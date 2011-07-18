@@ -3,8 +3,8 @@ unit U_Setup;
 interface
 
 uses
-  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
-  QDialogs, QStdCtrls, QExtCtrls, QButtons, QComCtrls, IniFiles;
+	SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
+	Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, IniFiles, FileCtrl;
 
 type
   TF_Setup = class(TForm)
@@ -45,7 +45,7 @@ type
     MP3List_ZIP_txt_CheckBox: TCheckBox;
     MP3List_CLear_TXT_files_after_zip_CB: TCheckBox;
     CDList_ZIP_txt_CheckBox: TCheckBox;
-    CDList_CLear_TXT_files_after_zip_CB: TCheckBox;
+		CDList_CLear_TXT_files_after_zip_CB: TCheckBox;
     MP3List_ZIP_html_CheckBox: TCheckBox;
     MP3List_CLear_HTML_files_after_zip_CB: TCheckBox;
     CDList_ZIP_html_CheckBox: TCheckBox;
@@ -87,13 +87,16 @@ type
 var
   F_Setup: TF_Setup;
 
+const
+	SELDIRHELP = 1000;
+
 implementation
 
 uses
   U_Main,
   U_Language;
 
-{$R *.xfm}
+{$R *.dfm}
 
 {--- Formular erzeugen --------------------------------------------------------}
 procedure TF_Setup.FormCreate(Sender: TObject);
@@ -352,22 +355,22 @@ end;
 
 {--- Choose the place where to store the textfiles ----------------------------}
 procedure TF_Setup.TXT_File_Dialog_BtnClick(Sender: TObject);
-var	sOutDir	:	WideString;
+var	sOutDir	:	String;
 begin
-	SelectDirectory('???', '', sOutDir);
+	FileCtrl.SelectDirectory(sOutDir, [sdAllowCreate, sdPerformCreate, sdPrompt], SELDIRHELP);
 	{Nur wenn Ordner ausgewählt wurde.}
-  if sOutDir	<>	'' then
-  begin
-	  text_files_output_path	    :=	sOutDir;
-  	TXT_File_Output_Edit.Text		:=  sOutDir;
-  end;
+	if sOutDir	<>	'' then
+	begin
+		text_files_output_path	    :=	sOutDir;
+		TXT_File_Output_Edit.Text		:=  sOutDir;
+	end;
 end;
 
 {--- Choose the place where to store the webfiles -----------------------------}
 procedure TF_Setup.HTML_File_Dialog_BtnClick(Sender: TObject);
-var	sOutDir	:	WideString;
+var	sOutDir	:	String;
 begin
-	SelectDirectory('???', '', sOutDir);
+	FileCtrl.SelectDirectory(sOutDir, [sdAllowCreate, sdPerformCreate, sdPrompt], SELDIRHELP);
 	{Nur wenn Ordner ausgewählt wurde.}
 	if sOutDir	<>	'' then
   begin

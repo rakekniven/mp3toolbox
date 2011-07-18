@@ -3,8 +3,8 @@ unit U_About;
 interface
 
 uses
-  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms,
-  QDialogs, QStdCtrls, QButtons, QComCtrls, QExtCtrls;
+	SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ComCtrls, ExtCtrls;
 
 type
   TAbout_F = class(TForm)
@@ -36,7 +36,7 @@ var
 
 implementation
 
-{$R *.xfm}
+{$R *.dfm}
 
 procedure TAbout_F.Close_BitBtnClick(Sender: TObject);
 begin

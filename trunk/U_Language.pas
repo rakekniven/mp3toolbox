@@ -3,11 +3,12 @@ unit U_Language;
 interface
 
 uses
-  SysUtils,
-  lib1,
-  QGraphics,
-  QDialogs,
-  QForms;
+	SysUtils,
+	lib1,
+	Graphics,
+	Dialogs,
+	Forms,
+	FileCtrl;
 
 type  sectionentry  = String;
 type  T_LngIDStr    = String;
@@ -22,7 +23,7 @@ const
   C_MsgTxt          = -2;
   C_TabTxt          = -3;
 
-  {Alle Formular IDs fortlaufend numerieren}
+	{Alle Formular IDs fortlaufend numerieren}
   Main              = 1;
   Setup             = 2;
 
@@ -112,7 +113,7 @@ VAR IniFile     : TextFile;
 
     {Section als Ergebnis oder ''}
     if (PosEnd>PosAnf) and (PosEnd<>0) and (PosAnf<>0) then
-      Result := Copy(TempStr,PosAnf+1,PosEnd-PosAnf-1)
+			Result := Copy(TempStr,PosAnf+1,PosEnd-PosAnf-1)
     else
       Result := '';
   end;
@@ -206,7 +207,7 @@ VAR IniFile     : TextFile;
     PosSep  := Pos('=', TempStr);
 
     {Wertepaar zuordnen}
-    if (PosSep<>0) and (ActSectID<0) then begin
+		if (PosSep<>0) and (ActSectID<0) then begin
       TempEntry := Trim(Copy(TempStr,1,PosSep-1));
       TempValue := Trim(Copy(TempStr,PosSep+1,Length(TempStr)-PosSep));
 
@@ -345,16 +346,16 @@ BEGIN  { of Set_Language_New }
 			end;
 			CloseFile(IniFile);
 		except
-			Application.MessageBox (PChar('Languagefile is missing. This program won´t work without a valid languagefile. Look for : "' + Lng_LibName ),
-																		PChar('Warning'),
-																		[smbOK]);
+			Application.MessageBox (PWideChar('Languagefile is missing. This program won´t work without a valid languagefile. Look for : "' + Lng_LibName),
+																		'Warning',
+																		2);
 			Application.Terminate;
 		end;
 	end
 	else
-			Application.MessageBox (PChar('Config file is missing. Please go to settings and save your settings. ("' + Lng_LibName ) + '")',
-																		PChar('Warning'),
-																		[smbOK]);
+			Application.MessageBox (PWideChar('Config file is missing. Please go to settings and save your settings. ("' + Lng_LibName + '")'),
+																		'Warning',
+																		2);//MB_OK
 end;   { of Set_Language_NEW }
 
 end.
