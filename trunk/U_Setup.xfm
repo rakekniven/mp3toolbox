@@ -1,24 +1,24 @@
 object F_Setup: TF_Setup
-  Left = 259
-  Top = 230
+  Left = 310
+  Top = 343
   Width = 549
   Height = 430
-  HorzScrollBar.Range = 545
   VertScrollBar.Range = 417
+  HorzScrollBar.Range = 545
   ActiveControl = Setup_Book
   Caption = 'F_Setup'
   Color = clBackground
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 84
-  TextHeight = 20
-  TextWidth = 7
+  TextHeight = 13
+  TextWidth = 6
   object Setup_Book: TPageControl
     Left = 8
     Top = 8
     Width = 537
     Height = 377
-    ActivePage = Allgemein
+    ActivePage = MP3List
     TabOrder = 0
     object Allgemein: TTabSheet
       Caption = 'Allgemein'
@@ -63,22 +63,22 @@ object F_Setup: TF_Setup
         object TXT_File_Output_Lab: TLabel
           Left = 8
           Top = 16
-          Width = 296
-          Height = 20
+          Width = 225
+          Height = 13
           Caption = 'Wo sollen die Textdateien gespeichert werden :'
         end
         object HTML_File_Output_Lab: TLabel
           Left = 8
           Top = 64
-          Width = 290
-          Height = 20
+          Width = 220
+          Height = 13
           Caption = 'Wo sollen die Webseiten gespeichert werden :'
         end
         object TXT_File_Output_Edit: TEdit
           Left = 8
           Top = 32
           Width = 441
-          Height = 28
+          Height = 21
           TabOrder = 0
           OnChange = TXT_File_Output_EditChange
         end
@@ -86,7 +86,7 @@ object F_Setup: TF_Setup
           Left = 8
           Top = 80
           Width = 441
-          Height = 28
+          Height = 21
           TabOrder = 1
           OnChange = HTML_File_Output_EditChange
         end
@@ -102,9 +102,9 @@ object F_Setup: TF_Setup
           Left = 8
           Top = 24
           Width = 145
-          Height = 28
+          Height = 21
           Style = csDropDownList
-          ItemHeight = 22
+          ItemHeight = 15
           Items.Strings = (
             'Deutsch'
             'English')
@@ -186,22 +186,22 @@ object F_Setup: TF_Setup
         object MP3List_Template_File_Lab: TLabel
           Left = 8
           Top = 36
-          Width = 235
-          Height = 20
+          Width = 179
+          Height = 13
           Caption = 'Welche Vorlage soll benutzt werden : '
         end
         object MP3List_Multi_Template_File_Lab: TLabel
           Left = 8
           Top = 108
-          Width = 235
-          Height = 20
+          Width = 179
+          Height = 13
           Caption = 'Welche Vorlage soll benutzt werden : '
         end
         object MP3List_Template_File_Edit: TEdit
           Left = 8
           Top = 52
           Width = 441
-          Height = 28
+          Height = 21
           TabOrder = 0
           OnExit = MP3List_Template_File_EditExit
         end
@@ -209,7 +209,7 @@ object F_Setup: TF_Setup
           Left = 8
           Top = 124
           Width = 441
-          Height = 28
+          Height = 21
           TabOrder = 1
           OnExit = MP3List_Multi_Template_File_EditExit
         end
@@ -234,15 +234,15 @@ object F_Setup: TF_Setup
         object Label1: TLabel
           Left = 288
           Top = 160
-          Width = 67
-          Height = 20
+          Width = 51
+          Height = 13
           Caption = 'Dateiname'
         end
         object mp3list_filename_Edit: TEdit
           Left = 288
           Top = 176
           Width = 161
-          Height = 28
+          Height = 21
           TabOrder = 7
           Text = 'mp3list'
           OnExit = mp3list_filename_EditExit
@@ -250,15 +250,15 @@ object F_Setup: TF_Setup
         object Label2: TLabel
           Left = 288
           Top = 216
-          Width = 80
-          Height = 20
+          Width = 61
+          Height = 13
           Caption = 'Dateiendung'
         end
         object mp3list_file_ending_Edit: TEdit
           Left = 288
           Top = 232
           Width = 161
-          Height = 28
+          Height = 21
           TabOrder = 9
           Text = '.html'
           OnExit = mp3list_file_ending_EditExit
@@ -270,6 +270,7 @@ object F_Setup: TF_Setup
           Height = 30
           Caption = 'ZIP die Textdateien'
           TabOrder = 10
+          Visible = False
           OnClick = MP3List_ZIP_txt_CheckBoxClick
         end
         object MP3List_CLear_TXT_files_after_zip_CB: TCheckBox
@@ -279,6 +280,7 @@ object F_Setup: TF_Setup
           Height = 30
           Caption = 'L'#246'sche Textdateien nach ZIPPEN'
           TabOrder = 11
+          Visible = False
           OnClick = MP3List_CLear_TXT_files_after_zip_CBClick
         end
         object MP3List_ZIP_html_CheckBox: TCheckBox
@@ -288,6 +290,7 @@ object F_Setup: TF_Setup
           Height = 30
           Caption = 'ZIP die HTML-Dateien'
           TabOrder = 12
+          Visible = False
           OnClick = MP3List_ZIP_html_CheckBoxClick
         end
         object MP3List_CLear_HTML_files_after_zip_CB: TCheckBox
@@ -297,6 +300,7 @@ object F_Setup: TF_Setup
           Height = 30
           Caption = 'L'#246'sche HTML-Dateien nach ZIPPEN'
           TabOrder = 13
+          Visible = False
           OnClick = MP3List_CLear_HTML_files_after_zip_CBClick
         end
       end
