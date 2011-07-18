@@ -3,9 +3,9 @@ unit U_Main;
 interface
 
 uses
-  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms,
-  QDialogs, QStdCtrls, QButtons, QComCtrls, QMenus, IniFiles, QExtCtrls,
-	QGrids, QFileCtrls;//, Libc;
+	Windows, SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
+	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
+	Grids, FileCtrl;//, Libc;
 
 type
   TF_Main = class(TForm)
@@ -23,11 +23,11 @@ type
     Clear_All_Button: TButton;
     Subdir_CheckBox: TCheckBox;
     Output_with_path_CB: TCheckBox;
-    Filter_GroupBox: TGroupBox;
-    Filter_Edit: TEdit;
-    filter_ComboBox: TComboBox;
-    Own_Filter_CheckBox: TCheckBox;
-    Sel_Dir_Btn: TBitBtn;
+		Filter_GroupBox: TGroupBox;
+		Filter_Edit: TEdit;
+		filter_ComboBox: TComboBox;
+		Own_Filter_CheckBox: TCheckBox;
+		Sel_Dir_Btn: TBitBtn;
     Output_with_filesize_CB: TCheckBox;
     TXT_Output_Btn: TBitBtn;
     HTML_OutputButton: TBitBtn;
@@ -45,7 +45,7 @@ type
     Exit1: TMenuItem;
     NameCheck_ListBox: TListBox;
     CDListe_StringGrid: TStringGrid;
-    Pacman_Panel: TPanel;
+		Pacman_Panel: TPanel;
     Pacman_Speed_Edit: TEdit;
     Start_Pacman_Btn: TButton;
     Close_Pacman_Btn: TBitBtn;
@@ -83,7 +83,7 @@ type
     GO_Btn2: TBitBtn;
     Save_Single_CD_Btn: TBitBtn;
     CD_Archive_TXT_Output: TBitBtn;
-    FileListView1: TFileListView;
+//		FileListView1: TFileListView;
     CD_Single_SaveDialog: TSaveDialog;
     checkfilenamesfornoof1: TMenuItem;
     AboutMP3Toolbox1: TMenuItem;
@@ -92,7 +92,7 @@ type
     Result_File_ComboBox: TComboBox;
     Template_OpenDialog: TOpenDialog;
     CDList_Template_ComboBox: TComboBox;
-    Result_File_Label: TLabel;
+		Result_File_Label: TLabel;
     CDList_Template_SpeedButton: TSpeedButton;
     Result_File_SaveDialog: TSaveDialog;
     CDList_Source_File_OpenDialog: TOpenDialog;
@@ -139,7 +139,7 @@ type
     procedure HTML_OutputButton3Click(Sender: TObject);
     procedure Dateibearbeiten1Click(Sender: TObject);
     procedure DateiausListeentfernen1Click(Sender: TObject);
-    procedure init_text(Sender:TObject);
+		procedure init_text(Sender:TObject);
     procedure FormShow(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure MP3_ListBoxMouseUp(Sender: TObject; Button: TMouseButton;
@@ -225,11 +225,12 @@ var
   cdlist_html_files_zip               : Boolean;
   cdlist_html_files_delete_after_zip  : Boolean;
 
-  const version =  '1.1.14';
+	const version =  '1.1.14';
+	SELDIRHELP = 1000;
 
 implementation
 
-{$R *.xfm}
+{$R *.dfm}
 {$R mp3tb_img.res}
 
 uses
@@ -376,8 +377,8 @@ begin
 	{CD-Archive}
   CD_Archive_ListBox.Width	:=	PageControl1.ClientWidth  - 200;
 	CD_Archive_ListBox.Height	:=	PageControl1.ClientHeight - 170;
-  FileListView1.Width      	:=  160;
-  FileListView1.Height     	:=	PageControl1.ClientHeight - 170;
+//  FileListView1.Width      	:=  160;
+//  FileListView1.Height     	:=	PageControl1.ClientHeight - 170;
 
 
   {CD-Liste}
@@ -473,10 +474,10 @@ end;
 {--- MP3List : Select new path to search --------------------------------------}
 procedure TF_Main.Sel_Dir_BtnClick(Sender: TObject);
 var
-  sOutDir : Widestring;
+	sOutDir : String;
 begin
 	{Dialog für Verzeichnisauswahl starten}
-  SelectDirectory('Oops', '/', sOutDir);
+	FileCtrl.SelectDirectory(sOutDir, [], SELDIRHELP);
 	if sOutDir	<>	'' then
   begin
     {Nur wenn Ordner ausgewählt wurde.}
@@ -1292,9 +1293,9 @@ begin
 
     if cdlist_html_files_delete_after_zip then
     begin
-      if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
+			if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
         ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
-    end;
+		end;
   end;
 
 	{clear progressbar}
@@ -1365,11 +1366,11 @@ end;
 
 procedure TF_Main.Choose_Search_PathClick(Sender: TObject);
 var
-  sOutDir : WideString;
+	sOutDir : String;
 begin
 	{Dialog für Verzeichnisauswahl starten}
-  if SelectDirectory('???', '/', sOutDir) then
-  begin
+	FileCtrl.SelectDirectory(sOutDir, [], SELDIRHELP);
+	begin
     {Nur wenn Ordner ausgewählt wurde.}
     cdarchive_path_to_read_in		  :=  sOutDir;
     Search_Path_Edit.Text         :=  cdarchive_path_to_read_in;
@@ -1395,22 +1396,24 @@ begin
   CD_Archive_ListBox.Clear;
 
   {Jede Datei öffnen}
-  for i :=  0 to FileListView1.Items.Count - 1 do
-  begin
-    if ( FileListView1.Items.Item[i].Caption <> '.'  ) and
-       ( FileListView1.Items.Item[i].Caption <> '..' ) then
-    begin
-  	  AssignFile(F, SlashSep(FileListView1.Directory.Location, FileListView1.Items.Item[i].Caption));
-      Reset	(F);
-      {zeilenweise lesen und zuweisen}
-      While not Eof(F) do
-      begin
-  	  	Readln(F, ln);
-        CD_Archive_Files.Add(ln);
-      end;
-  	  CloseFile(F);
-    end;
-  end;
+(* 66666
+	for i :=  0 to FileListView1.Items.Count - 1 do
+	begin
+		if ( FileListView1.Items.Item[i].Caption <> '.'  ) and
+			 ( FileListView1.Items.Item[i].Caption <> '..' ) then
+		begin
+			AssignFile(F, SlashSep(FileListView1.Directory.Location, FileListView1.Items.Item[i].Caption));
+			Reset	(F);
+			{zeilenweise lesen und zuweisen}
+			While not Eof(F) do
+			begin
+				Readln(F, ln);
+				CD_Archive_Files.Add(ln);
+			end;
+			CloseFile(F);
+		end;
+	end;
+*)
 
   {StringList sortieren}
   CD_Archive_Files.Sort;
@@ -1422,11 +1425,11 @@ end;
 
 procedure TF_Main.Choose_New_Archive_BtnClick(Sender: TObject);
 var
-  sOutDir : WideString;
-  i			 	:	Integer;
+	sOutDir : String;
+	i			 	:	Integer;
 begin
 	{Dialog für Verzeichnisauswahl starten}
-  SelectDirectory('???', '/', sOutDir);
+	FileCtrl.SelectDirectory(sOutDir, [sdAllowCreate, sdPerformCreate, sdPrompt], SELDIRHELP);
 	if ( sOutDir	<>	'' ) and (DirectoryExists(sOutDir)) then
   begin
     {neuen Pfad merken und einordnen}
@@ -1450,8 +1453,8 @@ begin
     New_Archive_Edit_CB.ItemIndex	:=	0;
 
     {Nur wenn Ordner ausgewählt wurde.}
-    FileListView1.Directory.Location    :=  sOutDir;
-    FileListView1.Update;
+//    FileListView1.Directory.Location    :=  sOutDir;
+//    FileListView1.Update;
     View_Archive_Btn.Enabled  :=  True;
   end;
 end;
@@ -1474,7 +1477,7 @@ begin
     begin
       New_Archive_Edit_CB.Items.Add(cdarchive_last_used_pathes[i]);
 			View_Archive_Btn.Enabled	:=	True;
-      FileListView1.Directory.Location    :=  cdarchive_path_to_act_archive;
+//      FileListView1.Directory.Location    :=  cdarchive_path_to_act_archive;
     end;
   end;
   New_Archive_Edit_CB.ItemIndex	:=	0;
@@ -1488,22 +1491,24 @@ var
 begin
  	{ListBox leeren}
   CD_Archive_ListBox.Clear;
-  for i :=  0 to  FileListView1.Items.Count -1 do
-  begin
-    {Wenn Eintrag markiert}
-    if FileListView1.Items[i].Selected = True  then
-    begin
-  	  AssignFile(F, SlashSep(FileListView1.Directory.Location, FileListView1.Items.Item[i].Caption));
-      Reset	(F);
-      {Zeile für Zeile einlesen}
-      While not Eof(F) do
-      begin
-        Readln(F, ln);
-        CD_Archive_ListBox.Items.Add(ln);
-      end;
-    CloseFile(F);
-    end;
-  end;
+(* 66666
+	for i :=  0 to  FileListView1.Items.Count -1 do
+	begin
+		{Wenn Eintrag markiert}
+		if FileListView1.Items[i].Selected = True  then
+		begin
+			AssignFile(F, SlashSep(FileListView1.Directory.Location, FileListView1.Items.Item[i].Caption));
+			Reset	(F);
+			{Zeile für Zeile einlesen}
+			While not Eof(F) do
+			begin
+				Readln(F, ln);
+				CD_Archive_ListBox.Items.Add(ln);
+			end;
+		CloseFile(F);
+		end;
+	end;
+*)
 end;
 
 procedure TF_Main.GO_Btn2Click(Sender: TObject);
@@ -1553,7 +1558,7 @@ begin
 
   	CloseFile(F);
   end;
-  FileListView1.Refresh;
+//  FileListView1.Refresh;
 end;
 
 procedure TF_Main.checkfilenamesfornoof1Click(Sender: TObject);

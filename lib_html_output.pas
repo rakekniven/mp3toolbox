@@ -3,7 +3,7 @@ unit lib_html_output;
 interface
 	uses
     SysUtils,
-    QDialogs,
+    Dialogs,
     classes;
 
   procedure	HTML_Multi_Index_Seite(HTML_Outputfile :	String);

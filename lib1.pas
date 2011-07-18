@@ -3,7 +3,7 @@ unit lib1;
 interface
 
 uses
-  classes, sysutils, QForms;
+  classes, sysutils, Forms;
 
 
 	function	SlashSep(const Path, S: string): string;

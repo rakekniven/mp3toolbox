@@ -3,19 +3,24 @@ object F_Main: TF_Main
   Top = 210
   Width = 802
   Height = 519
-  VertScrollBar.Range = 481
   HorzScrollBar.Range = 789
+  VertScrollBar.Range = 481
   ActiveControl = PageControl1
   Caption = 'F_Main'
   Color = clBackground
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
   Menu = MainMenu1
+  OldCreateOrder = True
   OnActivate = FormActivate
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 84
   TextHeight = 13
-  TextWidth = 6
   object PageControl1: TPageControl
     Left = 4
     Top = 0
@@ -25,14 +30,6 @@ object F_Main: TF_Main
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'mp3list'
-      object Search_ProgressBar: TProgressBar
-        Left = 456
-        Top = 11
-        Width = 161
-        Height = 25
-        Enabled = False
-        FillColor = clBlack
-      end
       object Pacman_Btn: TSpeedButton
         Left = 456
         Top = 128
@@ -40,7 +37,7 @@ object F_Main: TF_Main
         Height = 48
         Flat = True
         Glyph.Data = {
-          0A130000424D06130000000000003600000028000000250000002B0000000100
+          06130000424D06130000000000003600000028000000250000002B0000000100
           180000000000D0120000120B0000120B00000000000000000000CECECECECECE
           CECECECECECECECECECECECECECECECECECECECECECECECECECECECECECECECE
           CECECECECECECECECECED6CECED6CECEDECEC6DECEC6DECEC6DECEC6DECEC6DE
@@ -197,12 +194,87 @@ object F_Main: TF_Main
         Transparent = False
         Visible = False
       end
+      object Search_Time_Lab: TLabel
+        Left = 456
+        Top = 104
+        Width = 161
+        Height = 25
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '...'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 11
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Dir_Count_Label: TLabel
+        Left = 456
+        Top = 72
+        Width = 161
+        Height = 25
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '...'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 11
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Result_Label: TLabel
+        Left = 456
+        Top = 40
+        Width = 161
+        Height = 25
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '...'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 11
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Char_Count_Lab: TLabel
+        Left = 624
+        Top = 112
+        Width = 6
+        Height = 13
+        Caption = '0'
+      end
+      object Char_Count_Lab2: TLabel
+        Left = 648
+        Top = 112
+        Width = 53
+        Height = 13
+        Caption = 'Characters'
+      end
+      object Search_ProgressBar: TProgressBar
+        Left = 456
+        Top = 11
+        Width = 161
+        Height = 25
+        Enabled = False
+        TabOrder = 7
+      end
       object NameCheck_ListBox: TListBox
         Left = 16
         Top = 192
         Width = 697
         Height = 233
-        Color = clButton
+        ItemHeight = 13
         TabOrder = 5
         OnMouseUp = NameCheck_ListBoxMouseUp
       end
@@ -212,13 +284,13 @@ object F_Main: TF_Main
         Width = 777
         Height = 275
         ExtendedSelect = False
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 12
         Font.Name = 'arial'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
-        ItemHeight = 15
+        ItemHeight = 12
         MultiSelect = True
         ParentFont = False
         PopupMenu = MP3List_PopupMenu
@@ -238,9 +310,10 @@ object F_Main: TF_Main
           Top = 24
           Width = 217
           Height = 97
-          BorderStyle = bsDouble
+          BorderStyle = e3PH,PT,PL,P      # Scaled3P  F)PF)P      $ ShowHint++P L+PL,P       VertScrollBa
           Color = clBackground
           ExtendedSelect = False
+          ItemHeight = 13
           MultiSelect = True
           TabOrder = 2
           OnMouseUp = Multi_Dir_ListBoxMouseUp
@@ -325,12 +398,12 @@ object F_Main: TF_Main
           Hint = 'Unterverzeichnisse durchsuchen'
           Caption = 'search subdir'#180's'
           Checked = True
-          Font.Color = clText
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
           Font.Height = 11
           Font.Name = 'gothic l'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 48
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
@@ -345,12 +418,12 @@ object F_Main: TF_Main
           Height = 17
           Hint = 'Ausgabe mit kompletten Pfadangaben'
           Caption = 'output with pathes'
-          Font.Color = clText
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
           Font.Height = 11
           Font.Name = 'gothic l'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 48
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
@@ -368,13 +441,13 @@ object F_Main: TF_Main
             Left = 8
             Top = 35
             Width = 65
-            Height = 22
+            Height = 18
+            Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = 11
             Font.Name = 'arial'
             Font.Pitch = fpVariable
             Font.Style = []
-            Font.Weight = 40
             ParentFont = False
             TabOrder = 2
           end
@@ -382,15 +455,20 @@ object F_Main: TF_Main
             Left = 8
             Top = 35
             Width = 113
-            Height = 22
+            Height = 18
             Hint = 'Nach was soll gesucht werden'
             Style = csDropDownList
+            Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = 11
             Font.Name = 'arial'
             Font.Pitch = fpVariable
             Font.Style = []
-            Font.Weight = 40
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnChange = filter_ComboBoxChange
             Items.Strings = (
               '*.mp3'
               '*.mp2'
@@ -398,11 +476,6 @@ object F_Main: TF_Main
               '*.gif'
               '*.jpg'
               '*.png')
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 1
-            OnChange = filter_ComboBoxChange
           end
           object Own_Filter_CheckBox: TCheckBox
             Left = 8
@@ -420,10 +493,9 @@ object F_Main: TF_Main
           Width = 137
           Height = 25
           Caption = 'Select Dir'
-          TabOrder = 0
-          OnClick = Sel_Dir_BtnClick
+          DoubleBuffered = True
           Glyph.Data = {
-            2A040000424D2604000000000000360000002800000012000000120000000100
+            26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -457,6 +529,9 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
+          ParentDoubleBuffered = False
+          TabOrder = 0
+          OnClick = Sel_Dir_BtnClick
         end
         object Output_with_filesize_CB: TCheckBox
           Left = 296
@@ -464,12 +539,12 @@ object F_Main: TF_Main
           Width = 145
           Height = 17
           Caption = 'output with size'
-          Font.Color = clText
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
           Font.Height = 11
           Font.Name = 'gothic l'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 48
           ParentFont = False
           TabOrder = 5
           OnClick = Output_with_filesize_CBClick
@@ -481,22 +556,24 @@ object F_Main: TF_Main
         Width = 150
         Height = 25
         Caption = 'create &textfile'
+        DoubleBuffered = True
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 12
         Font.Name = 'arial'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
-        ParentFont = False
-        TabOrder = 0
-        OnClick = TXT_Output_BtnClick
         Glyph.Data = {
-          82000000424D7E000000000000003E0000002800000010000000100000000100
+          7E000000424D7E000000000000003E0000002800000010000000100000000100
           01000000000040000000120B0000120B00000200000002000000FFFFFF000000
           000000000000000000007FF00000000000007FFE0000000000007FFE00000000
           00007FFE0000000000007FFE0000000000007FFE000000000000000000000000
           0000}
         Margin = 10
+        ParentDoubleBuffered = False
+        ParentFont = False
+        TabOrder = 0
+        OnClick = TXT_Output_BtnClick
       end
       object HTML_OutputButton: TBitBtn
         Left = 624
@@ -504,17 +581,15 @@ object F_Main: TF_Main
         Width = 150
         Height = 25
         Caption = 'create &website'
+        DoubleBuffered = True
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 12
         Font.Name = 'arial'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
-        ParentFont = False
-        TabOrder = 1
-        OnClick = HTML_OutputButtonClick
         Glyph.Data = {
-          3A030000424D3603000000000000360000002800000010000000100000000100
+          36030000424D3603000000000000360000002800000010000000100000000100
           18000000000000030000120B0000120B00000000000000000000000000000000
           0000000000005858583030303030303030303030303030303030303030308000
           80000000303030303030000000000000000000000000585858B4BDC2A2ACB19B
@@ -541,6 +616,10 @@ object F_Main: TF_Main
           9958585800000000000000000000000080008080008058585858585858585858
           5858585858585858585858585858585858000000000000000000}
         Margin = 10
+        ParentDoubleBuffered = False
+        ParentFont = False
+        TabOrder = 1
+        OnClick = HTML_OutputButtonClick
       end
       object Go_Btn: TBitBtn
         Left = 624
@@ -548,18 +627,16 @@ object F_Main: TF_Main
         Width = 150
         Height = 25
         Caption = 'Go !'
+        DoubleBuffered = True
         Enabled = False
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 12
         Font.Name = 'arial'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
-        ParentFont = False
-        TabOrder = 2
-        OnClick = Go_BtnClick
         Glyph.Data = {
-          7A010000424D7601000000000000760000002800000020000000100000000100
+          76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
           800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
           FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -573,73 +650,10 @@ object F_Main: TF_Main
           00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
         Margin = 10
         NumGlyphs = 2
-      end
-      object Search_Time_Lab: TLabel
-        Left = 456
-        Top = 104
-        Width = 161
-        Height = 25
-        Alignment = taCenter
-        AutoSize = False
-        Caption = '...'
-        Font.Color = clRed
-        Font.Height = 11
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 40
+        ParentDoubleBuffered = False
         ParentFont = False
-        Layout = tlCenter
-      end
-      object Dir_Count_Label: TLabel
-        Left = 456
-        Top = 72
-        Width = 161
-        Height = 25
-        Alignment = taCenter
-        AutoSize = False
-        Caption = '...'
-        Font.Color = clRed
-        Font.Height = 11
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 40
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Result_Label: TLabel
-        Left = 456
-        Top = 40
-        Width = 161
-        Height = 25
-        Alignment = taCenter
-        AutoSize = False
-        Caption = '...'
-        Color = clBackground
-        Font.Color = clRed
-        Font.Height = 11
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 40
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Char_Count_Lab: TLabel
-        Left = 624
-        Top = 112
-        Width = 6
-        Height = 13
-        Caption = '0'
-      end
-      object Char_Count_Lab2: TLabel
-        Left = 648
-        Top = 112
-        Width = 51
-        Height = 13
-        Caption = 'Characters'
+        TabOrder = 2
+        OnClick = Go_BtnClick
       end
       object Pacman_Panel: TPanel
         Left = 441
@@ -662,12 +676,12 @@ object F_Main: TF_Main
           Width = 25
           Height = 21
           Caption = 'go'
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = 12
           Font.Name = 'arial'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 1
           OnClick = Start_Pacman_BtnClick
@@ -678,12 +692,14 @@ object F_Main: TF_Main
           Width = 41
           Height = 21
           Caption = 'close'
+          DoubleBuffered = True
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = 12
           Font.Name = 'arial'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
+          ParentDoubleBuffered = False
           ParentFont = False
           TabOrder = 2
           OnClick = Close_Pacman_BtnClick
@@ -697,7 +713,7 @@ object F_Main: TF_Main
       object CD_Archive_View_All_Files_Btn: TLabel
         Left = 8
         Top = 112
-        Width = 119
+        Width = 121
         Height = 13
         Caption = 'All files in actual archive :'
       end
@@ -707,14 +723,14 @@ object F_Main: TF_Main
         Width = 313
         Height = 97
         Caption = 'Archive : '
-        TabOrder = 1
+        TabOrder = 0
         object Choose_New_Archive_Btn: TSpeedButton
           Left = 264
           Top = 64
           Width = 41
           Height = 25
           Glyph.Data = {
-            EA000000424DE60000000000000076000000280000000E0000000E0000000100
+            E6000000424DE60000000000000076000000280000000E0000000E0000000100
             0400000000007000000000000000000000001000000000000000000000000000
             80000080000000808000800000008000800080800000C0C0C000808080000000
             FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -727,7 +743,7 @@ object F_Main: TF_Main
         object Choose_Archiv_Lab: TLabel
           Left = 8
           Top = 20
-          Width = 78
+          Width = 79
           Height = 13
           Caption = 'Archivauswahl : '
         end
@@ -737,6 +753,8 @@ object F_Main: TF_Main
           Width = 137
           Height = 25
           Caption = 'view whole archiv'
+          DoubleBuffered = True
+          ParentDoubleBuffered = False
           TabOrder = 0
           OnClick = View_Archive_BtnClick
         end
@@ -746,7 +764,6 @@ object F_Main: TF_Main
           Width = 297
           Height = 21
           Style = csDropDownList
-          ItemHeight = 15
           TabOrder = 1
         end
       end
@@ -756,9 +773,10 @@ object F_Main: TF_Main
         Width = 569
         Height = 273
         ExtendedSelect = False
+        ItemHeight = 13
         MultiSelect = True
         Sorted = True
-        TabOrder = 2
+        TabOrder = 1
       end
       object Add_A_Disk_GB: TGroupBox
         Left = 320
@@ -773,7 +791,7 @@ object F_Main: TF_Main
           Width = 41
           Height = 21
           Glyph.Data = {
-            2A040000424D2604000000000000360000002800000012000000120000000100
+            26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -812,7 +830,7 @@ object F_Main: TF_Main
         object Archive_Path_to_read_in_Lab: TLabel
           Left = 8
           Top = 20
-          Width = 67
+          Width = 70
           Height = 13
           Caption = 'Path to read : '
         end
@@ -830,10 +848,9 @@ object F_Main: TF_Main
           Width = 89
           Height = 25
           Caption = 'Go !'
-          TabOrder = 1
-          OnClick = GO_Btn2Click
+          DoubleBuffered = True
           Glyph.Data = {
-            7A010000424D7601000000000000760000002800000020000000100000000100
+            76010000424D7601000000000000760000002800000020000000100000000100
             04000000000000010000130B0000130B00001000000000000000000000000000
             800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
             FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -846,6 +863,9 @@ object F_Main: TF_Main
             70E337F33333333337F3E0FFFFFFFFFFF0E337FFFFFFFFFFF7F3E00000000000
             00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
           NumGlyphs = 2
+          ParentDoubleBuffered = False
+          TabOrder = 1
+          OnClick = GO_Btn2Click
         end
         object Save_Single_CD_Btn: TBitBtn
           Left = 110
@@ -853,11 +873,10 @@ object F_Main: TF_Main
           Width = 91
           Height = 25
           Caption = 'Save'
+          DoubleBuffered = True
           Enabled = False
-          TabOrder = 2
-          OnClick = Save_Single_CD_BtnClick
           Glyph.Data = {
-            3A030000424D3603000000000000360000002800000010000000100000000100
+            36030000424D3603000000000000360000002800000010000000100000000100
             1800000000000003000000000000000000000000000000000000FFFFFF303030
             B090908060606060606060606060606060606060606060606060606060606060
             60A06060703030400000606060A06060800000A06060A06060A06060B09090CF
@@ -883,6 +902,9 @@ object F_Main: TF_Main
             800000007F7F00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
             FF007F7F800000800000FFFFFF20000040000000000000000000000000000000
             0000000000000000000000000000000000000000400000200000}
+          ParentDoubleBuffered = False
+          TabOrder = 2
+          OnClick = Save_Single_CD_BtnClick
         end
       end
       object CD_Archive_TXT_Output: TBitBtn
@@ -891,26 +913,16 @@ object F_Main: TF_Main
         Width = 137
         Height = 25
         Caption = 'create &textfile'
-        TabOrder = 4
+        DoubleBuffered = True
         Glyph.Data = {
-          82000000424D7E000000000000003E0000002800000010000000100000000100
+          7E000000424D7E000000000000003E0000002800000010000000100000000100
           01000000000040000000120B0000120B00000200000002000000FFFFFF000000
           000000000000000000007FF00000000000007FFE0000000000007FFE00000000
           00007FFE0000000000007FFE0000000000007FFE000000000000000000000000
           0000}
         Margin = 10
-      end
-      object FileListView1: TFileListView
-        Left = 8
-        Top = 132
-        Width = 145
-        Height = 257
-        Color = clNone
-        Directory.Location = 'D:\media\hda3\myrealm\dev-projects\mp3toolbox-lin\'
-        Directory.FileType = [ftSystem, ftNormal]
-        Directory.FileMask = '*.txt'
-        TabOrder = 5
-        OnClick = FileListView1Click
+        ParentDoubleBuffered = False
+        TabOrder = 2
       end
     end
     object TabSheet3: TTabSheet
@@ -923,6 +935,7 @@ object F_Main: TF_Main
         Width = 161
         Height = 25
         Step = 5
+        TabOrder = 3
       end
       object CDListe_StringGrid: TStringGrid
         Left = 0
@@ -933,12 +946,12 @@ object F_Main: TF_Main
         DefaultRowHeight = 16
         FixedCols = 0
         RowCount = 2
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 12
         Font.Name = 'arial'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing]
         ParentFont = False
         TabOrder = 0
@@ -949,11 +962,10 @@ object F_Main: TF_Main
         Width = 161
         Height = 25
         Caption = 'create &website'
+        DoubleBuffered = True
         Enabled = False
-        TabOrder = 1
-        OnClick = HTML_OutputButton3Click
         Glyph.Data = {
-          3A030000424D3603000000000000360000002800000010000000100000000100
+          36030000424D3603000000000000360000002800000010000000100000000100
           18000000000000030000120B0000120B00000000000000000000000000000000
           0000000000005858583030303030303030303030303030303030303030308000
           80000000303030303030000000000000000000000000585858B4BDC2A2ACB19B
@@ -980,6 +992,9 @@ object F_Main: TF_Main
           9958585800000000000000000000000080008080008058585858585858585858
           5858585858585858585858585858585858000000000000000000}
         Margin = 10
+        ParentDoubleBuffered = False
+        TabOrder = 1
+        OnClick = HTML_OutputButton3Click
       end
       object CDLIst_Choose_GB: TGroupBox
         Left = 0
@@ -993,7 +1008,7 @@ object F_Main: TF_Main
           Width = 41
           Height = 25
           Glyph.Data = {
-            2A040000424D2604000000000000360000002800000012000000120000000100
+            26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -1035,7 +1050,7 @@ object F_Main: TF_Main
           Width = 41
           Height = 25
           Glyph.Data = {
-            2A040000424D2604000000000000360000002800000012000000120000000100
+            26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -1077,7 +1092,7 @@ object F_Main: TF_Main
           Width = 41
           Height = 25
           Glyph.Data = {
-            2A040000424D2604000000000000360000002800000012000000120000000100
+            26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -1113,29 +1128,62 @@ object F_Main: TF_Main
             00000000000000000000}
           OnClick = CDList_Template_SpeedButtonClick
         end
+        object CD_List_Open_File_Lab: TLabel
+          Left = 8
+          Top = 3
+          Width = 102
+          Height = 13
+          Caption = 'Which file to read in :'
+        end
+        object CDList_Template_Label: TLabel
+          Left = 8
+          Top = 48
+          Width = 51
+          Height = 13
+          Caption = 'Template :'
+        end
+        object Result_File_Label: TLabel
+          Left = 8
+          Top = 96
+          Width = 54
+          Height = 13
+          Caption = 'Result file :'
+        end
+        object CDList_Result_Label: TLabel
+          Left = 608
+          Top = 66
+          Width = 89
+          Height = 25
+          Alignment = taCenter
+          AutoSize = False
+          Caption = '...'
+          Color = clBackground
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+        end
         object CDList_Source_File_CB: TComboBox
           Left = 8
           Top = 20
           Width = 536
-          Height = 22
+          Height = 18
           Style = csDropDownList
           DropDownCount = 10
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = 11
           Font.Name = 'arial'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           PopupMenu = CDList_Popup
           TabOrder = 1
-        end
-        object CD_List_Open_File_Lab: TLabel
-          Left = 8
-          Top = 3
-          Width = 100
-          Height = 13
-          Caption = 'Which file to read in :'
         end
         object Go_Btn3: TBitBtn
           Left = 608
@@ -1143,12 +1191,10 @@ object F_Main: TF_Main
           Width = 89
           Height = 25
           Caption = 'Go !'
+          DoubleBuffered = True
           Enabled = False
-          TabOrder = 0
-          OnClick = Go_Btn3Click
-          OnMouseDown = Go_Btn3MouseDown
           Glyph.Data = {
-            7A010000424D7601000000000000760000002800000020000000100000000100
+            76010000424D7601000000000000760000002800000020000000100000000100
             04000000000000010000130B0000130B00001000000000000000000000000000
             800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
             FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -1161,71 +1207,42 @@ object F_Main: TF_Main
             70E337F33333333337F3E0FFFFFFFFFFF0E337FFFFFFFFFFF7F3E00000000000
             00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
           NumGlyphs = 2
-        end
-        object CDList_Template_Label: TLabel
-          Left = 8
-          Top = 48
-          Width = 50
-          Height = 13
-          Caption = 'Template :'
+          ParentDoubleBuffered = False
+          TabOrder = 0
+          OnClick = Go_Btn3Click
+          OnMouseDown = Go_Btn3MouseDown
         end
         object CDList_Template_ComboBox: TComboBox
           Left = 8
           Top = 66
           Width = 536
-          Height = 22
+          Height = 18
           Style = csDropDownList
           DropDownCount = 10
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = 11
           Font.Name = 'arial'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
-          TabOrder = 5
-        end
-        object Result_File_Label: TLabel
-          Left = 8
-          Top = 96
-          Width = 52
-          Height = 13
-          Caption = 'Result file :'
-        end
-        object CDList_Result_Label: TLabel
-          Left = 608
-          Top = 66
-          Width = 89
-          Height = 25
-          Alignment = taCenter
-          AutoSize = False
-          Caption = '...'
-          Color = clButton
-          Font.Color = clRed
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = []
-          Font.Weight = 40
-          ParentColor = False
-          ParentFont = False
-          Layout = tlCenter
+          TabOrder = 2
         end
         object Result_File_ComboBox: TComboBox
           Left = 8
           Top = 114
           Width = 536
-          Height = 22
+          Height = 18
           Style = csDropDownList
           DropDownCount = 10
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = 11
           Font.Name = 'arial'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 3
         end
       end
     end
@@ -1237,7 +1254,7 @@ object F_Main: TF_Main
       Caption = 'File'
       object Setup1: TMenuItem
         Bitmap.Data = {
-          2A040000424D2604000000000000360000002800000012000000120000000100
+          26040000424D2604000000000000360000002800000012000000120000000100
           180000000000F0030000120B0000120B00000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000000000000000
@@ -1277,7 +1294,7 @@ object F_Main: TF_Main
       end
       object Exit1: TMenuItem
         Bitmap.Data = {
-          3A030000424D3603000000000000360000002800000010000000100000000100
+          36030000424D3603000000000000360000002800000010000000100000000100
           18000000000000030000120B0000120B000000000000000000000000000D1AA4
           0512A0192BA81324A71223A71021A50E1FA50C1DA5091BA20719A20517A20317
           A105119F101FA50000000C1AA41827A7729ED36894D06994CF6B95D16D97D072
@@ -1370,31 +1387,23 @@ object F_Main: TF_Main
     DefaultExt = '.txt'
     Filter = 'textfiles (txt)|*.txt'
     FilterIndex = 0
-    Height = 0
     Title = 'Speichern'
-    Width = 0
     Left = 432
     Top = 16
   end
   object Template_OpenDialog: TOpenDialog
     FilterIndex = 0
-    Height = 0
-    Width = 0
     Left = 480
     Top = 96
   end
   object Result_File_SaveDialog: TSaveDialog
     FilterIndex = 0
-    Height = 0
     Title = 'Speichern'
-    Width = 0
     Left = 480
     Top = 144
   end
   object CDList_Source_File_OpenDialog: TOpenDialog
     FilterIndex = 0
-    Height = 0
-    Width = 0
     Left = 480
     Top = 48
   end

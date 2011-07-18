@@ -3,16 +3,21 @@ object F_Setup: TF_Setup
   Top = 343
   Width = 549
   Height = 430
-  VertScrollBar.Range = 417
   HorzScrollBar.Range = 545
+  VertScrollBar.Range = 417
   ActiveControl = Setup_Book
   Caption = 'F_Setup'
   Color = clBackground
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = True
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 84
   TextHeight = 13
-  TextWidth = 6
   object Setup_Book: TPageControl
     Left = 8
     Top = 8
@@ -22,6 +27,10 @@ object F_Setup: TF_Setup
     TabOrder = 0
     object Allgemein: TTabSheet
       Caption = 'Allgemein'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Pathes_GB: TGroupBox
         Left = 8
         Top = 8
@@ -34,7 +43,7 @@ object F_Setup: TF_Setup
           Width = 33
           Height = 22
           Glyph.Data = {
-            EA000000424DE60000000000000076000000280000000E0000000E0000000100
+            E6000000424DE60000000000000076000000280000000E0000000E0000000100
             0400000000007000000000000000000000001000000000000000000000000000
             80000080000000808000800000008000800080800000C0C0C000808080000000
             FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -50,7 +59,7 @@ object F_Setup: TF_Setup
           Width = 33
           Height = 22
           Glyph.Data = {
-            EA000000424DE60000000000000076000000280000000E0000000E0000000100
+            E6000000424DE60000000000000076000000280000000E0000000E0000000100
             0400000000007000000000000000000000001000000000000000000000000000
             80000080000000808000800000008000800080800000C0C0C000808080000000
             FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -63,14 +72,14 @@ object F_Setup: TF_Setup
         object TXT_File_Output_Lab: TLabel
           Left = 8
           Top = 16
-          Width = 225
+          Width = 229
           Height = 13
           Caption = 'Wo sollen die Textdateien gespeichert werden :'
         end
         object HTML_File_Output_Lab: TLabel
           Left = 8
           Top = 64
-          Width = 220
+          Width = 222
           Height = 13
           Caption = 'Wo sollen die Webseiten gespeichert werden :'
         end
@@ -104,12 +113,11 @@ object F_Setup: TF_Setup
           Width = 145
           Height = 21
           Style = csDropDownList
-          ItemHeight = 15
+          TabOrder = 0
+          OnChange = Language_CBChange
           Items.Strings = (
             'Deutsch'
             'English')
-          TabOrder = 0
-          OnChange = Language_CBChange
         end
       end
       object First_Start_Panel: TPanel
@@ -124,7 +132,7 @@ object F_Setup: TF_Setup
           Top = 8
           Width = 329
           Height = 177
-          Color = clButton
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = 15
           Font.Name = 'MS Sans Serif'
@@ -157,7 +165,7 @@ object F_Setup: TF_Setup
           Width = 33
           Height = 22
           Glyph.Data = {
-            EA000000424DE60000000000000076000000280000000E0000000E0000000100
+            E6000000424DE60000000000000076000000280000000E0000000E0000000100
             0400000000007000000000000000000000001000000000000000000000000000
             80000080000000808000800000008000800080800000C0C0C000808080000000
             FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -173,7 +181,7 @@ object F_Setup: TF_Setup
           Width = 33
           Height = 22
           Glyph.Data = {
-            EA000000424DE60000000000000076000000280000000E0000000E0000000100
+            E6000000424DE60000000000000076000000280000000E0000000E0000000100
             0400000000007000000000000000000000001000000000000000000000000000
             80000080000000808000800000008000800080800000C0C0C000808080000000
             FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
@@ -186,16 +194,30 @@ object F_Setup: TF_Setup
         object MP3List_Template_File_Lab: TLabel
           Left = 8
           Top = 36
-          Width = 179
+          Width = 181
           Height = 13
           Caption = 'Welche Vorlage soll benutzt werden : '
         end
         object MP3List_Multi_Template_File_Lab: TLabel
           Left = 8
           Top = 108
-          Width = 179
+          Width = 181
           Height = 13
           Caption = 'Welche Vorlage soll benutzt werden : '
+        end
+        object Label1: TLabel
+          Left = 288
+          Top = 160
+          Width = 51
+          Height = 13
+          Caption = 'Dateiname'
+        end
+        object Label2: TLabel
+          Left = 288
+          Top = 216
+          Width = 61
+          Height = 13
+          Caption = 'Dateiendung'
         end
         object MP3List_Template_File_Edit: TEdit
           Left = 8
@@ -231,28 +253,14 @@ object F_Setup: TF_Setup
           TabOrder = 3
           OnClick = RadioButton2Click
         end
-        object Label1: TLabel
-          Left = 288
-          Top = 160
-          Width = 51
-          Height = 13
-          Caption = 'Dateiname'
-        end
         object mp3list_filename_Edit: TEdit
           Left = 288
           Top = 176
           Width = 161
           Height = 21
-          TabOrder = 7
+          TabOrder = 6
           Text = 'mp3list'
           OnExit = mp3list_filename_EditExit
-        end
-        object Label2: TLabel
-          Left = 288
-          Top = 216
-          Width = 61
-          Height = 13
-          Caption = 'Dateiendung'
         end
         object mp3list_file_ending_Edit: TEdit
           Left = 288
@@ -269,7 +277,7 @@ object F_Setup: TF_Setup
           Width = 145
           Height = 30
           Caption = 'ZIP die Textdateien'
-          TabOrder = 10
+          TabOrder = 4
           Visible = False
           OnClick = MP3List_ZIP_txt_CheckBoxClick
         end
@@ -279,7 +287,7 @@ object F_Setup: TF_Setup
           Width = 225
           Height = 30
           Caption = 'L'#246'sche Textdateien nach ZIPPEN'
-          TabOrder = 11
+          TabOrder = 5
           Visible = False
           OnClick = MP3List_CLear_TXT_files_after_zip_CBClick
         end
@@ -289,7 +297,7 @@ object F_Setup: TF_Setup
           Width = 153
           Height = 30
           Caption = 'ZIP die HTML-Dateien'
-          TabOrder = 12
+          TabOrder = 7
           Visible = False
           OnClick = MP3List_ZIP_html_CheckBoxClick
         end
@@ -299,7 +307,7 @@ object F_Setup: TF_Setup
           Width = 257
           Height = 30
           Caption = 'L'#246'sche HTML-Dateien nach ZIPPEN'
-          TabOrder = 13
+          TabOrder = 8
           Visible = False
           OnClick = MP3List_CLear_HTML_files_after_zip_CBClick
         end
@@ -308,6 +316,10 @@ object F_Setup: TF_Setup
     object Album_Liste: TTabSheet
       Caption = 'Album-Liste'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object CDList_Template_GB: TGroupBox
         Left = 8
         Top = 8
@@ -356,6 +368,10 @@ object F_Setup: TF_Setup
       Caption = 'Debug and Dev.'
       ImageIndex = 2
       OnContextPopup = Debug_DevContextPopup
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Pacman_CheckBox: TCheckBox
         Left = 32
         Top = 24
@@ -373,10 +389,9 @@ object F_Setup: TF_Setup
     Width = 177
     Height = 25
     Caption = '&Sichern und Schliessen'
-    TabOrder = 1
-    OnClick = Store_And_Close_BtnClick
+    DoubleBuffered = True
     Glyph.Data = {
-      3A030000424D3603000000000000360000002800000010000000100000000100
+      36030000424D3603000000000000360000002800000010000000100000000100
       1800000000000003000000000000000000000000000000000000FFFFFF303030
       B090908060606060606060606060606060606060606060606060606060606060
       60A06060703030400000606060A06060800000A06060A06060A06060B09090CF
@@ -402,18 +417,17 @@ object F_Setup: TF_Setup
       800000007F7F00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
       FF007F7F800000800000FFFFFF20000040000000000000000000000000000000
       0000000000000000000000000000000000000000400000200000}
+    ParentDoubleBuffered = False
+    TabOrder = 1
+    OnClick = Store_And_Close_BtnClick
   end
   object MP3List_Open_Template_File_Dialog: TOpenDialog
     FilterIndex = 0
-    Height = 0
-    Width = 0
     Left = 48
     Top = 328
   end
   object MP3List_Multi_Open_Template_File_Dialog: TOpenDialog
     FilterIndex = 0
-    Height = 0
-    Width = 0
     Left = 72
     Top = 328
   end
