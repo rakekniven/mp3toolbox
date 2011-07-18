@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms,
   QDialogs, QStdCtrls, QButtons, QComCtrls, QMenus, IniFiles, QExtCtrls,
-  QGrids, QFileCtrls, Libc;
+	QGrids, QFileCtrls;//, Libc;
 
 type
   TF_Main = class(TForm)
@@ -252,11 +252,11 @@ var
 {--- Formular erzeugen --------------------------------------------------------}
 procedure TF_Main.FormCreate(Sender: TObject);
 var
-  i :Integer;
+	i :Integer;
 begin
   init_ok :=  True;
 
-  ini_file_name               :=  '/home/mark/.mp3toolbox/mp3toolbox.cfg';
+  ini_file_name               :=  'd:\mp3toolbox.cfg';
 
   for i := 0 to Length(mp3list_Character_stringlists) do
     mp3list_Character_stringlists[i]  :=  TStringList.Create;
@@ -393,7 +393,7 @@ end;
 {--- Menu : Show Setup Form ---------------------------------------------------}
 procedure TF_Main.Setup1Click(Sender: TObject);
 begin
-  F_Setup.Show;
+	F_Setup.Show;
 end;
 
 {--- OnShow -------------------------------------------------------------------}
@@ -786,14 +786,17 @@ begin
   begin
     {zip files}
     { syntax : zip name_of_zip_file file1_to_zip file2_to_zip file3_to_zip}
-    Libc.system(PChar('zip -j' +
-                      ' ' +
-                      SlashSep(text_files_output_path, mp3list_text_output_file) +
-                      '.zip' +
-                      ' ' +
-                      SlashSep(text_files_output_path, mp3list_text_output_file)));
-    if mp3list_text_files_delete_after_zip then
-    begin
+(*
+66666
+				 system(PChar('zip -j' +
+											' ' +
+											SlashSep(text_files_output_path, mp3list_text_output_file) +
+											'.zip' +
+											' ' +
+											SlashSep(text_files_output_path, mp3list_text_output_file)));
+*)
+		if mp3list_text_files_delete_after_zip then
+		begin
       if not DeleteFile(SlashSep(text_files_output_path, mp3list_text_output_file)) then
         ShowMessage('???');
     end;
@@ -824,13 +827,16 @@ begin
     begin
       {zip files}
       { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
-      Libc.system(PChar('zip -j' +
-                        ' ' +
-                        SlashSep(html_files_output_path, mp3list_html_output_file) +
-                        '.zip' +
-                        ' ' +
-                        SlashSep(html_files_output_path, mp3list_html_output_file)));
-      if mp3list_html_files_delete_after_zip then
+(*
+66666
+			Libc.system(PChar('zip -j' +
+												' ' +
+												SlashSep(html_files_output_path, mp3list_html_output_file) +
+												'.zip' +
+												' ' +
+												SlashSep(html_files_output_path, mp3list_html_output_file)));
+*)
+			if mp3list_html_files_delete_after_zip then
       begin
         if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
           ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
@@ -903,14 +909,17 @@ begin
       end;
       {zip files}
       { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
-      Libc.system(PChar('zip -j' +
-                        ' ' +
-                        SlashSep(html_files_output_path, mp3list_html_output_file) +
-                        '.zip' +
-                        ' ' +
-                        files_to_zip));
-      for i := 0 to Length(dir) - 1 do
-      begin
+(*
+66666
+			Libc.system(PChar('zip -j' +
+												' ' +
+												SlashSep(html_files_output_path, mp3list_html_output_file) +
+												'.zip' +
+												' ' +
+												files_to_zip));
+*)
+			for i := 0 to Length(dir) - 1 do
+			begin
         if mp3list_html_files_delete_after_zip then
         begin
           if not DeleteFile(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
@@ -1270,13 +1279,16 @@ begin
   if cdlist_html_files_zip then
   begin
 
-    Libc.system(PChar('zip -j' +
-                      ' ' +
-    								  Result_File_ComboBox.Items[Result_File_ComboBox.ItemIndex] +
-                      '.zip' +
-                      ' ' +
-  									  Result_File_ComboBox.Items[Result_File_ComboBox.ItemIndex]))
-                      ;
+(*
+66666
+		Libc.system(PChar('zip -j' +
+											' ' +
+											Result_File_ComboBox.Items[Result_File_ComboBox.ItemIndex] +
+											'.zip' +
+											' ' +
+											Result_File_ComboBox.Items[Result_File_ComboBox.ItemIndex]))
+											;
+*)
 
     if cdlist_html_files_delete_after_zip then
     begin

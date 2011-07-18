@@ -235,119 +235,126 @@ BEGIN  { of Set_Language_New }
 
   FilePath    := act_exec_directory;
 
-  Lng_LibName  := SlashSep(FilePath, 'Lang_'+Lng_ID+{~FIX~}'.txt'#0);
+  Lng_LibName  := SlashSep(FilePath, 'Lang_'+Lng_ID+'.txt'#0);
 
-  Try
-    {Sprachfile zuweisen}
-    AssignFile(IniFile,Lng_LibName);
-    Reset(IniFile);
+	if FileExists(Lng_LibName) then
+	begin
+		Try
+			{Sprachfile zuweisen}
+			AssignFile(IniFile,Lng_LibName);
+			Reset(IniFile);
 
-    {Zeile für Zeile auslesen}
-    while not EOF(IniFile) do begin
-      Readln(IniFile, TempLine);
+			{Zeile für Zeile auslesen}
+			while not EOF(IniFile) do begin
+				Readln(IniFile, TempLine);
 
 
-      {Prüfung ob String ein Kommentar ist}
-      if Length(TempLine) > 0 then
-        DoLine := Trim(TempLine)[1] <> ';'       // Kommentarzeilen beginnen mit einem ';'
-      else
-        DoLine := FALSE;
+				{Prüfung ob String ein Kommentar ist}
+				if Length(TempLine) > 0 then
+					DoLine := Trim(TempLine)[1] <> ';'       // Kommentarzeilen beginnen mit einem ';'
+				else
+					DoLine := FALSE;
 
-      if DoLine then begin
-        TempSection := GetSectionID(GetSectionName(TempLine));
+				if DoLine then begin
+					TempSection := GetSectionID(GetSectionName(TempLine));
 
-        if TempSection <> 0 then begin
-          ActSectID := TempSection;
+					if TempSection <> 0 then begin
+						ActSectID := TempSection;
 
-          if TempSection > 0 then begin
-            FormIndex[ActSectID] := TextCount+1;
-          end;
-        end
-        else begin
-          if ActSectID > 0 then begin
-            GetActLine(TempLine, ActSectID, TempNummer, TempText);
+						if TempSection > 0 then begin
+							FormIndex[ActSectID] := TextCount+1;
+						end;
+					end
+					else begin
+						if ActSectID > 0 then begin
+							GetActLine(TempLine, ActSectID, TempNummer, TempText);
 
-            if (TempNummer <> 0) and (TempText <> '~~~') then begin
-              ActTextNr := FormIndex[ActSectID]+TempNummer-1;
+							if (TempNummer <> 0) and (TempText <> '~~~') then begin
+								ActTextNr := FormIndex[ActSectID]+TempNummer-1;
 
-              {Prüfen ob erstes Zeichen ein "\" ist um mehrzeilige Ausgaben zu ermöglichen}
-              if Length(TempText)>0 then
-                NewLine := TempText[1]='\'
-              else
-                NewLine := FALSE;
+								{Prüfen ob erstes Zeichen ein "\" ist um mehrzeilige Ausgaben zu ermöglichen}
+								if Length(TempText)>0 then
+									NewLine := TempText[1]='\'
+								else
+									NewLine := FALSE;
 
-              if NewLine then begin
-                Text[ActTextNr] := Text[ActTextNr] + #13#10 + Copy(TempText,2,Length(TempText)-1);
-              end
-              else begin
-                Text[ActTextNr] := TempText;
-                if ActTextNr>TextCount then TextCount := ActTextNr;
-                FormLength[ActSectID] := TextCount;
-              end;
-            end;
-          end
-          else begin
-            case ActSectID of
-              C_Language  : begin
-                              GetIniLine(TempLine, ActSectID, TempEntry, TempValue);
+								if NewLine then begin
+									Text[ActTextNr] := Text[ActTextNr] + #13#10 + Copy(TempText,2,Length(TempText)-1);
+								end
+								else begin
+									Text[ActTextNr] := TempText;
+									if ActTextNr>TextCount then TextCount := ActTextNr;
+									FormLength[ActSectID] := TextCount;
+								end;
+							end;
+						end
+						else begin
+							case ActSectID of
+								C_Language  : begin
+																GetIniLine(TempLine, ActSectID, TempEntry, TempValue);
 
-                              if UpperCase(TempEntry)=UpperCase('Charset') then begin
-                                try
-//                                  Lng_CharSet := StrToInt(TempValue);
-                                except end;
-                              end;
+																if UpperCase(TempEntry)=UpperCase('Charset') then begin
+																	try
+	//                                  Lng_CharSet := StrToInt(TempValue);
+																	except end;
+																end;
 
-                            end;
+															end;
 
-              C_TabTxt    : begin
-                              GetActLine(TempLine, ActSectID, TempNummer, TempText);
-                              ActTextNr := TempNummer;
-                              if (TempNummer <> 0) and (TempText <> '~~~') then begin
+								C_TabTxt    : begin
+																GetActLine(TempLine, ActSectID, TempNummer, TempText);
+																ActTextNr := TempNummer;
+																if (TempNummer <> 0) and (TempText <> '~~~') then begin
 
-                                if Length(TempText)>0 then
-                                  NewLine := TempText[1]='\'
-                                else
-                                  NewLine := FALSE;
+																	if Length(TempText)>0 then
+																		NewLine := TempText[1]='\'
+																	else
+																		NewLine := FALSE;
 
-                                if NewLine then begin
-                                  TABText[ActTextNr] := TABText[ActTextNr] + #13#10 + Copy(TempText,2,Length(TempText)-1);
-                                end
-                                else begin
-                                  TABText[ActTextNr] := TempText;
-                                end;
-                              end;
-                            end;
+																	if NewLine then begin
+																		TABText[ActTextNr] := TABText[ActTextNr] + #13#10 + Copy(TempText,2,Length(TempText)-1);
+																	end
+																	else begin
+																		TABText[ActTextNr] := TempText;
+																	end;
+																end;
+															end;
 
-              C_MsgTxt    : begin
-                              GetActLine(TempLine, ActSectID, TempNummer, TempText);
-                              ActTextNr := TempNummer;
-                              if (TempNummer <> 0) and (TempText <> '~~~') then begin
+								C_MsgTxt    : begin
+																GetActLine(TempLine, ActSectID, TempNummer, TempText);
+																ActTextNr := TempNummer;
+																if (TempNummer <> 0) and (TempText <> '~~~') then begin
 
-                                if Length(TempText)>0 then
-                                  NewLine := TempText[1]='\'
-                                else
-                                  NewLine := FALSE;
+																	if Length(TempText)>0 then
+																		NewLine := TempText[1]='\'
+																	else
+																		NewLine := FALSE;
 
-                                if NewLine then begin
-                                  MSGText[ActTextNr] := MSGText[ActTextNr] + #13#10 + Copy(TempText,2,Length(TempText)-1);
-                                end
-                                else begin
-                                  MSGText[ActTextNr] := TempText;
-                                end;
-                              end;
-                            end;
-            end;
-          end;
-        end;
-      end;
-    end;
-    CloseFile(IniFile);
-  except
-    Application.MessageBox (PChar('Languagefile is missing. This program won´t work without a valid languagefile. Look for : "' + Lng_LibName ),
-                                  PChar('Warning'),
-                                  [smbOK]);
-    Application.Terminate;
-  end;
+																	if NewLine then begin
+																		MSGText[ActTextNr] := MSGText[ActTextNr] + #13#10 + Copy(TempText,2,Length(TempText)-1);
+																	end
+																	else begin
+																		MSGText[ActTextNr] := TempText;
+																	end;
+																end;
+															end;
+							end;
+						end;
+					end;
+				end;
+			end;
+			CloseFile(IniFile);
+		except
+			Application.MessageBox (PChar('Languagefile is missing. This program won´t work without a valid languagefile. Look for : "' + Lng_LibName ),
+																		PChar('Warning'),
+																		[smbOK]);
+			Application.Terminate;
+		end;
+	end
+	else
+			Application.MessageBox (PChar('Config file is missing. Please go to settings and save your settings. ("' + Lng_LibName ) + '")',
+																		PChar('Warning'),
+																		[smbOK]);
 end;   { of Set_Language_NEW }
 
 end.
