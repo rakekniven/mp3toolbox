@@ -232,6 +232,7 @@ implementation
 
 {$R *.dfm}
 {$R mp3tb_img.res}
+{$WARN UNIT_PLATFORM off}
 
 uses
   lib1,

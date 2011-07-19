@@ -1,6 +1,7 @@
 program mp3toolbox;
 
 
+{$R 'Manifest.res' 'Manifest.rc'}
 
 uses
   Forms,
