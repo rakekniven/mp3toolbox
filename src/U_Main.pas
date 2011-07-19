@@ -38,7 +38,7 @@ type
     Save_To_Button: TButton;
     Sel_All_Button: TButton;
     Sel_None_Button: TButton;
-    Clear_Sel_Button: TButton;
+		Clear_Sel_Button: TButton;
     Clear_All_Button: TButton;
     Subdir_CheckBox: TCheckBox;
     Output_with_path_CB: TCheckBox;
@@ -78,7 +78,7 @@ type
     MP3List_PopupMenu: TPopupMenu;
     checkfilenames1: TMenuItem;
     checkfilenamesforallowedlength1: TMenuItem;
-    Joliet601: TMenuItem;
+		Joliet601: TMenuItem;
     ISO9660Level1121: TMenuItem;
     ISO9660Level2311: TMenuItem;
     Romeo1281: TMenuItem;
@@ -118,7 +118,7 @@ type
     CDList_Result_Label: TLabel;
     TabSheet4: TTabSheet;
     ListBox_Error: TListBox;
-    procedure Sel_Dir_BtnClick(Sender: TObject);
+		procedure Sel_Dir_BtnClick(Sender: TObject);
     procedure Close_Btn1Click(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
     procedure Load_From_ButtonClick(Sender: TObject);
@@ -158,7 +158,7 @@ type
     procedure CDList_Close_BtnClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure HTML_OutputButton3Click(Sender: TObject);
-    procedure Dateibearbeiten1Click(Sender: TObject);
+		procedure Dateibearbeiten1Click(Sender: TObject);
     procedure DateiausListeentfernen1Click(Sender: TObject);
 		procedure init_text(Sender:TObject);
     procedure FormShow(Sender: TObject);
@@ -179,7 +179,6 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure Result_File_SpeedButtonClick(Sender: TObject);
     procedure CDList_Template_SpeedButtonClick(Sender: TObject);
-    procedure Multi_Dir_GroupBoxDblClick(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -238,7 +237,7 @@ var
   cdarchive_last_used_pathes          :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
 
   {Variablen für CD-Liste}
-  cdlist_last_used_pathes             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
+	cdlist_last_used_pathes             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
   cdlist_last_used_export_files       :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
   cdlist_last_used_template_files     :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
   cdlist_tab_values                   :	array[0..99]	of String;	//	100 Tabs sind in quelldatei möglich
@@ -283,7 +282,10 @@ var
 begin
   init_ok :=  True;
 
-  ini_file_name               :=  'd:\mp3toolbox.cfg';
+	if not DirectoryExists(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox')) then
+		MkDir(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox'));
+
+	ini_file_name               :=  	SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox\mp3toolbox.cfg');
 
   for i := 0 to Length(mp3list_Character_stringlists) do
     mp3list_Character_stringlists[i]  :=  TStringList.Create;
@@ -629,20 +631,6 @@ begin
 end;
 
 {--- MP3List : on mouse up in pathentries listbox check selected --------------}
-procedure TF_Main.Multi_Dir_GroupBoxDblClick(Sender: TObject);
-begin
-// 66666 Debug
-	if FileExists('Z:\sound-archives\0-9\3 doors down\The Better Life\01-Kryptonite.mp3') then
-	begin
-		ID3v2Tag.ReadFromFile('Z:\sound-archives\0-9\3 doors down\The Better Life\01-Kryptonite.mp3');
-
-		MP3_ListBox.Items.Add(ID3v2Tag.Artist);
-		MP3_ListBox.Items.Add(ID3v2Tag.Album);
-		MP3_ListBox.Items.Add(ID3v2Tag.Track);
-		MP3_ListBox.Items.Add(ID3v2Tag.Title);
-	end;
-end;
-
 procedure TF_Main.Multi_Dir_ListBoxMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin

@@ -22,7 +22,7 @@ unit lib1;
 interface
 
 uses
-  classes, sysutils, Forms;
+	classes, sysutils, Forms, Windows;
 
 
 	function	SlashSep(const Path, S: string): string;
@@ -41,7 +41,7 @@ uses
 	procedure separate_string_by_tab(complex_string : String);
 
   function	seperate_string_in_parts(whole_string,
-  																	middle_string,
+																		middle_string,
                                     position : String): String;
 
   procedure move_memory_combos(var arrayname	:	array of String;
@@ -67,7 +67,10 @@ uses
   function  clear_all_until_last_slash ( path_and_file : String ) : string;
 
   function  get_no_of_chars (String_to_check    : String;
-                             Char_to_search_for : String) : Integer;
+														 Char_to_search_for : String) : Integer;
+
+	function ExpandEnv(const S: String): String;
+
 implementation
 
 uses
@@ -79,7 +82,7 @@ begin
   if Path <> '' then
   begin
     if AnsiLastChar(Path)^ <> '/' then
-      Result := Path + '/' + S
+			Result := Path + '/' + S
     else
       Result := Path + S;
   end;
@@ -108,7 +111,7 @@ var
 begin
 
   { Zuerst alle Dateien im aktuelle Verzeichnis finden												 }
-  { Anstatt *.* kann auch etwas anderes wie *.jpg oder *.gif eingegeben werden,}
+	{ Anstatt *.* kann auch etwas anderes wie *.jpg oder *.gif eingegeben werden,}
   { um nur Dateien eines bestimmten Typs zu finden.                            }
   nStatus := FindFirst(PChar(SlashSep(ADirectory, SearchString)),  0, SearchRec);
   while nStatus = 0 do
@@ -122,12 +125,12 @@ begin
   	if WithPathes then
 	    SearchRec.Name	:=	SlashSep(ADirectory, SearchRec.Name);
 
-  	{Wenn Dateigroesse mit übergeben werden soll}
+		{Wenn Dateigroesse mit übergeben werden soll}
     if GetSize then
     begin
 
       {Mit oder ohne pfad}
-      if WithPathes then
+			if WithPathes then
         size	:=	GetTheFileSize(SearchRec.Name)
       else
         size	:=	GetTheFileSize(SlashSep(ADirectory, SearchRec.Name));
@@ -147,11 +150,11 @@ begin
 
     nStatus := FindNext(SearchRec);
   end;
-  FindClose(SearchRec);
+	SysUtils.FindClose(SearchRec);
 
-  {Als nächstes nach Unterverzeichnissen suchen und wenn benötigt durchsuchen}
+	{Als nächstes nach Unterverzeichnissen suchen und wenn benötigt durchsuchen}
   if SubFolders then
-  begin
+	begin
 //    nStatus := FindFirst(PChar(SlashSep(ADirectory, '*.*')), faDirectory, SearchRec);
     nStatus := FindFirst(PChar(SlashSep(ADirectory, '*')), faDirectory, SearchRec);
 
@@ -165,21 +168,21 @@ begin
           Application.ProcessMessages;
 
           {Cancel ???}
-          if cancel_search then Break;
+					if cancel_search then Break;
 
           GetFiles(SlashSep(ADirectory, SearchRec.Name),
                    Files,
                    WithPathes,
-                   SubFolders,
+									 SubFolders,
                    GetSize,
                    SearchString);
         end;
         {Counter for directories}
         searched_dir_count	:=	searched_dir_count + 1;
       end;
-      nStatus := FindNext(SearchRec)
+			nStatus := FindNext(SearchRec)
     end;
-    FindClose(SearchRec);
+		SysUtils.FindClose(SearchRec);
   end;
 end;
 
@@ -194,7 +197,7 @@ begin
     size		:=	size / 1024 / 1024;
     fsize		:=	Format('%7.3f', [size]);
     result	:=	fsize + ' MB';
-  end
+	end
   {if bigger than kB}
   else if	size > 1024 then
   begin
@@ -208,7 +211,7 @@ begin
     fsize		:=	Format('%4.0f', [size]);
     result	:=	fsize + ' Byte';
   end
-  else
+	else
     result	:=	' <no size>';
 end;
 
@@ -237,7 +240,7 @@ begin
     begin
       i1  :=  Length(complex_string) + 1;
       last_part :=  True;
-    end;
+		end;
 
     {get text before tab}
     for i := 1 to i1 - 1 do
@@ -251,7 +254,7 @@ begin
     {replace text with none for next in row}
     if last_part then
       complex_string  :=  StringReplace(complex_string, temp_string ,'', [])
-    else
+		else
       complex_string  :=  StringReplace(complex_string, temp_string + #9,'', []);
 
   end;
@@ -280,7 +283,7 @@ var
   i1          : Integer;
   temp_string : String;
 begin
-  Result  :=  0;
+	Result  :=  0;
 
   {Solange tab vorhanden dann inhalt bis zum nächsten tab entfernen}
   repeat
@@ -294,12 +297,12 @@ begin
         temp_string := temp_string + complex_string[i];
       end;
       Result  :=  Result + 1;
-      complex_string  :=  StringReplace(complex_string, temp_string + #9,'', []);
+			complex_string  :=  StringReplace(complex_string, temp_string + #9,'', []);
     end
     else
     begin
       if Length(complex_string) > 0 then
-        Result  :=  Result + 1;
+				Result  :=  Result + 1;
     end;
   until i1  = 0;
 end;
@@ -323,7 +326,7 @@ begin
   pdwHandle := 0;
   nInfoSize := GetFileVersionInfoSize(aFileName, pdwHandle);
   if nInfoSize <> 0 then
-    pFileInfo := GetMemory(nInfoSize)
+		pFileInfo := GetMemory(nInfoSize)
   else
     pFileInfo := nil;
   if Assigned(pFileInfo) then
@@ -337,7 +340,7 @@ begin
       if VerQueryValue(pFileInfo, '\', Pointer(pFixFInfo), nFixFInfo) then
       begin
       // Bei von Delphi erzeugten Info-Blöcken sind die Dateiversion
-      // und die Produktversion im FixedInfo-Block immer gleich.
+			// und die Produktversion im FixedInfo-Block immer gleich.
         Place1	:=	Format('%d', [HiWord(pFixFInfo^.dwFileVersionMS)]);
         Place2	:=	Format('%d', [LoWord(pFixFInfo^.dwFileVersionMS)]);
         Place3	:=	Format('%d', [HiWord(pFixFInfo^.dwFileVersionLS)]);
@@ -380,7 +383,7 @@ end;
 
 {--- seperate string into three parts, middle part must me given --------------}
 function seperate_string_in_parts(whole_string,
-  																middle_string,
+																	middle_string,
                                   position : String) : String;
 var
 	i1	:	integer;
@@ -409,7 +412,7 @@ begin
     whole_string	:=	StringReplace(whole_string, temp_string, '', []);
 
     {remove middle_string}
-    whole_string	:=	StringReplace(whole_string, middle_string, '', []);
+		whole_string	:=	StringReplace(whole_string, middle_string, '', []);
 
     result	:=  whole_string;
   end;
@@ -423,7 +426,7 @@ var
 begin {of MyFileSize}
   if FindFirst(Filename, faAnyFile, SR)=0 then begin
     Result:=SR.Size;
-    FindClose(SR);
+		SysUtils.FindClose(SR);
   end
   else
     Result:=-1;
@@ -452,7 +455,7 @@ begin
   {Fehlercodes}
   if i <= 32 then
   begin
-    case i of
+		case i of
       0  : msg :=  'Zuwenig Speicher, ausfuehbare Datei war zerstoert, Relokationswerte waren ungueltig';
       2  : msg :=  'Datei wurde nicht gefunden';
       3  : msg :=  'Verzeichnis wurde nicht gefunden';
@@ -466,12 +469,12 @@ begin
       14 : msg :=  'Typ der ausfuehrbaren Datei unbekannt.';
       15 : msg :=  'Versuch eine Real-Mode-Anwendung zu starten.';
       19 : msg :=  'Versuch eine komprimierte ausfuehrbare Datei zu laden. Die Datei muss dekomprimiert werden, bevor sie geladen werden kann.';
-      20 : msg :=  'Ungueltige DLL. Eine der DLLs. die benoetigt wurde um die Anwendung auszufuehren, war beschaedigt.';
+			20 : msg :=  'Ungueltige DLL. Eine der DLLs. die benoetigt wurde um die Anwendung auszufuehren, war beschaedigt.';
     end;
   end;
 
   {Wenn Fehler dann Ausgabe in Status}
-  if msg <> '' then
+	if msg <> '' then
     ShowMessage(msg);
 end;
 *)
@@ -495,7 +498,7 @@ begin
 
   {check the filename for every forbidden character}
   for i := 0 to (Length(characters_not_ok_str) - 1) do
-  begin
+	begin
     if AnsiPos(characters_not_ok[i], filename_to_check) > 0 then
     begin
       result	:=	True;
@@ -514,7 +517,7 @@ begin
 	result	:=	False;
 
   {check the filename for every forbidden character}
-  if Length(filename_to_check) > allowed_length then
+	if Length(filename_to_check) > allowed_length then
     result	:=	True;
 
 end;
@@ -538,10 +541,18 @@ begin
     begin
       String_to_check :=  StringReplace(String_to_check, Char_to_search_for, '', []);
       i :=  i + 1;
-    end;
+		end;
   until AnsiPos(Char_to_search_for, String_to_check) < 1;
 
   Result  :=  i;
+end;
+
+function ExpandEnv(const S: String): String;
+var i: Integer;
+begin
+	i := ExpandEnvironmentStrings(PChar(S), nil, 0);
+	SetLength(Result, i - 1);
+	ExpandEnvironmentStrings(PChar(S), PChar(Result), i);
 end;
 
 end.
