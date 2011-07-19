@@ -647,7 +647,8 @@ procedure TF_Main.Go_BtnClick(Sender: TObject);
 var
 	Files							:	TStringList;                       //  Stringliste
 	i									:	Integer;
-  gauge_step				:	Integer;
+	gauge_step				:	Integer;
+	s1								:	String;
 begin
 	MP3_ListBox.BringToFront;
   NameCheck_ListBox.Clear;
@@ -744,6 +745,9 @@ begin
 		TabSheet4.TabVisible	:=	False;
 		for i:= 0  to Files.Count - 1 do
 		begin
+			if cancel_search then
+				break;
+
 			if Files[i] <> '%s.mp3' then
 			begin
 				ID3v2Tag.ReadFromFile(Files[i]);
@@ -756,10 +760,15 @@ begin
 				end
 				else
 				begin
-					MP3_ListBox.Items.Add(ID3v2Tag.Artist + ' - ' +
-																ID3v2Tag.Album + ' - ' +
-																ID3v2Tag.Track + ' - ' +
-																ID3v2Tag.Title);
+					s1	:= ID3v2Tag.Artist;
+					if ID3v2Tag.Album <> '' then
+						s1	:=	s1 + ' - ' + ID3v2Tag.Album;
+					if ID3v2Tag.Track <> '' then
+						s1	:=	s1 + ' - ' + ID3v2Tag.Track;
+					if ID3v2Tag.Title <> '' then
+						s1	:=	s1 + ' - ' + ID3v2Tag.Title;
+
+					MP3_ListBox.Items.Add(s1);
 				end;
 
 				Search_ProgressBar.Position	:=	Round((100 * i) div (Files.Count -1));
