@@ -847,6 +847,10 @@ object F_Main: TF_Main
       Caption = 'cd-archives'
       ImageIndex = 1
       OnShow = TabSheet2Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object CD_Archive_View_All_Files_Btn: TLabel
         Left = 10
         Top = 138
@@ -1125,6 +1129,10 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object CDList_ProgressBar: TProgressBar
         Left = 876
         Top = 90
