@@ -5,7 +5,7 @@ interface
 uses
 	Windows, SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
 	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
-	Grids, FileCtrl;//, Libc;
+	Grids, FileCtrl, Mp3FileUtils;//, Libc;
 
 type
   TF_Main = class(TForm)
@@ -97,6 +97,8 @@ type
     Result_File_SaveDialog: TSaveDialog;
     CDList_Source_File_OpenDialog: TOpenDialog;
     CDList_Result_Label: TLabel;
+    TabSheet4: TTabSheet;
+    ListBox_Error: TListBox;
     procedure Sel_Dir_BtnClick(Sender: TObject);
     procedure Close_Btn1Click(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
@@ -158,11 +160,15 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure Result_File_SpeedButtonClick(Sender: TObject);
     procedure CDList_Template_SpeedButtonClick(Sender: TObject);
+    procedure Multi_Dir_GroupBoxDblClick(Sender: TObject);
   private
     { Private-Deklarationen }
   public
     { Public-Deklarationen }
-  end;
+
+		ID3v2Tag: TID3v2Tag;
+
+	end;
 
 type
   TASCII_File = class(TObject)
@@ -263,13 +269,14 @@ begin
   for i := 0 to Length(mp3list_Character_stringlists) do
     mp3list_Character_stringlists[i]  :=  TStringList.Create;
 
+	ID3v2Tag := TID3v2Tag.Create;
 
   if not FileExists(ini_file_name) then
   begin
 //    init_ok                   :=  False;
     Load_From_Button.Enabled  :=  False;
   end
-  else
+	else
   begin
     {Begin: INI-Datei oeffnen und werte setzen}
     Ini := TIniFile.Create(ini_file_name);
@@ -333,7 +340,8 @@ begin
 
   GetDir(0, act_exec_directory);
 
-  output_with_pathes    :=  False;
+// 66666
+  output_with_pathes    :=  True;
   output_with_filesize  :=  False;
   cancel_search     	  :=	False;
 
@@ -602,6 +610,20 @@ begin
 end;
 
 {--- MP3List : on mouse up in pathentries listbox check selected --------------}
+procedure TF_Main.Multi_Dir_GroupBoxDblClick(Sender: TObject);
+begin
+// 66666 Debug
+	if FileExists('Z:\sound-archives\0-9\3 doors down\The Better Life\01-Kryptonite.mp3') then
+	begin
+		ID3v2Tag.ReadFromFile('Z:\sound-archives\0-9\3 doors down\The Better Life\01-Kryptonite.mp3');
+
+		MP3_ListBox.Items.Add(ID3v2Tag.Artist);
+		MP3_ListBox.Items.Add(ID3v2Tag.Album);
+		MP3_ListBox.Items.Add(ID3v2Tag.Track);
+		MP3_ListBox.Items.Add(ID3v2Tag.Title);
+	end;
+end;
+
 procedure TF_Main.Multi_Dir_ListBoxMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -620,7 +642,7 @@ var
 	i									:	Integer;
   gauge_step				:	Integer;
 begin
-  MP3_ListBox.BringToFront;
+	MP3_ListBox.BringToFront;
   NameCheck_ListBox.Clear;
 
   {When Search is canceled.}
@@ -675,7 +697,7 @@ begin
                   search_subdir,
                   output_with_filesize,
                   search_filter_expression );
-        Search_ProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
+				Search_ProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
       end;
     end;
 
@@ -697,19 +719,48 @@ begin
 
     {Anzeige der Suchzeit.}
     Search_Time_Lab.Color			:=  clBlack;
-    Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time) + ' Suchdauer';;
+		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time) + ' Suchdauer';;
 
     {Stringliste sortieren}
     Files.Sort;
 
-    {filter and fill ListBox}
-    for i:= 0  to Files.Count - 1 do
-    begin
-      if Files[i] <> '%s.mp3' then
-        MP3_ListBox.Items.Add(Files[i]);
-    end;
+		{filter and fill ListBox}
+(*
+		for i:= 0  to Files.Count - 1 do
+		begin
+			if Files[i] <> '%s.mp3' then
+				MP3_ListBox.Items.Add(Files[i]);
+		end;
+*)
+		Search_ProgressBar.Position	:=	0;
+		ListBox_Error.Clear;
+		for i:= 0  to Files.Count - 1 do
+		begin
+			if Files[i] <> '%s.mp3' then
+			begin
+				ID3v2Tag.ReadFromFile(Files[i]);
 
-    {total counter (wird für ausgabenschleife benötigt TXT und HTML}
+				if ID3v2Tag.Artist = '' then
+				begin
+					ListBox_Error.Items.Add(Files[i]);
+					if ListBox_Error.Count > 0 then
+						TabSheet4.TabVisible	:=	True;
+				end
+				else
+				begin
+					MP3_ListBox.Items.Add(ID3v2Tag.Artist + ' - ' +
+																ID3v2Tag.Album + ' - ' +
+																ID3v2Tag.Track + ' - ' +
+																ID3v2Tag.Title);
+				end;
+
+				Search_ProgressBar.Position	:=	Round((100 * i) div (Files.Count -1));
+				Application.ProcessMessages;
+			end;
+		end;
+		Search_ProgressBar.Position	:=	100;
+
+		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
     mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
@@ -750,10 +801,10 @@ end;
 {--- MP3List : When Checkbox "Output with pathes" is clicked. -----------------}
 procedure TF_Main.Output_with_path_CBClick(Sender: TObject);
 begin
-  if Output_with_path_CB.Checked then
-    output_with_pathes  :=  True
+	if Output_with_path_CB.Checked then
+		output_with_pathes  :=  True
   else
-    output_with_pathes  :=  False;
+		output_with_pathes  :=  False;
 end;
 
 {--- MP3List : When Checkbox "Output with filesize" is clicked. ---------------}
@@ -855,7 +906,7 @@ begin
 
     {clear stringlists first}
     for i := 0 to Length(mp3list_Character_stringlists) - 1 do
-      mp3list_Character_stringlists[i].Clear;
+			mp3list_Character_stringlists[i].Clear;
 
     {sort every single line to it's assignes character stringlist}
     for i := 0 to MP3_ListBox.Items.Count - 1 do

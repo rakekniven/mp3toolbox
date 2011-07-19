@@ -325,12 +325,12 @@ object F_Main: TF_Main
         Left = 0
         Top = 225
         Width = 962
-        Height = 342
+        Height = 364
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akLeft, akTop, akRight, akBottom]
         ExtendedSelect = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -357,6 +357,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Caption = 'Directorys'
         TabOrder = 3
+        OnDblClick = Multi_Dir_GroupBoxDblClick
         object Multi_Dir_ListBox: TListBox
           Left = 187
           Top = 30
@@ -514,6 +515,7 @@ object F_Main: TF_Main
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
+          Visible = False
           OnClick = Output_with_path_CBClick
         end
         object Filter_GroupBox: TGroupBox
@@ -1148,14 +1150,14 @@ object F_Main: TF_Main
       end
       object CDListe_StringGrid: TStringGrid
         Left = 0
-        Top = 196
+        Top = 216
         Width = 960
         Height = 373
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akLeft, akTop, akRight, akBottom]
         ColCount = 1
         DefaultRowHeight = 16
         FixedCols = 0
@@ -1510,6 +1512,23 @@ object F_Main: TF_Main
           ParentFont = False
           TabOrder = 3
         end
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'Error'
+      ImageIndex = 3
+      TabVisible = False
+      object ListBox_Error: TListBox
+        Left = 0
+        Top = 0
+        Width = 964
+        Height = 593
+        Align = alClient
+        TabOrder = 0
+        ExplicitLeft = 544
+        ExplicitTop = 416
+        ExplicitWidth = 121
+        ExplicitHeight = 97
       end
     end
   end
