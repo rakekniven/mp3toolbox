@@ -15,8 +15,8 @@ uses
 
 begin
   Application.Initialize;
+	Application.CreateForm(TF_Main, F_Main);
 	Application.CreateForm(TF_Setup, F_Setup);
 	Application.CreateForm(TAbout_F, About_F);
-	Application.CreateForm(TF_Main, F_Main);
   Application.Run;
 end.
