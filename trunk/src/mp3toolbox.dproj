@@ -57,6 +57,9 @@
 			<DCCReference Include="U_About.pas">
 				<Form>About_F</Form>
 			</DCCReference>
+			<DCCReference Include="externallibs\U_CharCode.pas"/>
+			<DCCReference Include="externallibs\Id3v2Frames.pas"/>
+			<DCCReference Include="externallibs\Mp3FileUtils.pas"/>
 			<None Include="Lang_D.txt">
 				<ContainerId>File</ContainerId>
 			</None>
