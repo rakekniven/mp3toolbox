@@ -325,7 +325,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 225
         Width = 962
-        Height = 364
+        Height = 344
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -855,6 +855,10 @@ object F_Main: TF_Main
       ImageIndex = 1
       TabVisible = False
       OnShow = TabSheet2Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object CD_Archive_View_All_Files_Btn: TLabel
         Left = 10
         Top = 138
@@ -1133,6 +1137,10 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         964
         593)
@@ -1152,7 +1160,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 960
-        Height = 373
+        Height = 353
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1171,6 +1179,7 @@ object F_Main: TF_Main
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing]
         ParentFont = False
         TabOrder = 0
+        ExplicitHeight = 373
       end
       object HTML_OutputButton3: TBitBtn
         Left = 762
@@ -1518,6 +1527,10 @@ object F_Main: TF_Main
       Caption = 'Error'
       ImageIndex = 3
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1525,10 +1538,6 @@ object F_Main: TF_Main
         Height = 593
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 544
-        ExplicitTop = 416
-        ExplicitWidth = 121
-        ExplicitHeight = 97
       end
     end
   end

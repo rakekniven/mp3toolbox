@@ -508,6 +508,11 @@ object About_F: TAbout_F
         Height = 195
         Align = alClient
         Color = clBtnFace
+        Lines.Strings = (
+          
+            'Greetings to Daniel Gau'#223'mann. Developer of pretty nice MP3FileUt' +
+            'ils '
+          'http://www.gausi.de/mp3fileutils.html')
         TabOrder = 0
       end
     end
