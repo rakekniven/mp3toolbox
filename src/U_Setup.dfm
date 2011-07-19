@@ -27,7 +27,7 @@ object F_Setup: TF_Setup
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = MP3List
+    ActivePage = Allgemein
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4

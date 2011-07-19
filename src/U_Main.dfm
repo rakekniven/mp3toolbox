@@ -33,17 +33,12 @@ object F_Main: TF_Main
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 5
-    ExplicitWidth = 966
-    ExplicitHeight = 592
     object TabSheet1: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'mp3list'
-      ExplicitWidth = 958
-      ExplicitHeight = 561
       DesignSize = (
         964
         593)
@@ -330,7 +325,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 225
         Width = 962
-        Height = 362
+        Height = 342
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -858,8 +853,6 @@ object F_Main: TF_Main
       ImageIndex = 1
       TabVisible = False
       OnShow = TabSheet2Show
-      ExplicitWidth = 958
-      ExplicitHeight = 561
       object CD_Archive_View_All_Files_Btn: TLabel
         Left = 10
         Top = 138
@@ -1138,13 +1131,11 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
-      ExplicitWidth = 958
-      ExplicitHeight = 561
       DesignSize = (
         964
         593)
       object CDList_ProgressBar: TProgressBar
-        Left = 876
+        Left = 762
         Top = 90
         Width = 198
         Height = 31
@@ -1157,9 +1148,9 @@ object F_Main: TF_Main
       end
       object CDListe_StringGrid: TStringGrid
         Left = 0
-        Top = 197
+        Top = 196
         Width = 960
-        Height = 392
+        Height = 373
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1180,8 +1171,8 @@ object F_Main: TF_Main
         TabOrder = 0
       end
       object HTML_OutputButton3: TBitBtn
-        Left = 876
-        Top = 33
+        Left = 762
+        Top = 34
         Width = 198
         Height = 31
         Margins.Left = 4
@@ -1226,7 +1217,7 @@ object F_Main: TF_Main
       object CDLIst_Choose_GB: TGroupBox
         Left = 0
         Top = 9
-        Width = 868
+        Width = 754
         Height = 179
         Margins.Left = 4
         Margins.Top = 4
@@ -1234,7 +1225,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         TabOrder = 2
         object Choose_CDList_Source_File_Btn: TSpeedButton
-          Left = 677
+          Left = 567
           Top = 25
           Width = 50
           Height = 30
@@ -1280,7 +1271,7 @@ object F_Main: TF_Main
           OnClick = Choose_CDList_Source_File_BtnClick
         end
         object Result_File_SpeedButton: TSpeedButton
-          Left = 677
+          Left = 567
           Top = 140
           Width = 50
           Height = 31
@@ -1326,7 +1317,7 @@ object F_Main: TF_Main
           OnClick = Result_File_SpeedButtonClick
         end
         object CDList_Template_SpeedButton: TSpeedButton
-          Left = 677
+          Left = 567
           Top = 81
           Width = 50
           Height = 31
@@ -1405,8 +1396,8 @@ object F_Main: TF_Main
           Caption = 'Result file :'
         end
         object CDList_Result_Label: TLabel
-          Left = 748
-          Top = 81
+          Left = 625
+          Top = 74
           Width = 110
           Height = 31
           Margins.Left = 4
@@ -1430,7 +1421,7 @@ object F_Main: TF_Main
         object CDList_Source_File_CB: TComboBox
           Left = 10
           Top = 25
-          Width = 660
+          Width = 549
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
@@ -1449,7 +1440,7 @@ object F_Main: TF_Main
           TabOrder = 1
         end
         object Go_Btn3: TBitBtn
-          Left = 748
+          Left = 625
           Top = 25
           Width = 110
           Height = 30
@@ -1482,7 +1473,7 @@ object F_Main: TF_Main
         object CDList_Template_ComboBox: TComboBox
           Left = 10
           Top = 81
-          Width = 660
+          Width = 549
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
@@ -1502,7 +1493,7 @@ object F_Main: TF_Main
         object Result_File_ComboBox: TComboBox
           Left = 10
           Top = 140
-          Width = 660
+          Width = 549
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
