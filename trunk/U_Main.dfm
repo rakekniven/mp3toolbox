@@ -1,11 +1,10 @@
 object F_Main: TF_Main
   Left = 164
   Top = 210
-  Width = 896
+  Width = 980
   Height = 678
   HorzScrollBar.Range = 971
   VertScrollBar.Range = 592
-  ActiveControl = PageControl1
   Caption = 'F_Main'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,6 +14,7 @@ object F_Main: TF_Main
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = True
+  Position = poDesktopCenter
   OnActivate = FormActivate
   OnCreate = FormCreate
   OnResize = FormResize
@@ -22,22 +22,31 @@ object F_Main: TF_Main
   PixelsPerInch = 96
   TextHeight = 16
   object PageControl1: TPageControl
-    Left = 5
+    Left = 0
     Top = 0
-    Width = 966
-    Height = 592
+    Width = 972
+    Height = 624
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     ActivePage = TabSheet1
+    Align = alClient
     TabOrder = 0
+    ExplicitLeft = 5
+    ExplicitWidth = 966
+    ExplicitHeight = 592
     object TabSheet1: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'mp3list'
+      ExplicitWidth = 958
+      ExplicitHeight = 561
+      DesignSize = (
+        964
+        593)
       object Pacman_Btn: TSpeedButton
         Left = 561
         Top = 158
@@ -260,7 +269,7 @@ object F_Main: TF_Main
         Alignment = taCenter
         AutoSize = False
         Caption = '...'
-        Color = clBackground
+        Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
         Font.Height = 13
@@ -319,13 +328,14 @@ object F_Main: TF_Main
       end
       object MP3_ListBox: TListBox
         Left = 0
-        Top = 217
-        Width = 956
-        Height = 338
+        Top = 225
+        Width = 962
+        Height = 362
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akLeft, akRight, akBottom]
         ExtendedSelect = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -846,11 +856,10 @@ object F_Main: TF_Main
       Margins.Bottom = 4
       Caption = 'cd-archives'
       ImageIndex = 1
+      TabVisible = False
       OnShow = TabSheet2Show
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 958
+      ExplicitHeight = 561
       object CD_Archive_View_All_Files_Btn: TLabel
         Left = 10
         Top = 138
@@ -1129,10 +1138,11 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 958
+      ExplicitHeight = 561
+      DesignSize = (
+        964
+        593)
       object CDList_ProgressBar: TProgressBar
         Left = 876
         Top = 90
@@ -1148,12 +1158,13 @@ object F_Main: TF_Main
       object CDListe_StringGrid: TStringGrid
         Left = 0
         Top = 197
-        Width = 946
-        Height = 326
+        Width = 960
+        Height = 392
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akLeft, akRight, akBottom]
         ColCount = 1
         DefaultRowHeight = 16
         FixedCols = 0

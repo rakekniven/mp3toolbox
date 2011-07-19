@@ -1,19 +1,22 @@
 object About_F: TAbout_F
   Left = 282
   Top = 224
-  Width = 538
+  Width = 478
   Height = 406
   HorzScrollBar.Range = 446
   VertScrollBar.Range = 341
-  Caption = 'About_F'
-  Color = clBackground
+  Caption = 'About'
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = True
-  OnResize = FormResize
+  OnShow = FormShow
+  DesignSize = (
+    470
+    372)
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
@@ -430,26 +433,27 @@ object About_F: TAbout_F
     Top = 83
     Width = 424
     Height = 223
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
+    Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'About'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      DesignSize = (
+        416
+        195)
       object Hyperlink_Label: TLabel
         Left = 42
         Top = 166
-        Width = 79
-        Height = 10
+        Width = 144
+        Height = 16
         Cursor = crHandPoint
+        Anchors = [akLeft, akBottom]
         Caption = 'http://www.rakekniven.de'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
         Font.Color = clBlue
-        Font.Height = 11
-        Font.Name = 'helvetica'
+        Font.Height = -13
+        Font.Name = 'Arial'
         Font.Pitch = fpVariable
         Font.Style = [fsUnderline]
         ParentColor = False
@@ -461,7 +465,8 @@ object About_F: TAbout_F
         Top = 7
         Width = 292
         Height = 146
-        Color = clBackground
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Color = clBtnFace
         Lines.Strings = (
           'MP3Toolbox is a little helper to get a list of all mp3s on your '
           'harddisk and net drives...'
@@ -487,36 +492,28 @@ object About_F: TAbout_F
         Width = 416
         Height = 195
         Align = alClient
-        Color = clBackground
+        Color = clBtnFace
         Lines.Strings = (
-          'Mark Volkert')
+          'Mark Ziegler aka rakekniven')
         TabOrder = 0
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'Thanks to'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Memo4: TMemo
         Left = 0
         Top = 0
-        Width = 417
-        Height = 197
+        Width = 416
+        Height = 195
         Align = alClient
-        Color = clBackground
+        Color = clBtnFace
         TabOrder = 0
       end
     end
     object TabSheet4: TTabSheet
       Caption = 'Licence Agreement'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Licence_Memo: TMemo
         Left = 0
         Top = 0
@@ -1262,6 +1259,7 @@ object About_F: TAbout_F
     Top = 319
     Width = 65
     Height = 22
+    Anchors = [akRight, akBottom]
     Caption = 'Close'
     DoubleBuffered = True
     ParentDoubleBuffered = False

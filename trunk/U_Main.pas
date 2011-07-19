@@ -225,7 +225,7 @@ var
   cdlist_html_files_zip               : Boolean;
   cdlist_html_files_delete_after_zip  : Boolean;
 
-	const version =  '1.1.14';
+	const version =  '1.1.15 beta';
 	SELDIRHELP = 1000;
 
 implementation
@@ -366,24 +366,24 @@ var
   i : Integer;
 begin
   {Allgemein}
-  PageControl1.Width      	:=	F_Main.ClientWidth - 6;
-  PageControl1.Height     	:=	F_Main.ClientHeight;
-  {MP3Liste}
-	MP3_ListBox.Width					:=	PageControl1.ClientWidth  - 10;
-	MP3_ListBox.Height				:=	PageControl1.ClientHeight - 208;
-  NameCheck_ListBox.Width		:=  MP3_ListBox.ClientWidth   - 32;
+//  PageControl1.Width      	:=	F_Main.ClientWidth - 6;
+//	PageControl1.Height     	:=	F_Main.ClientHeight;
+	{MP3Liste}
+//	MP3_ListBox.Width					:=	PageControl1.ClientWidth  - 10;
+//	MP3_ListBox.Height				:=	PageControl1.ClientHeight - 208;
+	NameCheck_ListBox.Width		:=  MP3_ListBox.ClientWidth   - 32;
   NameCheck_ListBox.Height  :=  MP3_ListBox.ClientHeight  - 32;
 
 	{CD-Archive}
-  CD_Archive_ListBox.Width	:=	PageControl1.ClientWidth  - 200;
-	CD_Archive_ListBox.Height	:=	PageControl1.ClientHeight - 170;
+//  CD_Archive_ListBox.Width	:=	PageControl1.ClientWidth  - 200;
+//	CD_Archive_ListBox.Height	:=	PageControl1.ClientHeight - 170;
 //  FileListView1.Width      	:=  160;
 //  FileListView1.Height     	:=	PageControl1.ClientHeight - 170;
 
 
-  {CD-Liste}
-  CDListe_StringGrid.Width  :=	PageControl1.ClientWidth  - 6;
-  CDListe_StringGrid.Height :=  PageControl1.ClientHeight - 144;
+	{CD-Liste}
+//  CDListe_StringGrid.Width  :=	PageControl1.ClientWidth  - 6;
+//  CDListe_StringGrid.Height :=  PageControl1.ClientHeight - 144;
 
   for i := 0 to CDListe_StringGrid.ColCount - 1 do
   begin
@@ -400,8 +400,9 @@ end;
 {--- OnShow -------------------------------------------------------------------}
 procedure TF_Main.FormShow(Sender: TObject);
 begin
-  F_Main.Width              :=  Screen.Width;
-  F_Main.Height             :=  Screen.Height;
+// 66666
+//	F_Main.Width              :=  Screen.Width;
+//  F_Main.Height             :=  Screen.Height;
 end;
 
 {--- OnActivate ---------------------------------------------------------------}
