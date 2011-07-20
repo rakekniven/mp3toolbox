@@ -472,7 +472,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 225
         Width = 962
-        Height = 244
+        Height = 368
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -508,7 +508,7 @@ object F_Main: TF_Main
           Left = 187
           Top = 30
           Width = 267
-          Height = 119
+          Height = 120
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -537,9 +537,9 @@ object F_Main: TF_Main
         end
         object Save_To_Button: TButton
           Left = 463
-          Top = 49
+          Top = 50
           Width = 70
-          Height = 21
+          Height = 20
           Hint = 'Aktuelle Auswahl speichern.'
           Margins.Left = 4
           Margins.Top = 4
@@ -553,9 +553,9 @@ object F_Main: TF_Main
         end
         object Sel_All_Button: TButton
           Left = 463
-          Top = 69
+          Top = 70
           Width = 70
-          Height = 21
+          Height = 20
           Hint = 'Alle Verzeichnisse markieren.'
           Margins.Left = 4
           Margins.Top = 4
@@ -569,9 +569,9 @@ object F_Main: TF_Main
         end
         object Sel_None_Button: TButton
           Left = 463
-          Top = 89
+          Top = 90
           Width = 70
-          Height = 21
+          Height = 20
           Hint = 'Kein Verzeichnis selektieren.'
           Margins.Left = 4
           Margins.Top = 4
@@ -585,9 +585,9 @@ object F_Main: TF_Main
         end
         object Clear_Sel_Button: TButton
           Left = 463
-          Top = 108
+          Top = 110
           Width = 70
-          Height = 21
+          Height = 20
           Hint = 'Markierte Verzeichniseintr'#228'ge l'#246'schen'
           Margins.Left = 4
           Margins.Top = 4
@@ -601,9 +601,9 @@ object F_Main: TF_Main
         end
         object Clear_All_Button: TButton
           Left = 463
-          Top = 128
+          Top = 130
           Width = 70
-          Height = 21
+          Height = 20
           Hint = 'Alle Verzeichniseintr'#228'ge l'#246'schen'
           Margins.Left = 4
           Margins.Top = 4
@@ -1019,7 +1019,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 960
-        Height = 253
+        Height = 233
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
