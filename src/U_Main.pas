@@ -30,7 +30,6 @@ type
   TF_Main = class(TForm)
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     Multi_Dir_GroupBox: TGroupBox;
     Multi_Dir_ListBox: TListBox;
@@ -88,20 +87,6 @@ type
     DateiausListeentfernen1: TMenuItem;
     Char_Count_Lab: TLabel;
     Char_Count_Lab2: TLabel;
-    CD_Archive_View_All_Files_Btn: TLabel;
-    Archive_GB: TGroupBox;
-    Choose_New_Archive_Btn: TSpeedButton;
-    Choose_Archiv_Lab: TLabel;
-    View_Archive_Btn: TBitBtn;
-    New_Archive_Edit_CB: TComboBox;
-    CD_Archive_ListBox: TListBox;
-    Add_A_Disk_GB: TGroupBox;
-    Choose_Search_Path: TSpeedButton;
-    Archive_Path_to_read_in_Lab: TLabel;
-    Search_Path_Edit: TEdit;
-    GO_Btn2: TBitBtn;
-    Save_Single_CD_Btn: TBitBtn;
-    CD_Archive_TXT_Output: TBitBtn;
 //		FileListView1: TFileListView;
     CD_Single_SaveDialog: TSaveDialog;
     checkfilenamesfornoof1: TMenuItem;
@@ -166,13 +151,6 @@ type
     procedure MP3_ListBoxMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure CD_Archive_Close_BtnClick(Sender: TObject);
-    procedure Choose_Search_PathClick(Sender: TObject);
-    procedure View_Archive_BtnClick(Sender: TObject);
-    procedure Choose_New_Archive_BtnClick(Sender: TObject);
-    procedure TabSheet2Show(Sender: TObject);
-    procedure FileListView1Click(Sender: TObject);
-    procedure GO_Btn2Click(Sender: TObject);
-    procedure Save_Single_CD_BtnClick(Sender: TObject);
     procedure checkfilenamesfornoof1Click(Sender: TObject);
     procedure AboutMP3Toolbox1Click(Sender: TObject);
     procedure NameCheck_ListBoxMouseUp(Sender: TObject;
@@ -430,9 +408,7 @@ end;
 {--- OnShow -------------------------------------------------------------------}
 procedure TF_Main.FormShow(Sender: TObject);
 begin
-// 66666
-//	F_Main.Width              :=  Screen.Width;
-//  F_Main.Height             :=  Screen.Height;
+//
 end;
 
 {--- OnActivate ---------------------------------------------------------------}
@@ -445,11 +421,10 @@ end;
 {--- assign captions and texts-------------------------------------------------}
 procedure TF_Main.init_text(Sender: TObject);
 begin
-  {General}
+	{General}
 //  F_Main.Caption                         :=  GetTxt( 1,  2, 'mp3toolbox version ???');
   TabSheet1.Caption                      :=  GetTxt( 1,  3, 'Laufwerks-archive');
-  TabSheet2.Caption                      :=  GetTxt( 1,  4, 'CD-Archive');
-  TabSheet3.Caption                      :=  GetTxt( 1,  5, 'CD-Liste');
+	TabSheet3.Caption                      :=  GetTxt( 1,  5, 'CD-Liste');
 
   {MP3List}
   Multi_Dir_GroupBox.Caption             :=  GetTxt( 1,  6, 'Verzeichnisse ');
@@ -464,19 +439,7 @@ begin
   Help1.Caption                          :=  GetTxt( 1, 15, 'Hilfe');
   Exit1.Caption                          :=  GetTxt( 1, 16, 'Beenden');
 
-
-  {CD-Archive}
-  Archive_GB.Caption                     :=  GetTxt( 1, 18, 'Archive : ');
-  Choose_Archiv_Lab.Caption              :=  GetTxt( 1, 19, 'Archivauswahl : ');
-  View_Archive_Btn.Caption               :=  GetTxt( 1, 20, 'gesamtes Archiv anzeigen');
-  Add_A_Disk_GB.Caption                  :=  GetTxt( 1, 21, 'CD hinzufügen : ');
-  Archive_Path_to_read_in_Lab.Caption    :=  GetTxt( 1, 22, 'Von wo soll gelesen werden : ');
-  Save_Single_CD_Btn.Caption             :=  GetTxt( 1, 23, 'Speichern');
-  CD_Archive_TXT_Output.Caption          :=  GetTxt( 1, 25, 'Textdatei erzeugen');
-  CD_Archive_View_All_Files_Btn.Caption  :=  GetTxt( 1, 26, 'Alle Dateien im Archiv :');
-
-
-  {CDList}
+	{CDList}
   CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
   HTML_OutputButton3.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
   CDList_Template_Label.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
@@ -1446,231 +1409,6 @@ end;
 procedure TF_Main.CD_Archive_Close_BtnClick(Sender: TObject);
 begin
 	Close;
-end;
-
-procedure TF_Main.Choose_Search_PathClick(Sender: TObject);
-var
-	sOutDir : String;
-	fb      : TFolderBrowser;
-begin
-	fb := TFolderBrowser.Create(Application.Handle, 'Select a folder to search');
-	{Dialog für Verzeichnisauswahl starten}
-
-	if(fb <> nil) then
-	begin
-		fb.ShowFiles	:=	false;                  				//keine Dateien anzeigen
-		fb.Left 			:=	Round(Screen.Width	/2)-162;  	//Folderauswahl ist 324 breit
-		fb.Top  			:=	Round(Screen.Height	/2)-169;		//Folderauswahl ist 338 hoch
-
-		if(fb.Execute) then
-			sOutDir	:= fb.SelectedItem;
-
-		{Nur wenn Ordner ausgewählt wurde.}
-		cdarchive_path_to_read_in		  :=  sOutDir;
-		Search_Path_Edit.Text         :=  cdarchive_path_to_read_in;
-
-		Ini := TIniFile.Create(ini_file_name);
-		Ini.WriteString ('CDARCHIV',  'SINGLEDISKPATH', cdarchive_path_to_read_in);
-		Ini.Free;
-
-		GO_Btn2.Enabled       :=  True
-
-	end;
-
-	fb.Free;
-end;
-
-procedure TF_Main.View_Archive_BtnClick(Sender: TObject);
-var
-	F	                :	TextFile;
-  i                 : Integer;
-	CD_Archive_Files	:	TStringList;                       //  Stringliste
-  ln                : String;
-begin
-	{Stringliste initialisieren}
-  CD_Archive_Files							:=	TStringList.Create;
-  {Listbox leeren}
-  CD_Archive_ListBox.Clear;
-
-  {Jede Datei öffnen}
-(* 66666
-	for i :=  0 to FileListView1.Items.Count - 1 do
-	begin
-		if ( FileListView1.Items.Item[i].Caption <> '.'  ) and
-			 ( FileListView1.Items.Item[i].Caption <> '..' ) then
-		begin
-			AssignFile(F, SlashSep(FileListView1.Directory.Location, FileListView1.Items.Item[i].Caption));
-			Reset	(F);
-			{zeilenweise lesen und zuweisen}
-			While not Eof(F) do
-			begin
-				Readln(F, ln);
-				CD_Archive_Files.Add(ln);
-			end;
-			CloseFile(F);
-		end;
-	end;
-*)
-
-  {StringList sortieren}
-  CD_Archive_Files.Sort;
- 	{ListBox füllen}
-  CD_Archive_ListBox.Items.AddStrings(CD_Archive_Files);
-
-  CD_Archive_Files.Free;
-end;
-
-procedure TF_Main.Choose_New_Archive_BtnClick(Sender: TObject);
-var
-	sOutDir : String;
-	i			 	:	Integer;
-	fb      : TFolderBrowser;
-begin
-	{Dialog für Verzeichnisauswahl starten}
-	fb := TFolderBrowser.Create(Application.Handle, 'Select a folder to search');
-	{Dialog für Verzeichnisauswahl starten}
-
-	if(fb <> nil) then
-	begin
-		fb.ShowFiles	:=	false;                  				//keine Dateien anzeigen
-		fb.Left 			:=	Round(Screen.Width	/2)-162;  	//Folderauswahl ist 324 breit
-		fb.Top  			:=	Round(Screen.Height	/2)-169;		//Folderauswahl ist 338 hoch
-
-		if(fb.Execute) then
-			sOutDir	:= fb.SelectedItem;
-	end;
-
-	fb.Free;
-
-	if ( sOutDir	<>	'' ) and (DirectoryExists(sOutDir)) then
-	begin
-		{neuen Pfad merken und einordnen}
-		move_memory_combos(cdarchive_last_used_pathes, sOutDir);
-
-		{Pfade speichern}
-		Ini := TIniFile.Create(ini_file_name);
-		for i := 0 to 9 do
-			Ini.WriteString ('CDARCHIV',  'SourcePath' + IntToStr(i), cdarchive_last_used_pathes[i]);
-		Ini.Free;
-
-    {Combobox neu füllen}
-    New_Archive_Edit_CB.Clear;
-    for i := 0 to 9 do
-    begin
-      if DirectoryExists(cdarchive_last_used_pathes[i]) then
-      begin
-        New_Archive_Edit_CB.Items.Add(cdarchive_last_used_pathes[i]);
-      end;
-    end;
-    New_Archive_Edit_CB.ItemIndex	:=	0;
-
-    {Nur wenn Ordner ausgewählt wurde.}
-//    FileListView1.Directory.Location    :=  sOutDir;
-//    FileListView1.Update;
-    View_Archive_Btn.Enabled  :=  True;
-  end;
-end;
-
-procedure TF_Main.TabSheet2Show(Sender: TObject);
-var
-  i	:	Integer;
-begin
-  if DirectoryExists(cdarchive_path_to_read_in) then
-  begin
-    Search_Path_Edit.Text           :=  cdarchive_path_to_read_in;
-	  GO_Btn2.Enabled                 :=  True;
-  end;
-
-  {Combobox neu füllen}
-  New_Archive_Edit_CB.Clear;
-  for i := 0 to 9 do
-  begin
-    if DirectoryExists(cdarchive_last_used_pathes[i]) then
-    begin
-      New_Archive_Edit_CB.Items.Add(cdarchive_last_used_pathes[i]);
-			View_Archive_Btn.Enabled	:=	True;
-//      FileListView1.Directory.Location    :=  cdarchive_path_to_act_archive;
-    end;
-  end;
-  New_Archive_Edit_CB.ItemIndex	:=	0;
-end;
-
-procedure TF_Main.FileListView1Click(Sender: TObject);
-var
-	F	  :	TextFile;
-  i   : Integer;
-  ln  : String;
-begin
- 	{ListBox leeren}
-  CD_Archive_ListBox.Clear;
-(* 66666
-	for i :=  0 to  FileListView1.Items.Count -1 do
-	begin
-		{Wenn Eintrag markiert}
-		if FileListView1.Items[i].Selected = True  then
-		begin
-			AssignFile(F, SlashSep(FileListView1.Directory.Location, FileListView1.Items.Item[i].Caption));
-			Reset	(F);
-			{Zeile für Zeile einlesen}
-			While not Eof(F) do
-			begin
-				Readln(F, ln);
-				CD_Archive_ListBox.Items.Add(ln);
-			end;
-		CloseFile(F);
-		end;
-	end;
-*)
-end;
-
-procedure TF_Main.GO_Btn2Click(Sender: TObject);
-var
-	CD_Single_Files							:	TStringList;
-begin
-	{Stringliste initialisieren}
-  CD_Single_Files							:=	TStringList.Create;
-
-  {Listbox leeren}
-  CD_Archive_ListBox.Clear;
-
-  {!!!!!!!!!!!!!!!!!!!!!!!!!!!! Filter}
-	GetFiles( cdarchive_path_to_read_in,
-  					CD_Single_Files,
-            False,
-            True,
-            False,
-            '*.*');
-
-  CD_Single_Files.Sort;																	//	Stringliste sortieren
- 	CD_Archive_ListBox.Items.AddStrings(CD_Single_Files);	//	ListBox füllen
-  if CD_Archive_ListBox.Items.Count > 0 then
-    Save_Single_CD_Btn.Enabled  :=  True;
-
-  {Speicher freigeben}
-  CD_Single_Files.Free;
-end;
-
-procedure TF_Main.Save_Single_CD_BtnClick(Sender: TObject);
-var
-	F	        :	TextFile;
-  i         : Integer;
-  diskname  : String;
-begin
-  CD_Single_SaveDialog.InitialDir :=  New_Archive_Edit_CB.Items[New_Archive_Edit_CB.ItemIndex];
-  if CD_Single_SaveDialog.Execute then
-  begin
-	  AssignFile(F, CD_Single_SaveDialog.FileName);
-    Rewrite	(F);
-    {CD-Namen ermitteln}
-    diskname  :=  clear_all_until_last_slash(CD_Single_SaveDialog.FileName);
-    diskname  :=  StringReplace(diskname, '.txt', '', [rfReplaceAll]);
-    {Jede Zeile mit CD.Kennung speichern}
-    for i := 0 to (CD_Archive_ListBox.Items.Count - 1) do
-  		writeln(F, CD_Archive_ListBox.Items[i] + '     (' + diskname + ')');
-
-  	CloseFile(F);
-  end;
-//  FileListView1.Refresh;
 end;
 
 procedure TF_Main.checkfilenamesfornoof1Click(Sender: TObject);
