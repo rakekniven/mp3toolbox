@@ -26,8 +26,7 @@ uses
 	lib1,
 	Graphics,
 	Dialogs,
-	Forms,
-	FileCtrl;
+	Forms;
 
 type  sectionentry  = String;
 type  T_LngIDStr    = String;

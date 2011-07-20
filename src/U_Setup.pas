@@ -23,7 +23,7 @@ interface
 
 uses
 	SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
-	Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, IniFiles, FileCtrl;
+	Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, IniFiles, fldbrowsUnicode;
 
 type
   TF_Setup = class(TForm)
@@ -374,9 +374,25 @@ end;
 
 {--- Choose the place where to store the textfiles ----------------------------}
 procedure TF_Setup.TXT_File_Dialog_BtnClick(Sender: TObject);
-var	sOutDir	:	String;
+var
+	sOutDir	:	String;
+	fb      : TFolderBrowser;
 begin
-	FileCtrl.SelectDirectory(sOutDir, [sdAllowCreate, sdPerformCreate, sdPrompt], SELDIRHELP);
+	fb := TFolderBrowser.Create(Application.Handle, 'Where to store text files');
+	{Dialog für Verzeichnisauswahl starten}
+
+	if(fb <> nil) then
+	begin
+		fb.ShowFiles	:=	false;                  				//keine Dateien anzeigen
+		fb.Left 			:=	Round(Screen.Width	/2)-162;  	//Folderauswahl ist 324 breit
+		fb.Top  			:=	Round(Screen.Height	/2)-169;		//Folderauswahl ist 338 hoch
+
+		if(fb.Execute) then
+			sOutDir	:= fb.SelectedItem;
+	end;
+
+	fb.Free;
+
 	{Nur wenn Ordner ausgewählt wurde.}
 	if sOutDir	<>	'' then
 	begin
@@ -387,9 +403,26 @@ end;
 
 {--- Choose the place where to store the webfiles -----------------------------}
 procedure TF_Setup.HTML_File_Dialog_BtnClick(Sender: TObject);
-var	sOutDir	:	String;
+var
+	sOutDir	:	String;
+	fb      : TFolderBrowser;
 begin
-	FileCtrl.SelectDirectory(sOutDir, [sdAllowCreate, sdPerformCreate, sdPrompt], SELDIRHELP);
+	fb := TFolderBrowser.Create(Application.Handle, 'Where to store web files');
+	{Dialog für Verzeichnisauswahl starten}
+
+	if(fb <> nil) then
+	begin
+		fb.ShowFiles	:=	false;                  				//keine Dateien anzeigen
+		fb.Left 			:=	Round(Screen.Width	/2)-162;  	//Folderauswahl ist 324 breit
+		fb.Top  			:=	Round(Screen.Height	/2)-169;		//Folderauswahl ist 338 hoch
+
+		if(fb.Execute) then
+			sOutDir	:= fb.SelectedItem;
+	end;
+
+	fb.Free;
+
+
 	{Nur wenn Ordner ausgewählt wurde.}
 	if sOutDir	<>	'' then
   begin

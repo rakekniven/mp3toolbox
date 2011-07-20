@@ -24,7 +24,7 @@ interface
 uses
 	Windows, SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
 	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
-	Grids, FileCtrl, Mp3FileUtils;//, Libc;
+	Grids, Mp3FileUtils, fldbrowsUnicode;//, Libc;
 
 type
   TF_Main = class(TForm)
@@ -506,9 +506,23 @@ end;
 procedure TF_Main.Sel_Dir_BtnClick(Sender: TObject);
 var
 	sOutDir : String;
+	fb      : TFolderBrowser;
 begin
+	fb := TFolderBrowser.Create(Application.Handle, 'Select a folder to search');
 	{Dialog für Verzeichnisauswahl starten}
-	FileCtrl.SelectDirectory(sOutDir, [], SELDIRHELP);
+
+	if(fb <> nil) then
+	begin
+		fb.ShowFiles	:=	false;                  				//keine Dateien anzeigen
+		fb.Left 			:=	Round(Screen.Width	/2)-162;  	//Folderauswahl ist 324 breit
+		fb.Top  			:=	Round(Screen.Height	/2)-169;		//Folderauswahl ist 338 hoch
+
+		if(fb.Execute) then
+			sOutDir	:= fb.SelectedItem;
+	end;
+
+	fb.Free;
+
 	if sOutDir	<>	'' then
   begin
     {Nur wenn Ordner ausgewählt wurde.}
@@ -1437,20 +1451,33 @@ end;
 procedure TF_Main.Choose_Search_PathClick(Sender: TObject);
 var
 	sOutDir : String;
+	fb      : TFolderBrowser;
 begin
+	fb := TFolderBrowser.Create(Application.Handle, 'Select a folder to search');
 	{Dialog für Verzeichnisauswahl starten}
-	FileCtrl.SelectDirectory(sOutDir, [], SELDIRHELP);
+
+	if(fb <> nil) then
 	begin
-    {Nur wenn Ordner ausgewählt wurde.}
-    cdarchive_path_to_read_in		  :=  sOutDir;
-    Search_Path_Edit.Text         :=  cdarchive_path_to_read_in;
+		fb.ShowFiles	:=	false;                  				//keine Dateien anzeigen
+		fb.Left 			:=	Round(Screen.Width	/2)-162;  	//Folderauswahl ist 324 breit
+		fb.Top  			:=	Round(Screen.Height	/2)-169;		//Folderauswahl ist 338 hoch
 
-    Ini := TIniFile.Create(ini_file_name);
-    Ini.WriteString ('CDARCHIV',  'SINGLEDISKPATH', cdarchive_path_to_read_in);
-    Ini.Free;
+		if(fb.Execute) then
+			sOutDir	:= fb.SelectedItem;
 
-    GO_Btn2.Enabled       :=  True
-  end;
+		{Nur wenn Ordner ausgewählt wurde.}
+		cdarchive_path_to_read_in		  :=  sOutDir;
+		Search_Path_Edit.Text         :=  cdarchive_path_to_read_in;
+
+		Ini := TIniFile.Create(ini_file_name);
+		Ini.WriteString ('CDARCHIV',  'SINGLEDISKPATH', cdarchive_path_to_read_in);
+		Ini.Free;
+
+		GO_Btn2.Enabled       :=  True
+
+	end;
+
+	fb.Free;
 end;
 
 procedure TF_Main.View_Archive_BtnClick(Sender: TObject);
@@ -1497,19 +1524,34 @@ procedure TF_Main.Choose_New_Archive_BtnClick(Sender: TObject);
 var
 	sOutDir : String;
 	i			 	:	Integer;
+	fb      : TFolderBrowser;
 begin
 	{Dialog für Verzeichnisauswahl starten}
-	FileCtrl.SelectDirectory(sOutDir, [sdAllowCreate, sdPerformCreate, sdPrompt], SELDIRHELP);
-	if ( sOutDir	<>	'' ) and (DirectoryExists(sOutDir)) then
-  begin
-    {neuen Pfad merken und einordnen}
-    move_memory_combos(cdarchive_last_used_pathes, sOutDir);
+	fb := TFolderBrowser.Create(Application.Handle, 'Select a folder to search');
+	{Dialog für Verzeichnisauswahl starten}
 
-    {Pfade speichern}
-    Ini := TIniFile.Create(ini_file_name);
-    for i := 0 to 9 do
-      Ini.WriteString ('CDARCHIV',  'SourcePath' + IntToStr(i), cdarchive_last_used_pathes[i]);
-    Ini.Free;
+	if(fb <> nil) then
+	begin
+		fb.ShowFiles	:=	false;                  				//keine Dateien anzeigen
+		fb.Left 			:=	Round(Screen.Width	/2)-162;  	//Folderauswahl ist 324 breit
+		fb.Top  			:=	Round(Screen.Height	/2)-169;		//Folderauswahl ist 338 hoch
+
+		if(fb.Execute) then
+			sOutDir	:= fb.SelectedItem;
+	end;
+
+	fb.Free;
+
+	if ( sOutDir	<>	'' ) and (DirectoryExists(sOutDir)) then
+	begin
+		{neuen Pfad merken und einordnen}
+		move_memory_combos(cdarchive_last_used_pathes, sOutDir);
+
+		{Pfade speichern}
+		Ini := TIniFile.Create(ini_file_name);
+		for i := 0 to 9 do
+			Ini.WriteString ('CDARCHIV',  'SourcePath' + IntToStr(i), cdarchive_last_used_pathes[i]);
+		Ini.Free;
 
     {Combobox neu füllen}
     New_Archive_Edit_CB.Clear;
