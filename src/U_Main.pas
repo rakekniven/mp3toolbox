@@ -103,6 +103,13 @@ type
     CDList_Result_Label: TLabel;
     TabSheet4: TTabSheet;
     ListBox_Error: TListBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
     procedure Close_Btn1Click(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
@@ -644,8 +651,8 @@ begin
     Go_Btn.Caption  :=  'stop search';
     Go_Btn.Caption  :=  'stop';
 
-    {Startzeit der suche}
-    start_search_time := Time;
+		{Startzeit der suche}
+		start_search_time := Time;
 
 
     {Pacman aktivieren und starten}
@@ -694,17 +701,17 @@ begin
     {fill progressbar up}
     Search_ProgressBar.Position :=	100;
 
-    {Ende der Suchzeit}
-    end_search_time           :=  Time;
+		{Ende der Suchzeit}
+		end_search_time           :=  Time;
 
-    {Anzahl durchgesuchter Verzeichnisse anzeigen.}
-    Dir_Count_Label.Color		  :=  clBlack;
-    Dir_Count_Label.Caption	  :=	IntToStr(searched_dir_count) + ' Verzeichnisse durchsucht';;
+		{Anzahl durchgesuchter Verzeichnisse anzeigen.}
+		Dir_Count_Label.Color		  :=  clBlack;
+		Dir_Count_Label.Caption	  :=	IntToStr(searched_dir_count);
 
 
-    {Anzeige der Suchzeit.}
-    Search_Time_Lab.Color			:=  clBlack;
-		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time) + ' Suchdauer';;
+		{Anzeige der Suchzeit.}
+		Search_Time_Lab.Color			:=  clBlack;
+		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
     {Stringliste sortieren}
     Files.Sort;
@@ -720,6 +727,10 @@ begin
 		Search_ProgressBar.Position	:=	0;
 		ListBox_Error.Clear;
 		TabSheet4.TabVisible	:=	False;
+
+		{Startzeit der suche}
+		start_search_time := Time;
+
 		for i:= 0  to Files.Count - 1 do
 		begin
 			if cancel_search then
@@ -727,7 +738,11 @@ begin
 
 			if Files[i] <> '%s.mp3' then
 			begin
-				ID3v2Tag.ReadFromFile(Files[i]);
+				try
+					ID3v2Tag.ReadFromFile(Files[i]);
+				except
+					ListBox_Error.Items.Add('!!! Check this file: ' + Files[i]);
+				end;
 
 				if ID3v2Tag.Artist = '' then
 				begin
@@ -748,18 +763,26 @@ begin
 					MP3_ListBox.Items.Add(s1);
 				end;
 
-				Search_ProgressBar.Position	:=	Round((100 * i) div (Files.Count -1));
+				Search_ProgressBar.Position	:=	Round((100 * i + 1) div (Files.Count -1));
 				Application.ProcessMessages;
 			end;
+			Label5.Caption	:=	IntToStr(i + 1);
 		end;
 		Search_ProgressBar.Position	:=	100;
+
+		{Ende der Suchzeit}
+		end_search_time           :=  Time;
+
+		{Anzeige der Suchzeit.}
+		Label7.Color			:=  clBlack;
+		Label7.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
 		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
     mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
     Result_Label.Color			  :=  clBlack;
-    Result_Label.Caption		  :=	IntToStr(MP3_ListBox.Items.Count) + ' Dateien gefunden';;
+    Result_Label.Caption		  :=	IntToStr(MP3_ListBox.Items.Count);
 
     {If result are present then allow output}
     if MP3_ListBox.Items.Count > 0 then
@@ -1142,7 +1165,8 @@ begin
   else
   begin
     Pacman_Btn.Glyph.LoadFromResourceName(HInstance,'eater-l');
-    if Pacman_Btn.Left < 466 then      pacman_direction  :=  True;
+		if Pacman_Btn.Left < Search_ProgressBar.Left then
+			pacman_direction  :=  True;
     Pacman_Btn.Left :=  Pacman_Btn.Left - 8 ;
     Pacman_Btn.Repaint;
   end;

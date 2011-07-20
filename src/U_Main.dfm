@@ -211,15 +211,14 @@ object F_Main: TF_Main
         Visible = False
       end
       object Search_Time_Lab: TLabel
-        Left = 561
-        Top = 128
-        Width = 198
+        Left = 672
+        Top = 92
+        Width = 88
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Alignment = taCenter
         AutoSize = False
         Caption = '...'
         Font.Charset = DEFAULT_CHARSET
@@ -232,15 +231,14 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Dir_Count_Label: TLabel
-        Left = 561
-        Top = 89
-        Width = 198
+        Left = 672
+        Top = 72
+        Width = 88
         Height = 30
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Alignment = taCenter
         AutoSize = False
         Caption = '...'
         Font.Charset = DEFAULT_CHARSET
@@ -253,15 +251,14 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Result_Label: TLabel
-        Left = 561
-        Top = 49
-        Width = 198
+        Left = 672
+        Top = 52
+        Width = 88
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Alignment = taCenter
         AutoSize = False
         Caption = '...'
         Color = clBtnFace
@@ -297,6 +294,156 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Caption = 'Characters'
       end
+      object Label1: TLabel
+        Left = 561
+        Top = 52
+        Width = 119
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        AutoSize = False
+        Caption = 'Files found'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label2: TLabel
+        Left = 561
+        Top = 72
+        Width = 119
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        AutoSize = False
+        Caption = 'Directories searched'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label3: TLabel
+        Left = 561
+        Top = 92
+        Width = 119
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        AutoSize = False
+        Caption = 'Search time'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label4: TLabel
+        Left = 561
+        Top = 112
+        Width = 119
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        AutoSize = False
+        Caption = 'Tags scanned'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label6: TLabel
+        Left = 561
+        Top = 132
+        Width = 119
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        AutoSize = False
+        Caption = 'Scan time'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label5: TLabel
+        Left = 672
+        Top = 112
+        Width = 88
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        AutoSize = False
+        Caption = '...'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label7: TLabel
+        Left = 672
+        Top = 132
+        Width = 88
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        AutoSize = False
+        Caption = '...'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+      end
       object Search_ProgressBar: TProgressBar
         Left = 561
         Top = 14
@@ -325,7 +472,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 225
         Width = 962
-        Height = 264
+        Height = 244
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -872,7 +1019,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 960
-        Height = 273
+        Height = 253
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
