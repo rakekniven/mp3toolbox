@@ -13,7 +13,8 @@ uses
   U_About in 'U_About.pas' {About_F},
   U_CharCode in 'externallibs\U_CharCode.pas',
   Id3v2Frames in 'externallibs\Id3v2Frames.pas',
-  Mp3FileUtils in 'externallibs\Mp3FileUtils.pas';
+  Mp3FileUtils in 'externallibs\Mp3FileUtils.pas',
+  fldbrowsUnicode in 'externallibs\fldbrowsUnicode.pas';
 
 {$R *.res}
 
