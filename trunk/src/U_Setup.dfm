@@ -27,7 +27,7 @@ object F_Setup: TF_Setup
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = Allgemein
+    ActivePage = MP3List
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4
@@ -430,6 +430,21 @@ object F_Setup: TF_Setup
           TabOrder = 8
           Visible = False
           OnClick = MP3List_CLear_HTML_files_after_zip_CBClick
+        end
+        object CB_HTML_Encoding_UTF8: TCheckBox
+          Left = 10
+          Top = 310
+          Width = 316
+          Height = 36
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
+          Caption = 'Encode HTML files in UTF8'
+          Checked = True
+          State = cbChecked
+          TabOrder = 10
+          OnClick = CB_HTML_Encoding_UTF8Click
         end
       end
     end

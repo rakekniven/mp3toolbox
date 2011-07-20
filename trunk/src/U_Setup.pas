@@ -69,6 +69,7 @@ type
     MP3List_CLear_HTML_files_after_zip_CB: TCheckBox;
     CDList_ZIP_html_CheckBox: TCheckBox;
     CDList_CLear_HTML_files_after_zip_CB: TCheckBox;
+    CB_HTML_Encoding_UTF8: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -97,6 +98,7 @@ type
     procedure CDList_ZIP_html_CheckBoxClick(Sender: TObject);
     procedure CDList_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
     procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
+    procedure CB_HTML_Encoding_UTF8Click(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -162,28 +164,34 @@ begin
   init_text(Sender);
 
 	{}
-  if mp3list_text_files_zip then
+	if mp3list_text_files_zip then
 	  MP3List_ZIP_txt_CheckBox.Checked	:=	True
   else
 	  MP3List_ZIP_txt_CheckBox.Checked	:=	False;
 
 	{}
-  if mp3list_html_files_zip then
-	  MP3List_ZIP_html_CheckBox.Checked	:=	True
-  else
-	  MP3List_ZIP_html_CheckBox.Checked	:=	False;
+	if mp3list_html_files_zip then
+		MP3List_ZIP_html_CheckBox.Checked	:=	True
+	else
+		MP3List_ZIP_html_CheckBox.Checked	:=	False;
 
 	{}
-  if mp3list_text_files_delete_after_zip then
-	  MP3List_CLear_TXT_files_after_zip_CB.Checked	:=	True
-  else
-	  MP3List_CLear_TXT_files_after_zip_CB.Checked	:=	False;
+	if mp3list_text_files_delete_after_zip then
+		MP3List_CLear_TXT_files_after_zip_CB.Checked	:=	True
+	else
+		MP3List_CLear_TXT_files_after_zip_CB.Checked	:=	False;
 
 	{}
-  if mp3list_html_files_delete_after_zip then
-	  MP3List_CLear_HTML_files_after_zip_CB.Checked	:=	True
-  else
-	  MP3List_CLear_HTML_files_after_zip_CB.Checked	:=	False;
+	if mp3list_html_files_delete_after_zip then
+		MP3List_CLear_HTML_files_after_zip_CB.Checked	:=	True
+	else
+		MP3List_CLear_HTML_files_after_zip_CB.Checked	:=	False;
+
+	{}
+	if mp3list_html_files_utf8 then
+		CB_HTML_Encoding_UTF8.Checked	:=	True
+	else
+		CB_HTML_Encoding_UTF8.Checked	:=	False;
 
 	{}
   if cdlist_text_files_zip then
@@ -355,7 +363,8 @@ begin
     Ini.WriteBool   ('MP3LIST', 'zip_text_files',             mp3list_text_files_zip);
     Ini.WriteBool   ('MP3LIST', 'zip_html_files',             mp3list_html_files_zip);
     Ini.WriteBool   ('MP3LIST', 'text_files_delete_after_zip',mp3list_text_files_delete_after_zip);
-    Ini.WriteBool   ('MP3LIST', 'html_files_delete_after_zip',mp3list_html_files_delete_after_zip);
+		Ini.WriteBool   ('MP3LIST', 'html_files_delete_after_zip',mp3list_html_files_delete_after_zip);
+		Ini.WriteBool   ('MP3LIST', 'html_files_utf8',            mp3list_html_files_utf8);
 
     Ini.WriteBool   ('CDLIST',  'zip_text_files',             cdlist_text_files_zip);
     Ini.WriteBool   ('CDLIST',  'zip_html_files',             cdlist_html_files_zip);
@@ -475,7 +484,7 @@ end;
 procedure TF_Setup.MP3List_ZIP_txt_CheckBoxClick(Sender: TObject);
 begin
   if mp3list_ZIP_txt_CheckBox.Checked then
-    mp3list_text_files_zip    :=  True
+		mp3list_text_files_zip    :=  True
   else
     mp3list_text_files_zip    :=  False;
 end;
@@ -535,14 +544,23 @@ begin
     cdlist_html_files_zip    :=  False;
 end;
 
+procedure TF_Setup.CB_HTML_Encoding_UTF8Click(Sender: TObject);
+begin
+	if CB_HTML_Encoding_UTF8.Checked then
+		mp3list_html_files_utf8	:=	True
+	else
+		mp3list_html_files_utf8	:=	False;
+
+end;
+
 {--- MP3List : Delete HTML files after zip ------------------------------------}
 procedure TF_Setup.CDList_CLear_HTML_files_after_zip_CBClick(
-  Sender: TObject);
+	Sender: TObject);
 begin
-  if CDList_CLear_HTML_files_after_zip_CB.Checked then
-    cdlist_html_files_delete_after_zip    :=  True
-  else
-    cdlist_html_files_delete_after_zip    :=  False;
+	if CDList_CLear_HTML_files_after_zip_CB.Checked then
+		cdlist_html_files_delete_after_zip    :=  True
+	else
+		cdlist_html_files_delete_after_zip    :=  False;
 end;
 
 end.

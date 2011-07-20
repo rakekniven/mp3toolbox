@@ -234,9 +234,9 @@ begin
           writeln (OutFile, F_Main.MP3_ListBox.Items[i] + '<br>');
       	  F_Main.Search_ProgressBar.Position	:= ((i + 1) * 100) div F_Main.MP3_ListBox.Items.Count;
         end;
-        {fill up gauge}
+				{fill up gauge}
         F_Main.Search_ProgressBar.Position	:=	100;
-        F_Main.Search_ProgressBar.Position	:=	0;
+				F_Main.Search_ProgressBar.Position	:=	0;
 
         writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:result_list}', 'end'));
       end
@@ -251,13 +251,28 @@ begin
       {replace mp3list : detail_result_list}
       else if AnsiStrPos(PChar(ln), '{#mp3list:detail_result_list}') <> nil then
       begin
-        writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'start'));
+				if mp3list_html_files_utf8 then
+					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'start')))
+				else
+					writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'start'));
 
-        for i := 0 to mp3list_Character_stringlists[Array_pointer].Count - 1 do
-          writeln (OutFile, mp3list_Character_stringlists[Array_pointer][i] + '<br>');
+(*
+				for i := 0 to mp3list_Character_stringlists[Array_pointer].Count - 1 do
+					writeln (OutFile, mp3list_Character_stringlists[Array_pointer][i] + '<br>');
+*)
+				for i := 0 to mp3list_Character_stringlists[Array_pointer].Count - 1 do
+				begin
+					if mp3list_html_files_utf8 then
+						writeln (OutFile, AnsiToUTF8(mp3list_Character_stringlists[Array_pointer][i] + '<br />'))
+					else
+						writeln (OutFile, mp3list_Character_stringlists[Array_pointer][i] + '<br />');
+				end;
 
-        writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'end'));
-      end
+				if mp3list_html_files_utf8 then
+					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'end')))
+				else
+					writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'end'));
+			end
 
       else
         {if nothing has to be replaced}
@@ -272,7 +287,7 @@ begin
   end
   else
   begin
-  	ShowMessage('Keine Vorlage gefunden.');
+		ShowMessage('No template found.');
   end;
 
 end;

@@ -210,11 +210,12 @@ var
   mp3list_result_count								:	Integer;            //	Zähler für Suchergebnis
   mp3list_html_file_name              : String;
   mp3list_html_file_ending            : String;
-  mp3list_text_files_zip              : Boolean;
+	mp3list_text_files_zip              : Boolean;
   mp3list_text_files_delete_after_zip : Boolean;
   mp3list_html_files_zip              : Boolean;
   mp3list_html_files_delete_after_zip : Boolean;
   mp3list_Character_stringlists       : array[0..26]  of TStringList;
+	mp3list_html_files_utf8             : Boolean;
 
   {Variablen für CD-Archive}
   cdarchive_path_to_read_in		        : String;
@@ -298,10 +299,12 @@ begin
     mp3list_html_multi_output           :=	Ini.ReadInteger('MP3LIST',   'multi_output',    0);
     mp3list_html_file_name				      :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_name', 	  'mp3list');
     mp3list_html_file_ending				    :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_ending',  '.html');
-    mp3list_text_files_zip	            :=	Ini.ReadBool   ('MP3LIST',   'zip_text_files',  False);
-    mp3list_text_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'text_files_delete_after_zip',  False);
-    mp3list_html_files_zip              :=	Ini.ReadBool   ('MP3LIST',   'zip_html_files',  False);
-    mp3list_html_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'html_files_delete_after_zip',  False);
+		mp3list_text_files_zip	            :=	Ini.ReadBool   ('MP3LIST',   'zip_text_files',  False);
+		mp3list_text_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'text_files_delete_after_zip',  False);
+		mp3list_html_files_zip              :=	Ini.ReadBool   ('MP3LIST',   'zip_html_files',  False);
+		mp3list_html_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'html_files_delete_after_zip',  False);
+		mp3list_html_files_utf8	            :=	Ini.ReadBool   ('MP3LIST',   'html_files_utf8', True);
+
 
     cdarchive_path_to_read_in		        :=  Ini.ReadString ('CDARCHIV',  'SINGLEDISKPATH',  'C:\');
     for i := 0 to 9 do
@@ -853,7 +856,7 @@ begin
   CloseFile(F);
   F_Main.Search_ProgressBar.Position	:=	0;
 
-  if mp3list_text_files_zip then
+	if mp3list_text_files_zip then
   begin
     {zip files}
     { syntax : zip name_of_zip_file file1_to_zip file2_to_zip file3_to_zip}
