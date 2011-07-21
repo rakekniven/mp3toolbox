@@ -23,7 +23,8 @@ interface
 	uses
     SysUtils,
     Dialogs,
-    classes;
+		classes,
+		WideStrUtils;
 
   procedure	HTML_Multi_Index_Seite(HTML_Outputfile :	String);
 
@@ -134,27 +135,39 @@ procedure create_html_output(Template_file,
 var
 	OutFile	  	                   	:	TextFile;
   InFile	  	                   	: TextFile;
-  ln					                   	: String;
-  cdlist_table                   	:	TStringList;
-  i						                   	:	Integer;
+	lnraw				                   	: RawByteString;
+	ln					                   	: String;
+	cdlist_table                   	:	TStringList;
+	i,
+	cnt					                   	:	Integer;
+	TplIsUnicode 										:	Boolean;
 begin
-  {check if template is present}
-  if FileExists(Template_file) then
-  begin
-    {Init}
-    cdlist_table	:=  TStringList.Create;
+	{check if template is present}
+	if FileExists(Template_file) then
+	begin
+		{Init}
+		cdlist_table	:=  TStringList.Create;
 
-    {Open Outputfile}
-    AssignFile(OutFile, HTML_Outputfile);
-    Rewrite	(OutFile);
+		{Open Outputfile}
+		AssignFile(OutFile, HTML_Outputfile);
+		Rewrite	(OutFile);
 
-    {Open template file}
-    AssignFile(InFile, Template_file);
-    Reset(InFile);
+		{Open template file}
+		AssignFile(InFile, Template_file);
+		Reset(InFile);
 
-    while not Eof(InFile) do
-    begin
-      Readln (InFile, ln);
+		cnt	:=	0;
+		TplIsUnicode	:=	False;
+
+		while not Eof(InFile) do
+		begin
+			Readln (InFile, lnraw);
+			inc(cnt);
+
+			if cnt < 2 then
+				TplIsUnicode	:=	WideStrUtils.HasUTF8BOM(lnraw);
+
+			ln	:=	UTF8ToString(lnraw);
 
       {--- Begin : Prüfungen ob werte ersetzt werden müssen ---}
 
@@ -182,7 +195,7 @@ begin
 
       {replace cdlist : total_cd_counter}
       else if AnsiStrPos(PChar(ln), '{#cdlist:total_cd_counter}') <> nil then
-      begin
+			begin
         ln	:=	StringReplace(ln, '{#cdlist:total_cd_counter}', IntToStr(cdlist_result_count), []);
         writeln (OutFile, ln);
       end
@@ -225,7 +238,7 @@ begin
 
       {replace mp3list : result_list}
       else if AnsiStrPos(PChar(ln), '{#mp3list:result_list}') <> nil then
-      begin
+			begin
         writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:result_list}', 'start'));
 
         {write resultlist}
@@ -239,7 +252,7 @@ begin
 				F_Main.Search_ProgressBar.Position	:=	0;
 
         writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:result_list}', 'end'));
-      end
+			end
 
       {replace mp3list : detail_mpg_counter}
       else if AnsiStrPos(PChar(ln), '{#mp3list:detail_mpg_counter}') <> nil then
@@ -250,8 +263,8 @@ begin
 
       {replace mp3list : detail_result_list}
       else if AnsiStrPos(PChar(ln), '{#mp3list:detail_result_list}') <> nil then
-      begin
-				if mp3list_html_files_utf8 then
+			begin
+				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'start')))
 				else
 					writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'start'));
@@ -262,21 +275,28 @@ begin
 *)
 				for i := 0 to mp3list_Character_stringlists[Array_pointer].Count - 1 do
 				begin
-					if mp3list_html_files_utf8 then
-						writeln (OutFile, AnsiToUTF8(mp3list_Character_stringlists[Array_pointer][i] + '<br />'))
+
+					if TplIsUnicode then
+						writeln (OutFile, AnsiToUTF8(mp3list_Character_stringlists[Array_pointer][i]) + '<br />')
 					else
 						writeln (OutFile, mp3list_Character_stringlists[Array_pointer][i] + '<br />');
+
 				end;
 
-				if mp3list_html_files_utf8 then
+				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'end')))
 				else
 					writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'end'));
 			end
 
-      else
-        {if nothing has to be replaced}
-        writeln (OutFile, ln);
+			else
+			begin
+				{if nothing has to be replaced}
+				if TplIsUnicode then
+					writeln (OutFile, ln)
+				else
+					writeln (OutFile, ln);
+			end;
 
       { End : Prüfungen ob werte ersetzt werden müssen}
     end;

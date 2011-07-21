@@ -472,7 +472,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 225
         Width = 962
-        Height = 368
+        Height = 348
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1019,7 +1019,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 960
-        Height = 233
+        Height = 213
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4

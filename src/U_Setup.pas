@@ -69,7 +69,6 @@ type
     MP3List_CLear_HTML_files_after_zip_CB: TCheckBox;
     CDList_ZIP_html_CheckBox: TCheckBox;
     CDList_CLear_HTML_files_after_zip_CB: TCheckBox;
-    CB_HTML_Encoding_UTF8: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -98,7 +97,6 @@ type
     procedure CDList_ZIP_html_CheckBoxClick(Sender: TObject);
     procedure CDList_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
     procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
-    procedure CB_HTML_Encoding_UTF8Click(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -128,7 +126,9 @@ end;
 {--- Formular anzeigen --------------------------------------------------------}
 procedure TF_Setup.FormShow(Sender: TObject);
 begin
-  {set radiobuttons}
+  Setup_Book.ActivePage	:=	Allgemein;
+
+	{set radiobuttons}
   if mp3list_html_multi_output = 0 then
   begin
   	RadioButton1.Checked	:=	True;
@@ -188,13 +188,7 @@ begin
 		MP3List_CLear_HTML_files_after_zip_CB.Checked	:=	False;
 
 	{}
-	if mp3list_html_files_utf8 then
-		CB_HTML_Encoding_UTF8.Checked	:=	True
-	else
-		CB_HTML_Encoding_UTF8.Checked	:=	False;
-
-	{}
-  if cdlist_text_files_zip then
+	if cdlist_text_files_zip then
 	  cdlist_ZIP_txt_CheckBox.Checked	:=	True
   else
 	  cdlist_ZIP_txt_CheckBox.Checked	:=	False;
@@ -364,7 +358,6 @@ begin
     Ini.WriteBool   ('MP3LIST', 'zip_html_files',             mp3list_html_files_zip);
     Ini.WriteBool   ('MP3LIST', 'text_files_delete_after_zip',mp3list_text_files_delete_after_zip);
 		Ini.WriteBool   ('MP3LIST', 'html_files_delete_after_zip',mp3list_html_files_delete_after_zip);
-		Ini.WriteBool   ('MP3LIST', 'html_files_utf8',            mp3list_html_files_utf8);
 
     Ini.WriteBool   ('CDLIST',  'zip_text_files',             cdlist_text_files_zip);
     Ini.WriteBool   ('CDLIST',  'zip_html_files',             cdlist_html_files_zip);
@@ -542,15 +535,6 @@ begin
     cdlist_html_files_zip    :=  True
   else
     cdlist_html_files_zip    :=  False;
-end;
-
-procedure TF_Setup.CB_HTML_Encoding_UTF8Click(Sender: TObject);
-begin
-	if CB_HTML_Encoding_UTF8.Checked then
-		mp3list_html_files_utf8	:=	True
-	else
-		mp3list_html_files_utf8	:=	False;
-
 end;
 
 {--- MP3List : Delete HTML files after zip ------------------------------------}
