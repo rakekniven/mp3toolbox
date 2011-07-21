@@ -61,12 +61,8 @@
 			<DCCReference Include="externallibs\Id3v2Frames.pas"/>
 			<DCCReference Include="externallibs\Mp3FileUtils.pas"/>
 			<DCCReference Include="externallibs\fldbrowsUnicode.pas"/>
-			<None Include="Lang_D.txt">
-				<ContainerId>File</ContainerId>
-			</None>
-			<None Include="Lang_GB.txt">
-				<ContainerId>File</ContainerId>
-			</None>
+			<None Include="LC\Lang_GB.txt"/>
+			<None Include="LC\Lang_D.txt"/>
 			<BuildConfiguration Include="Basis">
 				<Key>Base</Key>
 			</BuildConfiguration>

@@ -127,7 +127,7 @@ VAR IniFile     : TextFile;
     TempStr := Trim(Line);
 
     PosAnf  := Pos('[', TempStr);
-    PosEnd  := Pos(']', TempStr);
+		PosEnd  := Pos(']', TempStr);
 
     {Section als Ergebnis oder ''}
     if (PosEnd>PosAnf) and (PosEnd<>0) and (PosAnf<>0) then
@@ -170,7 +170,7 @@ VAR IniFile     : TextFile;
     end;
   end;
 
-  {Aktuelle Zeile in Nummer und Text separieren, linke Seite ist Zahl}
+	{Aktuelle Zeile in Nummer und Text separieren, linke Seite ist Zahl}
   procedure GetActLine(Line : STRING; ActSectID : INTEGER; var ActNummer : INTEGER; var ActText : STRING);
   var
     PosSep  : INTEGER;
@@ -213,7 +213,7 @@ VAR IniFile     : TextFile;
   procedure GetIniLine (Line : STRING; ActSectID : INTEGER; var ActEntry: STRING; var ActValue: STRING);
   var
     PosSep  : INTEGER;
-    TempStr : STRING;
+		TempStr : STRING;
 
     TempEntry : STRING;
     TempValue : STRING;
@@ -254,7 +254,7 @@ BEGIN  { of Set_Language_New }
 
   FilePath    := act_exec_directory;
 
-  Lng_LibName  := SlashSep(FilePath, 'Lang_'+Lng_ID+'.txt'#0);
+	Lng_LibName  := SlashSep(FilePath, 'LC\Lang_'+Lng_ID+'.txt'#0);
 
 	if FileExists(Lng_LibName) then
 	begin
