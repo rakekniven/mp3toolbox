@@ -81,8 +81,8 @@ function SlashSep(const Path, S: string): string;
 begin
   if Path <> '' then
   begin
-    if AnsiLastChar(Path)^ <> '/' then
-			Result := Path + '/' + S
+		if AnsiLastChar(Path)^ <> '\' then
+			Result := Path + '\' + S
     else
       Result := Path + S;
   end;
