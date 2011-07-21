@@ -267,16 +267,15 @@ var
 procedure TF_Main.FormCreate(Sender: TObject);
 var
 	i :Integer;
-	PathToEXE	:	String;
 begin
-  init_ok :=  True;
-	GetDir(0, PathToEXE);
+	init_ok :=  True;
+	GetDir(0, act_exec_directory);
 
 	if not DirectoryExists(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox')) then
 		MkDir(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox'));
 
 	ini_file_name               :=  	SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox\mp3toolbox.cfg');
-	default_ini_file_name       :=  	SlashSep(PathToEXE, 'config\default.cfg');
+	default_ini_file_name       :=  	SlashSep(act_exec_directory, 'config\default.cfg');
 	for i := 0 to Length(mp3list_Character_stringlists) do
 		mp3list_Character_stringlists[i]  :=  TStringList.Create;
 
@@ -350,8 +349,6 @@ begin
   F_Main.Caption :=  'mp3toolbox version ' + version;
 //  Form1.Caption :=  'mp3toolbox version ' + get_version(1,1,0,1);
 
-
-  GetDir(0, act_exec_directory);
 
 // 66666
   output_with_pathes    :=  True;
