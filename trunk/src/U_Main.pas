@@ -171,6 +171,8 @@ type
 
 		ID3v2Tag: TID3v2Tag;
 
+		FirstStart	:	Boolean;
+
 	end;
 
 type
@@ -189,9 +191,10 @@ var
   searched_dir_count									:	Integer;						//	anzahl durchsuchte Verzeichnisse.
   cancel_search								        :	Boolean;            //  Suche abbrechen
   gui_language                        : String;             //  Sprache
-  ini_file_name                       : string;
+	ini_file_name                       : string;
+	default_ini_file_name               : string;
 
-  start_search_time                   : TDateTime;          //  Startzeitpunkt der Suche
+	start_search_time                   : TDateTime;          //  Startzeitpunkt der Suche
   end_search_time                     : TDateTime;          //  Stopzeitpunkt der Suche
 
   pacman_adjustment_visible           : Boolean;						//	Soll PacmanBox sichtbar sein
@@ -215,7 +218,6 @@ var
   mp3list_html_files_zip              : Boolean;
   mp3list_html_files_delete_after_zip : Boolean;
   mp3list_Character_stringlists       : array[0..26]  of TStringList;
-	mp3list_html_files_utf8             : Boolean;
 
   {Variablen für CD-Archive}
   cdarchive_path_to_read_in		        : String;
@@ -265,32 +267,36 @@ var
 procedure TF_Main.FormCreate(Sender: TObject);
 var
 	i :Integer;
+	PathToEXE	:	String;
 begin
   init_ok :=  True;
+	GetDir(0, PathToEXE);
 
 	if not DirectoryExists(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox')) then
 		MkDir(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox'));
 
 	ini_file_name               :=  	SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox\mp3toolbox.cfg');
-
-  for i := 0 to Length(mp3list_Character_stringlists) do
-    mp3list_Character_stringlists[i]  :=  TStringList.Create;
+	default_ini_file_name       :=  	SlashSep(PathToEXE, 'config\default.cfg');
+	for i := 0 to Length(mp3list_Character_stringlists) do
+		mp3list_Character_stringlists[i]  :=  TStringList.Create;
 
 	ID3v2Tag := TID3v2Tag.Create;
 
-  if not FileExists(ini_file_name) then
-  begin
-//    init_ok                   :=  False;
-    Load_From_Button.Enabled  :=  False;
-  end
-	else
-  begin
-    {Begin: INI-Datei oeffnen und werte setzen}
-    Ini := TIniFile.Create(ini_file_name);
+	if not FileExists(ini_file_name) then
+		FirstStart	:=	True;
 
-    {Sprache auslesen}
-    gui_language          	            :=	Ini.ReadString ('GENERAL',   'gui_language',    'GB');
-    text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     act_exec_directory);
+//    init_ok                   :=  False;
+//    Load_From_Button.Enabled  :=  False;
+
+		{Begin: INI-Datei oeffnen und werte setzen}
+		if FirstStart then
+			Ini := TIniFile.Create(default_ini_file_name)
+		else
+			Ini := TIniFile.Create(ini_file_name);
+
+		{Sprache auslesen}
+		gui_language          	            :=	Ini.ReadString ('GENERAL',   'gui_language',    'GB');
+		text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     act_exec_directory);
     html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     act_exec_directory);
     pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
 
@@ -303,7 +309,6 @@ begin
 		mp3list_text_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'text_files_delete_after_zip',  False);
 		mp3list_html_files_zip              :=	Ini.ReadBool   ('MP3LIST',   'zip_html_files',  False);
 		mp3list_html_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'html_files_delete_after_zip',  False);
-		mp3list_html_files_utf8	            :=	Ini.ReadBool   ('MP3LIST',   'html_files_utf8', True);
 
 
     cdarchive_path_to_read_in		        :=  Ini.ReadString ('CDARCHIV',  'SINGLEDISKPATH',  'C:\');
@@ -334,9 +339,8 @@ begin
     Ini.Free;
     {End: INI-Datei oeffnen und werte setzen}
 
-    mp3list_html_output_file    :=	mp3list_html_file_name + mp3list_html_file_ending;
+		mp3list_html_output_file    :=	mp3list_html_file_name + mp3list_html_file_ending;
     mp3list_text_output_file    :=  mp3list_html_file_name + '.txt';
-  end;
 
   {Set filter-options}
 	filter_ComboBox.ItemIndex		:=	0;	 //	default is mp3
@@ -418,7 +422,13 @@ end;
 {--- OnShow -------------------------------------------------------------------}
 procedure TF_Main.FormShow(Sender: TObject);
 begin
-//
+	if FirstStart then
+	begin
+//    init_ok                   :=  False;
+//    Load_From_Button.Enabled  :=  False;
+		ShowMessage('Looks like you run the programm for the first time. Please adjust your settings and save them.');
+		F_Setup.ShowModal;
+	end
 end;
 
 {--- OnActivate ---------------------------------------------------------------}
