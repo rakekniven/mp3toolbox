@@ -23,7 +23,7 @@ interface
 
 uses
 	SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ComCtrls, ExtCtrls;
+  Dialogs, StdCtrls, Buttons, ComCtrls, ExtCtrls, pngimage;
 
 type
   TAbout_F = class(TForm)
