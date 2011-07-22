@@ -282,6 +282,7 @@ object F_Main: TF_Main
         Margins.Right = 4
         Margins.Bottom = 4
         Caption = '0'
+        Visible = False
       end
       object Char_Count_Lab2: TLabel
         Left = 798
@@ -293,6 +294,7 @@ object F_Main: TF_Main
         Margins.Right = 4
         Margins.Bottom = 4
         Caption = 'Characters'
+        Visible = False
       end
       object Label1: TLabel
         Left = 561
@@ -819,6 +821,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Caption = 'create &textfile'
         DoubleBuffered = True
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 15
@@ -848,6 +851,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Caption = 'create &website'
         DoubleBuffered = True
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 15
@@ -1019,7 +1023,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 960
-        Height = 193
+        Height = 173
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
