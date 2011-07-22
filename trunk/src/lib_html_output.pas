@@ -175,94 +175,144 @@ begin
       if AnsiStrPos(PChar(ln), '{#general:update_date}') <> nil then
       begin
         ln	:=	StringReplace(ln, '{#general:update_date}', DateTimeToStr(Now), []);
-        writeln (OutFile, ln);
-      end
+
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
 
       {replace general : version}
       else if AnsiStrPos(PChar(ln), '{#general:version}') <> nil then
-      begin
-//        ln	:=	StringReplace(ln, '{#general:version}', get_version(1,1,0,1), []);
-        ln	:=	StringReplace(ln, '{#general:version}', version, []);
-        writeln (OutFile, ln);
-      end
-
-      {replace cdlist : searchtime}
-      else if AnsiStrPos(PChar(ln), '{#cdlist:searchtime}') <> nil then
-      begin
-        ln	:=	StringReplace(ln, '{#cdlist:searchtime}', TimeToStr(end_search_time - start_search_time), []);
-        writeln (OutFile, ln);
-      end
-
-      {replace cdlist : total_cd_counter}
-      else if AnsiStrPos(PChar(ln), '{#cdlist:total_cd_counter}') <> nil then
 			begin
-        ln	:=	StringReplace(ln, '{#cdlist:total_cd_counter}', IntToStr(cdlist_result_count), []);
-        writeln (OutFile, ln);
-      end
+				ln	:=	StringReplace(ln, '{#general:version}', version, []);
 
-      {replace cdlist : result_table}
-      else if AnsiStrPos(PChar(ln), '{#cdlist:result_table}') <> nil then
-      begin
-        writeln (OutFile, seperate_string_in_parts(ln, '{#cdlist:result_table}', 'start'));
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
 
-        {write result table in a stringlist and print it}
-        CDList_HTML_Main_Table_Output(cdlist_table);
-        for i := 0 to cdlist_table.Count - 1 do
-        begin
-          writeln (OutFile, cdlist_table.Strings[i]);
-        end;
+			{replace cdlist : searchtime}
+			else if AnsiStrPos(PChar(ln), '{#cdlist:searchtime}') <> nil then
+			begin
+				ln	:=	StringReplace(ln, '{#cdlist:searchtime}', TimeToStr(end_search_time - start_search_time), []);
 
-        writeln (OutFile, seperate_string_in_parts(ln, '{#cdlist:result_table}', 'end'));
-      end
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
 
-      {replace mp3list : total_mpg_counter}
-      else if AnsiStrPos(PChar(ln), '{#mp3list:total_mpg_counter}') <> nil then
-      begin
-        ln	:=	StringReplace(ln, '{#mp3list:total_mpg_counter}', IntToStr(mp3list_result_count), []);
-        writeln (OutFile, ln);
-      end
+			{replace cdlist : total_cd_counter}
+			else if AnsiStrPos(PChar(ln), '{#cdlist:total_cd_counter}') <> nil then
+			begin
+				ln	:=	StringReplace(ln, '{#cdlist:total_cd_counter}', IntToStr(cdlist_result_count), []);
+
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
+
+			{replace cdlist : result_table}
+			else if AnsiStrPos(PChar(ln), '{#cdlist:result_table}') <> nil then
+			begin
+				if TplIsUnicode then
+					writeln (OutFile, AnsiStrPos(seperate_string_in_parts(ln, '{#cdlist:result_table}', 'start')))
+				else
+					writeln (OutFile, seperate_string_in_parts(ln, '{#cdlist:result_table}', 'start'));
+
+				{write result table in a stringlist and print it}
+				CDList_HTML_Main_Table_Output(cdlist_table);
+				for i := 0 to cdlist_table.Count - 1 do
+				begin
+					if TplIsUnicode then
+						writeln (OutFile, AnsiStrPos(cdlist_table.Strings[i]))
+					else
+						writeln (OutFile, cdlist_table.Strings[i]);
+				end;
+
+				if TplIsUnicode then
+					writeln (OutFile, AnsiStrPos(seperate_string_in_parts(ln, '{#cdlist:result_table}', 'end')))
+				else
+					writeln (OutFile, seperate_string_in_parts(ln, '{#cdlist:result_table}', 'end'));
+			end
+
+			{replace mp3list : total_mpg_counter}
+			else if AnsiStrPos(PChar(ln), '{#mp3list:total_mpg_counter}') <> nil then
+			begin
+				ln	:=	StringReplace(ln, '{#mp3list:total_mpg_counter}', IntToStr(mp3list_result_count), []);
+
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
 
       {replace mp3list : index character for multi output}
       else if AnsiStrPos(PChar(ln), '{#mp3list:index_character}') <> nil then
       begin
         ln	:=	StringReplace(ln, '{#mp3list:index_character}', Letter, []);
-        writeln (OutFile, ln);
-      end
+
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
 
       {replace mp3list : searchtime}
       else if AnsiStrPos(PChar(ln), '{#mp3list:searchtime}') <> nil then
       begin
         ln	:=	StringReplace(ln, '{#mp3list:searchtime}', TimeToStr(end_search_time - start_search_time), []);
-        writeln (OutFile, ln);
-      end
+
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
 
       {replace mp3list : result_list}
       else if AnsiStrPos(PChar(ln), '{#mp3list:result_list}') <> nil then
 			begin
-        writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:result_list}', 'start'));
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:result_list}', 'start')))
+				else
+					writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:result_list}', 'start'));
 
-        {write resultlist}
-        for i := 0 to F_Main.MP3_ListBox.Items.Count - 1 do
-        begin
-          writeln (OutFile, F_Main.MP3_ListBox.Items[i] + '<br>');
-      	  F_Main.Search_ProgressBar.Position	:= ((i + 1) * 100) div F_Main.MP3_ListBox.Items.Count;
-        end;
+				{write resultlist}
+				for i := 0 to F_Main.MP3_ListBox.Items.Count - 1 do
+				begin
+					if TplIsUnicode then
+						writeln (OutFile, AnsiToUTF8(F_Main.MP3_ListBox.Items[i] + '<br />'))
+					else
+						writeln (OutFile, F_Main.MP3_ListBox.Items[i] + '<br />');
+
+					F_Main.Search_ProgressBar.Position	:= ((i + 1) * 100) div F_Main.MP3_ListBox.Items.Count;
+				end;
 				{fill up gauge}
-        F_Main.Search_ProgressBar.Position	:=	100;
+				F_Main.Search_ProgressBar.Position	:=	100;
 				F_Main.Search_ProgressBar.Position	:=	0;
 
-        writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:result_list}', 'end'));
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:result_list}', 'end')))
+				else
+					writeln (OutFile, seperate_string_in_parts(ln, '{#mp3list:result_list}', 'end'));
 			end
 
-      {replace mp3list : detail_mpg_counter}
-      else if AnsiStrPos(PChar(ln), '{#mp3list:detail_mpg_counter}') <> nil then
-      begin
-        ln	:=	StringReplace(ln, '{#mp3list:detail_mpg_counter}', IntToStr(mp3list_Character_stringlists[Array_pointer].Count), []);
-        writeln (OutFile, ln);
-      end
+			{replace mp3list : detail_mpg_counter}
+			else if AnsiStrPos(PChar(ln), '{#mp3list:detail_mpg_counter}') <> nil then
+			begin
+				ln	:=	StringReplace(ln, '{#mp3list:detail_mpg_counter}', IntToStr(mp3list_Character_stringlists[Array_pointer].Count), []);
 
-      {replace mp3list : detail_result_list}
-      else if AnsiStrPos(PChar(ln), '{#mp3list:detail_result_list}') <> nil then
+				if TplIsUnicode then
+					writeln (OutFile, AnsiToUTF8(ln))
+				else
+					writeln (OutFile, ln);
+			end
+
+			{replace mp3list : detail_result_list}
+			else if AnsiStrPos(PChar(ln), '{#mp3list:detail_result_list}') <> nil then
 			begin
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:detail_result_list}', 'start')))
@@ -293,7 +343,7 @@ begin
 			begin
 				{if nothing has to be replaced}
 				if TplIsUnicode then
-					writeln (OutFile, ln)
+					writeln (OutFile, AnsiToUTF8(ln))
 				else
 					writeln (OutFile, ln);
 			end;
@@ -303,7 +353,7 @@ begin
 	  cdlist_table.Free;
 
 	  CloseFile(InFile);
-  	CloseFile(OutFile);
+		CloseFile(OutFile);
   end
   else
   begin
