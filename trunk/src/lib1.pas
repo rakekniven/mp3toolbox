@@ -22,7 +22,12 @@ unit lib1;
 interface
 
 uses
-	classes, sysutils, Forms, Windows;
+	classes,
+	sysutils,
+	Forms,
+	Windows,
+	Shellapi,
+	dialogs;
 
 
 	function	SlashSep(const Path, S: string): string;
@@ -69,7 +74,15 @@ uses
   function  get_no_of_chars (String_to_check    : String;
 														 Char_to_search_for : String) : Integer;
 
-	function ExpandEnv(const S: String): String;
+	function	ExpandEnv(const S: String): String;
+
+	// Externes Programm starten
+	procedure Start_External_Program          (handle : hwnd;
+																						 what_to_do,
+																						 program_to_start,
+																						 parameter,
+																						 start_dir          : String;
+																						 option             : Integer);
 
 implementation
 
@@ -553,6 +566,51 @@ begin
 	i := ExpandEnvironmentStrings(PChar(S), nil, 0);
 	SetLength(Result, i - 1);
 	ExpandEnvironmentStrings(PChar(S), PChar(Result), i);
+end;
+
+{--- Externes Programm öffnen >>> DB.exe --------------------------------------}
+procedure Start_External_Program (handle : hwnd;
+																	what_to_do,
+																	program_to_start,
+																	parameter,
+																	start_dir : String;
+																	option : Integer);
+var
+	i				: Integer;
+	msg   	: String;
+
+begin
+	i :=  shellexecute(handle,
+										 PChar(what_to_do),
+										 PChar(program_to_start),
+										 PChar(parameter),
+										 PChar(start_dir),
+										 option);
+
+	{Fehlercodes}
+	if i <= 32 then
+	begin
+		case i of
+			0  : msg :=  'Zuwenig Speicher, ausfuehbare Datei war zerstoert, Relokationswerte waren ungueltig';
+			2  : msg :=  'Datei wurde nicht gefunden';
+			3  : msg :=  'Verzeichnis wurde nicht gefunden';
+			5  : msg :=  'Fehler beim gemeinsamen Zugriff auf eine Datei im Netz oder Fehler beim Zugriff auf eine gesperrte Datei im Netz.';
+			6  : msg :=  'Bibliothek forderte separate Datensegmente fuer jede Task an.';
+			8  : msg :=  'Zu wenig Speicher um die Anwendung zu starten.';
+			10 : msg :=  'Falsche Windows-Version.';
+			11 : msg :=  'Ungueltige ausfuehrbare Datei. Entweder keine Windows-Anwendung oder Fehler in der EXE-Datei.';
+			12 : msg :=  'Anwendung fuer ein anderes Betriebssytem.';
+			13 : msg :=  'Anwendung fuer MS-DOS 4.0 .';
+			14 : msg :=  'Typ der ausfuehrbaren Datei unbekannt.';
+			15 : msg :=  'Versuch eine Real-Mode-Anwendung zu starten.';
+			19 : msg :=  'Versuch eine komprimierte ausfuehrbare Datei zu laden. Die Datei muss dekomprimiert werden, bevor sie geladen werden kann.';
+			20 : msg :=  'Ungueltige DLL. Eine der DLLs. die benoetigt wurde um die Anwendung auszufuehren, war beschaedigt.';
+		end;
+	end;
+
+	{Wenn Fehler dann Ausgabe in Status}
+	if msg <> '' then
+		ShowMessage(msg);
 end;
 
 end.
