@@ -1,6 +1,6 @@
 object F_Main: TF_Main
-  Left = 164
-  Top = 210
+  Left = 95
+  Top = 128
   Width = 980
   Height = 678
   HorzScrollBar.Range = 971
@@ -14,7 +14,7 @@ object F_Main: TF_Main
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = True
-  Position = poDesktopCenter
+  Position = poDesigned
   OnActivate = FormActivate
   OnCreate = FormCreate
   OnResize = FormResize
@@ -462,11 +462,12 @@ object F_Main: TF_Main
         Left = 20
         Top = 236
         Width = 858
-        Height = 287
+        Height = 247
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 5
         OnMouseUp = NameCheck_ListBoxMouseUp
       end
@@ -474,7 +475,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 225
         Width = 962
-        Height = 364
+        Height = 368
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1023,7 +1024,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 960
-        Height = 173
+        Height = 373
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4

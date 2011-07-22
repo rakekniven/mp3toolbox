@@ -185,7 +185,7 @@ begin
       {replace general : version}
       else if AnsiStrPos(PChar(ln), '{#general:version}') <> nil then
 			begin
-				ln	:=	StringReplace(ln, '{#general:version}', version, []);
+				ln	:=	StringReplace(ln, '{#general:version}', F_Main.version, []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))

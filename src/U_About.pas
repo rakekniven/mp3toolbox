@@ -23,7 +23,7 @@ interface
 
 uses
 	SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ComCtrls, ExtCtrls, pngimage;
+	Dialogs, StdCtrls, Buttons, ComCtrls, ExtCtrls, lib1, pngimage, Windows;
 
 type
   TAbout_F = class(TForm)
@@ -44,6 +44,7 @@ type
     procedure Hyperlink_LabelMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure FormShow(Sender: TObject);
+    procedure Hyperlink_LabelClick(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -64,15 +65,20 @@ begin
   Close;
 end;
 
-procedure TAbout_F.Hyperlink_LabelMouseMove(Sender: TObject; Shift: TShiftState; X,
-  Y: Integer);
+procedure TAbout_F.Hyperlink_LabelClick(Sender: TObject);
 begin
-//  Hyperlink_Label.Cursor  :=  
+	lib1.Start_External_Program(self.WindowHandle, 'open', 'http://www.rakekniven.de', '', '', SW_SHOW);
+end;
+
+procedure TAbout_F.Hyperlink_LabelMouseMove(Sender: TObject; Shift: TShiftState; X,
+	Y: Integer);
+begin
+//  Hyperlink_Label.Cursor  :=
 end;
 
 procedure TAbout_F.FormShow(Sender: TObject);
 begin
-	Label1.Caption	:=	'MP3ToolBox ' + U_Main.version;
+	Label1.Caption	:=	'MP3ToolBox ' + F_Main.version;
 	About_PageControl.ActivePage	:=	TabSheet1;
 end;
 

@@ -42,13 +42,13 @@ object About_F: TAbout_F
   object Label1: TLabel
     Left = 90
     Top = 35
-    Width = 159
-    Height = 12
+    Width = 300
+    Height = 22
     Caption = 'MP3Toolbox x.x.x (Kylix Project)'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
-    Font.Height = 13
-    Font.Name = 'helvetica'
+    Font.Height = -19
+    Font.Name = 'Arial'
     Font.Pitch = fpVariable
     Font.Style = [fsBold]
     ParentFont = False
@@ -83,6 +83,7 @@ object About_F: TAbout_F
         Font.Style = [fsUnderline]
         ParentColor = False
         ParentFont = False
+        OnClick = Hyperlink_LabelClick
         OnMouseMove = Hyperlink_LabelMouseMove
       end
       object About_Memo: TMemo

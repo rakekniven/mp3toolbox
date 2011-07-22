@@ -27,219 +27,219 @@ uses
 	Grids, Mp3FileUtils, fldbrowsUnicode;//, Libc;
 
 type
-  TF_Main = class(TForm)
-    PageControl1: TPageControl;
-    TabSheet1: TTabSheet;
-    TabSheet3: TTabSheet;
-    Multi_Dir_GroupBox: TGroupBox;
-    Multi_Dir_ListBox: TListBox;
-    Load_From_Button: TButton;
-    Save_To_Button: TButton;
-    Sel_All_Button: TButton;
-    Sel_None_Button: TButton;
+	TF_Main = class(TForm)
+		PageControl1: TPageControl;
+		TabSheet1: TTabSheet;
+		TabSheet3: TTabSheet;
+		Multi_Dir_GroupBox: TGroupBox;
+		Multi_Dir_ListBox: TListBox;
+		Load_From_Button: TButton;
+		Save_To_Button: TButton;
+		Sel_All_Button: TButton;
+		Sel_None_Button: TButton;
 		Clear_Sel_Button: TButton;
-    Clear_All_Button: TButton;
-    Subdir_CheckBox: TCheckBox;
-    Output_with_path_CB: TCheckBox;
+		Clear_All_Button: TButton;
+		Subdir_CheckBox: TCheckBox;
+		Output_with_path_CB: TCheckBox;
 		Filter_GroupBox: TGroupBox;
 		Filter_Edit: TEdit;
 		filter_ComboBox: TComboBox;
 		Own_Filter_CheckBox: TCheckBox;
 		Sel_Dir_Btn: TBitBtn;
-    Output_with_filesize_CB: TCheckBox;
-    TXT_Output_Btn: TBitBtn;
-    HTML_OutputButton: TBitBtn;
-    Go_Btn: TBitBtn;
-    Search_Time_Lab: TLabel;
-    Dir_Count_Label: TLabel;
-    Result_Label: TLabel;
-    Pacman_Btn: TSpeedButton;
-    MP3_ListBox: TListBox;
-    Search_ProgressBar: TProgressBar;
-    MainMenu1: TMainMenu;
-    File1: TMenuItem;
-    Help1: TMenuItem;
-    Setup1: TMenuItem;
-    Exit1: TMenuItem;
-    NameCheck_ListBox: TListBox;
-    CDListe_StringGrid: TStringGrid;
+		Output_with_filesize_CB: TCheckBox;
+		TXT_Output_Btn: TBitBtn;
+		HTML_OutputButton: TBitBtn;
+		Go_Btn: TBitBtn;
+		Search_Time_Lab: TLabel;
+		Dir_Count_Label: TLabel;
+		Result_Label: TLabel;
+		Pacman_Btn: TSpeedButton;
+		MP3_ListBox: TListBox;
+		Search_ProgressBar: TProgressBar;
+		MainMenu1: TMainMenu;
+		File1: TMenuItem;
+		Help1: TMenuItem;
+		Setup1: TMenuItem;
+		Exit1: TMenuItem;
+		NameCheck_ListBox: TListBox;
+		CDListe_StringGrid: TStringGrid;
 		Pacman_Panel: TPanel;
-    Pacman_Speed_Edit: TEdit;
-    Start_Pacman_Btn: TButton;
-    Close_Pacman_Btn: TBitBtn;
-    CDList_ProgressBar: TProgressBar;
-    HTML_OutputButton3: TBitBtn;
-    CDLIst_Choose_GB: TGroupBox;
-    Choose_CDList_Source_File_Btn: TSpeedButton;
-    CD_List_Open_File_Lab: TLabel;
-    Go_Btn3: TBitBtn;
-    CDList_Source_File_CB: TComboBox;
-    MP3List_PopupMenu: TPopupMenu;
-    checkfilenames1: TMenuItem;
-    checkfilenamesforallowedlength1: TMenuItem;
+		Pacman_Speed_Edit: TEdit;
+		Start_Pacman_Btn: TButton;
+		Close_Pacman_Btn: TBitBtn;
+		CDList_ProgressBar: TProgressBar;
+		HTML_OutputButton3: TBitBtn;
+		CDLIst_Choose_GB: TGroupBox;
+		Choose_CDList_Source_File_Btn: TSpeedButton;
+		CD_List_Open_File_Lab: TLabel;
+		Go_Btn3: TBitBtn;
+		CDList_Source_File_CB: TComboBox;
+		MP3List_PopupMenu: TPopupMenu;
+		checkfilenames1: TMenuItem;
+		checkfilenamesforallowedlength1: TMenuItem;
 		Joliet601: TMenuItem;
-    ISO9660Level1121: TMenuItem;
-    ISO9660Level2311: TMenuItem;
-    Romeo1281: TMenuItem;
-    Pacman_Move_Timer: TTimer;
-    CDList_Popup: TPopupMenu;
-    Dateibearbeiten1: TMenuItem;
-    DateiausListeentfernen1: TMenuItem;
-    Char_Count_Lab: TLabel;
-    Char_Count_Lab2: TLabel;
-//		FileListView1: TFileListView;
-    CD_Single_SaveDialog: TSaveDialog;
-    checkfilenamesfornoof1: TMenuItem;
-    AboutMP3Toolbox1: TMenuItem;
-    Result_File_SpeedButton: TSpeedButton;
-    CDList_Template_Label: TLabel;
-    Result_File_ComboBox: TComboBox;
-    Template_OpenDialog: TOpenDialog;
-    CDList_Template_ComboBox: TComboBox;
+		ISO9660Level1121: TMenuItem;
+		ISO9660Level2311: TMenuItem;
+		Romeo1281: TMenuItem;
+		Pacman_Move_Timer: TTimer;
+		CDList_Popup: TPopupMenu;
+		Dateibearbeiten1: TMenuItem;
+		DateiausListeentfernen1: TMenuItem;
+		Char_Count_Lab: TLabel;
+		Char_Count_Lab2: TLabel;
+		CD_Single_SaveDialog: TSaveDialog;
+		checkfilenamesfornoof1: TMenuItem;
+		AboutMP3Toolbox1: TMenuItem;
+		Result_File_SpeedButton: TSpeedButton;
+		CDList_Template_Label: TLabel;
+		Result_File_ComboBox: TComboBox;
+		Template_OpenDialog: TOpenDialog;
+		CDList_Template_ComboBox: TComboBox;
 		Result_File_Label: TLabel;
-    CDList_Template_SpeedButton: TSpeedButton;
-    Result_File_SaveDialog: TSaveDialog;
-    CDList_Source_File_OpenDialog: TOpenDialog;
-    CDList_Result_Label: TLabel;
-    TabSheet4: TTabSheet;
-    ListBox_Error: TListBox;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label6: TLabel;
-    Label5: TLabel;
-    Label7: TLabel;
+		CDList_Template_SpeedButton: TSpeedButton;
+		Result_File_SaveDialog: TSaveDialog;
+		CDList_Source_File_OpenDialog: TOpenDialog;
+		CDList_Result_Label: TLabel;
+		TabSheet4: TTabSheet;
+		ListBox_Error: TListBox;
+		Label1: TLabel;
+		Label2: TLabel;
+		Label3: TLabel;
+		Label4: TLabel;
+		Label6: TLabel;
+		Label5: TLabel;
+		Label7: TLabel;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
-    procedure Close_Btn1Click(Sender: TObject);
-    procedure Exit1Click(Sender: TObject);
-    procedure Load_From_ButtonClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure Save_To_ButtonClick(Sender: TObject);
-    procedure Sel_All_ButtonClick(Sender: TObject);
-    procedure Sel_None_ButtonClick(Sender: TObject);
-    procedure Clear_Sel_ButtonClick(Sender: TObject);
-    procedure Clear_All_ButtonClick(Sender: TObject);
-    procedure Own_Filter_CheckBoxClick(Sender: TObject);
-    procedure filter_ComboBoxChange(Sender: TObject);
-    procedure Multi_Dir_ListBoxMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure Go_BtnClick(Sender: TObject);
-    procedure Subdir_CheckBoxClick(Sender: TObject);
-    procedure Output_with_path_CBClick(Sender: TObject);
-    procedure Output_with_filesize_CBClick(Sender: TObject);
-    procedure TXT_Output_BtnClick(Sender: TObject);
-    procedure Setup1Click(Sender: TObject);
-    procedure HTML_OutputButtonClick(Sender: TObject);
-    procedure checkfilenames1Click(Sender: TObject);
-    procedure Joliet601Click(Sender: TObject);
-    procedure ISO9660Level1121Click(Sender: TObject);
-    procedure ISO9660Level2311Click(Sender: TObject);
-    procedure Romeo1281Click(Sender: TObject);
-    procedure MP3List_PopupMenuPopup(Sender: TObject);
-    procedure MP3_ListBoxClick(Sender: TObject);
-    procedure Start_Pacman_BtnClick(Sender: TObject);
-    procedure Close_Pacman_BtnClick(Sender: TObject);
-    procedure Pacman_Speed_EditChange(Sender: TObject);
-    procedure Pacman_Move_TimerTimer(Sender: TObject);
-    procedure TabSheet3Show(Sender: TObject);
-    procedure Go_Btn3Click(Sender: TObject);
-    procedure Go_Btn3MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure Choose_CDList_Source_File_BtnClick(Sender: TObject);
-    procedure CDList_Close_BtnClick(Sender: TObject);
-    procedure FormResize(Sender: TObject);
-    procedure HTML_OutputButton3Click(Sender: TObject);
+		procedure Close_Btn1Click(Sender: TObject);
+		procedure Exit1Click(Sender: TObject);
+		procedure Load_From_ButtonClick(Sender: TObject);
+		procedure FormCreate(Sender: TObject);
+		procedure Save_To_ButtonClick(Sender: TObject);
+		procedure Sel_All_ButtonClick(Sender: TObject);
+		procedure Sel_None_ButtonClick(Sender: TObject);
+		procedure Clear_Sel_ButtonClick(Sender: TObject);
+		procedure Clear_All_ButtonClick(Sender: TObject);
+		procedure Own_Filter_CheckBoxClick(Sender: TObject);
+		procedure filter_ComboBoxChange(Sender: TObject);
+		procedure Multi_Dir_ListBoxMouseUp(Sender: TObject;
+			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+		procedure Go_BtnClick(Sender: TObject);
+		procedure Subdir_CheckBoxClick(Sender: TObject);
+		procedure Output_with_path_CBClick(Sender: TObject);
+		procedure Output_with_filesize_CBClick(Sender: TObject);
+		procedure TXT_Output_BtnClick(Sender: TObject);
+		procedure Setup1Click(Sender: TObject);
+		procedure HTML_OutputButtonClick(Sender: TObject);
+		procedure checkfilenames1Click(Sender: TObject);
+		procedure Joliet601Click(Sender: TObject);
+		procedure ISO9660Level1121Click(Sender: TObject);
+		procedure ISO9660Level2311Click(Sender: TObject);
+		procedure Romeo1281Click(Sender: TObject);
+		procedure MP3List_PopupMenuPopup(Sender: TObject);
+		procedure MP3_ListBoxClick(Sender: TObject);
+		procedure Start_Pacman_BtnClick(Sender: TObject);
+		procedure Close_Pacman_BtnClick(Sender: TObject);
+		procedure Pacman_Speed_EditChange(Sender: TObject);
+		procedure Pacman_Move_TimerTimer(Sender: TObject);
+		procedure TabSheet3Show(Sender: TObject);
+		procedure Go_Btn3Click(Sender: TObject);
+		procedure Go_Btn3MouseDown(Sender: TObject; Button: TMouseButton;
+			Shift: TShiftState; X, Y: Integer);
+		procedure Choose_CDList_Source_File_BtnClick(Sender: TObject);
+		procedure CDList_Close_BtnClick(Sender: TObject);
+		procedure FormResize(Sender: TObject);
+		procedure HTML_OutputButton3Click(Sender: TObject);
 		procedure Dateibearbeiten1Click(Sender: TObject);
-    procedure DateiausListeentfernen1Click(Sender: TObject);
+		procedure DateiausListeentfernen1Click(Sender: TObject);
 		procedure init_text(Sender:TObject);
-    procedure FormShow(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure MP3_ListBoxMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure CD_Archive_Close_BtnClick(Sender: TObject);
-    procedure checkfilenamesfornoof1Click(Sender: TObject);
-    procedure AboutMP3Toolbox1Click(Sender: TObject);
-    procedure NameCheck_ListBoxMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure Result_File_SpeedButtonClick(Sender: TObject);
-    procedure CDList_Template_SpeedButtonClick(Sender: TObject);
-  private
-    { Private-Deklarationen }
-  public
-    { Public-Deklarationen }
+		procedure FormShow(Sender: TObject);
+		procedure FormActivate(Sender: TObject);
+		procedure MP3_ListBoxMouseUp(Sender: TObject; Button: TMouseButton;
+			Shift: TShiftState; X, Y: Integer);
+		procedure CD_Archive_Close_BtnClick(Sender: TObject);
+		procedure checkfilenamesfornoof1Click(Sender: TObject);
+		procedure AboutMP3Toolbox1Click(Sender: TObject);
+		procedure NameCheck_ListBoxMouseUp(Sender: TObject;
+			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+		procedure Result_File_SpeedButtonClick(Sender: TObject);
+		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
+	private
+		{ Private-Deklarationen }
+	public
+		{ Public-Deklarationen }
 
 		ID3v2Tag: TID3v2Tag;
 
 		FirstStart	:	Boolean;
 		AppDataPath	:	String;
+		version			:	String;
 
 	end;
 
 type
-  TASCII_File = class(TObject)
-    CDList_Result_Label: TLabel;
-//    procedure CDList_Template_SpeedButtonClick(Sender: TObject);
-  private
-    { Private-Deklarationen }
-  public
-    { Public-Deklarationen }
-  end;
+	TASCII_File = class(TObject)
+		CDList_Result_Label: TLabel;
+
+	private
+		{ Private-Deklarationen }
+	public
+		{ Public-Deklarationen }
+	end;
 
 var
-  F_Main: TF_Main;
+	F_Main: TF_Main;
 	act_exec_directory                  : String;             //  aktuelles Verzeichnis
-  searched_dir_count									:	Integer;						//	anzahl durchsuchte Verzeichnisse.
-  cancel_search								        :	Boolean;            //  Suche abbrechen
-  gui_language                        : String;             //  Sprache
+	searched_dir_count									:	Integer;						//	anzahl durchsuchte Verzeichnisse.
+	cancel_search								        :	Boolean;            //  Suche abbrechen
+	gui_language                        : String;             //  Sprache
 	ini_file_name                       : string;
 	default_ini_file_name               : string;
 
 	start_search_time                   : TDateTime;          //  Startzeitpunkt der Suche
-  end_search_time                     : TDateTime;          //  Stopzeitpunkt der Suche
+	end_search_time                     : TDateTime;          //  Stopzeitpunkt der Suche
 
-  pacman_adjustment_visible           : Boolean;						//	Soll PacmanBox sichtbar sein
-  pacman_speed												:	Integer;						//	Speed for pacman
-  pacman_direction                    : Boolean;            //  Welche Richtung soll der Pacman laufen
+	pacman_adjustment_visible           : Boolean;						//	Soll PacmanBox sichtbar sein
+	pacman_speed												:	Integer;						//	Speed for pacman
+	pacman_direction                    : Boolean;            //  Welche Richtung soll der Pacman laufen
 
-  text_files_output_path			        :	String;							//	Pfad wo Text-Dateien gesichert werden sollen.
-  html_files_output_path			        :	String;							//	Pfad wo HTML-Dateien gesichert werden sollen.
+	text_files_output_path			        :	String;							//	Pfad wo Text-Dateien gesichert werden sollen.
+	html_files_output_path			        :	String;							//	Pfad wo HTML-Dateien gesichert werden sollen.
 
-  {Variablen für MP3Liste}
-  mp3list_html_multi_output		        :	Integer;            //  0 = single page ; 1 = one page for everey character
-  mp3list_html_output_file		        :	String;             //  Name der HTML-Ausgabedatei
-  mp3list_text_output_file            : String;             //  Name der Text-Ausgabedatei
-  mp3list_single_template_file			  : String;             //  path and name of the template file
-  mp3list_multi_template_file					: String;             //  path and name of the multi template file
-  mp3list_result_count								:	Integer;            //	Zähler für Suchergebnis
-  mp3list_html_file_name              : String;
-  mp3list_html_file_ending            : String;
+	{Variablen für MP3Liste}
+	mp3list_html_multi_output		        :	Integer;            //  0 = single page ; 1 = one page for everey character
+	mp3list_html_output_file		        :	String;             //  Name der HTML-Ausgabedatei
+	mp3list_text_output_file            : String;             //  Name der Text-Ausgabedatei
+	mp3list_single_template_file			  : String;             //  path and name of the template file
+	mp3list_multi_template_file					: String;             //  path and name of the multi template file
+	mp3list_result_count								:	Integer;            //	Zähler für Suchergebnis
+	mp3list_html_file_name              : String;
+	mp3list_html_file_ending            : String;
 	mp3list_text_files_zip              : Boolean;
-  mp3list_text_files_delete_after_zip : Boolean;
-  mp3list_html_files_zip              : Boolean;
-  mp3list_html_files_delete_after_zip : Boolean;
-  mp3list_Character_stringlists       : array[0..26]  of TStringList;
+	mp3list_text_files_delete_after_zip : Boolean;
+	mp3list_html_files_zip              : Boolean;
+	mp3list_html_files_delete_after_zip : Boolean;
+	mp3list_Character_stringlists       : array[0..26]  of TStringList;
 
-  {Variablen für CD-Archive}
-  cdarchive_path_to_read_in		        : String;
-  cdarchive_path_to_act_archive	      : String;
-  cdarchive_last_used_pathes          :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
+	{Variablen für CD-Archive}
+	cdarchive_path_to_read_in		        : String;
+	cdarchive_path_to_act_archive	      : String;
+	cdarchive_last_used_pathes          :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
 
-  {Variablen für CD-Liste}
+	{Variablen für CD-Liste}
 	cdlist_last_used_pathes             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
-  cdlist_last_used_export_files       :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
-  cdlist_last_used_template_files     :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
-  cdlist_tab_values                   :	array[0..99]	of String;	//	100 Tabs sind in quelldatei möglich
-  cdlist_result_count								  :	Integer;                  //	Zähler für Suchergebnis
-  cdlist_html_file_name               : String;
-  cdlist_html_file_ending             : String;
-  cdlist_text_files_zip               : Boolean;
-  cdlist_text_files_delete_after_zip  : Boolean;
-  cdlist_html_files_zip               : Boolean;
-  cdlist_html_files_delete_after_zip  : Boolean;
+	cdlist_last_used_export_files       :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
+	cdlist_last_used_template_files     :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
+	cdlist_tab_values                   :	array[0..99]	of String;	//	100 Tabs sind in quelldatei möglich
+	cdlist_result_count								  :	Integer;                  //	Zähler für Suchergebnis
+	cdlist_html_file_name               : String;
+	cdlist_html_file_ending             : String;
+	cdlist_text_files_zip               : Boolean;
+	cdlist_text_files_delete_after_zip  : Boolean;
+	cdlist_html_files_zip               : Boolean;
+	cdlist_html_files_delete_after_zip  : Boolean;
 
-	const version =  '1.1.15 beta';
-	SELDIRHELP = 1000;
+	const
+		SELDIRHELP = 1000;
 
 implementation
 
@@ -248,22 +248,22 @@ implementation
 {$WARN UNIT_PLATFORM off}
 
 uses
-  lib1,
-  lib_html_output,
-  U_Setup,
+	lib1,
+	lib_html_output,
+	U_Setup,
 	U_Language,
 	U_About;
 
 var
-  Ini           : TIniFile;
-  init_ok       : Boolean;
+	Ini           : TIniFile;
+	init_ok       : Boolean;
 
-  search_filter_expression            : string;
-  search_subdir	  						        :	Boolean ;							//	Unterverzeichnisse durchsuchen
-  output_with_pathes                  :	Boolean ;							//	Ausgabe mit Pfaden
-  output_with_filesize                :	Boolean ;							//	Ausgabe mit Dateigroesse
+	search_filter_expression            : string;
+	search_subdir	  						        :	Boolean ;							//	Unterverzeichnisse durchsuchen
+	output_with_pathes                  :	Boolean ;							//	Ausgabe mit Pfaden
+	output_with_filesize                :	Boolean ;							//	Ausgabe mit Dateigroesse
 
-  search_status								        :	Boolean;              //  Suchstatus
+	search_status								        :	Boolean;              //  Suchstatus
 
 {--- Formular erzeugen --------------------------------------------------------}
 procedure TF_Main.FormCreate(Sender: TObject);
@@ -289,6 +289,8 @@ begin
 		mp3list_Character_stringlists[i]  :=  TStringList.Create;
 
 	ID3v2Tag := TID3v2Tag.Create;
+
+	version	:=	get_version() + ' beta';
 
 	if not FileExists(ini_file_name) then
 		FirstStart	:=	True;
@@ -389,25 +391,8 @@ procedure TF_Main.FormResize(Sender: TObject);
 var
   i : Integer;
 begin
-  {Allgemein}
-//  PageControl1.Width      	:=	F_Main.ClientWidth - 6;
-//	PageControl1.Height     	:=	F_Main.ClientHeight;
-	{MP3Liste}
-	NameCheck_ListBox.Width		:=  MP3_ListBox.ClientWidth   - 32;
-  NameCheck_ListBox.Height  :=  MP3_ListBox.ClientHeight  - 32;
 
-	{CD-Archive}
-//  CD_Archive_ListBox.Width	:=	PageControl1.ClientWidth  - 200;
-//	CD_Archive_ListBox.Height	:=	PageControl1.ClientHeight - 170;
-//  FileListView1.Width      	:=  160;
-//  FileListView1.Height     	:=	PageControl1.ClientHeight - 170;
-
-
-	{CD-Liste}
-//  CDListe_StringGrid.Width  :=	PageControl1.ClientWidth  - 6;
-//  CDListe_StringGrid.Height :=  PageControl1.ClientHeight - 144;
-
-  for i := 0 to CDListe_StringGrid.ColCount - 1 do
+	for i := 0 to CDListe_StringGrid.ColCount - 1 do
   begin
     CDListe_StringGrid.ColWidths[i] :=  (CDListe_StringGrid.ClientWidth - 19 ) div CDListe_StringGrid.ColCount;
   end;
@@ -861,12 +846,12 @@ begin
     F_Main.Search_ProgressBar.Position	:=	i;
   end;
   CloseFile(F);
-  F_Main.Search_ProgressBar.Position	:=	0;
+	F_Main.Search_ProgressBar.Position	:=	0;
 
 	if mp3list_text_files_zip then
-  begin
-    {zip files}
-    { syntax : zip name_of_zip_file file1_to_zip file2_to_zip file3_to_zip}
+	begin
+		{zip files}
+		{ syntax : zip name_of_zip_file file1_to_zip file2_to_zip file3_to_zip}
 (*
 66666
 				 system(PChar('zip -j' +
@@ -875,13 +860,13 @@ begin
 											'.zip' +
 											' ' +
 											SlashSep(text_files_output_path, mp3list_text_output_file)));
-*)
 		if mp3list_text_files_delete_after_zip then
 		begin
-      if not DeleteFile(SlashSep(text_files_output_path, mp3list_text_output_file)) then
-        ShowMessage('???');
-    end;
-  end;
+			if not DeleteFile(SlashSep(text_files_output_path, mp3list_text_output_file)) then
+				ShowMessage('Could not remove files after zipping them.');
+		end;
+*)
+	end;
 
 end;
 
