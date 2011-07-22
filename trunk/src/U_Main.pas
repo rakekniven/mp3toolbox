@@ -250,7 +250,8 @@ uses
   lib1,
   lib_html_output,
   U_Setup,
-  U_Language, U_About;
+	U_Language,
+	U_About;
 
 var
   Ini           : TIniFile;
@@ -1008,6 +1009,9 @@ begin
     Search_ProgressBar.Position     	:=	0;
 
   end;
+
+	lib1.Start_External_Program(self.WindowHandle, 'open', 'explorer', html_files_output_path, '', SW_SHOW);
+
 end;
 
 
