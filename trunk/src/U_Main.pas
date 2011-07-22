@@ -798,11 +798,8 @@ begin
     Result_Label.Caption		  :=	IntToStr(MP3_ListBox.Items.Count);
 
     {If result are present then allow output}
-    if MP3_ListBox.Items.Count > 0 then
-    begin
-      TXT_Output_Btn.Enabled		:=	True;
-      HTML_OutputButton.Enabled :=	True;
-    end;
+		TXT_Output_Btn.Enabled		:=	MP3_ListBox.Items.Count > 0;
+		HTML_OutputButton.Enabled :=	MP3_ListBox.Items.Count > 0;
 
     {Speicher freigeben}
     Files.Free;
