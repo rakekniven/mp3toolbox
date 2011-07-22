@@ -172,6 +172,7 @@ type
 		ID3v2Tag: TID3v2Tag;
 
 		FirstStart	:	Boolean;
+		AppDataPath	:	String;
 
 	end;
 
@@ -187,7 +188,7 @@ type
 
 var
   F_Main: TF_Main;
-  act_exec_directory                  : String;             //  aktuelles Verzeichnis
+	act_exec_directory                  : String;             //  aktuelles Verzeichnis
   searched_dir_count									:	Integer;						//	anzahl durchsuchte Verzeichnisse.
   cancel_search								        :	Boolean;            //  Suche abbrechen
   gui_language                        : String;             //  Sprache
@@ -272,8 +273,15 @@ begin
 	init_ok :=  True;
 	GetDir(0, act_exec_directory);
 
-	if not DirectoryExists(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox')) then
-		MkDir(SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox'));
+	AppDataPath	:=	SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox');
+	if not DirectoryExists(AppDataPath) then
+		MkDir(AppDataPath);
+
+	html_files_output_path	:=	SlashSep(ExpandEnv('%TEMP%'), 'mp3toolbox-output');
+	if not DirectoryExists(html_files_output_path) then
+		MkDir(html_files_output_path);
+
+
 
 	ini_file_name               :=  	SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox\mp3toolbox.cfg');
 	default_ini_file_name       :=  	SlashSep(act_exec_directory, 'config\default.cfg');
@@ -297,7 +305,7 @@ begin
 		{Sprache auslesen}
 		gui_language          	            :=	Ini.ReadString ('GENERAL',   'gui_language',    'GB');
 		text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     act_exec_directory);
-    html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     act_exec_directory);
+		html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     html_files_output_path);
     pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
 
     mp3list_single_template_file			  :=  Ini.ReadString ('MP3LIST',   'single_template', SlashSep(act_exec_directory, 'templates\mp3list-template.html'));
