@@ -219,7 +219,7 @@ begin
 			else if AnsiStrPos(PChar(ln), '{#cdlist:result_table}') <> nil then
 			begin
 				if TplIsUnicode then
-					writeln (OutFile, AnsiStrPos(seperate_string_in_parts(ln, '{#cdlist:result_table}', 'start')))
+					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#cdlist:result_table}', 'start')))
 				else
 					writeln (OutFile, seperate_string_in_parts(ln, '{#cdlist:result_table}', 'start'));
 
@@ -228,13 +228,13 @@ begin
 				for i := 0 to cdlist_table.Count - 1 do
 				begin
 					if TplIsUnicode then
-						writeln (OutFile, AnsiStrPos(cdlist_table.Strings[i]))
+						writeln (OutFile, AnsiToUTF8(cdlist_table.Strings[i]))
 					else
 						writeln (OutFile, cdlist_table.Strings[i]);
 				end;
 
 				if TplIsUnicode then
-					writeln (OutFile, AnsiStrPos(seperate_string_in_parts(ln, '{#cdlist:result_table}', 'end')))
+					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#cdlist:result_table}', 'end')))
 				else
 					writeln (OutFile, seperate_string_in_parts(ln, '{#cdlist:result_table}', 'end'));
 			end
