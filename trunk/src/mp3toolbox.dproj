@@ -45,6 +45,11 @@
 				<ContainerId>RC</ContainerId>
 				<Form>Manifest.res</Form>
 			</RcCompile>
+			<RcCompile Include="version.RC">
+				<ContainerId>RC</ContainerId>
+				<ContainerId>RC</ContainerId>
+				<Form>version.res</Form>
+			</RcCompile>
 			<DCCReference Include="lib1.pas"/>
 			<DCCReference Include="lib_html_output.pas"/>
 			<DCCReference Include="U_Language.pas"/>
@@ -61,8 +66,6 @@
 			<DCCReference Include="externallibs\Id3v2Frames.pas"/>
 			<DCCReference Include="externallibs\Mp3FileUtils.pas"/>
 			<DCCReference Include="externallibs\fldbrowsUnicode.pas"/>
-			<None Include="LC\Lang_GB.txt"/>
-			<None Include="LC\Lang_D.txt"/>
 			<BuildConfiguration Include="Basis">
 				<Key>Base</Key>
 			</BuildConfiguration>

@@ -56,15 +56,7 @@ uses
 
 	function	GetTheFileSize(Filename:string):integer;
 
-(*
-  procedure Start_External_Program (handle : hwnd;
-                                    what_to_do,
-                                    program_to_start,
-                                    parameter,
-                                    start_dir : String;
-                                    option : Integer);
-*)
-  function	check_filename	(filename_to_check : String) : Boolean;
+	function	check_filename	(filename_to_check : String) : Boolean;
 
 	function	check_filename_for_length	(filename_to_check : String;
 																			 allowed_length	:	Integer) : Boolean;
@@ -83,6 +75,8 @@ uses
 																						 parameter,
 																						 start_dir          : String;
 																						 option             : Integer);
+
+	function  get_version                     (                         )         : String; overload;
 
 implementation
 
@@ -611,6 +605,47 @@ begin
 	{Wenn Fehler dann Ausgabe in Status}
 	if msg <> '' then
 		ShowMessage(msg);
+end;
+
+// -----------------------------------------------------------------------------
+function get_version() : String;
+var
+	aFileName       : array [0..MAX_PATH] of Char;
+	pdwHandle       : DWORD;
+	nInfoSize       : DWORD;
+	pFileInfo       : Pointer;
+	pFixFInfo       : PVSFixedFileInfo;
+	nFixFInfo       : DWORD;
+begin
+	GetModuleFileName(0, aFileName, MAX_PATH);
+	pdwHandle := 0;
+	nInfoSize := GetFileVersionInfoSize(aFileName, pdwHandle);
+	if nInfoSize <> 0 then
+		pFileInfo := GetMemory(nInfoSize)
+	else
+		pFileInfo := nil;
+	if Assigned(pFileInfo) then
+	try
+		if GetFileVersionInfo(aFileName, pdwHandle, nInfoSize, pFileInfo) then
+		begin
+		// den vordefinierten Info-Block holen, der in jeder
+		// Versionsinformation enthalten sein sollte.
+		pFixFInfo := nil;
+		nFixFInfo := 0;
+			if VerQueryValue(pFileInfo, '\', Pointer(pFixFInfo), nFixFInfo) then
+			begin
+			// Bei von Delphi erzeugten Info-Blöcken sind die Dateiversion
+			// und die Produktversion im FixedInfo-Block immer gleich.
+				get_version := Format('%d.%d.%d.%d',             //  Original mit allen 4 Nummern
+														 [HiWord(pFixFInfo^.dwFileVersionMS),
+															LoWord(pFixFInfo^.dwFileVersionMS),
+															HiWord(pFixFInfo^.dwFileVersionLS),
+															LoWord(pFixFInfo^.dwFileVersionLS)]);
+			end;
+		end;
+	finally
+	FreeMemory(pFileInfo);
+	end;
 end;
 
 end.
