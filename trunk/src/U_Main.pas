@@ -385,8 +385,6 @@ begin
 //  PageControl1.Width      	:=	F_Main.ClientWidth - 6;
 //	PageControl1.Height     	:=	F_Main.ClientHeight;
 	{MP3Liste}
-//	MP3_ListBox.Width					:=	PageControl1.ClientWidth  - 10;
-//	MP3_ListBox.Height				:=	PageControl1.ClientHeight - 208;
 	NameCheck_ListBox.Width		:=  MP3_ListBox.ClientWidth   - 32;
   NameCheck_ListBox.Height  :=  MP3_ListBox.ClientHeight  - 32;
 
@@ -770,7 +768,7 @@ begin
 					MP3_ListBox.Items.Add(s1);
 				end;
 
-				Search_ProgressBar.Position	:=	Round((100 * i + 1) div (Files.Count -1));
+				Search_ProgressBar.Position	:=	Round((100 * (i + 1)) div (Files.Count));
 				Application.ProcessMessages;
 			end;
 			Label5.Caption	:=	IntToStr(i + 1);
