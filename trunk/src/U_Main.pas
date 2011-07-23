@@ -197,6 +197,9 @@ var
 
 	start_search_time                   : TDateTime;          //  Startzeitpunkt der Suche
 	end_search_time                     : TDateTime;          //  Stopzeitpunkt der Suche
+	start_scan_time                   	: TDateTime;          //  Startzeitpunkt der Suche
+	end_scan_time                     	: TDateTime;          //  Stopzeitpunkt der Suche
+	total_work_duration									: TDateTime;
 
 	pacman_adjustment_visible           : Boolean;						//	Soll PacmanBox sichtbar sein
 	pacman_speed												:	Integer;						//	Speed for pacman
@@ -726,8 +729,8 @@ begin
 		ListBox_Error.Clear;
 		TabSheet4.TabVisible	:=	False;
 
-		{Startzeit der suche}
-		start_search_time := Time;
+		{Startzeit des scans}
+		start_scan_time := Time;
 
 		for i:= 0  to Files.Count - 1 do
 		begin
@@ -769,11 +772,14 @@ begin
 		Search_ProgressBar.Position	:=	100;
 
 		{Ende der Suchzeit}
-		end_search_time           :=  Time;
+		end_scan_time           :=  Time;
 
 		{Anzeige der Suchzeit.}
 		Label7.Color			:=  clBlack;
-		Label7.Caption		:=	TimeToStr(end_search_time - start_search_time);
+		Label7.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+
+		total_work_duration	:=  (end_scan_time - start_scan_time) +
+														(end_search_time - start_search_time);
 
 		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
     mp3list_result_count		  :=	MP3_ListBox.Items.Count;

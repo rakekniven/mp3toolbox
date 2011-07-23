@@ -196,7 +196,7 @@ begin
 			{replace cdlist : searchtime}
 			else if AnsiStrPos(PChar(ln), '{#cdlist:searchtime}') <> nil then
 			begin
-				ln	:=	StringReplace(ln, '{#cdlist:searchtime}', TimeToStr(end_search_time - start_search_time), []);
+				ln	:=	StringReplace(ln, '{#cdlist:searchtime}', TimeToStr(total_work_duration), []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))
