@@ -11,7 +11,7 @@ AppCopyright=Mark Ziegler
 AppName=MP3Toolbox
 AppVerName=Version 1.1.15
 DefaultDirName={pf}\MP3Toolbox
-DefaultGroupName=Mark Ziegler
+DefaultGroupName=MP3Toolbox
 
 VersionInfoVersion=1.1.15
 VersionInfoCompany=Mark Ziegler
@@ -38,8 +38,8 @@ UninstallFilesDir={pf}\MP3Toolbox Uninstall
 Name: {group}\MP3Toolbox; Filename: {app}\mp3toolbox.exe; WorkingDir: {app}; IconIndex: 0
 [Files]
 Source: rar-folder\*.*; DestDir: {app}; Flags: recursesubdirs sortfilesbyextension
-[Tasks]
-Name: desktopicon; Description: {cm:CreateDesktopIcon}
-Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}
+;[Tasks]
+;Name: desktopicon; Description: {cm:CreateDesktopIcon}
+;Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}
 ;[Run]
 ;Filename: {app}\mp3toolbox.exe; WorkingDir: {app}; Description: {cm:LaunchProgram, ToolBox}; Flags: nowait postinstall skipifsilent
