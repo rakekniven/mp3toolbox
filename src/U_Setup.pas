@@ -207,6 +207,8 @@ begin
 	else
 		MP3List_CLear_HTML_files_after_zip_CB.Checked	:=	False;
 
+	CB_TXT_Encoding.ItemIndex	:=	mp3list_text_file_encoding;
+
 	{}
 	if cdlist_text_files_zip then
 	  cdlist_ZIP_txt_CheckBox.Checked	:=	True
