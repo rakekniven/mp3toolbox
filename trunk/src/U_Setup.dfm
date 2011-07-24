@@ -27,7 +27,7 @@ object F_Setup: TF_Setup
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = Allgemein
+    ActivePage = MP3List
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4
@@ -215,221 +215,475 @@ object F_Setup: TF_Setup
         Margins.Right = 4
         Margins.Bottom = 4
         TabOrder = 0
-        object MP3List_Template_File_Dialog_Btn: TSpeedButton
-          Left = 571
-          Top = 64
-          Width = 41
-          Height = 27
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Glyph.Data = {
-            E6000000424DE60000000000000076000000280000000E0000000E0000000100
-            0400000000007000000000000000000000001000000000000000000000000000
-            80000080000000808000800000008000800080800000C0C0C000808080000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-            33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
-            33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
-            33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
-            33003333333333333300}
-          OnClick = MP3List_Template_File_Dialog_BtnClick
-        end
-        object MP3List_Multi_Template_File_Dialog_Btn: TSpeedButton
-          Left = 571
-          Top = 153
-          Width = 41
-          Height = 27
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Glyph.Data = {
-            E6000000424DE60000000000000076000000280000000E0000000E0000000100
-            0400000000007000000000000000000000001000000000000000000000000000
-            80000080000000808000800000008000800080800000C0C0C000808080000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-            33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
-            33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
-            33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
-            33003333333333333300}
-          OnClick = MP3List_Multi_Template_File_Dialog_BtnClick
-        end
-        object MP3List_Template_File_Lab: TLabel
-          Left = 10
-          Top = 44
-          Width = 219
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Welche Vorlage soll benutzt werden : '
-        end
-        object MP3List_Multi_Template_File_Lab: TLabel
-          Left = 10
-          Top = 133
-          Width = 219
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Welche Vorlage soll benutzt werden : '
-        end
-        object Label1: TLabel
-          Left = 354
-          Top = 197
-          Width = 61
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Dateiname'
-        end
-        object Label2: TLabel
-          Left = 354
-          Top = 266
-          Width = 71
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Dateiendung'
-        end
-        object MP3List_Template_File_Edit: TEdit
-          Left = 10
-          Top = 64
-          Width = 543
-          Height = 24
+        object GroupBox1: TGroupBox
+          Left = 0
+          Top = 0
+          Width = 631
+          Height = 395
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
           TabOrder = 0
-          OnExit = MP3List_Template_File_EditExit
-        end
-        object MP3List_Multi_Template_File_Edit: TEdit
-          Left = 10
-          Top = 153
-          Width = 543
-          Height = 24
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          TabOrder = 1
-          OnExit = MP3List_Multi_Template_File_EditExit
-        end
-        object RadioButton1: TRadioButton
-          Left = 10
-          Top = 20
-          Width = 415
-          Height = 21
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Eine Seite (Groesse beachten)'
-          TabOrder = 2
-          OnClick = RadioButton1Click
-        end
-        object RadioButton2: TRadioButton
-          Left = 10
-          Top = 108
-          Width = 424
-          Height = 21
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'pro Buchstaben eine Seite'
-          TabOrder = 3
-          OnClick = RadioButton2Click
-        end
-        object mp3list_filename_Edit: TEdit
-          Left = 354
-          Top = 217
-          Width = 199
-          Height = 24
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          TabOrder = 6
-          Text = 'mp3list'
-          OnExit = mp3list_filename_EditExit
-        end
-        object mp3list_file_ending_Edit: TEdit
-          Left = 354
-          Top = 286
-          Width = 199
-          Height = 24
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          TabOrder = 9
-          Text = '.html'
-          OnExit = mp3list_file_ending_EditExit
-        end
-        object MP3List_ZIP_txt_CheckBox: TCheckBox
-          Left = 10
-          Top = 197
-          Width = 178
-          Height = 37
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'ZIP die Textdateien'
-          TabOrder = 4
-          Visible = False
-          OnClick = MP3List_ZIP_txt_CheckBoxClick
-        end
-        object MP3List_CLear_TXT_files_after_zip_CB: TCheckBox
-          Left = 10
-          Top = 226
-          Width = 277
-          Height = 37
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'L'#246'sche Textdateien nach ZIPPEN'
-          TabOrder = 5
-          Visible = False
-          OnClick = MP3List_CLear_TXT_files_after_zip_CBClick
-        end
-        object MP3List_ZIP_html_CheckBox: TCheckBox
-          Left = 10
-          Top = 256
-          Width = 188
-          Height = 37
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'ZIP die HTML-Dateien'
-          TabOrder = 7
-          Visible = False
-          OnClick = MP3List_ZIP_html_CheckBoxClick
-        end
-        object MP3List_CLear_HTML_files_after_zip_CB: TCheckBox
-          Left = 10
-          Top = 286
-          Width = 316
-          Height = 36
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'L'#246'sche HTML-Dateien nach ZIPPEN'
-          TabOrder = 8
-          Visible = False
-          OnClick = MP3List_CLear_HTML_files_after_zip_CBClick
+          object SpeedButton1: TSpeedButton
+            Left = 571
+            Top = 64
+            Width = 41
+            Height = 27
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Glyph.Data = {
+              E6000000424DE60000000000000076000000280000000E0000000E0000000100
+              0400000000007000000000000000000000001000000000000000000000000000
+              80000080000000808000800000008000800080800000C0C0C000808080000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+              33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
+              33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
+              33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
+              33003333333333333300}
+            OnClick = MP3List_Template_File_Dialog_BtnClick
+          end
+          object SpeedButton2: TSpeedButton
+            Left = 571
+            Top = 153
+            Width = 41
+            Height = 27
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Glyph.Data = {
+              E6000000424DE60000000000000076000000280000000E0000000E0000000100
+              0400000000007000000000000000000000001000000000000000000000000000
+              80000080000000808000800000008000800080800000C0C0C000808080000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+              33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
+              33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
+              33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
+              33003333333333333300}
+            OnClick = MP3List_Multi_Template_File_Dialog_BtnClick
+          end
+          object Label3: TLabel
+            Left = 10
+            Top = 44
+            Width = 219
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Welche Vorlage soll benutzt werden : '
+          end
+          object Label4: TLabel
+            Left = 10
+            Top = 133
+            Width = 219
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Welche Vorlage soll benutzt werden : '
+          end
+          object Label5: TLabel
+            Left = 354
+            Top = 197
+            Width = 61
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Dateiname'
+          end
+          object Label6: TLabel
+            Left = 354
+            Top = 266
+            Width = 71
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Dateiendung'
+          end
+          object Label1: TLabel
+            Left = 354
+            Top = 197
+            Width = 61
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Dateiname'
+          end
+          object Label2: TLabel
+            Left = 354
+            Top = 266
+            Width = 71
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Dateiendung'
+          end
+          object Label7: TLabel
+            Left = 10
+            Top = 329
+            Width = 93
+            Height = 16
+            Hint = 'Used to encode textfiles'
+            Caption = 'Output encoding'
+            ParentShowHint = False
+            ShowHint = True
+          end
+          object MP3List_Multi_Template_File_Dialog_Btn: TSpeedButton
+            Left = 571
+            Top = 153
+            Width = 41
+            Height = 27
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Glyph.Data = {
+              E6000000424DE60000000000000076000000280000000E0000000E0000000100
+              0400000000007000000000000000000000001000000000000000000000000000
+              80000080000000808000800000008000800080800000C0C0C000808080000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+              33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
+              33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
+              33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
+              33003333333333333300}
+            OnClick = MP3List_Multi_Template_File_Dialog_BtnClick
+          end
+          object MP3List_Multi_Template_File_Lab: TLabel
+            Left = 10
+            Top = 133
+            Width = 219
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Welche Vorlage soll benutzt werden : '
+          end
+          object MP3List_Template_File_Dialog_Btn: TSpeedButton
+            Left = 571
+            Top = 64
+            Width = 41
+            Height = 27
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Glyph.Data = {
+              E6000000424DE60000000000000076000000280000000E0000000E0000000100
+              0400000000007000000000000000000000001000000000000000000000000000
+              80000080000000808000800000008000800080800000C0C0C000808080000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+              33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
+              33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
+              33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
+              33003333333333333300}
+            OnClick = MP3List_Template_File_Dialog_BtnClick
+          end
+          object MP3List_Template_File_Lab: TLabel
+            Left = 10
+            Top = 44
+            Width = 219
+            Height = 16
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Welche Vorlage soll benutzt werden : '
+          end
+          object Edit1: TEdit
+            Left = 10
+            Top = 64
+            Width = 543
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 0
+            OnExit = MP3List_Template_File_EditExit
+          end
+          object Edit2: TEdit
+            Left = 10
+            Top = 153
+            Width = 543
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 1
+            OnExit = MP3List_Multi_Template_File_EditExit
+          end
+          object RadioButton3: TRadioButton
+            Left = 10
+            Top = 20
+            Width = 415
+            Height = 21
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Eine Seite (Groesse beachten)'
+            TabOrder = 2
+            OnClick = RadioButton1Click
+          end
+          object RadioButton4: TRadioButton
+            Left = 10
+            Top = 108
+            Width = 424
+            Height = 21
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'pro Buchstaben eine Seite'
+            TabOrder = 3
+            OnClick = RadioButton2Click
+          end
+          object Edit3: TEdit
+            Left = 354
+            Top = 217
+            Width = 199
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 6
+            Text = 'mp3list'
+            OnExit = mp3list_filename_EditExit
+          end
+          object Edit4: TEdit
+            Left = 354
+            Top = 286
+            Width = 199
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 9
+            Text = '.html'
+            OnExit = mp3list_file_ending_EditExit
+          end
+          object CheckBox1: TCheckBox
+            Left = 10
+            Top = 202
+            Width = 178
+            Height = 37
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'ZIP die Textdateien'
+            TabOrder = 4
+            Visible = False
+            OnClick = MP3List_ZIP_txt_CheckBoxClick
+          end
+          object CheckBox2: TCheckBox
+            Left = 10
+            Top = 230
+            Width = 277
+            Height = 37
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'L'#246'sche Textdateien nach ZIPPEN'
+            TabOrder = 5
+            Visible = False
+            OnClick = MP3List_CLear_TXT_files_after_zip_CBClick
+          end
+          object CheckBox3: TCheckBox
+            Left = 10
+            Top = 258
+            Width = 188
+            Height = 37
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'ZIP die HTML-Dateien'
+            TabOrder = 7
+            OnClick = MP3List_ZIP_html_CheckBoxClick
+          end
+          object CheckBox4: TCheckBox
+            Left = 10
+            Top = 286
+            Width = 316
+            Height = 36
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'L'#246'sche HTML-Dateien nach ZIPPEN'
+            TabOrder = 8
+            Visible = False
+            OnClick = MP3List_CLear_HTML_files_after_zip_CBClick
+          end
+          object CB_TXT_Encoding: TComboBox
+            Left = 134
+            Top = 326
+            Width = 79
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Style = csDropDownList
+            ItemIndex = 0
+            TabOrder = 10
+            Text = 'UTF8'
+            OnChange = CB_TXT_EncodingChange
+            Items.Strings = (
+              'UTF8'
+              'ANSI')
+          end
+          object MP3List_CLear_HTML_files_after_zip_CB: TCheckBox
+            Left = 10
+            Top = 286
+            Width = 316
+            Height = 36
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'L'#246'sche HTML-Dateien nach ZIPPEN'
+            TabOrder = 11
+            Visible = False
+            OnClick = MP3List_CLear_HTML_files_after_zip_CBClick
+          end
+          object MP3List_CLear_TXT_files_after_zip_CB: TCheckBox
+            Left = 10
+            Top = 226
+            Width = 277
+            Height = 37
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'L'#246'sche Textdateien nach ZIPPEN'
+            TabOrder = 12
+            Visible = False
+            OnClick = MP3List_CLear_TXT_files_after_zip_CBClick
+          end
+          object mp3list_file_ending_Edit: TEdit
+            Left = 354
+            Top = 286
+            Width = 199
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 13
+            Text = '.html'
+            OnExit = mp3list_file_ending_EditExit
+          end
+          object mp3list_filename_Edit: TEdit
+            Left = 354
+            Top = 217
+            Width = 199
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 14
+            Text = 'mp3list'
+            OnExit = mp3list_filename_EditExit
+          end
+          object MP3List_Multi_Template_File_Edit: TEdit
+            Left = 10
+            Top = 153
+            Width = 543
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 15
+            OnExit = MP3List_Multi_Template_File_EditExit
+          end
+          object MP3List_ZIP_txt_CheckBox: TCheckBox
+            Left = 10
+            Top = 197
+            Width = 178
+            Height = 37
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'ZIP die Textdateien'
+            TabOrder = 16
+            Visible = False
+            OnClick = MP3List_ZIP_txt_CheckBoxClick
+          end
+          object MP3List_ZIP_html_CheckBox: TCheckBox
+            Left = 10
+            Top = 256
+            Width = 188
+            Height = 37
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'ZIP die HTML-Dateien'
+            TabOrder = 17
+            Visible = False
+            OnClick = MP3List_ZIP_html_CheckBoxClick
+          end
+          object RadioButton1: TRadioButton
+            Left = 10
+            Top = 20
+            Width = 415
+            Height = 21
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'Eine Seite (Groesse beachten)'
+            TabOrder = 18
+            OnClick = RadioButton1Click
+          end
+          object RadioButton2: TRadioButton
+            Left = 10
+            Top = 108
+            Width = 424
+            Height = 21
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'pro Buchstaben eine Seite'
+            TabOrder = 19
+            OnClick = RadioButton2Click
+          end
+          object MP3List_Template_File_Edit: TEdit
+            Left = 10
+            Top = 64
+            Width = 543
+            Height = 24
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            TabOrder = 20
+            OnExit = MP3List_Template_File_EditExit
+          end
         end
       end
     end
