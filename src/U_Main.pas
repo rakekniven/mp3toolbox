@@ -222,6 +222,7 @@ var
 	mp3list_html_files_zip              : Boolean;
 	mp3list_html_files_delete_after_zip : Boolean;
 	mp3list_Character_stringlists       : array[0..26]  of TStringList;
+	mp3list_text_file_encoding					:	Integer;            //	0 : UTF8; 1 : ANSI
 
 	{Variablen für CD-Archive}
 	cdarchive_path_to_read_in		        : String;
@@ -322,7 +323,7 @@ begin
 		mp3list_text_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'text_files_delete_after_zip',  False);
 		mp3list_html_files_zip              :=	Ini.ReadBool   ('MP3LIST',   'zip_html_files',  False);
 		mp3list_html_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'html_files_delete_after_zip',  False);
-
+		mp3list_text_file_encoding           :=	Ini.ReadInteger('MP3LIST',   'text_file_encoding',    0);
 
 		cdarchive_path_to_read_in		        :=  Ini.ReadString ('CDARCHIV',  'SINGLEDISKPATH',  'C:\');
 		for i := 0 to 9 do
@@ -837,21 +838,23 @@ end;
 {--- MP3List : write mp3list as an textfile -----------------------------------}
 procedure TF_Main.TXT_Output_BtnClick(Sender: TObject);
 var
-	F	:	TextFile;
-  i	:	Integer;
+	i	:	Integer;
+	s	:	TStrings;
 begin
-  Search_ProgressBar.Min     	:=	0;
-  Search_ProgressBar.Position :=	0;
-  Search_ProgressBar.Max      :=  MP3_ListBox.Items.Count;
-	AssignFile(F, SlashSep(text_files_output_path, mp3list_text_output_file));
-  Rewrite(F);
-  {Schleife für ListBox-Ausgabe}
-  for i := 0 to (MP3_ListBox.Items.Count - 1) do
-  begin
-	 	writeln(F,(MP3_ListBox.Items[i]));
-    F_Main.Search_ProgressBar.Position	:=	i;
-  end;
-  CloseFile(F);
+	S	:=	TStringList.Create();
+	Search_ProgressBar.Min     	:=	0;
+	Search_ProgressBar.Position :=	0;
+	Search_ProgressBar.Max      :=  MP3_ListBox.Items.Count;
+
+	//	Add result to StringList
+	for I := 0 to MP3_ListBox.Items.Count - 1 do
+		S.Add(MP3_ListBox.Items[i]);
+
+	if mp3list_text_file_encoding = 0 then
+		S.SaveToFile(SlashSep(text_files_output_path, mp3list_text_output_file), TEncoding.UTF8)
+	else
+		S.SaveToFile(SlashSep(text_files_output_path, mp3list_text_output_file));
+
 	F_Main.Search_ProgressBar.Position	:=	0;
 
 	if mp3list_text_files_zip then
@@ -873,6 +876,10 @@ begin
 		end;
 *)
 	end;
+
+	S.Free;
+
+	lib1.Start_External_Program(self.WindowHandle, 'open', 'explorer', text_files_output_path, '', SW_SHOW);
 
 end;
 
