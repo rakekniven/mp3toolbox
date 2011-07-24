@@ -1,11 +1,9 @@
 object F_Main: TF_Main
   Left = 95
   Top = 128
-  Width = 980
-  Height = 678
-  HorzScrollBar.Range = 971
-  VertScrollBar.Range = 592
   Caption = 'F_Main'
+  ClientHeight = 624
+  ClientWidth = 792
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,27 +22,31 @@ object F_Main: TF_Main
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 972
+    Width = 792
     Height = 624
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 780
+    ExplicitHeight = 607
     object TabSheet1: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'mp3list'
+      ExplicitWidth = 772
+      ExplicitHeight = 576
       DesignSize = (
-        964
+        784
         593)
       object Pacman_Btn: TSpeedButton
-        Left = 561
-        Top = 158
+        Left = 571
+        Top = 267
         Width = 47
         Height = 59
         Margins.Left = 4
@@ -211,14 +213,15 @@ object F_Main: TF_Main
         Visible = False
       end
       object Search_Time_Lab: TLabel
-        Left = 672
-        Top = 92
-        Width = 88
+        Left = 682
+        Top = 209
+        Width = 80
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = '...'
         Font.Charset = DEFAULT_CHARSET
@@ -231,14 +234,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Dir_Count_Label: TLabel
-        Left = 672
-        Top = 72
-        Width = 88
+        Left = 682
+        Top = 188
+        Width = 80
         Height = 30
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = '...'
         Font.Charset = DEFAULT_CHARSET
@@ -251,14 +255,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Result_Label: TLabel
-        Left = 672
-        Top = 52
-        Width = 88
+        Left = 682
+        Top = 168
+        Width = 80
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = '...'
         Color = clBtnFace
@@ -273,8 +278,8 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Char_Count_Lab: TLabel
-        Left = 768
-        Top = 138
+        Left = 550
+        Top = 377
         Width = 7
         Height = 16
         Margins.Left = 4
@@ -285,8 +290,8 @@ object F_Main: TF_Main
         Visible = False
       end
       object Char_Count_Lab2: TLabel
-        Left = 798
-        Top = 138
+        Left = 560
+        Top = 377
         Width = 62
         Height = 16
         Margins.Left = 4
@@ -297,14 +302,15 @@ object F_Main: TF_Main
         Visible = False
       end
       object Label1: TLabel
-        Left = 561
-        Top = 52
+        Left = 571
+        Top = 168
         Width = 119
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = 'Files found'
         Color = clBtnFace
@@ -319,14 +325,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label2: TLabel
-        Left = 561
-        Top = 72
+        Left = 571
+        Top = 188
         Width = 119
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = 'Directories searched'
         Color = clBtnFace
@@ -341,14 +348,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label3: TLabel
-        Left = 561
-        Top = 92
+        Left = 571
+        Top = 208
         Width = 119
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = 'Search time'
         Color = clBtnFace
@@ -363,14 +371,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label4: TLabel
-        Left = 561
-        Top = 112
+        Left = 571
+        Top = 228
         Width = 119
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = 'Tags scanned'
         Color = clBtnFace
@@ -385,14 +394,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label6: TLabel
-        Left = 561
-        Top = 132
+        Left = 571
+        Top = 248
         Width = 119
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = 'Scan time'
         Color = clBtnFace
@@ -407,14 +417,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label5: TLabel
-        Left = 672
-        Top = 112
-        Width = 88
+        Left = 682
+        Top = 228
+        Width = 80
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = '...'
         Font.Charset = DEFAULT_CHARSET
@@ -427,14 +438,15 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label7: TLabel
-        Left = 672
-        Top = 132
-        Width = 88
+        Left = 682
+        Top = 248
+        Width = 80
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         AutoSize = False
         Caption = '...'
         Font.Charset = DEFAULT_CHARSET
@@ -446,23 +458,11 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
       end
-      object Search_ProgressBar: TProgressBar
-        Left = 561
-        Top = 14
-        Width = 198
-        Height = 30
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Enabled = False
-        TabOrder = 7
-      end
       object NameCheck_ListBox: TListBox
-        Left = 20
-        Top = 236
-        Width = 858
-        Height = 247
+        Left = 4
+        Top = 401
+        Width = 734
+        Height = 176
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -473,9 +473,9 @@ object F_Main: TF_Main
       end
       object MP3_ListBox: TListBox
         Left = 0
-        Top = 225
-        Width = 962
-        Height = 368
+        Top = 401
+        Width = 780
+        Height = 188
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -499,23 +499,28 @@ object F_Main: TF_Main
       object Multi_Dir_GroupBox: TGroupBox
         Left = 0
         Top = 5
-        Width = 553
-        Height = 197
+        Width = 537
+        Height = 388
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Caption = 'Directorys'
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Directories'
         TabOrder = 3
+        DesignSize = (
+          537
+          388)
         object Multi_Dir_ListBox: TListBox
           Left = 187
           Top = 30
-          Width = 267
-          Height = 120
+          Width = 334
+          Height = 344
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
+          Anchors = [akLeft, akTop, akRight]
           Color = clBtnFace
           ExtendedSelect = False
           MultiSelect = True
@@ -523,104 +528,104 @@ object F_Main: TF_Main
           OnMouseUp = Multi_Dir_ListBoxMouseUp
         end
         object Load_From_Button: TButton
-          Left = 463
-          Top = 30
-          Width = 70
+          Left = 11
+          Top = 155
+          Width = 168
           Height = 20
           Hint = 'Gespeicherte Verzeichnisse laden.'
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'load'
+          Caption = 'Load directories from config'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
           OnClick = Load_From_ButtonClick
         end
         object Save_To_Button: TButton
-          Left = 463
-          Top = 50
-          Width = 70
+          Left = 11
+          Top = 183
+          Width = 168
           Height = 20
           Hint = 'Aktuelle Auswahl speichern.'
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'save'
+          Caption = 'Save directories'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
           OnClick = Save_To_ButtonClick
         end
         object Sel_All_Button: TButton
-          Left = 463
-          Top = 70
-          Width = 70
+          Left = 11
+          Top = 211
+          Width = 168
           Height = 20
           Hint = 'Alle Verzeichnisse markieren.'
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'sel all'
+          Caption = 'Select all'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
           OnClick = Sel_All_ButtonClick
         end
         object Sel_None_Button: TButton
-          Left = 463
-          Top = 90
-          Width = 70
+          Left = 11
+          Top = 239
+          Width = 168
           Height = 20
           Hint = 'Kein Verzeichnis selektieren.'
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'sel none'
+          Caption = 'Select none'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
           OnClick = Sel_None_ButtonClick
         end
         object Clear_Sel_Button: TButton
-          Left = 463
-          Top = 110
-          Width = 70
+          Left = 11
+          Top = 267
+          Width = 168
           Height = 20
           Hint = 'Markierte Verzeichniseintr'#228'ge l'#246'schen'
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'clear sel'
+          Caption = 'Clear selected'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
           OnClick = Clear_Sel_ButtonClick
         end
         object Clear_All_Button: TButton
-          Left = 463
-          Top = 130
-          Width = 70
+          Left = 11
+          Top = 295
+          Width = 168
           Height = 20
           Hint = 'Alle Verzeichniseintr'#228'ge l'#246'schen'
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'clear all'
+          Caption = 'Clear all'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 11
           OnClick = Clear_All_ButtonClick
         end
         object Subdir_CheckBox: TCheckBox
-          Left = 10
-          Top = 167
+          Left = 11
+          Top = 68
           Width = 168
           Height = 21
           Hint = 'Unterverzeichnisse durchsuchen'
@@ -644,9 +649,9 @@ object F_Main: TF_Main
           OnClick = Subdir_CheckBoxClick
         end
         object Output_with_path_CB: TCheckBox
-          Left = 187
-          Top = 167
-          Width = 188
+          Left = 11
+          Top = 97
+          Width = 168
           Height = 21
           Hint = 'Ausgabe mit kompletten Pfadangaben'
           Margins.Left = 4
@@ -668,19 +673,20 @@ object F_Main: TF_Main
           OnClick = Output_with_path_CBClick
         end
         object Filter_GroupBox: TGroupBox
-          Left = 10
-          Top = 69
+          Left = 11
+          Top = 318
           Width = 168
-          Height = 80
+          Height = 61
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
           Caption = 'Filter : '
           TabOrder = 1
+          Visible = False
           object Filter_Edit: TEdit
-            Left = 10
-            Top = 43
+            Left = 15
+            Top = 35
             Width = 80
             Height = 21
             Margins.Left = 4
@@ -697,8 +703,8 @@ object F_Main: TF_Main
             TabOrder = 2
           end
           object filter_ComboBox: TComboBox
-            Left = 10
-            Top = 43
+            Left = 15
+            Top = 35
             Width = 139
             Height = 21
             Hint = 'Nach was soll gesucht werden'
@@ -727,8 +733,8 @@ object F_Main: TF_Main
               '*.png')
           end
           object Own_Filter_CheckBox: TCheckBox
-            Left = 10
-            Top = 20
+            Left = 15
+            Top = 15
             Width = 149
             Height = 21
             Margins.Left = 4
@@ -791,9 +797,9 @@ object F_Main: TF_Main
           OnClick = Sel_Dir_BtnClick
         end
         object Output_with_filesize_CB: TCheckBox
-          Left = 364
-          Top = 167
-          Width = 179
+          Left = 11
+          Top = 126
+          Width = 168
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
@@ -808,18 +814,20 @@ object F_Main: TF_Main
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          Visible = False
           OnClick = Output_with_filesize_CBClick
         end
       end
       object TXT_Output_Btn: TBitBtn
-        Left = 768
-        Top = 14
+        Left = 571
+        Top = 92
         Width = 185
         Height = 30
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         Caption = 'create &textfile'
         DoubleBuffered = True
         Enabled = False
@@ -842,7 +850,7 @@ object F_Main: TF_Main
         OnClick = TXT_Output_BtnClick
       end
       object HTML_OutputButton: TBitBtn
-        Left = 768
+        Left = 571
         Top = 53
         Width = 185
         Height = 31
@@ -850,6 +858,7 @@ object F_Main: TF_Main
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         Caption = 'create &website'
         DoubleBuffered = True
         Enabled = False
@@ -893,14 +902,15 @@ object F_Main: TF_Main
         OnClick = HTML_OutputButtonClick
       end
       object Go_Btn: TBitBtn
-        Left = 768
-        Top = 92
+        Left = 571
+        Top = 14
         Width = 185
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         Caption = 'Go !'
         DoubleBuffered = True
         Enabled = False
@@ -931,8 +941,8 @@ object F_Main: TF_Main
         OnClick = Go_BtnClick
       end
       object Pacman_Panel: TPanel
-        Left = 543
-        Top = 229
+        Left = 571
+        Top = 319
         Width = 168
         Height = 50
         Margins.Left = 4
@@ -996,6 +1006,19 @@ object F_Main: TF_Main
           OnClick = Close_Pacman_BtnClick
         end
       end
+      object Search_ProgressBar: TProgressBar
+        Left = 571
+        Top = 130
+        Width = 185
+        Height = 30
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        Enabled = False
+        TabOrder = 7
+      end
     end
     object TabSheet3: TTabSheet
       Margins.Left = 4
@@ -1006,24 +1029,49 @@ object F_Main: TF_Main
       ImageIndex = 2
       OnShow = TabSheet3Show
       DesignSize = (
-        964
+        784
         593)
-      object CDList_ProgressBar: TProgressBar
-        Left = 762
-        Top = 90
-        Width = 198
+      object CDList_Result_Label: TLabel
+        Left = 611
+        Top = 142
+        Width = 151
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Alignment = taCenter
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '...'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object CDList_ProgressBar: TProgressBar
+        Left = 611
+        Top = 90
+        Width = 151
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         Step = 5
         TabOrder = 3
       end
       object CDListe_StringGrid: TStringGrid
         Left = 0
         Top = 216
-        Width = 960
+        Width = 780
         Height = 373
         Margins.Left = 4
         Margins.Top = 4
@@ -1045,14 +1093,15 @@ object F_Main: TF_Main
         TabOrder = 0
       end
       object HTML_OutputButton3: TBitBtn
-        Left = 762
+        Left = 611
         Top = 34
-        Width = 198
+        Width = 151
         Height = 31
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akTop, akRight]
         Caption = 'create &website'
         DoubleBuffered = True
         Enabled = False
@@ -1091,15 +1140,19 @@ object F_Main: TF_Main
       object CDLIst_Choose_GB: TGroupBox
         Left = 0
         Top = 9
-        Width = 754
+        Width = 595
         Height = 179
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        Anchors = [akLeft, akTop, akRight]
         TabOrder = 2
+        DesignSize = (
+          595
+          179)
         object Choose_CDList_Source_File_Btn: TSpeedButton
-          Left = 567
+          Left = 417
           Top = 25
           Width = 50
           Height = 30
@@ -1107,6 +1160,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
+          Anchors = [akTop, akRight]
           Glyph.Data = {
             26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
@@ -1145,7 +1199,7 @@ object F_Main: TF_Main
           OnClick = Choose_CDList_Source_File_BtnClick
         end
         object Result_File_SpeedButton: TSpeedButton
-          Left = 567
+          Left = 417
           Top = 140
           Width = 50
           Height = 31
@@ -1153,6 +1207,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
+          Anchors = [akTop, akRight]
           Glyph.Data = {
             26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
@@ -1191,7 +1246,7 @@ object F_Main: TF_Main
           OnClick = Result_File_SpeedButtonClick
         end
         object CDList_Template_SpeedButton: TSpeedButton
-          Left = 567
+          Left = 417
           Top = 81
           Width = 50
           Height = 31
@@ -1199,6 +1254,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
+          Anchors = [akTop, akRight]
           Glyph.Data = {
             26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
@@ -1269,39 +1325,17 @@ object F_Main: TF_Main
           Margins.Bottom = 4
           Caption = 'Result file :'
         end
-        object CDList_Result_Label: TLabel
-          Left = 625
-          Top = 74
-          Width = 110
-          Height = 31
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Alignment = taCenter
-          AutoSize = False
-          Caption = '...'
-          Color = clBackground
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clRed
-          Font.Height = 13
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          Layout = tlCenter
-        end
         object CDList_Source_File_CB: TComboBox
           Left = 10
           Top = 25
-          Width = 549
+          Width = 399
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           DropDownCount = 10
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1314,7 +1348,7 @@ object F_Main: TF_Main
           TabOrder = 1
         end
         object Go_Btn3: TBitBtn
-          Left = 625
+          Left = 475
           Top = 25
           Width = 110
           Height = 30
@@ -1322,6 +1356,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
+          Anchors = [akTop, akRight]
           Caption = 'Go !'
           DoubleBuffered = True
           Enabled = False
@@ -1347,13 +1382,14 @@ object F_Main: TF_Main
         object CDList_Template_ComboBox: TComboBox
           Left = 10
           Top = 81
-          Width = 549
+          Width = 399
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           DropDownCount = 10
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1367,13 +1403,14 @@ object F_Main: TF_Main
         object Result_File_ComboBox: TComboBox
           Left = 10
           Top = 140
-          Width = 549
+          Width = 399
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
           Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
           DropDownCount = 10
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1393,7 +1430,7 @@ object F_Main: TF_Main
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
-        Width = 964
+        Width = 784
         Height = 593
         Align = alClient
         TabOrder = 0
