@@ -294,7 +294,8 @@ begin
 
 	ID3v2Tag := TID3v2Tag.Create;
 
-	version	:=	get_version() + ' beta';
+//	version	:=	get_version() + ' beta';
+	version	:=	get_version();
 
 	if not FileExists(ini_file_name) then
 		FirstStart	:=	True;
