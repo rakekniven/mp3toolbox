@@ -28,19 +28,15 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 780
-    ExplicitHeight = 607
     object TabSheet1: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'mp3list'
-      ExplicitWidth = 772
-      ExplicitHeight = 576
       DesignSize = (
         784
         593)
@@ -1027,6 +1023,7 @@ object F_Main: TF_Main
       Margins.Bottom = 4
       Caption = 'cdlist'
       ImageIndex = 2
+      TabVisible = False
       OnShow = TabSheet3Show
       DesignSize = (
         784
