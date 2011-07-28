@@ -1,13 +1,13 @@
-#summary One-sentence summary of this page.
+#labels Featured
+Instructions about how to compile it yourself
 
-= Introduction =
+= Requirements =
+ * Embarcadero Delphi 2010 or later
+ * Mp3FileUtils - Download it here: http://www.gausi.de/mp3fileutils.html
+ * You need Inno Setup to build a setup yourself - See http://www.jrsoftware.org/isinfo.php
 
-Add your content here.
+= How to I get the source? =
+Use a subversion client to pull it out of google code
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= I am having problems. Can you help me? =
+Contact me if you have any problems by sending an email.
