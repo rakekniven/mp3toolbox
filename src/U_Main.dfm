@@ -1514,6 +1514,14 @@ object F_Main: TF_Main
     end
     object Help1: TMenuItem
       Caption = 'Help'
+      object Goo1: TMenuItem
+        Caption = 'Website at Google Code'
+        OnClick = Goo1Click
+      end
+      object WebsiteofAuthor1: TMenuItem
+        Caption = 'Website of Author'
+        OnClick = WebsiteofAuthor1Click
+      end
       object AboutMP3Toolbox1: TMenuItem
         Caption = 'About MP3Toolbox'
         OnClick = AboutMP3Toolbox1Click
