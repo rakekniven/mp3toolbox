@@ -109,6 +109,8 @@ type
 		Label6: TLabel;
 		Label5: TLabel;
 		Label7: TLabel;
+    Goo1: TMenuItem;
+    WebsiteofAuthor1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -163,6 +165,8 @@ type
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 		procedure Result_File_SpeedButtonClick(Sender: TObject);
 		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
+    procedure Goo1Click(Sender: TObject);
+		procedure WebsiteofAuthor1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -884,15 +888,21 @@ begin
 
 end;
 
+procedure TF_Main.WebsiteofAuthor1Click(Sender: TObject);
+begin
+	lib1.Start_External_Program(self.WindowHandle, 'open', 'http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project', '', '', SW_SHOW);
+end;
+
+
 {--- MP3List : write mp3list as an website ------------------------------------}
 procedure TF_Main.HTML_OutputButtonClick(Sender: TObject);
 var
 	i		          :	Integer;
 	i2	          :	Integer;
-  dir	          :	array[0..26]	of Char;	//  array fuer die Buchstaben
-  first_letter  : String;
-  files_to_zip  : String;
-  letter_found  : Boolean;
+	dir	          :	array[0..26]	of Char;	//  array fuer die Buchstaben
+	first_letter  : String;
+	files_to_zip  : String;
+	letter_found  : Boolean;
 begin
 	{Wenn eine gesamte Seite erzeugt werden soll.}
 	if mp3list_html_multi_output = 0 then
@@ -1224,6 +1234,11 @@ begin
 end;
 
 {--- CDList : Start to read in the textfile -----------------------------------}
+procedure TF_Main.Goo1Click(Sender: TObject);
+begin
+	lib1.Start_External_Program(self.WindowHandle, 'open', 'http://code.google.com/p/mp3toolbox/', '', '', SW_SHOW);
+end;
+
 procedure TF_Main.Go_Btn3Click(Sender: TObject);
 var
   F         : TextFile;
