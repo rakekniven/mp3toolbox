@@ -1,1 +1,12 @@
-will be filled soon
+|| *Variable name* || *Description* ||
+||{#general:update_date}||Wird ersetzt durch die aktuelle Uhrzeit während des Updates.||
+||{#general:version}||Wird ersetzt durch die Programmversion.||
+||{#cdlist:total_cd_counter}||Wird ersetzt durch die Anzahl der gefundenen CD´s.||
+||{#cdlist:searchtime}||Wird ersetzt durch die Suchdauer.||
+||{#cdlist:result_table}||Wird ersetzt durch die erzeugte Tabelle mit allen CD´s und Zusatzinformationen||
+||{#mp3list:total_mpg_counter}||Wird ersetzt durch alle gefundenen mp3s||
+||{#mp3list:searchtime}||Wird ersetzt durch die Suchdauer||
+||{#mp3list:result_list}||Wird ersetzt durch die Liste mit allen MP3s.||
+||{#mp3list:detail_mpg_counter}||Wird ersetzt durch die Anzahl der gefundenen MP3s zum jeweiligen Buchstaben.||
+||{#mp3list:detail_result_list}||Wird ersetzt durch die Liste mit den gefundenen MP3s zum jeweiligen Buchstaben.||
+||{#mp3list:index_character}||Wird ersetzt durch den Buchstaben der aktuell erstellten Seite (nur bei Multi-Ausgabe).||
