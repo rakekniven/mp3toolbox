@@ -713,9 +713,9 @@ begin
     end;
 
 
-    {Pacman anhalten}
-    Pacman_Move_Timer.Enabled :=  False;
-    Pacman_Btn.Visible        :=  False;
+		{Pacman anhalten}
+		Pacman_Move_Timer.Enabled :=  False;
+		Pacman_Btn.Visible        :=  False;
 
     {fill progressbar up}
     Search_ProgressBar.Position :=	100;
@@ -747,6 +747,12 @@ begin
 
 		{Startzeit des scans}
 		start_scan_time := Time;
+
+    {Pacman aktivieren und starten}
+    Pacman_Btn.Visible        :=  True;
+    Pacman_Btn.Repaint;
+    pacman_direction          :=  True;
+    Pacman_Move_Timer.Enabled :=  True;
 
 		for i:= 0  to Files.Count - 1 do
 		begin
@@ -789,6 +795,10 @@ begin
 
 		{Ende der Suchzeit}
 		end_scan_time           :=  Time;
+
+		{Pacman anhalten}
+		Pacman_Move_Timer.Enabled :=  False;
+		Pacman_Btn.Visible        :=  False;
 
 		{Anzeige der Suchzeit.}
 		Label7.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
