@@ -323,6 +323,10 @@ begin
 				for i := 0 to mp3list_Character_stringlists[Array_pointer].Count - 1 do
 					writeln (OutFile, mp3list_Character_stringlists[Array_pointer][i] + '<br>');
 *)
+
+				// Sort list before writing result
+				mp3list_Character_stringlists[Array_pointer].Sort;
+
 				for i := 0 to mp3list_Character_stringlists[Array_pointer].Count - 1 do
 				begin
 
