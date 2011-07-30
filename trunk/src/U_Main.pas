@@ -422,7 +422,13 @@ begin
 //    Load_From_Button.Enabled  :=  False;
 		ShowMessage('Looks like you run the programm for the first time. Please adjust your settings and save them.');
 		F_Setup.ShowModal;
-	end
+	end;
+
+	Result_Label.Caption	:=	'...';
+	Dir_Count_Label.Caption	:=	'...';
+	Search_Time_Lab.Caption	:=	'...';
+	Label5.Caption	:=	'...';
+	Label7.Caption	:=	'...';
 end;
 
 {--- OnActivate ---------------------------------------------------------------}
@@ -641,6 +647,12 @@ var
 	gauge_step				:	Integer;
 	s1								:	String;
 begin
+	Result_Label.Caption	:=	'...';
+	Dir_Count_Label.Caption	:=	'...';
+	Search_Time_Lab.Caption	:=	'...';
+	Label5.Caption	:=	'...';
+	Label7.Caption	:=	'...';
+
 	MP3_ListBox.BringToFront;
   NameCheck_ListBox.Clear;
 
@@ -712,12 +724,10 @@ begin
 		end_search_time           :=  Time;
 
 		{Anzahl durchgesuchter Verzeichnisse anzeigen.}
-		Dir_Count_Label.Color		  :=  clBlack;
 		Dir_Count_Label.Caption	  :=	IntToStr(searched_dir_count);
 
 
 		{Anzeige der Suchzeit.}
-		Search_Time_Lab.Color			:=  clBlack;
 		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
     {Stringliste sortieren}
@@ -781,7 +791,6 @@ begin
 		end_scan_time           :=  Time;
 
 		{Anzeige der Suchzeit.}
-		Label7.Color			:=  clBlack;
 		Label7.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
 
 		total_work_duration	:=  (end_scan_time - start_scan_time) +
@@ -791,7 +800,6 @@ begin
     mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
-    Result_Label.Color			  :=  clBlack;
     Result_Label.Caption		  :=	IntToStr(MP3_ListBox.Items.Count);
 
     {If result are present then allow output}

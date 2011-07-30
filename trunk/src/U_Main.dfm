@@ -12,7 +12,7 @@ object F_Main: TF_Main
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = True
-  Position = poDesigned
+  Position = poScreenCenter
   OnActivate = FormActivate
   OnCreate = FormCreate
   OnResize = FormResize
@@ -208,39 +208,18 @@ object F_Main: TF_Main
         Transparent = False
         Visible = False
       end
-      object Search_Time_Lab: TLabel
-        Left = 682
-        Top = 209
-        Width = 80
-        Height = 31
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '...'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-      end
       object Dir_Count_Label: TLabel
-        Left = 682
+        Left = 698
         Top = 188
-        Width = 80
-        Height = 30
+        Width = 64
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = '...'
+        Caption = '00000'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
         Font.Height = 13
@@ -251,17 +230,17 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Result_Label: TLabel
-        Left = 682
+        Left = 698
         Top = 168
-        Width = 80
-        Height = 31
+        Width = 64
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = '...'
+        Caption = '000000'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
@@ -301,7 +280,7 @@ object F_Main: TF_Main
         Left = 571
         Top = 168
         Width = 119
-        Height = 31
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -324,7 +303,7 @@ object F_Main: TF_Main
         Left = 571
         Top = 188
         Width = 119
-        Height = 31
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -347,7 +326,7 @@ object F_Main: TF_Main
         Left = 571
         Top = 208
         Width = 119
-        Height = 31
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -370,7 +349,7 @@ object F_Main: TF_Main
         Left = 571
         Top = 228
         Width = 119
-        Height = 31
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -393,7 +372,7 @@ object F_Main: TF_Main
         Left = 571
         Top = 248
         Width = 119
-        Height = 31
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -413,17 +392,17 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label5: TLabel
-        Left = 682
+        Left = 698
         Top = 228
-        Width = 80
-        Height = 31
+        Width = 64
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = '...'
+        Caption = '000000'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
         Font.Height = 13
@@ -434,17 +413,38 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label7: TLabel
-        Left = 682
+        Left = 698
         Top = 248
-        Width = 80
-        Height = 31
+        Width = 64
+        Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = '...'
+        Caption = '00:00:00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Search_Time_Lab: TLabel
+        Left = 698
+        Top = 207
+        Width = 64
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '00:00:00'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
         Font.Height = 13
