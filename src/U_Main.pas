@@ -109,8 +109,6 @@ type
 		Label6: TLabel;
 		Label5: TLabel;
 		Label7: TLabel;
-    Goo1: TMenuItem;
-    WebsiteofAuthor1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -165,8 +163,6 @@ type
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 		procedure Result_File_SpeedButtonClick(Sender: TObject);
 		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
-    procedure Goo1Click(Sender: TObject);
-		procedure WebsiteofAuthor1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -422,13 +418,7 @@ begin
 //    Load_From_Button.Enabled  :=  False;
 		ShowMessage('Looks like you run the programm for the first time. Please adjust your settings and save them.');
 		F_Setup.ShowModal;
-	end;
-
-	Result_Label.Caption	:=	'...';
-	Dir_Count_Label.Caption	:=	'...';
-	Search_Time_Lab.Caption	:=	'...';
-	Label5.Caption	:=	'...';
-	Label7.Caption	:=	'...';
+	end
 end;
 
 {--- OnActivate ---------------------------------------------------------------}
@@ -647,12 +637,6 @@ var
 	gauge_step				:	Integer;
 	s1								:	String;
 begin
-	Result_Label.Caption	:=	'...';
-	Dir_Count_Label.Caption	:=	'...';
-	Search_Time_Lab.Caption	:=	'...';
-	Label5.Caption	:=	'...';
-	Label7.Caption	:=	'...';
-
 	MP3_ListBox.BringToFront;
   NameCheck_ListBox.Clear;
 
@@ -713,9 +697,9 @@ begin
     end;
 
 
-		{Pacman anhalten}
-		Pacman_Move_Timer.Enabled :=  False;
-		Pacman_Btn.Visible        :=  False;
+    {Pacman anhalten}
+    Pacman_Move_Timer.Enabled :=  False;
+    Pacman_Btn.Visible        :=  False;
 
     {fill progressbar up}
     Search_ProgressBar.Position :=	100;
@@ -724,10 +708,12 @@ begin
 		end_search_time           :=  Time;
 
 		{Anzahl durchgesuchter Verzeichnisse anzeigen.}
+		Dir_Count_Label.Color		  :=  clBlack;
 		Dir_Count_Label.Caption	  :=	IntToStr(searched_dir_count);
 
 
 		{Anzeige der Suchzeit.}
+		Search_Time_Lab.Color			:=  clBlack;
 		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
     {Stringliste sortieren}
@@ -747,12 +733,6 @@ begin
 
 		{Startzeit des scans}
 		start_scan_time := Time;
-
-    {Pacman aktivieren und starten}
-    Pacman_Btn.Visible        :=  True;
-    Pacman_Btn.Repaint;
-    pacman_direction          :=  True;
-    Pacman_Move_Timer.Enabled :=  True;
 
 		for i:= 0  to Files.Count - 1 do
 		begin
@@ -796,11 +776,8 @@ begin
 		{Ende der Suchzeit}
 		end_scan_time           :=  Time;
 
-		{Pacman anhalten}
-		Pacman_Move_Timer.Enabled :=  False;
-		Pacman_Btn.Visible        :=  False;
-
 		{Anzeige der Suchzeit.}
+		Label7.Color			:=  clBlack;
 		Label7.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
 
 		total_work_duration	:=  (end_scan_time - start_scan_time) +
@@ -810,6 +787,7 @@ begin
     mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
+    Result_Label.Color			  :=  clBlack;
     Result_Label.Caption		  :=	IntToStr(MP3_ListBox.Items.Count);
 
     {If result are present then allow output}
@@ -906,21 +884,15 @@ begin
 
 end;
 
-procedure TF_Main.WebsiteofAuthor1Click(Sender: TObject);
-begin
-	lib1.Start_External_Program(self.WindowHandle, 'open', 'http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project', '', '', SW_SHOW);
-end;
-
-
 {--- MP3List : write mp3list as an website ------------------------------------}
 procedure TF_Main.HTML_OutputButtonClick(Sender: TObject);
 var
 	i		          :	Integer;
 	i2	          :	Integer;
-	dir	          :	array[0..26]	of Char;	//  array fuer die Buchstaben
-	first_letter  : String;
-	files_to_zip  : String;
-	letter_found  : Boolean;
+  dir	          :	array[0..26]	of Char;	//  array fuer die Buchstaben
+  first_letter  : String;
+  files_to_zip  : String;
+  letter_found  : Boolean;
 begin
 	{Wenn eine gesamte Seite erzeugt werden soll.}
 	if mp3list_html_multi_output = 0 then
@@ -1252,11 +1224,6 @@ begin
 end;
 
 {--- CDList : Start to read in the textfile -----------------------------------}
-procedure TF_Main.Goo1Click(Sender: TObject);
-begin
-	lib1.Start_External_Program(self.WindowHandle, 'open', 'http://code.google.com/p/mp3toolbox/', '', '', SW_SHOW);
-end;
-
 procedure TF_Main.Go_Btn3Click(Sender: TObject);
 var
   F         : TextFile;
