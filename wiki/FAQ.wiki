@@ -1,0 +1,3 @@
+Q: I Need my Websites encoded in ISO-8859-1. Where to adjust it?
+
+A: Just modify encoding of your Template file. MP3Toolbox detects encoding and uses it for Output.
