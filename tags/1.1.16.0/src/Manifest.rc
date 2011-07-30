@@ -1,0 +1,46 @@
+// created with Manifest-Creator
+
+#define VS_MANIFEST          1
+#define RT_MANIFEST          24
+#define LANG_NEUTRAL         0x00
+#define SUBLANG_NEUTRAL      0x00
+
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+
+VS_MANIFEST RT_MANIFEST
+  BEGIN
+    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n",
+    "<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\">\r\n",
+    "  <assemblyIdentity\r\n",
+    "    version=\"0.0.0.0\"\r\n",
+    "    processorArchitecture=\"X86\"\r\n",
+    "    name=\"rakekniven.music.toolbox\"\r\n",
+    "    type=\"Win32\"/>\r\n",
+    "  <trustInfo xmlns=\"urn:schemas-microsoft-com:asm.v2\">\r\n",
+    "    <security>\r\n",
+    "      <requestedPrivileges>\r\n",
+    "        <requestedExecutionLevel\r\n",
+    "          level=\"asInvoker\"\r\n",
+    "          uiAccess=\"false\"/>\r\n",
+    "      </requestedPrivileges>\r\n",
+    "    </security>\r\n",
+    "  </trustInfo>\r\n",
+    "  <compatibility xmlns=\"urn:schemas-microsoft-com:compatibility.v1\">\r\n",
+    "    <application>\r\n",
+    "      <supportedOS Id=\"{e2011457-1546-43c5-a5fe-008deee3d3f0}\"/>\r\n",
+    "      <supportedOS Id=\"{35138b9a-5d96-4fbd-8e2d-a2440225f93a}\"/>\r\n",
+    "    </application>\r\n",
+    "  </compatibility>\r\n",
+    "  <dependency>\r\n",
+    "    <dependentAssembly>\r\n",
+    "      <assemblyIdentity\r\n",
+    "        type=\"win32\"\r\n",
+    "        name=\"Microsoft.Windows.Common-Controls\"\r\n",
+    "        version=\"6.0.0.0\"\r\n",
+    "        publicKeyToken=\"6595b64144ccf1df\"\r\n",
+    "        language=\"*\"\r\n",
+    "        processorArchitecture=\"*\"/>\r\n",
+    "    </dependentAssembly>\r\n",
+    "  </dependency>\r\n",
+    "</assembly>"
+  END
