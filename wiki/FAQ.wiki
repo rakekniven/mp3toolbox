@@ -1,3 +1,10 @@
-Q: I Need my Websites encoded in ISO-8859-1. Where to adjust it?
+#labels Phase-Support
+Q: I need my websites encoded in ISO-8859-1. Where to adjust it?
 
-A: Just modify encoding of your Template file. MP3Toolbox detects encoding and uses it for Output.
+A: Just modify encoding of your template file. MP3Toolbox detects encoding and uses it for output.
+
+----
+
+Q: ID3 tags of some files couldn't be read. They are listed on error tab. iTunes shows their tag content correctly. Why?
+
+A: I use a 3rd party library to read tags. Please convert your tags to at least ID3v2 and you are fine.
