@@ -1,4 +1,4 @@
-#labels Phase-Support
+#labels Phase-Support,Featured
 Q: I need my websites encoded in ISO-8859-1. Where to adjust it?
 
 A: Just modify encoding of your template file. MP3Toolbox detects encoding and uses it for output.
