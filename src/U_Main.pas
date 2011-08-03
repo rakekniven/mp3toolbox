@@ -761,17 +761,17 @@ begin
 
 			if Files[i] <> '%s.mp3' then
 			begin
+				// get id3 values
 				try
 					ID3v2Tag.ReadFromFile(Files[i]);
 				except
 					ListBox_Error.Items.Add('!!! Check this file: ' + Files[i]);
 				end;
 
+				// check if artist is present. Add to error list if not
 				if ID3v2Tag.Artist = '' then
 				begin
 					ListBox_Error.Items.Add(Files[i]);
-					if ListBox_Error.Count > 0 then
-						TabSheet4.TabVisible	:=	True;
 				end
 				else
 				begin
@@ -786,10 +786,21 @@ begin
 					MP3_ListBox.Items.Add(s1);
 				end;
 
+				// Debug for mark: Check if comment is present
+				//if ID3v2Tag.Comment <> '' then
+					//ListBox_Error.Items.Add('!!! Comment found: ' + Files[i]);
+
+
 				Search_ProgressBar.Position	:=	Round((100 * (i + 1)) div (Files.Count));
 				Application.ProcessMessages;
 			end;
 			Label5.Caption	:=	IntToStr(i + 1);
+
+			if not TabSheet4.TabVisible then
+			begin
+				if ListBox_Error.Count > 0 then
+					TabSheet4.TabVisible	:=	True;
+			end;
 		end;
 		Search_ProgressBar.Position	:=	100;
 
@@ -962,7 +973,7 @@ begin
     for i := 0 to Length(mp3list_Character_stringlists) - 1 do
 			mp3list_Character_stringlists[i].Clear;
 
-    {sort every single line to it's assignes character stringlist}
+		{sort every single line to it's assignes character stringlist}
     for i := 0 to MP3_ListBox.Items.Count - 1 do
     begin
       letter_found  :=  False;
