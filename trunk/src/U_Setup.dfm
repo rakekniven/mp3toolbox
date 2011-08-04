@@ -587,6 +587,7 @@ object F_Setup: TF_Setup
       Margins.Bottom = 4
       Caption = 'Album-Liste'
       ImageIndex = 3
+      TabVisible = False
       object CDList_Template_GB: TGroupBox
         Left = 10
         Top = 10
