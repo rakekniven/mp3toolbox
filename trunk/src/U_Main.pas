@@ -752,7 +752,7 @@ begin
 
     {Pacman aktivieren und starten}
     Pacman_Btn.Visible        :=  True;
-    Pacman_Btn.Repaint;
+		Pacman_Btn.Repaint;
     pacman_direction          :=  True;
     Pacman_Move_Timer.Enabled :=  True;
 
@@ -781,7 +781,12 @@ begin
 					if ID3v2Tag.Album <> '' then
 						s1	:=	s1 + ' - ' + ID3v2Tag.Album;
 					if ID3v2Tag.Track <> '' then
-						s1	:=	s1 + ' - ' + ID3v2Tag.Track;
+					begin
+						if Length(ID3v2Tag.Track) = 1 then
+							s1	:=	s1 + ' - 0' + ID3v2Tag.Track
+						else
+							s1	:=	s1 + ' - ' + ID3v2Tag.Track;
+					end;
 					if ID3v2Tag.Title <> '' then
 						s1	:=	s1 + ' - ' + ID3v2Tag.Title;
 
