@@ -56,7 +56,7 @@ type
     MP3List_Open_Template_File_Dialog: TOpenDialog;
     MP3List_Multi_Open_Template_File_Dialog: TOpenDialog;
     mp3list_filename_Edit: TEdit;
-    Label2: TLabel;
+    Lab_File_Ext: TLabel;
     mp3list_file_ending_Edit: TEdit;
     MP3List_ZIP_txt_CheckBox: TCheckBox;
     MP3List_CLear_TXT_files_after_zip_CB: TCheckBox;
@@ -69,17 +69,9 @@ type
     GroupBox1: TGroupBox;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    Label5: TLabel;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
-    CheckBox1: TCheckBox;
-    CheckBox2: TCheckBox;
-    CheckBox3: TCheckBox;
-    CheckBox4: TCheckBox;
+    Lab_File_Prefix: TLabel;
     CB_TXT_Encoding: TComboBox;
-    Label7: TLabel;
+    Lab_Enc: TLabel;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -452,13 +444,15 @@ end;
 procedure TF_Setup.init_text(Sender: TObject);
 begin
   {General}
-  Allgemein.Caption                               :=  GetTxt( 2,  1, 'Allgemein');
-  MP3List.Caption                                 :=  GetTxt( 2,  2, 'MP3-Liste');
+	Allgemein.Caption                               :=  GetTxt( 2,  1, 'Allgemein');
+	MP3List.Caption                                 :=  GetTxt( 2,  2, 'MP3-Liste');
   Album_Liste.Caption                             :=  GetTxt( 2,  3, 'Ascii-Liste');
   Debug_Dev.Caption                               :=  GetTxt( 2,  4, 'Debug und Zusatz');
   TXT_File_Output_Lab.Caption                     :=  GetTxt( 2,  5, 'Wo sollen die Textdateien gespeichert werden :');
   HTML_File_Output_Lab.Caption                    :=  GetTxt( 2,  6, 'Wo sollen die Webseiten gespeichert werden :');
   Store_And_Close_Btn.Caption                     :=  GetTxt( 2,  7, '&Sichern und Schliessen');
+	F_Setup.Caption                                 :=  GetTxt( 2, 10, 'Setup');
+	Language_GB.Caption                             :=  GetTxt( 2, 25, 'Sprache / Language ');
 
 (*
 	First_Start_Memo.Clear;
@@ -478,7 +472,10 @@ begin
   MP3List_ZIP_txt_CheckBox.Caption                :=  GetTxt( 2, 21, 'ZIP die Textdateien');
   MP3List_ZIP_html_CheckBox.Caption               :=  GetTxt( 2, 22, 'ZIP die HTML-Dateien');
   MP3List_CLear_TXT_files_after_zip_CB.Caption    :=  GetTxt( 2, 23, 'Lösche Textdateien nach ZIPPEN');
-  MP3List_CLear_HTML_files_after_zip_CB.Caption   :=  GetTxt( 2, 24, 'Lösche HTML-Dateien nach ZIPPEN');
+	MP3List_CLear_HTML_files_after_zip_CB.Caption   :=  GetTxt( 2, 24, 'Lösche HTML-Dateien nach ZIPPEN');
+	Lab_Enc.Caption                                 :=  GetTxt( 2, 26, 'Output encoding');
+	Lab_File_Prefix.Caption                         :=  GetTxt( 2, 27, 'Dateiname');
+	Lab_File_Ext.Caption                            :=  GetTxt( 2, 28, 'Dateiendung');
 
   {CDList}
   CDList_ZIP_txt_CheckBox.Caption                 :=  GetTxt( 2, 21, 'ZIP die Textdateien');
@@ -487,7 +484,7 @@ begin
   CDList_CLear_HTML_files_after_zip_CB.Caption    :=  GetTxt( 2, 24, 'Lösche HTML-Dateien nach ZIPPEN');
 
   {Debug}
-  Pacman_CheckBox.Caption                         :=  GetTxt( 2, 20, 'Pacman einstellen');
+	Pacman_CheckBox.Caption                         :=  GetTxt( 2, 20, 'Pacman einstellen');
 end;
 
 {--- MP3List : zip txt files --------------------------------------------------}

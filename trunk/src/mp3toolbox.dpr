@@ -20,7 +20,7 @@ uses
 {$R *.res}
 
 begin
-  Application.Initialize;
+	Application.Initialize;
 	Application.CreateForm(TF_Main, F_Main);
 	Application.CreateForm(TF_Setup, F_Setup);
 	Application.CreateForm(TAbout_F, About_F);

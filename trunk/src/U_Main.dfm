@@ -2,7 +2,7 @@ object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
-  ClientHeight = 624
+  ClientHeight = 643
   ClientWidth = 792
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object F_Main: TF_Main
     Left = 0
     Top = 0
     Width = 792
-    Height = 624
+    Height = 643
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -36,10 +36,10 @@ object F_Main: TF_Main
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = 'mp3list'
+      Caption = '??mp3list'
       DesignSize = (
         784
-        593)
+        612)
       object Pacman_Btn: TSpeedButton
         Left = 571
         Top = 267
@@ -287,7 +287,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = 'Files found'
+        Caption = '??Files found'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
@@ -310,7 +310,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = 'Directories searched'
+        Caption = '??Directories searched'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
@@ -333,7 +333,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = 'Search time'
+        Caption = '??Search time'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
@@ -356,30 +356,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = 'Tags scanned'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label6: TLabel
-        Left = 571
-        Top = 248
-        Width = 119
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = 'Scan time'
+        Caption = '??Tags scanned'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clRed
@@ -392,6 +369,29 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label5: TLabel
+        Left = 571
+        Top = 248
+        Width = 119
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '??Scan time'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Lab_Scan_Result: TLabel
         Left = 698
         Top = 228
         Width = 64
@@ -412,7 +412,7 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
       end
-      object Label7: TLabel
+      object Lab_Scan_Time: TLabel
         Left = 698
         Top = 248
         Width = 64
@@ -458,7 +458,7 @@ object F_Main: TF_Main
         Left = 4
         Top = 401
         Width = 734
-        Height = 176
+        Height = 195
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -471,7 +471,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 401
         Width = 780
-        Height = 188
+        Height = 207
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -502,7 +502,7 @@ object F_Main: TF_Main
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akLeft, akTop, akRight]
-        Caption = 'Directories'
+        Caption = '??Directories'
         TabOrder = 3
         DesignSize = (
           537
@@ -533,7 +533,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Load directories from config'
+          Caption = '??Load directories from config'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
@@ -549,7 +549,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Save directories'
+          Caption = '??Save directories'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
@@ -565,7 +565,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Select all'
+          Caption = '??Select all'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
@@ -581,7 +581,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Select none'
+          Caption = '??Select none'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
@@ -597,7 +597,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Clear selected'
+          Caption = '??Clear selected'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
@@ -613,7 +613,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Clear all'
+          Caption = '??Clear all'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 11
@@ -629,7 +629,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'search subdir'#180's'
+          Caption = '??search subdir'#180's'
           Checked = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -654,7 +654,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'output with pathes'
+          Caption = '??output with pathes'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = 13
@@ -677,7 +677,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Filter : '
+          Caption = '??Filter : '
           TabOrder = 1
           Visible = False
           object Filter_Edit: TEdit
@@ -737,7 +737,7 @@ object F_Main: TF_Main
             Margins.Top = 4
             Margins.Right = 4
             Margins.Bottom = 4
-            Caption = 'own Filter'
+            Caption = '??own Filter'
             TabOrder = 0
             OnClick = Own_Filter_CheckBoxClick
           end
@@ -751,7 +751,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'Select Dir'
+          Caption = '??Select Dir'
           DoubleBuffered = True
           Glyph.Data = {
             26040000424D2604000000000000360000002800000012000000120000000100
@@ -801,7 +801,7 @@ object F_Main: TF_Main
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
-          Caption = 'output with size'
+          Caption = '??output with size'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = 13
@@ -824,7 +824,7 @@ object F_Main: TF_Main
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
-        Caption = 'create &textfile'
+        Caption = '??create &textfile'
         DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
@@ -855,7 +855,7 @@ object F_Main: TF_Main
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
-        Caption = 'create &website'
+        Caption = '??create &website'
         DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
@@ -907,7 +907,7 @@ object F_Main: TF_Main
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
-        Caption = 'Go !'
+        Caption = '??Go !'
         DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
@@ -1025,13 +1025,9 @@ object F_Main: TF_Main
       ImageIndex = 2
       TabVisible = False
       OnShow = TabSheet3Show
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         784
-        593)
+        612)
       object CDList_Result_Label: TLabel
         Left = 611
         Top = 142
@@ -1073,7 +1069,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 780
-        Height = 373
+        Height = 392
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1428,15 +1424,11 @@ object F_Main: TF_Main
       Caption = 'Error'
       ImageIndex = 3
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
         Width = 784
-        Height = 593
+        Height = 612
         Align = alClient
         TabOrder = 0
       end
@@ -1446,7 +1438,7 @@ object F_Main: TF_Main
     Left = 328
     Top = 16
     object File1: TMenuItem
-      Caption = 'File'
+      Caption = '??File'
       object Setup1: TMenuItem
         Bitmap.Data = {
           26040000424D2604000000000000360000002800000012000000120000000100
@@ -1483,7 +1475,7 @@ object F_Main: TF_Main
           2A383A1700000000000000000000000000000000000000000000000000000000
           00000000FFFFFF4B494944424244424200000000000000000000000000000000
           00000000000000000000}
-        Caption = 'Setup'
+        Caption = '??Setup'
         ShortCut = 16464
         OnClick = Setup1Click
       end
@@ -1515,23 +1507,23 @@ object F_Main: TF_Main
           93B5DD4C71C65479C7547CC8587EC85881CA5981C95A85CC5C87CA5E8ACA638F
           CE76A5D51827A70D1AA40000000817A10511A03040B12938AF2938AE2635AF25
           35AC2334AC2231AC2031AC202EAA2134AC05109F0C1AA4000000}
-        Caption = 'Exit'
+        Caption = '??Exit'
         ShortCut = 16465
         OnClick = Exit1Click
       end
     end
     object Help1: TMenuItem
-      Caption = 'Help'
+      Caption = '??Help'
       object Goo1: TMenuItem
-        Caption = 'Website at Google Code'
+        Caption = '??Website at Google Code'
         OnClick = Goo1Click
       end
       object WebsiteofAuthor1: TMenuItem
-        Caption = 'Website of Author'
+        Caption = '??Website of Author'
         OnClick = WebsiteofAuthor1Click
       end
       object AboutMP3Toolbox1: TMenuItem
-        Caption = 'About MP3Toolbox'
+        Caption = '??About MP3Toolbox'
         OnClick = AboutMP3Toolbox1Click
       end
     end
