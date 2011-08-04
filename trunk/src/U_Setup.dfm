@@ -14,6 +14,7 @@ object F_Setup: TF_Setup
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = True
+  Position = poMainFormCenter
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -168,6 +169,10 @@ object F_Setup: TF_Setup
       Margins.Bottom = 4
       Caption = '??MP3-Liste'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object MP3List_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -483,6 +488,10 @@ object F_Setup: TF_Setup
       Caption = 'Album-Liste'
       ImageIndex = 3
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object CDList_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -555,6 +564,10 @@ object F_Setup: TF_Setup
       Caption = '??Debug and Dev.'
       ImageIndex = 2
       OnContextPopup = Debug_DevContextPopup
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Pacman_CheckBox: TCheckBox
         Left = 39
         Top = 30
