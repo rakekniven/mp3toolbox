@@ -289,7 +289,9 @@ begin
 	if not DirectoryExists(html_files_output_path) then
 		MkDir(html_files_output_path);
 
-
+	text_files_output_path	:=	SlashSep(ExpandEnv('%TEMP%'), 'mp3toolbox-output');
+	if not DirectoryExists(text_files_output_path) then
+		MkDir(text_files_output_path);
 
 	ini_file_name               :=  	SlashSep(ExpandEnv('%APPDATA%'), 'mp3toolbox\mp3toolbox.cfg');
 	default_ini_file_name       :=  	SlashSep(act_exec_directory, 'config\default.cfg');
@@ -307,55 +309,55 @@ begin
 //    init_ok                   :=  False;
 //    Load_From_Button.Enabled  :=  False;
 
-		{Begin: INI-Datei oeffnen und werte setzen}
-		if FirstStart then
-			Ini := TIniFile.Create(default_ini_file_name)
-		else
-			Ini := TIniFile.Create(ini_file_name);
+	{Begin: INI-Datei oeffnen und werte setzen}
+	if FirstStart then
+		Ini := TIniFile.Create(default_ini_file_name)
+	else
+		Ini := TIniFile.Create(ini_file_name);
 
-		{Sprache auslesen}
-		gui_language          	            :=	Ini.ReadString ('GENERAL',   'gui_language',    'GB');
-		text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     act_exec_directory);
-		html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     html_files_output_path);
-    pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
+	{Sprache auslesen}
+	gui_language          	            :=	Ini.ReadString ('GENERAL',   'gui_language',    'GB');
+	text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     text_files_output_path);
+	html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     html_files_output_path);
+	pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
 
-    mp3list_single_template_file			  :=  Ini.ReadString ('MP3LIST',   'single_template', SlashSep(act_exec_directory, 'templates\mp3list-template.html'));
-    mp3list_multi_template_file				  :=  Ini.ReadString ('MP3LIST',   'multi_template', 	SlashSep(act_exec_directory, 'templates\mp3list-letter-template.html'));
-		mp3list_html_multi_output           :=	Ini.ReadInteger('MP3LIST',   'multi_output',    0);
-		mp3list_html_file_name				      :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_name', 	  'mp3list');
-		mp3list_html_file_ending				    :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_ending',  '.html');
-		mp3list_text_files_zip	            :=	Ini.ReadBool   ('MP3LIST',   'zip_text_files',  False);
-		mp3list_text_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'text_files_delete_after_zip',  False);
-		mp3list_html_files_zip              :=	Ini.ReadBool   ('MP3LIST',   'zip_html_files',  False);
-		mp3list_html_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'html_files_delete_after_zip',  False);
-		mp3list_text_file_encoding           :=	Ini.ReadInteger('MP3LIST',   'text_file_encoding',    0);
+	mp3list_single_template_file			  :=  Ini.ReadString ('MP3LIST',   'single_template', SlashSep(act_exec_directory, 'templates\mp3list-template.html'));
+	mp3list_multi_template_file				  :=  Ini.ReadString ('MP3LIST',   'multi_template', 	SlashSep(act_exec_directory, 'templates\mp3list-letter-template.html'));
+	mp3list_html_multi_output           :=	Ini.ReadInteger('MP3LIST',   'multi_output',    0);
+	mp3list_html_file_name				      :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_name', 	  'mp3list');
+	mp3list_html_file_ending				    :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_ending',  '.html');
+	mp3list_text_files_zip	            :=	Ini.ReadBool   ('MP3LIST',   'zip_text_files',  False);
+	mp3list_text_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'text_files_delete_after_zip',  False);
+	mp3list_html_files_zip              :=	Ini.ReadBool   ('MP3LIST',   'zip_html_files',  False);
+	mp3list_html_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'html_files_delete_after_zip',  False);
+	mp3list_text_file_encoding           :=	Ini.ReadInteger('MP3LIST',   'text_file_encoding',    0);
 
-		cdarchive_path_to_read_in		        :=  Ini.ReadString ('CDARCHIV',  'SINGLEDISKPATH',  'C:\');
-		for i := 0 to 9 do
-			cdarchive_last_used_pathes[i]	    :=  Ini.ReadString ('CDARCHIV',  'SourcePath'+IntToStr(i), '');
+	cdarchive_path_to_read_in		        :=  Ini.ReadString ('CDARCHIV',  'SINGLEDISKPATH',  'C:\');
+	for i := 0 to 9 do
+		cdarchive_last_used_pathes[i]	    :=  Ini.ReadString ('CDARCHIV',  'SourcePath'+IntToStr(i), '');
 
-		cdarchive_path_to_act_archive       :=	cdarchive_last_used_pathes[0];
+	cdarchive_path_to_act_archive       :=	cdarchive_last_used_pathes[0];
 
-		for i := 0 to 9 do
-			cdlist_last_used_pathes[i]	      :=  Ini.ReadString ('CDLIST',    'SourcePath'+IntToStr(i), '');
+	for i := 0 to 9 do
+		cdlist_last_used_pathes[i]	      :=  Ini.ReadString ('CDLIST',    'SourcePath'+IntToStr(i), '');
 
-		for i := 0 to 9 do
-			cdlist_last_used_export_files[i]  :=  Ini.ReadString ('CDLIST',    'export_files'+IntToStr(i), '');
+	for i := 0 to 9 do
+		cdlist_last_used_export_files[i]  :=  Ini.ReadString ('CDLIST',    'export_files'+IntToStr(i), '');
 
-		for i := 0 to 9 do
-			cdlist_last_used_template_files[i]:=  Ini.ReadString ('CDLIST',    'template_files'+IntToStr(i), '');
+	for i := 0 to 9 do
+		cdlist_last_used_template_files[i]:=  Ini.ReadString ('CDLIST',    'template_files'+IntToStr(i), '');
 
-		cdlist_text_files_zip	              :=	Ini.ReadBool   ('CDLIST',    'zip_text_files',  False);
-		cdlist_text_files_delete_after_zip  :=	Ini.ReadBool   ('CDLIST',    'text_files_delete_after_zip',  False);
-		cdlist_html_files_zip               :=	Ini.ReadBool   ('CDLIST',    'zip_html_files',  False);
-		cdlist_html_files_delete_after_zip  :=	Ini.ReadBool   ('CDLIST',    'html_files_delete_after_zip',  False);
+	cdlist_text_files_zip	              :=	Ini.ReadBool   ('CDLIST',    'zip_text_files',  False);
+	cdlist_text_files_delete_after_zip  :=	Ini.ReadBool   ('CDLIST',    'text_files_delete_after_zip',  False);
+	cdlist_html_files_zip               :=	Ini.ReadBool   ('CDLIST',    'zip_html_files',  False);
+	cdlist_html_files_delete_after_zip  :=	Ini.ReadBool   ('CDLIST',    'html_files_delete_after_zip',  False);
 
-		pacman_adjustment_visible         	:=  Ini.ReadBool   ('DEVELOP',   'PACMAN_ADJUSTMENT', False);
-    Ini.Free;
-    {End: INI-Datei oeffnen und werte setzen}
+	pacman_adjustment_visible         	:=  Ini.ReadBool   ('DEVELOP',   'PACMAN_ADJUSTMENT', False);
+	Ini.Free;
+	{End: INI-Datei oeffnen und werte setzen}
 
-		mp3list_html_output_file    :=	mp3list_html_file_name + mp3list_html_file_ending;
-    mp3list_text_output_file    :=  mp3list_html_file_name + '.txt';
+	mp3list_html_output_file    :=	mp3list_html_file_name + mp3list_html_file_ending;
+	mp3list_text_output_file    :=  mp3list_html_file_name + '.txt';
 
   {Set filter-options}
 	filter_ComboBox.ItemIndex		:=	0;	 //	default is mp3
@@ -937,7 +939,7 @@ begin
 	if mp3list_html_multi_output = 0 then
   begin
 		create_html_output(mp3list_single_template_file,
-    									 SlashSep(html_files_output_path, mp3list_html_output_file),
+											 SlashSep(html_files_output_path, mp3list_html_output_file),
                        '',
                        0);
 
@@ -1421,7 +1423,7 @@ begin
     if cdlist_html_files_delete_after_zip then
     begin
 			if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
-        ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
+				ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
 		end;
   end;
 
