@@ -32,15 +32,13 @@ type
     Pathes_GB: TGroupBox;
     HTML_File_Dialog_Btn: TSpeedButton;
     TXT_File_Dialog_Btn: TSpeedButton;
-    TXT_File_Output_Lab: TLabel;
+		TXT_File_Output_Lab: TLabel;
     HTML_File_Output_Lab: TLabel;
     TXT_File_Output_Edit: TEdit;
     HTML_File_Output_Edit: TEdit;
     Language_GB: TGroupBox;
     Language_CB: TComboBox;
-    First_Start_Panel: TPanel;
-    First_Start_Memo: TMemo;
-    MP3List: TTabSheet;
+		MP3List: TTabSheet;
     MP3List_Template_GB: TGroupBox;
     MP3List_Template_File_Dialog_Btn: TSpeedButton;
     MP3List_Multi_Template_File_Dialog_Btn: TSpeedButton;
@@ -57,7 +55,6 @@ type
     Pacman_CheckBox: TCheckBox;
     MP3List_Open_Template_File_Dialog: TOpenDialog;
     MP3List_Multi_Open_Template_File_Dialog: TOpenDialog;
-    Label1: TLabel;
     mp3list_filename_Edit: TEdit;
     Label2: TLabel;
     mp3list_file_ending_Edit: TEdit;
@@ -72,14 +69,9 @@ type
     GroupBox1: TGroupBox;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    Label3: TLabel;
-    Label4: TLabel;
     Label5: TLabel;
-    Label6: TLabel;
     Edit1: TEdit;
     Edit2: TEdit;
-    RadioButton3: TRadioButton;
-    RadioButton4: TRadioButton;
     Edit3: TEdit;
     Edit4: TEdit;
     CheckBox1: TCheckBox;
@@ -468,13 +460,15 @@ begin
   HTML_File_Output_Lab.Caption                    :=  GetTxt( 2,  6, 'Wo sollen die Webseiten gespeichert werden :');
   Store_And_Close_Btn.Caption                     :=  GetTxt( 2,  7, '&Sichern und Schliessen');
 
-  First_Start_Memo.Clear;
-  First_Start_Memo.Lines.Add                         (GetTxt( 2,  8, 'Beim ersten Programmstart sollten noch'));
-  First_Start_Memo.Lines.Add                         (GetTxt( 2,  9, 'verschiedene Einstellungen gemacht werden.'));
-  First_Start_Memo.Lines.Add                         ('');
-  First_Start_Memo.Lines.Add                         (GetTxt( 2, 11, 'Du kannst die Standardeinstellungen'));
-  First_Start_Memo.Lines.Add                         (GetTxt( 2, 12, 'akzeptieren und auf "Sichern und Schliessen"'));
-  First_Start_Memo.Lines.Add                         (GetTxt( 2, 13, 'klicken.'));
+(*
+	First_Start_Memo.Clear;
+	First_Start_Memo.Lines.Add                         (GetTxt( 2,  8, 'Beim ersten Programmstart sollten noch'));
+	First_Start_Memo.Lines.Add                         (GetTxt( 2,  9, 'verschiedene Einstellungen gemacht werden.'));
+	First_Start_Memo.Lines.Add                         ('');
+	First_Start_Memo.Lines.Add                         (GetTxt( 2, 11, 'Du kannst die Standardeinstellungen'));
+	First_Start_Memo.Lines.Add                         (GetTxt( 2, 12, 'akzeptieren und auf "Sichern und Schliessen"'));
+	First_Start_Memo.Lines.Add                         (GetTxt( 2, 13, 'klicken.'));
+*)
 
   {MP3List}
   RadioButton1.Caption						                :=  GetTxt( 2, 14, 'Eine Seite (Groesse beachten)');
