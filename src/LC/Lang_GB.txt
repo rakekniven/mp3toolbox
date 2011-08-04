@@ -41,6 +41,23 @@ Msg=GB
 36 = searchtime
 37 = Cancel search
 38 = Where is the folder to search ?
+39 = Setup
+40 = Website at Google Code
+41 = Website of Author
+42 = About
+43 = Load directories from config
+44 = Save directories
+45 = Select all
+46 = Select none
+47 = Clear selected
+48 = Clear all
+49 = Go !
+50 = Files found
+51 = Directories searched
+52 = Search time
+53 = Tags scannen
+54 = Scan time
+55 = Stop
 
 [Setup]
  1 = General
@@ -52,7 +69,7 @@ Msg=GB
  7 = &Save and close
  8 = This is the first time you´re starting this programm and you need to make some settings.
  9 =
-10 =
+10 = Setup
 11 = You can accept the standardsettings. Simply click at "Save and close"
 12 =
 13 =
@@ -67,4 +84,9 @@ Msg=GB
 22 = Where should the webfiles be stored ?
 23 = Delete text files after zipping
 24 = Delete html files after zipping
+25 = Sprache / Language
+26 = Output encoding of text files
+27 = File name prefix
+28 = File name extension
+
 

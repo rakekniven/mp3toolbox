@@ -106,9 +106,9 @@ type
 		Label2: TLabel;
 		Label3: TLabel;
 		Label4: TLabel;
-		Label6: TLabel;
-		Label5: TLabel;
-		Label7: TLabel;
+    Label5: TLabel;
+    Lab_Scan_Result: TLabel;
+    Lab_Scan_Time: TLabel;
     Goo1: TMenuItem;
     WebsiteofAuthor1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
@@ -364,7 +364,7 @@ begin
 	search_filter_expression		:=	filter_ComboBox.Items[filter_ComboBox.ItemIndex];
 
 
-  F_Main.Caption :=  'mp3toolbox version ' + version;
+	F_Main.Caption :=  'MP3Toolbox ' + version;
 //  Form1.Caption :=  'mp3toolbox version ' + get_version(1,1,0,1);
 
 
@@ -429,8 +429,8 @@ begin
 	Result_Label.Caption	:=	'...';
 	Dir_Count_Label.Caption	:=	'...';
 	Search_Time_Lab.Caption	:=	'...';
-	Label5.Caption	:=	'...';
-	Label7.Caption	:=	'...';
+	Lab_Scan_Result.Caption	:=	'...';
+	Lab_Scan_Time.Caption	:=	'...';
 end;
 
 {--- OnActivate ---------------------------------------------------------------}
@@ -445,24 +445,40 @@ procedure TF_Main.init_text(Sender: TObject);
 begin
 	{General}
 //  F_Main.Caption                         :=  GetTxt( 1,  2, 'mp3toolbox version ???');
-  TabSheet1.Caption                      :=  GetTxt( 1,  3, 'Laufwerks-archive');
+	TabSheet1.Caption                      :=  GetTxt( 1,  3, 'Laufwerks-archive');
 	TabSheet3.Caption                      :=  GetTxt( 1,  5, 'CD-Liste');
+	File1.Caption                          :=  GetTxt( 1, 14, 'Datei');
+	Help1.Caption                          :=  GetTxt( 1, 15, 'Hilfe');
+	Exit1.Caption                          :=  GetTxt( 1, 16, 'Beenden');
+	Setup1.Caption                         :=  GetTxt( 1, 39, 'Einstellungen');
+	Goo1.Caption                           :=  GetTxt( 1, 40, 'Website at Google Code');
+	WebsiteofAuthor1.Caption               :=  GetTxt( 1, 41, 'Website of Author');
+	AboutMP3Toolbox1.Caption               :=  GetTxt( 1, 42, 'About');
 
-  {MP3List}
-  Multi_Dir_GroupBox.Caption             :=  GetTxt( 1,  6, 'Verzeichnisse ');
-  Output_with_filesize_CB.Caption        :=  GetTxt( 1,  7, 'Ausgabe mit Dateigroesse');
-  Output_with_path_CB.Caption            :=  GetTxt( 1,  8, 'Ausgabe mit Pfad');
-  Subdir_CheckBox.Caption                :=  GetTxt( 1,  9, 'Unterverz. durchsuchen');
-  Sel_Dir_Btn.Caption                    :=  GetTxt( 1, 10, 'Pfad auswaehlen');
-  Own_Filter_CheckBox.Caption            :=  GetTxt( 1, 11, 'eigener Filter');
-  TXT_Output_Btn.Caption                 :=  GetTxt( 1, 12, 'Textdatei erzeugen');
-  HTML_OutputButton.Caption              :=  GetTxt( 1, 13, 'Webseite erzeugen');
-  File1.Caption                          :=  GetTxt( 1, 14, 'Datei');
-  Help1.Caption                          :=  GetTxt( 1, 15, 'Hilfe');
-  Exit1.Caption                          :=  GetTxt( 1, 16, 'Beenden');
+	{MP3List}
+	Multi_Dir_GroupBox.Caption             :=  GetTxt( 1,  6, 'Verzeichnisse ');
+	Output_with_filesize_CB.Caption        :=  GetTxt( 1,  7, 'Ausgabe mit Dateigroesse');
+	Output_with_path_CB.Caption            :=  GetTxt( 1,  8, 'Ausgabe mit Pfad');
+	Subdir_CheckBox.Caption                :=  GetTxt( 1,  9, 'Unterverz. durchsuchen');
+	Sel_Dir_Btn.Caption                    :=  GetTxt( 1, 10, 'Pfad auswaehlen');
+	Own_Filter_CheckBox.Caption            :=  GetTxt( 1, 11, 'eigener Filter');
+	TXT_Output_Btn.Caption                 :=  GetTxt( 1, 12, 'Textdatei erzeugen');
+	HTML_OutputButton.Caption              :=  GetTxt( 1, 13, 'Webseite erzeugen');
+	Load_From_Button.Caption               :=  GetTxt( 1, 43, 'Load directories from config');
+	Save_To_Button.Caption                 :=  GetTxt( 1, 44, 'Save directories');
+	Sel_All_Button.Caption                 :=  GetTxt( 1, 45, 'Select all');
+	Sel_None_Button.Caption                :=  GetTxt( 1, 46, 'Select none');
+	Clear_Sel_Button.Caption               :=  GetTxt( 1, 47, 'Clear selected');
+	Clear_All_Button.Caption               :=  GetTxt( 1, 48, 'Clear all');
+	Go_Btn.Caption               :=  GetTxt( 1, 49, 'Go !');
+	Label1.Caption               :=  GetTxt( 1, 50, 'Files found');
+	Label2.Caption               :=  GetTxt( 1, 51, 'Directories searched');
+	Label3.Caption               :=  GetTxt( 1, 52, 'Search time');
+	Label4.Caption               :=  GetTxt( 1, 53, 'Tags scanned');
+	Label5.Caption               :=  GetTxt( 1, 54, 'Scan time');
 
 	{CDList}
-  CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
+	CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
   HTML_OutputButton3.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
   CDList_Template_Label.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
   Result_File_Label.Caption              :=  GetTxt( 1, 28, 'Ausgabedatei :');
@@ -652,8 +668,8 @@ begin
 	Result_Label.Caption	:=	'...';
 	Dir_Count_Label.Caption	:=	'...';
 	Search_Time_Lab.Caption	:=	'...';
-	Label5.Caption	:=	'...';
-	Label7.Caption	:=	'...';
+	Lab_Scan_Result.Caption	:=	'...';
+	Lab_Scan_Time.Caption	:=	'...';
 
 	MP3_ListBox.BringToFront;
   NameCheck_ListBox.Clear;
@@ -669,8 +685,7 @@ begin
     search_status :=  True;
 
     Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
-    Go_Btn.Caption  :=  'stop search';
-    Go_Btn.Caption  :=  'stop';
+		Go_Btn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
 		{Startzeit der suche}
 		start_search_time := Time;
@@ -679,7 +694,7 @@ begin
     {Pacman aktivieren und starten}
     Pacman_Btn.Visible        :=  True;
     Pacman_Btn.Repaint;
-    pacman_direction          :=  True;
+		pacman_direction          :=  True;
     Pacman_Move_Timer.Enabled :=  True;
 
 
@@ -801,7 +816,8 @@ begin
 				Search_ProgressBar.Position	:=	Round((100 * (i + 1)) div (Files.Count));
 				Application.ProcessMessages;
 			end;
-			Label5.Caption	:=	IntToStr(i + 1);
+
+			Lab_Scan_Result.Caption	:=	IntToStr(i + 1);
 
 			if not TabSheet4.TabVisible then
 			begin
@@ -819,7 +835,7 @@ begin
 		Pacman_Btn.Visible        :=  False;
 
 		{Anzeige der Suchzeit.}
-		Label7.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+		Lab_Scan_Time.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
 
 		total_work_duration	:=  (end_scan_time - start_scan_time) +
 														(end_search_time - start_search_time);
@@ -839,7 +855,7 @@ begin
 
     {Button zurücksetzen}
     Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
-    Go_Btn.Caption  :=  'Go !';
+    Go_Btn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
     cancel_search	:=	False;
     search_status :=  False;
@@ -1524,7 +1540,7 @@ procedure TF_Main.NameCheck_ListBoxMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if  NameCheck_ListBox.ItemIndex >= 0 then
-    Char_Count_Lab.Caption  :=  IntToStr(Length(NameCheck_ListBox.Items[NameCheck_ListBox.ItemIndex]));
+		Char_Count_Lab.Caption  :=  IntToStr(Length(NameCheck_ListBox.Items[NameCheck_ListBox.ItemIndex]));
 end;
 
 procedure TF_Main.CDList_Template_SpeedButtonClick(Sender: TObject);
