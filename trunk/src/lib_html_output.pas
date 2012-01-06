@@ -142,6 +142,9 @@ var
 	cnt					                   	:	Integer;
 	TplIsUnicode 										:	Boolean;
 begin
+
+	//	docs: https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
+
 	{check if template is present}
 	if FileExists(Template_file) then
 	begin
