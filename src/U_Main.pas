@@ -106,11 +106,11 @@ type
 		Label2: TLabel;
 		Label3: TLabel;
 		Label4: TLabel;
-    Label5: TLabel;
-    Lab_Scan_Result: TLabel;
-    Lab_Scan_Time: TLabel;
-    Goo1: TMenuItem;
-    WebsiteofAuthor1: TMenuItem;
+		Label5: TLabel;
+		Lab_Scan_Result: TLabel;
+		Lab_Scan_Time: TLabel;
+		Goo1: TMenuItem;
+		WebsiteofAuthor1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -165,7 +165,7 @@ type
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 		procedure Result_File_SpeedButtonClick(Sender: TObject);
 		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
-    procedure Goo1Click(Sender: TObject);
+		procedure Goo1Click(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
@@ -221,6 +221,7 @@ var
 	mp3list_result_count								:	Integer;            //	Zähler für Suchergebnis
 	mp3list_html_file_name              : String;
 	mp3list_html_file_ending            : String;
+	mp3list_html_output_format          : String;
 	mp3list_text_files_zip              : Boolean;
 	mp3list_text_files_delete_after_zip : Boolean;
 	mp3list_html_files_zip              : Boolean;
@@ -326,6 +327,7 @@ begin
 	mp3list_html_multi_output           :=	Ini.ReadInteger('MP3LIST',   'multi_output',    0);
 	mp3list_html_file_name				      :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_name', 	  'mp3list');
 	mp3list_html_file_ending				    :=  Ini.ReadString ('MP3LIST',   'mp3list_html_file_ending',  '.html');
+	mp3list_html_output_format					:=	Ini.ReadString ('MP3LIST',   'output_format',		'%artist% - %album% - %track% - %title% (%year%)');
 	mp3list_text_files_zip	            :=	Ini.ReadBool   ('MP3LIST',   'zip_text_files',  False);
 	mp3list_text_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'text_files_delete_after_zip',  False);
 	mp3list_html_files_zip              :=	Ini.ReadBool   ('MP3LIST',   'zip_html_files',  False);
@@ -374,7 +376,7 @@ begin
   cancel_search     	  :=	False;
 
   {Searchstatus : False = not activ }
-  {               True  = activ     }
+	{               True  = activ     }
   search_status         :=  False;
 
 	{fill subdir variable}
@@ -538,7 +540,7 @@ var
   s   : string;
 begin
   Multi_Dir_ListBox.Clear;
-  Ini := TIniFile.Create(ini_file_name);
+	Ini := TIniFile.Create(ini_file_name);
 
   //	Verzeichnisse einlesen
   s :=  '';
@@ -661,7 +663,8 @@ end;
 procedure TF_Main.Go_BtnClick(Sender: TObject);
 var
 	Files							:	TStringList;                       //  Stringliste
-	i									:	Integer;
+	i,
+	i2								:	Integer;
 	gauge_step				:	Integer;
 	s1								:	String;
 begin
@@ -674,7 +677,7 @@ begin
 	MP3_ListBox.BringToFront;
   NameCheck_ListBox.Clear;
 
-  {When Search is canceled.}
+	{When Search is canceled.}
   if search_status  = True then
   begin
     cancel_search	:=	True;
@@ -701,8 +704,8 @@ begin
     {Liste löschen}
     MP3_ListBox.items.Clear;
 
-    {Wenn eigener Filter angewaehlt wurde}
-    if Own_Filter_CheckBox.Checked	=	True then
+		{Wenn eigener Filter angewaehlt wurde}
+		if Own_Filter_CheckBox.Checked	=	True then
       search_filter_expression	:=	Filter_Edit.Text;
 
     searched_dir_count	:=	0;           // Verzeichniszähler
@@ -715,7 +718,7 @@ begin
     for i := 0 to (Multi_Dir_ListBox.Items.Count - 1) do
     begin
       if Multi_Dir_ListBox.Selected[i] then
-      begin
+			begin
         gauge_step	:=	gauge_step + 1;
         {Aufruf der Suchprozedur}
         if cancel_search = True then Break;
@@ -792,6 +795,23 @@ begin
 				end
 				else
 				begin
+					// Check existence for each placeholder and replace it
+
+					// Edit_Output_Format
+					s1	:=	F_Setup.Edit_Output_Format.Text;
+
+					s1	:=	StringReplace(s1, '%artist%', ID3v2Tag.Artist, [rfReplaceAll, rfIgnoreCase]);
+
+					s1	:=	StringReplace(s1, '%album%', ID3v2Tag.Album, [rfReplaceAll, rfIgnoreCase]);
+
+					s1	:=	StringReplace(s1, '%track%', ID3v2Tag.Track, [rfReplaceAll, rfIgnoreCase]);
+
+					s1	:=	StringReplace(s1, '%title%', ID3v2Tag.Title, [rfReplaceAll, rfIgnoreCase]);
+
+					s1	:=	StringReplace(s1, '%year%', ID3v2Tag.Year, [rfReplaceAll, rfIgnoreCase]);
+
+					(*
+
 					s1	:= ID3v2Tag.Artist;
 					if ID3v2Tag.Album <> '' then
 						s1	:=	s1 + ' - ' + ID3v2Tag.Album;
@@ -804,6 +824,17 @@ begin
 					end;
 					if ID3v2Tag.Title <> '' then
 						s1	:=	s1 + ' - ' + ID3v2Tag.Title;
+
+*)
+					// check search and replace list
+					for i2 := 1 to F_Setup.ValueListEditor1.RowCount - 1 do
+					begin
+						if F_Setup.ValueListEditor1.Keys[i2] <> '' then
+							s1	:=	StringReplace(s1,
+																		F_Setup.ValueListEditor1.Keys[i2],
+																		F_Setup.ValueListEditor1.Values[F_Setup.ValueListEditor1.Keys[i2]],
+																		[rfReplaceAll, rfIgnoreCase]);
+					end;
 
 					MP3_ListBox.Items.Add(s1);
 				end;

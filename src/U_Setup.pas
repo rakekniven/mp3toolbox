@@ -23,7 +23,8 @@ interface
 
 uses
 	SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
-	Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, IniFiles, fldbrowsUnicode;
+	Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, IniFiles, fldbrowsUnicode,
+  Grids, ValEdit;
 
 type
   TF_Setup = class(TForm)
@@ -72,6 +73,9 @@ type
     Lab_File_Prefix: TLabel;
     CB_TXT_Encoding: TComboBox;
     Lab_Enc: TLabel;
+    Label6: TLabel;
+    Edit_Output_Format: TEdit;
+    ValueListEditor1: TValueListEditor;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -83,8 +87,6 @@ type
     procedure MP3List_Multi_Template_File_EditExit(Sender: TObject);
     procedure MP3List_Template_File_Dialog_BtnClick(Sender: TObject);
     procedure MP3List_Multi_Template_File_Dialog_BtnClick(Sender: TObject);
-    procedure Debug_DevContextPopup(Sender: TObject; MousePos: TPoint;
-      var Handled: Boolean);
     procedure Pacman_CheckBoxClick(Sender: TObject);
     procedure Store_And_Close_BtnClick(Sender: TObject);
     procedure TXT_File_Dialog_BtnClick(Sender: TObject);
@@ -101,6 +103,7 @@ type
     procedure CDList_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
     procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
     procedure CB_TXT_EncodingChange(Sender: TObject);
+    procedure Edit_Output_FormatChange(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -258,7 +261,7 @@ procedure TF_Setup.RadioButton2Click(Sender: TObject);
 begin
   if RadioButton1.Checked then
 		mp3list_html_multi_output	:=	0
-  else
+	else
   	mp3list_html_multi_output	:=	1;
 end;
 
@@ -317,18 +320,17 @@ begin
   end;
 end;
 
-procedure TF_Setup.Debug_DevContextPopup(Sender: TObject; MousePos: TPoint;
-  var Handled: Boolean);
+procedure TF_Setup.Edit_Output_FormatChange(Sender: TObject);
 begin
-
+	mp3list_html_output_format	:=  Edit_Output_Format.Text;
 end;
 
 {--- Pacman - Adjustment Visible ? --------------------------------------------}
 procedure TF_Setup.Pacman_CheckBoxClick(Sender: TObject);
 begin
-  if Pacman_CheckBox.Checked  =  True then
+	if Pacman_CheckBox.Checked  =  True then
   begin
-    pacman_adjustment_visible    :=  True;
+		pacman_adjustment_visible    :=  True;
     F_Main.Pacman_Panel.Visible  :=  True
   end
   else
@@ -345,7 +347,7 @@ var
   all_entries_ok  : Boolean;
 	Ini             : TIniFile;
 begin
-  all_entries_ok  :=  True;
+	all_entries_ok  :=  True;
 
   if all_entries_ok then
   begin
@@ -356,7 +358,7 @@ begin
  	  Ini.WriteString ('GENERAL', 'htmldateien', 		            html_files_output_path);
 
     Ini.WriteString ('MP3LIST', 'single_template',            mp3list_single_template_file);
-    Ini.WriteString ('MP3LIST', 'multi_template',             mp3list_multi_template_file);
+		Ini.WriteString ('MP3LIST', 'multi_template',             mp3list_multi_template_file);
 		Ini.WriteInteger('MP3LIST', 'multi_output', 	            mp3list_html_multi_output);
 		Ini.WriteString ('MP3LIST', 'mp3list_html_file_name', 	  mp3list_html_file_name);
 		Ini.WriteString ('MP3LIST', 'mp3list_html_file_ending',   mp3list_html_file_ending);
@@ -365,6 +367,7 @@ begin
 		Ini.WriteBool   ('MP3LIST', 'text_files_delete_after_zip',mp3list_text_files_delete_after_zip);
 		Ini.WriteBool   ('MP3LIST', 'html_files_delete_after_zip',mp3list_html_files_delete_after_zip);
 		Ini.WriteInteger('MP3LIST', 'text_file_encoding',    			mp3list_text_file_encoding);
+		Ini.WriteString ('MP3LIST', 'output_format',						  mp3list_html_output_format);
 
 		Ini.WriteBool   ('CDLIST',  'zip_text_files',             cdlist_text_files_zip);
 		Ini.WriteBool   ('CDLIST',  'zip_html_files',             cdlist_html_files_zip);
