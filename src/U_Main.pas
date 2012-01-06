@@ -810,6 +810,8 @@ begin
 
 					s1	:=	StringReplace(s1, '%year%', ID3v2Tag.Year, [rfReplaceAll, rfIgnoreCase]);
 
+					//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
+
 					(*
 
 					s1	:= ID3v2Tag.Artist;
