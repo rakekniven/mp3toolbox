@@ -75,7 +75,7 @@ type
     Lab_Enc: TLabel;
     Label6: TLabel;
     Edit_Output_Format: TEdit;
-    ValueListEditor1: TValueListEditor;
+    ValueListEditor_SeachAndReplace: TValueListEditor;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TXT_File_Output_EditChange(Sender: TObject);

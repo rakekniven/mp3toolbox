@@ -177,7 +177,7 @@ object F_Setup: TF_Setup
         Text = '%artist% - %album% - %track% - %title% (%year%)'
         OnChange = Edit_Output_FormatChange
       end
-      object ValueListEditor1: TValueListEditor
+      object ValueListEditor_SeachAndReplace: TValueListEditor
         Left = 10
         Top = 298
         Width = 306
