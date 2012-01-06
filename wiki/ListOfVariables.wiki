@@ -1,3 +1,4 @@
+Use for templates
 || *Variable name* || *Description* ||
 ||{#general:update_date}||Wird ersetzt durch die aktuelle Uhrzeit während des Updates.||
 ||{#general:version}||Wird ersetzt durch die Programmversion.||
@@ -10,3 +11,10 @@
 ||{#mp3list:detail_mpg_counter}||Wird ersetzt durch die Anzahl der gefundenen MP3s zum jeweiligen Buchstaben.||
 ||{#mp3list:detail_result_list}||Wird ersetzt durch die Liste mit den gefundenen MP3s zum jeweiligen Buchstaben.||
 ||{#mp3list:index_character}||Wird ersetzt durch den Buchstaben der aktuell erstellten Seite (nur bei Multi-Ausgabe).||
+
+Use to create your output string. Adjust it under "Settings" dialog
+ * %artist%
+ * %album%
+ * %track%
+ * %title%
+ * %year%
