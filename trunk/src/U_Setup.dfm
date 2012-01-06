@@ -36,11 +36,18 @@ object F_Setup: TF_Setup
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??Allgemein'
+      object Label6: TLabel
+        Left = 10
+        Top = 227
+        Width = 95
+        Height = 16
+        Caption = '??Output Format'
+      end
       object Pathes_GB: TGroupBox
         Left = 10
         Top = 10
         Width = 631
-        Height = 149
+        Height = 135
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -135,9 +142,9 @@ object F_Setup: TF_Setup
       end
       object Language_GB: TGroupBox
         Left = 10
-        Top = 167
+        Top = 153
         Width = 198
-        Height = 71
+        Height = 66
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -161,6 +168,29 @@ object F_Setup: TF_Setup
             'English')
         end
       end
+      object Edit_Output_Format: TEdit
+        Left = 10
+        Top = 249
+        Width = 510
+        Height = 24
+        TabOrder = 2
+        Text = '%artist% - %album% - %track% - %title% (%year%)'
+        OnChange = Edit_Output_FormatChange
+      end
+      object ValueListEditor1: TValueListEditor
+        Left = 10
+        Top = 298
+        Width = 306
+        Height = 119
+        KeyOptions = [keyEdit, keyAdd, keyDelete]
+        Strings.Strings = (
+          '-  -  -=-'
+          '()=')
+        TabOrder = 3
+        TitleCaptions.Strings = (
+          '??Suchen'
+          '??Ersetzen')
+      end
     end
     object MP3List: TTabSheet
       Margins.Left = 4
@@ -169,10 +199,6 @@ object F_Setup: TF_Setup
       Margins.Bottom = 4
       Caption = '??MP3-Liste'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object MP3List_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -488,10 +514,6 @@ object F_Setup: TF_Setup
       Caption = 'Album-Liste'
       ImageIndex = 3
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object CDList_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -563,11 +585,6 @@ object F_Setup: TF_Setup
       Margins.Bottom = 4
       Caption = '??Debug and Dev.'
       ImageIndex = 2
-      OnContextPopup = Debug_DevContextPopup
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Pacman_CheckBox: TCheckBox
         Left = 39
         Top = 30

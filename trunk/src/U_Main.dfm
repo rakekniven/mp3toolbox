@@ -265,7 +265,7 @@ object F_Main: TF_Main
         Visible = False
       end
       object Char_Count_Lab2: TLabel
-        Left = 560
+        Left = 565
         Top = 377
         Width = 62
         Height = 16
@@ -469,9 +469,9 @@ object F_Main: TF_Main
       end
       object MP3_ListBox: TListBox
         Left = 0
-        Top = 401
+        Top = 345
         Width = 780
-        Height = 207
+        Height = 263
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -496,7 +496,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 5
         Width = 537
-        Height = 388
+        Height = 332
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -506,12 +506,12 @@ object F_Main: TF_Main
         TabOrder = 3
         DesignSize = (
           537
-          388)
+          332)
         object Multi_Dir_ListBox: TListBox
           Left = 187
           Top = 30
           Width = 334
-          Height = 344
+          Height = 291
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -527,7 +527,7 @@ object F_Main: TF_Main
           Left = 11
           Top = 155
           Width = 168
-          Height = 20
+          Height = 25
           Hint = 'Gespeicherte Verzeichnisse laden.'
           Margins.Left = 4
           Margins.Top = 4
@@ -543,7 +543,7 @@ object F_Main: TF_Main
           Left = 11
           Top = 183
           Width = 168
-          Height = 20
+          Height = 25
           Hint = 'Aktuelle Auswahl speichern.'
           Margins.Left = 4
           Margins.Top = 4
@@ -559,7 +559,7 @@ object F_Main: TF_Main
           Left = 11
           Top = 211
           Width = 168
-          Height = 20
+          Height = 25
           Hint = 'Alle Verzeichnisse markieren.'
           Margins.Left = 4
           Margins.Top = 4
@@ -575,7 +575,7 @@ object F_Main: TF_Main
           Left = 11
           Top = 239
           Width = 168
-          Height = 20
+          Height = 25
           Hint = 'Kein Verzeichnis selektieren.'
           Margins.Left = 4
           Margins.Top = 4
@@ -591,7 +591,7 @@ object F_Main: TF_Main
           Left = 11
           Top = 267
           Width = 168
-          Height = 20
+          Height = 25
           Hint = 'Markierte Verzeichniseintr'#228'ge l'#246'schen'
           Margins.Left = 4
           Margins.Top = 4
@@ -607,7 +607,7 @@ object F_Main: TF_Main
           Left = 11
           Top = 295
           Width = 168
-          Height = 20
+          Height = 25
           Hint = 'Alle Verzeichniseintr'#228'ge l'#246'schen'
           Margins.Left = 4
           Margins.Top = 4
@@ -669,8 +669,8 @@ object F_Main: TF_Main
           OnClick = Output_with_path_CBClick
         end
         object Filter_GroupBox: TGroupBox
-          Left = 11
-          Top = 318
+          Left = 259
+          Top = 223
           Width = 168
           Height = 61
           Margins.Left = 4
@@ -700,7 +700,7 @@ object F_Main: TF_Main
           end
           object filter_ComboBox: TComboBox
             Left = 15
-            Top = 35
+            Top = 36
             Width = 139
             Height = 21
             Hint = 'Nach was soll gesucht werden'
@@ -1025,6 +1025,10 @@ object F_Main: TF_Main
       ImageIndex = 2
       TabVisible = False
       OnShow = TabSheet3Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         784
         612)
@@ -1424,6 +1428,10 @@ object F_Main: TF_Main
       Caption = 'Error'
       ImageIndex = 3
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
