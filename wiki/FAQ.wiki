@@ -8,3 +8,11 @@ A: Just modify encoding of your template file. MP3Toolbox detects encoding and u
 Q: ID3 tags of some files couldn't be read. They are listed on error tab. iTunes shows their tag content correctly. Why?
 
 A: I use a 3rd party library to read tags. Please convert your tags to at least ID3v2 and you are fine.
+
+----
+
+Q: It takes a long time to scan my huge collection of music
+
+A: Get a cup of coffee.
+
+----
