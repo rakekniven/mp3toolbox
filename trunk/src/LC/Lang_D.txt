@@ -58,6 +58,7 @@ Msg=D
 53 = Gescannte Tags
 54 = Scandauer
 55 = Stop
+56 = Hilfe
 
 [Setup]
  1 = Allgemein

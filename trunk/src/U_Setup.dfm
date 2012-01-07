@@ -36,12 +36,29 @@ object F_Setup: TF_Setup
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??Allgemein'
-      object Label_OutputFormat: TLabel
+      object Lab_OutputFormat: TLabel
         Left = 10
         Top = 227
         Width = 95
         Height = 16
         Caption = '??Output Format'
+      end
+      object Lab_OutputFormat_Help: TLabel
+        Left = 526
+        Top = 227
+        Width = 37
+        Height = 16
+        Cursor = crHandPoint
+        Hint = 'https://code.google.com/p/mp3toolbox/wiki/ListOfVariables'
+        Alignment = taRightJustify
+        Caption = '??Help'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsUnderline]
+        ParentFont = False
+        OnClick = Lab_OutputFormat_HelpClick
       end
       object Pathes_GB: TGroupBox
         Left = 10
@@ -171,7 +188,7 @@ object F_Setup: TF_Setup
       object Edit_Output_Format: TEdit
         Left = 10
         Top = 249
-        Width = 510
+        Width = 553
         Height = 24
         TabOrder = 2
         Text = '%artist% - %album% - %track% - %title% (%year%)'
