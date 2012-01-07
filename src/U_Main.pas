@@ -829,12 +829,12 @@ begin
 
 *)
 					// check search and replace list
-					for i2 := 1 to F_Setup.ValueListEditor1.RowCount - 1 do
+					for i2 := 1 to F_Setup.ValueListEditor_SeachAndReplace.RowCount - 1 do
 					begin
-						if F_Setup.ValueListEditor1.Keys[i2] <> '' then
+						if F_Setup.ValueListEditor_SeachAndReplace.Keys[i2] <> '' then
 							s1	:=	StringReplace(s1,
-																		F_Setup.ValueListEditor1.Keys[i2],
-																		F_Setup.ValueListEditor1.Values[F_Setup.ValueListEditor1.Keys[i2]],
+																		F_Setup.ValueListEditor_SeachAndReplace.Keys[i2],
+																		F_Setup.ValueListEditor_SeachAndReplace.Values[F_Setup.ValueListEditor_SeachAndReplace.Keys[i2]],
 																		[rfReplaceAll, rfIgnoreCase]);
 					end;
 
