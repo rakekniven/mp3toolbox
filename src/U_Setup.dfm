@@ -190,6 +190,7 @@ object F_Setup: TF_Setup
         TitleCaptions.Strings = (
           '??Suchen'
           '??Ersetzen')
+        OnExit = ValueListEditor_SeachAndReplaceExit
       end
     end
     object MP3List: TTabSheet

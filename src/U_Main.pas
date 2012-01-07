@@ -228,6 +228,7 @@ var
 	mp3list_html_files_delete_after_zip : Boolean;
 	mp3list_Character_stringlists       : array[0..26]  of TStringList;
 	mp3list_text_file_encoding					:	Integer;            //	0 : UTF8; 1 : ANSI
+	mp3list_SearchAndReplace			      : TStringList;
 
 	{Variablen für CD-Archive}
 	cdarchive_path_to_read_in		        : String;
@@ -299,6 +300,8 @@ begin
 	for i := 0 to Length(mp3list_Character_stringlists) do
 		mp3list_Character_stringlists[i]  :=  TStringList.Create;
 
+	mp3list_SearchAndReplace  :=  TStringList.Create;
+
 	ID3v2Tag := TID3v2Tag.Create;
 
 //	version	:=	get_version() + ' beta';
@@ -321,6 +324,14 @@ begin
 	text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     text_files_output_path);
 	html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     html_files_output_path);
 	pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
+
+	// Read all search & replace pairs from INI
+	i	:=	0;
+	while Ini.ReadString ('GENERAL', 'SeachAndReplace' + IntToStr(i), '') <> '' do
+	begin
+		mp3list_SearchAndReplace.Add(Ini.ReadString ('GENERAL', 'SeachAndReplace' + IntToStr(i), ''));
+		inc(i);
+	end;
 
 	mp3list_single_template_file			  :=  Ini.ReadString ('MP3LIST',   'single_template', SlashSep(act_exec_directory, 'templates\mp3list-template2.html'));
 	mp3list_multi_template_file				  :=  Ini.ReadString ('MP3LIST',   'multi_template', 	SlashSep(act_exec_directory, 'templates\mp3list-letter-template2.html'));
@@ -393,7 +404,7 @@ begin
 
 
   {Sprache}
-  Set_Language(gui_language);
+	Set_Language(gui_language);
   init_text(Sender);
 //  Set_Language(Reg.language);
 
@@ -439,7 +450,7 @@ end;
 procedure TF_Main.FormActivate(Sender: TObject);
 begin
   Set_Language(gui_language);
-  init_text(Sender);
+	init_text(Sender);
 end;
 
 {--- assign captions and texts-------------------------------------------------}
