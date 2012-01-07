@@ -1,6 +1,5 @@
+#labels Phase-Implementation
 Follow these steps:
-
-...
 
  # Commit all your changes
  # Make sure to take care of issue tracker
