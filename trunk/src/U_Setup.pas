@@ -81,7 +81,7 @@ type
     procedure TXT_File_Output_EditChange(Sender: TObject);
     procedure HTML_File_Output_EditChange(Sender: TObject);
     procedure Language_CBChange(Sender: TObject);
-    procedure RadioButton1Click(Sender: TObject);
+		procedure RadioButton1Click(Sender: TObject);
     procedure RadioButton2Click(Sender: TObject);
     procedure MP3List_Template_File_EditExit(Sender: TObject);
     procedure MP3List_Multi_Template_File_EditExit(Sender: TObject);
@@ -104,6 +104,7 @@ type
     procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
     procedure CB_TXT_EncodingChange(Sender: TObject);
     procedure Edit_Output_FormatChange(Sender: TObject);
+    procedure ValueListEditor_SeachAndReplaceExit(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -126,8 +127,19 @@ uses
 
 {--- Formular erzeugen --------------------------------------------------------}
 procedure TF_Setup.FormCreate(Sender: TObject);
+var
+	i	:	Integer;
 begin
-	//
+  //	Delete designer items
+	ValueListEditor_SeachAndReplace.Strings.Clear;
+
+	if mp3list_SearchAndReplace.Count > 0 then
+	begin
+		for i := 0 to mp3list_SearchAndReplace.Count - 1 do
+		begin
+			ValueListEditor_SeachAndReplace.Strings.Add(mp3list_SearchAndReplace[i])
+		end;
+	end;
 end;
 
 {--- Formular anzeigen --------------------------------------------------------}
@@ -217,7 +229,7 @@ begin
 	{}
   if cdlist_html_files_delete_after_zip then
 	  cdlist_CLear_HTML_files_after_zip_CB.Checked	:=	True
-  else
+	else
 	  cdlist_CLear_HTML_files_after_zip_CB.Checked	:=	False;
 end;
 
@@ -225,6 +237,18 @@ end;
 procedure TF_Setup.TXT_File_Output_EditChange(Sender: TObject);
 begin
 	text_files_output_path	:=  TXT_File_Output_Edit.Text;
+end;
+
+procedure TF_Setup.ValueListEditor_SeachAndReplaceExit(Sender: TObject);
+var
+	i	:	Integer;
+begin
+	//
+	mp3list_SearchAndReplace.Clear;
+	for i := 0 to ValueListEditor_SeachAndReplace.Strings.Count - 1 do
+	begin
+		mp3list_SearchAndReplace.Add(ValueListEditor_SeachAndReplace.Strings[i])
+  end;
 end;
 
 {--- Wenn Pfad zu HTML-Ausgabe verändert wird. --------------------------------}
@@ -316,7 +340,7 @@ begin
   else
   begin
     MP3List_Multi_Template_File_Edit.Text :=  '';
-    mp3list_multi_template_file			  		:=  MP3List_Multi_Template_File_Edit.Text;
+		mp3list_multi_template_file			  		:=  MP3List_Multi_Template_File_Edit.Text;
   end;
 end;
 
@@ -346,16 +370,35 @@ procedure TF_Setup.Store_And_Close_BtnClick(Sender: TObject);
 var
   all_entries_ok  : Boolean;
 	Ini             : TIniFile;
+	i,
+	i2								:	Integer;
 begin
 	all_entries_ok  :=  True;
 
   if all_entries_ok then
   begin
-    Ini := TIniFile.Create(ini_file_name);
+		Ini := TIniFile.Create(ini_file_name);
 
     Ini.WriteString ('GENERAL', 'gui_language', 	            gui_language);
  	  Ini.WriteString ('GENERAL', 'textdateien', 		            text_files_output_path);
- 	  Ini.WriteString ('GENERAL', 'htmldateien', 		            html_files_output_path);
+		Ini.WriteString ('GENERAL', 'htmldateien', 		            html_files_output_path);
+
+		for i := 0 to mp3list_SearchAndReplace.Count - 1 do
+		begin
+			Ini.WriteString ('GENERAL', 'SeachAndReplace' + IntToStr(i), mp3list_SearchAndReplace[i]);
+      // If last entry has been reached then wipe out old values from INI
+			if i = (mp3list_SearchAndReplace.Count - 1) then
+			begin
+				i2	:= i+1;
+				while Ini.ValueExists('GENERAL', 'SeachAndReplace' + IntToStr(i2)) do
+				begin
+					Ini.DeleteKey('GENERAL', 'SeachAndReplace' + IntToStr(i2));
+					inc(i2);
+				end;
+
+
+			end;
+		end;
 
     Ini.WriteString ('MP3LIST', 'single_template',            mp3list_single_template_file);
 		Ini.WriteString ('MP3LIST', 'multi_template',             mp3list_multi_template_file);
@@ -449,7 +492,7 @@ begin
   {General}
 	Allgemein.Caption                               :=  GetTxt( 2,  1, 'Allgemein');
 	MP3List.Caption                                 :=  GetTxt( 2,  2, 'MP3-Liste');
-  Album_Liste.Caption                             :=  GetTxt( 2,  3, 'Ascii-Liste');
+	Album_Liste.Caption                             :=  GetTxt( 2,  3, 'Ascii-Liste');
   Debug_Dev.Caption                               :=  GetTxt( 2,  4, 'Debug und Zusatz');
   TXT_File_Output_Lab.Caption                     :=  GetTxt( 2,  5, 'Wo sollen die Textdateien gespeichert werden :');
   HTML_File_Output_Lab.Caption                    :=  GetTxt( 2,  6, 'Wo sollen die Webseiten gespeichert werden :');
