@@ -73,7 +73,7 @@ type
     Lab_File_Prefix: TLabel;
     CB_TXT_Encoding: TComboBox;
     Lab_Enc: TLabel;
-    Label6: TLabel;
+    Label_OutputFormat: TLabel;
     Edit_Output_Format: TEdit;
     ValueListEditor_SeachAndReplace: TValueListEditor;
     procedure FormShow(Sender: TObject);
@@ -107,7 +107,7 @@ type
   private
     { Private-Deklarationen }
   public
-    { Public-Deklarationen }
+		{ Public-Deklarationen }
   end;
 
 var
@@ -154,7 +154,7 @@ begin
 	  Pacman_CheckBox.Checked	:=	False;
 
   {set values of editfields}
-  TXT_File_Output_Edit.Text	 						:=	text_files_output_path;
+	TXT_File_Output_Edit.Text	 						:=	text_files_output_path;
   HTML_File_Output_Edit.Text						:=	html_files_output_path;
   MP3List_Template_File_Edit.Text				:=  mp3list_single_template_file;
   MP3List_Multi_Template_File_Edit.Text	:=  mp3list_multi_template_file;
@@ -295,7 +295,7 @@ begin
   if MP3List_Open_Template_File_Dialog.Execute = True then
   begin
     MP3List_Template_File_Edit.Text 		:=  MP3List_Open_Template_File_Dialog.FileName;
-    mp3list_single_template_file  			:=  MP3List_Template_File_Edit.Text;
+		mp3list_single_template_file  			:=  MP3List_Template_File_Edit.Text;
   end
   else
   begin
@@ -457,6 +457,11 @@ begin
 	F_Setup.Caption                                 :=  GetTxt( 2, 10, 'Setup');
 	Language_GB.Caption                             :=  GetTxt( 2, 25, 'Sprache / Language ');
 
+	Label_OutputFormat.Caption 											:=	GetTxt( 2, 31, 'Ausgabeformat');
+
+	ValueListEditor_SeachAndReplace.TitleCaptions[0]	:=	GetTxt( 2, 29, 'Suchen');
+	ValueListEditor_SeachAndReplace.TitleCaptions[1]	:=	GetTxt( 2, 30, 'Ersetzen');
+
 (*
 	First_Start_Memo.Clear;
 	First_Start_Memo.Lines.Add                         (GetTxt( 2,  8, 'Beim ersten Programmstart sollten noch'));
@@ -481,7 +486,7 @@ begin
 	Lab_File_Ext.Caption                            :=  GetTxt( 2, 28, 'Dateiendung');
 
   {CDList}
-  CDList_ZIP_txt_CheckBox.Caption                 :=  GetTxt( 2, 21, 'ZIP die Textdateien');
+	CDList_ZIP_txt_CheckBox.Caption                 :=  GetTxt( 2, 21, 'ZIP die Textdateien');
   CDList_ZIP_html_CheckBox.Caption                :=  GetTxt( 2, 22, 'ZIP die HTML-Dateien');
 	CDList_CLear_TXT_files_after_zip_CB.Caption     :=  GetTxt( 2, 23, 'Lösche Textdateien nach ZIPPEN');
   CDList_CLear_HTML_files_after_zip_CB.Caption    :=  GetTxt( 2, 24, 'Lösche HTML-Dateien nach ZIPPEN');
@@ -522,7 +527,7 @@ procedure TF_Setup.MP3List_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
 begin
   if mp3list_CLear_HTML_files_after_zip_CB.Checked then
     mp3list_html_files_delete_after_zip    :=  True
-  else
+	else
     mp3list_html_files_delete_after_zip    :=  False;
 end;
 

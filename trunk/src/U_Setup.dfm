@@ -36,7 +36,7 @@ object F_Setup: TF_Setup
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??Allgemein'
-      object Label6: TLabel
+      object Label_OutputFormat: TLabel
         Left = 10
         Top = 227
         Width = 95

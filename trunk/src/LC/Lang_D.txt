@@ -88,4 +88,7 @@ Msg=D
 26 = Kodierung der Ausgabe von Textdateien
 27 = Anfang des Dateinamens
 28 = Dateiendung
+29 = Suchen
+30 = Ersetzen
+31 = Ausgabeformat
 

@@ -88,5 +88,7 @@ Msg=GB
 26 = Output encoding of text files
 27 = File name prefix
 28 = File name extension
-
+29 = Search
+30 = Replace
+31 = Output format
 
