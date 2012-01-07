@@ -2,16 +2,13 @@ Follow these steps:
 
 ...
 
-Commit all your changes
-
-Make your to take care of issue tracker
-
-Edit version.RC file and setup new version no.
-
-Commit it and build it.
-
-Create setup file.
-
-Upload it to google
-
-Update project page.
+ # Commit all your changes
+ # Make sure to take care of issue tracker
+ # Edit version.RC file and setup new version no.
+ # Commit it and build it.
+ # run "scripts/refresh-rar-folder.bat"
+ # Create setup file.
+ # commit setup.iss file
+ # Create tag
+ # Upload setup to google and highlight it as featured
+ # Update main project page
