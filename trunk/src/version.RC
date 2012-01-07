@@ -1,6 +1,6 @@
 1 VERSIONINFO LOADONCALL MOVEABLE DISCARDABLE IMPURE
-FILEVERSION 1, 1, 17, 0
-PRODUCTVERSION 1, 1, 17, 0
+FILEVERSION 1, 1, 18, 0
+PRODUCTVERSION 1, 1, 18, 0
 FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
 FILEOS VOS__WINDOWS32
 FILETYPE VFT_APP
@@ -11,13 +11,13 @@ FILETYPE VFT_APP
   {
    VALUE "CompanyName", "Mark Ziegler\000"
    VALUE "FileDescription", "Create listings of your mp3 music collection\000"
-   VALUE "FileVersion", "1.1.17.0\000"
+   VALUE "FileVersion", "1.1.18.0\000"
    VALUE "InternalName", "$Revision$ D2010\000"
    VALUE "LegalCopyright", "Mark Ziegler\000"
    VALUE "LegalTrademarks", "\000"
    VALUE "OriginalFilename", "MP3Toolbox\000"
    VALUE "ProductName", "MP3Toolbox\000"
-   VALUE "ProductVersion", "1.1.17.0\000"
+   VALUE "ProductVersion", "1.1.18.0\000"
    VALUE "Comments", "\000"
    VALUE "Publisher", "Mark Ziegler\000"
    VALUE "WBuild WCRev", "$WCREV$\000"
