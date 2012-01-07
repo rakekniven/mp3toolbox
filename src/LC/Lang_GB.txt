@@ -58,6 +58,7 @@ Msg=GB
 53 = Tags scannen
 54 = Scan time
 55 = Stop
+56 = Help
 
 [Setup]
  1 = General

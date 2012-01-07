@@ -24,95 +24,97 @@ interface
 uses
 	SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
 	Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, IniFiles, fldbrowsUnicode,
-  Grids, ValEdit;
+	Grids, ValEdit, Windows;
 
 type
-  TF_Setup = class(TForm)
-    Setup_Book: TPageControl;
-    Allgemein: TTabSheet;
-    Pathes_GB: TGroupBox;
-    HTML_File_Dialog_Btn: TSpeedButton;
-    TXT_File_Dialog_Btn: TSpeedButton;
+	TF_Setup = class(TForm)
+		Setup_Book: TPageControl;
+		Allgemein: TTabSheet;
+		Pathes_GB: TGroupBox;
+		HTML_File_Dialog_Btn: TSpeedButton;
+		TXT_File_Dialog_Btn: TSpeedButton;
 		TXT_File_Output_Lab: TLabel;
-    HTML_File_Output_Lab: TLabel;
-    TXT_File_Output_Edit: TEdit;
-    HTML_File_Output_Edit: TEdit;
-    Language_GB: TGroupBox;
-    Language_CB: TComboBox;
+		HTML_File_Output_Lab: TLabel;
+		TXT_File_Output_Edit: TEdit;
+		HTML_File_Output_Edit: TEdit;
+		Language_GB: TGroupBox;
+		Language_CB: TComboBox;
 		MP3List: TTabSheet;
-    MP3List_Template_GB: TGroupBox;
-    MP3List_Template_File_Dialog_Btn: TSpeedButton;
-    MP3List_Multi_Template_File_Dialog_Btn: TSpeedButton;
-    MP3List_Template_File_Lab: TLabel;
-    MP3List_Multi_Template_File_Lab: TLabel;
-    MP3List_Template_File_Edit: TEdit;
-    MP3List_Multi_Template_File_Edit: TEdit;
-    RadioButton1: TRadioButton;
-    RadioButton2: TRadioButton;
-    Album_Liste: TTabSheet;
-    CDList_Template_GB: TGroupBox;
-    Debug_Dev: TTabSheet;
-    Store_And_Close_Btn: TBitBtn;
-    Pacman_CheckBox: TCheckBox;
-    MP3List_Open_Template_File_Dialog: TOpenDialog;
-    MP3List_Multi_Open_Template_File_Dialog: TOpenDialog;
-    mp3list_filename_Edit: TEdit;
-    Lab_File_Ext: TLabel;
-    mp3list_file_ending_Edit: TEdit;
-    MP3List_ZIP_txt_CheckBox: TCheckBox;
-    MP3List_CLear_TXT_files_after_zip_CB: TCheckBox;
-    CDList_ZIP_txt_CheckBox: TCheckBox;
+		MP3List_Template_GB: TGroupBox;
+		MP3List_Template_File_Dialog_Btn: TSpeedButton;
+		MP3List_Multi_Template_File_Dialog_Btn: TSpeedButton;
+		MP3List_Template_File_Lab: TLabel;
+		MP3List_Multi_Template_File_Lab: TLabel;
+		MP3List_Template_File_Edit: TEdit;
+		MP3List_Multi_Template_File_Edit: TEdit;
+		RadioButton1: TRadioButton;
+		RadioButton2: TRadioButton;
+		Album_Liste: TTabSheet;
+		CDList_Template_GB: TGroupBox;
+		Debug_Dev: TTabSheet;
+		Store_And_Close_Btn: TBitBtn;
+		Pacman_CheckBox: TCheckBox;
+		MP3List_Open_Template_File_Dialog: TOpenDialog;
+		MP3List_Multi_Open_Template_File_Dialog: TOpenDialog;
+		mp3list_filename_Edit: TEdit;
+		Lab_File_Ext: TLabel;
+		mp3list_file_ending_Edit: TEdit;
+		MP3List_ZIP_txt_CheckBox: TCheckBox;
+		MP3List_CLear_TXT_files_after_zip_CB: TCheckBox;
+		CDList_ZIP_txt_CheckBox: TCheckBox;
 		CDList_CLear_TXT_files_after_zip_CB: TCheckBox;
-    MP3List_ZIP_html_CheckBox: TCheckBox;
-    MP3List_CLear_HTML_files_after_zip_CB: TCheckBox;
-    CDList_ZIP_html_CheckBox: TCheckBox;
-    CDList_CLear_HTML_files_after_zip_CB: TCheckBox;
-    GroupBox1: TGroupBox;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    Lab_File_Prefix: TLabel;
-    CB_TXT_Encoding: TComboBox;
-    Lab_Enc: TLabel;
-    Label_OutputFormat: TLabel;
-    Edit_Output_Format: TEdit;
-    ValueListEditor_SeachAndReplace: TValueListEditor;
-    procedure FormShow(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure TXT_File_Output_EditChange(Sender: TObject);
-    procedure HTML_File_Output_EditChange(Sender: TObject);
-    procedure Language_CBChange(Sender: TObject);
+		MP3List_ZIP_html_CheckBox: TCheckBox;
+		MP3List_CLear_HTML_files_after_zip_CB: TCheckBox;
+		CDList_ZIP_html_CheckBox: TCheckBox;
+		CDList_CLear_HTML_files_after_zip_CB: TCheckBox;
+		GroupBox1: TGroupBox;
+		SpeedButton1: TSpeedButton;
+		SpeedButton2: TSpeedButton;
+		Lab_File_Prefix: TLabel;
+		CB_TXT_Encoding: TComboBox;
+		Lab_Enc: TLabel;
+		Lab_OutputFormat: TLabel;
+		Edit_Output_Format: TEdit;
+		ValueListEditor_SeachAndReplace: TValueListEditor;
+		Lab_OutputFormat_Help: TLabel;
+		procedure FormShow(Sender: TObject);
+		procedure FormCreate(Sender: TObject);
+		procedure TXT_File_Output_EditChange(Sender: TObject);
+		procedure HTML_File_Output_EditChange(Sender: TObject);
+		procedure Language_CBChange(Sender: TObject);
 		procedure RadioButton1Click(Sender: TObject);
-    procedure RadioButton2Click(Sender: TObject);
-    procedure MP3List_Template_File_EditExit(Sender: TObject);
-    procedure MP3List_Multi_Template_File_EditExit(Sender: TObject);
-    procedure MP3List_Template_File_Dialog_BtnClick(Sender: TObject);
-    procedure MP3List_Multi_Template_File_Dialog_BtnClick(Sender: TObject);
-    procedure Pacman_CheckBoxClick(Sender: TObject);
-    procedure Store_And_Close_BtnClick(Sender: TObject);
-    procedure TXT_File_Dialog_BtnClick(Sender: TObject);
-    procedure HTML_File_Dialog_BtnClick(Sender: TObject);
-    procedure init_text(Sender: TObject);
-    procedure MP3List_ZIP_txt_CheckBoxClick(Sender: TObject);
-    procedure MP3List_ZIP_html_CheckBoxClick(Sender: TObject);
-    procedure mp3list_filename_EditExit(Sender: TObject);
-    procedure mp3list_file_ending_EditExit(Sender: TObject);
-    procedure MP3List_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
-    procedure MP3List_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
-    procedure CDList_ZIP_txt_CheckBoxClick(Sender: TObject);
-    procedure CDList_ZIP_html_CheckBoxClick(Sender: TObject);
-    procedure CDList_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
-    procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
-    procedure CB_TXT_EncodingChange(Sender: TObject);
-    procedure Edit_Output_FormatChange(Sender: TObject);
-    procedure ValueListEditor_SeachAndReplaceExit(Sender: TObject);
-  private
-    { Private-Deklarationen }
-  public
+		procedure RadioButton2Click(Sender: TObject);
+		procedure MP3List_Template_File_EditExit(Sender: TObject);
+		procedure MP3List_Multi_Template_File_EditExit(Sender: TObject);
+		procedure MP3List_Template_File_Dialog_BtnClick(Sender: TObject);
+		procedure MP3List_Multi_Template_File_Dialog_BtnClick(Sender: TObject);
+		procedure Pacman_CheckBoxClick(Sender: TObject);
+		procedure Store_And_Close_BtnClick(Sender: TObject);
+		procedure TXT_File_Dialog_BtnClick(Sender: TObject);
+		procedure HTML_File_Dialog_BtnClick(Sender: TObject);
+		procedure init_text(Sender: TObject);
+		procedure MP3List_ZIP_txt_CheckBoxClick(Sender: TObject);
+		procedure MP3List_ZIP_html_CheckBoxClick(Sender: TObject);
+		procedure mp3list_filename_EditExit(Sender: TObject);
+		procedure mp3list_file_ending_EditExit(Sender: TObject);
+		procedure MP3List_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
+		procedure MP3List_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
+		procedure CDList_ZIP_txt_CheckBoxClick(Sender: TObject);
+		procedure CDList_ZIP_html_CheckBoxClick(Sender: TObject);
+		procedure CDList_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
+		procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
+		procedure CB_TXT_EncodingChange(Sender: TObject);
+		procedure Edit_Output_FormatChange(Sender: TObject);
+		procedure ValueListEditor_SeachAndReplaceExit(Sender: TObject);
+		procedure Lab_OutputFormat_HelpClick(Sender: TObject);
+	private
+		{ Private-Deklarationen }
+	public
 		{ Public-Deklarationen }
-  end;
+	end;
 
 var
-  F_Setup: TF_Setup;
+	F_Setup: TF_Setup;
 
 const
 	SELDIRHELP = 1000;
@@ -120,8 +122,9 @@ const
 implementation
 
 uses
-  U_Main,
-  U_Language;
+	U_Main,
+	U_Language,
+	lib1;
 
 {$R *.dfm}
 
@@ -165,7 +168,7 @@ begin
   else
 	  Pacman_CheckBox.Checked	:=	False;
 
-  {set values of editfields}
+	{set values of editfields}
 	TXT_File_Output_Edit.Text	 						:=	text_files_output_path;
   HTML_File_Output_Edit.Text						:=	html_files_output_path;
   MP3List_Template_File_Edit.Text				:=  mp3list_single_template_file;
@@ -211,7 +214,7 @@ begin
 	{}
 	if cdlist_text_files_zip then
 	  cdlist_ZIP_txt_CheckBox.Checked	:=	True
-  else
+	else
 	  cdlist_ZIP_txt_CheckBox.Checked	:=	False;
 
 	{}
@@ -386,7 +389,7 @@ begin
 		for i := 0 to mp3list_SearchAndReplace.Count - 1 do
 		begin
 			Ini.WriteString ('GENERAL', 'SeachAndReplace' + IntToStr(i), mp3list_SearchAndReplace[i]);
-      // If last entry has been reached then wipe out old values from INI
+			// If last entry has been reached then wipe out old values from INI
 			if i = (mp3list_SearchAndReplace.Count - 1) then
 			begin
 				i2	:= i+1;
@@ -489,7 +492,7 @@ end;
 {--- set captions to objects --------------------------------------------------}
 procedure TF_Setup.init_text(Sender: TObject);
 begin
-  {General}
+	{General}
 	Allgemein.Caption                               :=  GetTxt( 2,  1, 'Allgemein');
 	MP3List.Caption                                 :=  GetTxt( 2,  2, 'MP3-Liste');
 	Album_Liste.Caption                             :=  GetTxt( 2,  3, 'Ascii-Liste');
@@ -500,7 +503,8 @@ begin
 	F_Setup.Caption                                 :=  GetTxt( 2, 10, 'Setup');
 	Language_GB.Caption                             :=  GetTxt( 2, 25, 'Sprache / Language ');
 
-	Label_OutputFormat.Caption 											:=	GetTxt( 2, 31, 'Ausgabeformat');
+	Lab_OutputFormat.Caption 												:=	GetTxt( 2, 31, 'Ausgabeformat');
+	Lab_OutputFormat_Help.Caption 									:=	GetTxt( 1, 56, 'Hilfe');
 
 	ValueListEditor_SeachAndReplace.TitleCaptions[0]	:=	GetTxt( 2, 29, 'Suchen');
 	ValueListEditor_SeachAndReplace.TitleCaptions[1]	:=	GetTxt( 2, 30, 'Ersetzen');
@@ -532,9 +536,9 @@ begin
 	CDList_ZIP_txt_CheckBox.Caption                 :=  GetTxt( 2, 21, 'ZIP die Textdateien');
   CDList_ZIP_html_CheckBox.Caption                :=  GetTxt( 2, 22, 'ZIP die HTML-Dateien');
 	CDList_CLear_TXT_files_after_zip_CB.Caption     :=  GetTxt( 2, 23, 'Lösche Textdateien nach ZIPPEN');
-  CDList_CLear_HTML_files_after_zip_CB.Caption    :=  GetTxt( 2, 24, 'Lösche HTML-Dateien nach ZIPPEN');
+	CDList_CLear_HTML_files_after_zip_CB.Caption    :=  GetTxt( 2, 24, 'Lösche HTML-Dateien nach ZIPPEN');
 
-  {Debug}
+	{Debug}
 	Pacman_CheckBox.Caption                         :=  GetTxt( 2, 20, 'Pacman einstellen');
 end;
 
@@ -578,9 +582,9 @@ end;
 procedure TF_Setup.CDList_ZIP_txt_CheckBoxClick(Sender: TObject);
 begin
   if CDList_ZIP_txt_CheckBox.Checked then
-    cdlist_text_files_zip    :=  True
+		cdlist_text_files_zip    :=  True
   else
-    cdlist_text_files_zip    :=  False;
+		cdlist_text_files_zip    :=  False;
 end;
 
 procedure TF_Setup.CB_TXT_EncodingChange(Sender: TObject);
@@ -615,6 +619,17 @@ begin
 		cdlist_html_files_delete_after_zip    :=  True
 	else
 		cdlist_html_files_delete_after_zip    :=  False;
+end;
+
+procedure TF_Setup.Lab_OutputFormat_HelpClick(Sender: TObject);
+begin
+	lib1.Start_External_Program(self.WindowHandle,
+															'open',
+															Lab_OutputFormat_Help.Hint,
+															'',
+															'',
+															SW_SHOW);
+
 end;
 
 end.
