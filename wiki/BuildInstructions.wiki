@@ -7,7 +7,7 @@ Instructions about how to compile it yourself
  * You need Inno Setup to build a setup yourself - See http://www.jrsoftware.org/isinfo.php
 
 = How to I get the source? =
-Use a subversion client to pull it out of google code
+Use a subversion client to pull it out of google code. Need a good client? Here you go http://tortoisesvn.net/
 
 = I am having problems. Can you help me? =
 Contact me if you have any problems by sending an email.
