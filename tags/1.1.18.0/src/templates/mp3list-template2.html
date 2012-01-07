@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>mp3list</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<style type='text/css'>
+BODY {color: #d0ffd0; background: #333333;
+          font-family: Sans Serif, sans-serif;
+          font-size: 14pt; margin: 8%; }
+H1       {color: #d0ffd0;}
+TABLE    {text-align: center; margin-left: auto; margin-right: auto;}
+TD       { color: #d0ffd0; padding: 1em}
+IMG      { border: 1px solid #d0ffd0; }
+</style>
+</head>
+<body>
+<h1>MP3 listing</h1>
+<p>
+<i>Total no. of songs </i> : {#mp3list:total_mpg_counter} <br />
+<i>Creation date</i> : {#general:update_date}</p>
+<hr/>
+
+<div>{#mp3list:result_list}<br>
+</div>
+<center>
+  Searchtime : {#mp3list:searchtime}<br />
+  Created with <a href="http://www.rakekniven.de">Mp3Toolbox V{#general:version}</a>
+</center>
+
+</body>
+</html>
