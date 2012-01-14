@@ -59,6 +59,9 @@ Msg=GB
 54 = Scan time
 55 = Stop
 56 = Help
+57 = XML file to process
+58 = iTunes import
+59 = Items found
 
 [Setup]
  1 = General

@@ -501,6 +501,7 @@ begin
 	{General}
 //  F_Main.Caption                         :=  GetTxt( 1,  2, 'mp3toolbox version ???');
 	TabSheet1.Caption                      :=  GetTxt( 1,  3, 'Laufwerks-archive');
+	TabSheet2.Caption                      :=  GetTxt( 1, 58, 'iTunes Import');
 	TabSheet3.Caption                      :=  GetTxt( 1,  5, 'CD-Liste');
 	File1.Caption                          :=  GetTxt( 1, 14, 'Datei');
 	Help1.Caption                          :=  GetTxt( 1, 15, 'Hilfe');
@@ -519,6 +520,7 @@ begin
 	Own_Filter_CheckBox.Caption            :=  GetTxt( 1, 11, 'eigener Filter');
 	TXT_Output_Btn.Caption                 :=  GetTxt( 1, 12, 'Textdatei erzeugen');
 	HTML_OutputButton.Caption              :=  GetTxt( 1, 13, 'Webseite erzeugen');
+	HTML_OutputButton2.Caption             :=  GetTxt( 1, 13, 'Webseite erzeugen');
 	Load_From_Button.Caption               :=  GetTxt( 1, 43, 'Load directories from config');
 	Save_To_Button.Caption                 :=  GetTxt( 1, 44, 'Save directories');
 	Sel_All_Button.Caption                 :=  GetTxt( 1, 45, 'Select all');
@@ -526,11 +528,15 @@ begin
 	Clear_Sel_Button.Caption               :=  GetTxt( 1, 47, 'Clear selected');
 	Clear_All_Button.Caption               :=  GetTxt( 1, 48, 'Clear all');
 	Go_Btn.Caption               :=  GetTxt( 1, 49, 'Go !');
+	Go_Btn2.Caption               :=  GetTxt( 1, 49, 'Go !');
 	Label1.Caption               :=  GetTxt( 1, 50, 'Files found');
 	Label2.Caption               :=  GetTxt( 1, 51, 'Directories searched');
 	Label3.Caption               :=  GetTxt( 1, 52, 'Search time');
 	Label4.Caption               :=  GetTxt( 1, 53, 'Tags scanned');
 	Label5.Caption               :=  GetTxt( 1, 54, 'Scan time');
+	Lab_Scan_Time3.Caption       :=  GetTxt( 1, 54, 'Scan time');
+	Label7.Caption							 :=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
+	Label12.Caption              :=  GetTxt( 1, 59, 'Items found');
 
 	{CDList}
 	CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
@@ -685,7 +691,7 @@ begin
     Filter_Edit.Visible					:=	True;
   end
   else
-  begin
+	begin
   	Own_Filter_CheckBox.Checked	:=	False;
     filter_ComboBox.Visible			:=	True;
     Filter_Edit.Visible					:=	False;
@@ -732,14 +738,14 @@ begin
 	{When Search is canceled.}
   if search_status  = True then
   begin
-    cancel_search	:=	True;
-  end;
+		cancel_search	:=	True;
+	end;
 
-  if search_status  = False then
+	if search_status  = False then
   begin
     search_status :=  True;
 
-    Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
 		Go_Btn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
 		{Startzeit der suche}
@@ -778,8 +784,8 @@ begin
         					Files,
                   output_with_pathes,
                   search_subdir,
-                  output_with_filesize,
-                  search_filter_expression );
+									output_with_filesize,
+									search_filter_expression );
 				Search_ProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
       end;
     end;
@@ -823,7 +829,7 @@ begin
     {Pacman aktivieren und starten}
     Pacman_Btn.Visible        :=  True;
 		Pacman_Btn.Repaint;
-    pacman_direction          :=  True;
+		pacman_direction          :=  True;
     Pacman_Move_Timer.Enabled :=  True;
 
 		for i:= 0  to Files.Count - 1 do
@@ -910,12 +916,12 @@ begin
     {Speicher freigeben}
     Files.Free;
 
-    {Button zurücksetzen}
-    Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
-    Go_Btn.Caption  :=  GetTxt( 1, 49, 'Go !');
+		{Button zurücksetzen}
+		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		Go_Btn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
-    cancel_search	:=	False;
-    search_status :=  False;
+		cancel_search	:=	False;
+		search_status :=  False;
 
     {clear progressbar}
     Search_ProgressBar.Position :=	0;
@@ -1061,7 +1067,7 @@ begin
 
       {compare for all letter except numbers}
       for i2 := 0 to Length(dir) - 2 do
-      begin
+			begin
         {	1 means the string start with searched letter}
         if AnsiPos(Lowercase(first_letter), lowercase(dir[i2])) = 1 then
         begin
@@ -1202,7 +1208,7 @@ begin
       	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
   if NameCheck_ListBox.Items.Count > 0 then
-	  NameCheck_ListBox.BringToFront
+		NameCheck_ListBox.BringToFront
   else
 	  MP3_ListBox.BringToFront;
 
@@ -1480,22 +1486,43 @@ var
 	TrackType  : String;
 	HasVideo		:	Boolean;
 begin
-	if not FileExists(CB_XML_File.Text) then
+	Label13.Caption	:=	'...';
+	Lab_Scan_Time4.Caption	:=	'...';
+
+	{When Search is canceled.}
+	if search_status  = True then
 	begin
-		if MessageDlg('File  "' + CB_XML_File.Text + '" not found.',
+		cancel_search	:=	True;
+	end;
+
+	if search_status  = False then
+	begin
+		search_status :=  True;
+
+		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		Go_Btn2.Caption  :=  GetTxt( 1, 55, 'Stop');
+
+		if not FileExists(CB_XML_File.Text) then
+		begin
+			if MessageDlg('File  "' + CB_XML_File.Text + '" not found.',
 								mtWarning,[mbYes, mbNo], 0) = mrYes then begin
-		end;
-	end
-	else
-		MP3_ListBox.Clear;
+			end;
+		end
+		else
+			MP3_ListBox.Clear;
 
-	// Get XML File
-	XMLDocument1.LoadFromFile(CB_XML_File.Text);
+		// Get XML File
+		XMLDocument1.LoadFromFile(CB_XML_File.Text);
 
-	for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
-	begin
-//		ShowMessage((XMLDocument1.DocumentElement.ChildNodes[i].LocalName ));
-		MyChild	:=	XMLDocument1.DocumentElement.ChildNodes[i];
+		for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
+		begin
+			Application.ProcessMessages;
+
+			if cancel_search then
+				break;
+
+			//		ShowMessage((XMLDocument1.DocumentElement.ChildNodes[i].LocalName ));
+			MyChild	:=	XMLDocument1.DocumentElement.ChildNodes[i];
 //		ShowMessage((MyChild.ChildNodes[i].LocalName ));
 (*
 		for i2 := 0 to MyChild.ChildNodes.Count - 1 do
@@ -1504,93 +1531,110 @@ begin
 			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
 		end;
 *)
-		MyChild2	:=	MyChild.ChildNodes['dict'];
+			MyChild2	:=	MyChild.ChildNodes['dict'];
 //		ShowMessage(IntToStr(MyChild2.ChildNodes.Count));
 //		ShowMessage(MyChild2.ChildNodes['key'].Text);
 
-		{Startzeit des scans}
-		start_scan_time := Time;
+			{Startzeit des scans}
+			start_scan_time := Time;
 
-		for i3 := 0 to MyChild2.ChildNodes.Count - 1 do
-		begin
-			Application.ProcessMessages;
-			//
-//			ShowMessage(MyChild2.ChildNodes[i3].LocalName);
-			if MyChild2.ChildNodes[i3].LocalName = 'dict' then
+			for i3 := 0 to MyChild2.ChildNodes.Count - 1 do
 			begin
+				Application.ProcessMessages;
 
-				MyChild	:=	MyChild2.ChildNodes[i3];
-//				ShowMessage(IntToStr(MyChild.ChildNodes.Count));
-//				ShowMessage(MyChild.ChildNodes['key'].Text);
-				artist	:=	'';
-				Album	:=	'';
-				Track	:=	'';
-				Title	:=	'';
-				Year	:=	'';
-				HasVideo	:=	False;
+				if cancel_search then
+					break;
 
-				for i2 := 0 to MyChild.ChildNodes.Count - 1 do
+				//
+	//			ShowMessage(MyChild2.ChildNodes[i3].LocalName);
+				if MyChild2.ChildNodes[i3].LocalName = 'dict' then
 				begin
-//		if XMLDocument1.DocumentElement.ChildNodes[i].LocalName <> '' then
-					if MyChild.ChildNodes[i2].Text = 'Artist' then
-						Artist	:=	MyChild.ChildNodes[i2 +1 ].Text;
 
-					if MyChild.ChildNodes[i2].Text = 'Album' then
-						Album	:=	MyChild.ChildNodes[i2 +1 ].Text;
+					MyChild	:=	MyChild2.ChildNodes[i3];
+	//				ShowMessage(IntToStr(MyChild.ChildNodes.Count));
+	//				ShowMessage(MyChild.ChildNodes['key'].Text);
+					artist	:=	'';
+					Album	:=	'';
+					Track	:=	'';
+					Title	:=	'';
+					Year	:=	'';
+					HasVideo	:=	False;
 
-					if MyChild.ChildNodes[i2].Text = 'Track Number' then
-						Track	:=	MyChild.ChildNodes[i2 +1 ].Text;
+					for i2 := 0 to MyChild.ChildNodes.Count - 1 do
+					begin
+						Application.ProcessMessages;
 
-					if MyChild.ChildNodes[i2].Text = 'Name' then
-						Title	:=	MyChild.ChildNodes[i2 +1 ].Text;
+						if cancel_search then
+							break;
 
-					if MyChild.ChildNodes[i2].Text = 'Year' then
-						Year	:=	MyChild.ChildNodes[i2 +1 ].Text;
+						if MyChild.ChildNodes[i2].Text = 'Artist' then
+							Artist	:=	MyChild.ChildNodes[i2 +1 ].Text;
 
-					if MyChild.ChildNodes[i2].Text = 'Track Type' then
-						TrackType	:=	MyChild.ChildNodes[i2 +1 ].Text;
+						if MyChild.ChildNodes[i2].Text = 'Album' then
+							Album	:=	MyChild.ChildNodes[i2 +1 ].Text;
 
-					if MyChild.ChildNodes[i2].Text = 'Has Video' then
-						HasVideo	:=	True;
+						if MyChild.ChildNodes[i2].Text = 'Track Number' then
+							Track	:=	MyChild.ChildNodes[i2 +1 ].Text;
 
-//			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
+						if MyChild.ChildNodes[i2].Text = 'Name' then
+							Title	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Year' then
+							Year	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Track Type' then
+							TrackType	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Has Video' then
+							HasVideo	:=	True;
+
+	//			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
+
+					end;
+
+					ResultString	:=	mp3list_html_output_format;
+
+					// Edit_Output_Format
+					ResultString	:=	ReplaceVariablesInResult(ResultString,
+																											Artist,
+																											Album,
+																											Track,
+																											Title,
+																											Year);
+
+					// check search and replace list
+					ResultString	:=	SearchAndReplace (ResultString);
+
+					if (TrackType <> 'URL') and not HasVideo then //	No URL's, no Videos
+						MP3_ListBox.Items.Add(ResultString)
+					else
+						ListBox_Error.Items.Add(ResultString);
 
 				end;
-
-				ResultString	:=	mp3list_html_output_format;
-
-				// Edit_Output_Format
-				ResultString	:=	ReplaceVariablesInResult(ResultString,
-																										Artist,
-																										Album,
-																										Track,
-																										Title,
-																										Year);
-
-				// check search and replace list
-				ResultString	:=	SearchAndReplace (ResultString);
-
-				if (TrackType <> 'URL') and not HasVideo then //	No URL's, no Videos
-					MP3_ListBox.Items.Add(ResultString)
-				else
-					ListBox_Error.Items.Add(ResultString);
-
 			end;
+			{Ende der Suchzeit}
+			end_scan_time           :=  Time;
+
+			{Anzeige der Suchzeit.}
+			Lab_Scan_Time4.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+
+			MP3_ListBox.Sorted	:=	True;
+			Label13.Caption	:=	IntToStr(MP3_ListBox.Items.Count);
+
+			if not TabSheet4.TabVisible then
+			begin
+				if ListBox_Error.Count > 0 then
+					TabSheet4.TabVisible	:=	True;
+			end;
+
 		end;
-		{Ende der Suchzeit}
-		end_scan_time           :=  Time;
 
-		{Anzeige der Suchzeit.}
-		Lab_Scan_Time4.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+		{Button zurücksetzen}
+		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		Go_Btn2.Caption  :=  GetTxt( 1, 49, 'Go !');
 
-		MP3_ListBox.Sorted	:=	True;
-		Label13.Caption	:=	IntToStr(MP3_ListBox.Items.Count);
-
-		if not TabSheet4.TabVisible then
-		begin
-			if ListBox_Error.Count > 0 then
-				TabSheet4.TabVisible	:=	True;
-		end;
+		cancel_search	:=	False;
+		search_status :=  False;
 
 	end;
 

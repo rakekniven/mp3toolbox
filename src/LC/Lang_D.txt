@@ -59,6 +59,9 @@ Msg=D
 54 = Scandauer
 55 = Stop
 56 = Hilfe
+57 = XML-Datei zum Verarbeiten
+58 = iTunes Import
+59 = Einträge gefunden
 
 [Setup]
  1 = Allgemein
