@@ -1775,7 +1775,7 @@ object F_Main: TF_Main
   object MP3_ListBox: TListBox
     Left = 0
     Top = 395
-    Width = 792
+    Width = 790
     Height = 246
     Margins.Left = 4
     Margins.Top = 4
