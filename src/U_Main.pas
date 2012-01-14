@@ -24,7 +24,7 @@ interface
 uses
 	Windows, SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
 	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
-	Grids, Mp3FileUtils, fldbrowsUnicode;//, Libc;
+	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc;//, Libc;
 
 type
 	TF_Main = class(TForm)
@@ -54,14 +54,12 @@ type
 		Dir_Count_Label: TLabel;
 		Result_Label: TLabel;
 		Pacman_Btn: TSpeedButton;
-		MP3_ListBox: TListBox;
 		Search_ProgressBar: TProgressBar;
 		MainMenu1: TMainMenu;
 		File1: TMenuItem;
 		Help1: TMenuItem;
 		Setup1: TMenuItem;
 		Exit1: TMenuItem;
-		NameCheck_ListBox: TListBox;
 		CDListe_StringGrid: TStringGrid;
 		Pacman_Panel: TPanel;
 		Pacman_Speed_Edit: TEdit;
@@ -111,6 +109,24 @@ type
 		Lab_Scan_Time: TLabel;
 		Goo1: TMenuItem;
 		WebsiteofAuthor1: TMenuItem;
+    TabSheet2: TTabSheet;
+    XMLDocument1: TXMLDocument;
+    Label7: TLabel;
+    Edit2: TEdit;
+    BitBtn3: TBitBtn;
+    HTML_OutputButton2: TBitBtn;
+    NameCheck_ListBox: TListBox;
+    MP3_ListBox: TListBox;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -167,6 +183,14 @@ type
 		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
 		procedure Goo1Click(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
+		procedure BitBtn3Click(Sender: TObject);
+		function SearchAndReplace(s : String): string;
+		function ReplaceVariablesInResult(s,
+																					artist,
+																					album,
+																					track,
+																					title,
+																					year  : String) : String;
 	private
 		{ Private-Deklarationen }
 	public
@@ -674,10 +698,9 @@ end;
 procedure TF_Main.Go_BtnClick(Sender: TObject);
 var
 	Files							:	TStringList;                       //  Stringliste
-	i,
-	i2								:	Integer;
+	i									:	Integer;
 	gauge_step				:	Integer;
-	s1								:	String;
+	ResultString			:	String;
 begin
 	Result_Label.Caption	:=	'...';
 	Dir_Count_Label.Caption	:=	'...';
@@ -761,7 +784,7 @@ begin
 		{Anzeige der Suchzeit.}
 		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
-    {Stringliste sortieren}
+		{Stringliste sortieren}
     Files.Sort;
 
 		{filter and fill ListBox}
@@ -809,47 +832,19 @@ begin
 					// Check existence for each placeholder and replace it
 
 					// Edit_Output_Format
-					s1	:=	F_Setup.Edit_Output_Format.Text;
+					ResultString	:=	mp3list_html_output_format;
 
-					s1	:=	StringReplace(s1, '%artist%', ID3v2Tag.Artist, [rfReplaceAll, rfIgnoreCase]);
+					ResultString	:=	ReplaceVariablesInResult(ResultString,
+																											ID3v2Tag.Artist,
+																											ID3v2Tag.Album,
+																											ID3v2Tag.Track,
+																											ID3v2Tag.Title,
+																											ID3v2Tag.Year);
 
-					s1	:=	StringReplace(s1, '%album%', ID3v2Tag.Album, [rfReplaceAll, rfIgnoreCase]);
-
-					s1	:=	StringReplace(s1, '%track%', ID3v2Tag.Track, [rfReplaceAll, rfIgnoreCase]);
-
-					s1	:=	StringReplace(s1, '%title%', ID3v2Tag.Title, [rfReplaceAll, rfIgnoreCase]);
-
-					s1	:=	StringReplace(s1, '%year%', ID3v2Tag.Year, [rfReplaceAll, rfIgnoreCase]);
-
-					//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
-
-					(*
-
-					s1	:= ID3v2Tag.Artist;
-					if ID3v2Tag.Album <> '' then
-						s1	:=	s1 + ' - ' + ID3v2Tag.Album;
-					if ID3v2Tag.Track <> '' then
-					begin
-						if Length(ID3v2Tag.Track) = 1 then
-							s1	:=	s1 + ' - 0' + ID3v2Tag.Track
-						else
-							s1	:=	s1 + ' - ' + ID3v2Tag.Track;
-					end;
-					if ID3v2Tag.Title <> '' then
-						s1	:=	s1 + ' - ' + ID3v2Tag.Title;
-
-*)
 					// check search and replace list
-					for i2 := 1 to F_Setup.ValueListEditor_SeachAndReplace.RowCount - 1 do
-					begin
-						if F_Setup.ValueListEditor_SeachAndReplace.Keys[i2] <> '' then
-							s1	:=	StringReplace(s1,
-																		F_Setup.ValueListEditor_SeachAndReplace.Keys[i2],
-																		F_Setup.ValueListEditor_SeachAndReplace.Values[F_Setup.ValueListEditor_SeachAndReplace.Keys[i2]],
-																		[rfReplaceAll, rfIgnoreCase]);
-					end;
+					ResultString	:=	SearchAndReplace (ResultString);
 
-					MP3_ListBox.Items.Add(s1);
+					MP3_ListBox.Items.Add(ResultString);
 				end;
 
 				// Debug for mark: Check if comment is present
@@ -1337,30 +1332,30 @@ end;
 
 procedure TF_Main.Go_Btn3Click(Sender: TObject);
 var
-  F         : TextFile;
-  ln        : String;
-  i         : Integer;
+	F         : TextFile;
+	ln        : String;
+	i         : Integer;
 begin
-  {Gesamtzähler}
-  cdlist_result_count :=  0;
+	{Gesamtzähler}
+	cdlist_result_count :=  0;
 
-  {Begin of search}
-  start_search_time :=  Time;
+	{Begin of search}
+	start_search_time :=  Time;
 
-  { - Begin : Get number of tabs and adjust StringGrid - }
-  AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
-  Reset(F);
-  Readln(F, ln);
+	{ - Begin : Get number of tabs and adjust StringGrid - }
+	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	Reset(F);
+	Readln(F, ln);
 
-  CDListe_StringGrid.ColCount :=  separate_string_to_get_tabcount(ln);
+	CDListe_StringGrid.ColCount :=  separate_string_to_get_tabcount(ln);
 
-  F_Main.FormResize(Go_Btn3);
+	F_Main.FormResize(Go_Btn3);
 
-  CloseFile(F);
-  { - End : Get number of tabs and adjust StringGrid - }
+	CloseFile(F);
+	{ - End : Get number of tabs and adjust StringGrid - }
 
   { - Begin : Fill lines - }
-  AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
   Reset(F);
 
   {zeilenweise lesen und zuweisen}
@@ -1450,6 +1445,120 @@ begin
   end;
 end;
 
+
+procedure TF_Main.BitBtn3Click(Sender: TObject);
+var
+	i,
+	i2,
+	i3	:	Integer;
+	MyChild,
+	MyChild2	:	IXMLNode;
+	ResultString,
+	artist,
+	album,
+	track,
+	title,
+	year,
+	TrackType  : String;
+	HasVideo		:	Boolean;
+begin
+	if not FileExists(Edit2.Text) then
+	begin
+		if MessageDlg('File  "' + Edit2.Text + '" not found.',
+								mtWarning,[mbYes, mbNo], 0) = mrYes then begin
+		end;
+	end
+	else
+		MP3_ListBox.Clear;
+
+	XMLDocument1.LoadFromFile(Edit2.Text);
+	for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
+	begin
+//		ShowMessage((XMLDocument1.DocumentElement.ChildNodes[i].LocalName ));
+		MyChild	:=	XMLDocument1.DocumentElement.ChildNodes[i];
+//		ShowMessage((MyChild.ChildNodes[i].LocalName ));
+(*
+		for i2 := 0 to MyChild.ChildNodes.Count - 1 do
+		begin
+//		if XMLDocument1.DocumentElement.ChildNodes[i].LocalName <> '' then
+			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
+		end;
+*)
+		MyChild2	:=	MyChild.ChildNodes['dict'];
+//		ShowMessage(IntToStr(MyChild2.ChildNodes.Count));
+//		ShowMessage(MyChild2.ChildNodes['key'].Text);
+
+		for i3 := 0 to MyChild2.ChildNodes.Count - 1 do
+		begin
+			//
+//			ShowMessage(MyChild2.ChildNodes[i3].LocalName);
+			if MyChild2.ChildNodes[i3].LocalName = 'dict' then
+			begin
+
+				MyChild	:=	MyChild2.ChildNodes[i3];
+//				ShowMessage(IntToStr(MyChild.ChildNodes.Count));
+//				ShowMessage(MyChild.ChildNodes['key'].Text);
+				artist	:=	'';
+				Album	:=	'';
+				Track	:=	'';
+				Title	:=	'';
+				Year	:=	'';
+				HasVideo	:=	False;
+
+				for i2 := 0 to MyChild.ChildNodes.Count - 1 do
+				begin
+//		if XMLDocument1.DocumentElement.ChildNodes[i].LocalName <> '' then
+					if MyChild.ChildNodes[i2].Text = 'Artist' then
+						Artist	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+					if MyChild.ChildNodes[i2].Text = 'Album' then
+						Album	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+					if MyChild.ChildNodes[i2].Text = 'Track Number' then
+						Track	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+					if MyChild.ChildNodes[i2].Text = 'Name' then
+						Title	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+					if MyChild.ChildNodes[i2].Text = 'Year' then
+						Year	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+					if MyChild.ChildNodes[i2].Text = 'Track Type' then
+						TrackType	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+					if MyChild.ChildNodes[i2].Text = 'Has Video' then
+						HasVideo	:=	True;
+
+//			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
+
+				end;
+
+				if (TrackType <> 'URL') and not HasVideo then //	No URL's, no Videos
+				begin
+					// Edit_Output_Format
+					ResultString	:=	mp3list_html_output_format;
+
+					ResultString	:=	ReplaceVariablesInResult(ResultString,
+																											Artist,
+																											Album,
+																											Track,
+																											Title,
+																											Year);
+
+					// check search and replace list
+					ResultString	:=	SearchAndReplace (ResultString);
+
+					MP3_ListBox.Items.Add(ResultString);
+				end;
+
+			end;
+		end;
+		MP3_ListBox.Sorted	:=	True;
+		Label13.Caption	:=	IntToStr(MP3_ListBox.Items.Count);
+	end;
+
+	HTML_OutputButton2.Enabled :=	MP3_ListBox.Items.Count > 0;
+end;
 
 {--- CDList : Close Form ------------------------------------------------------}
 procedure TF_Main.CDList_Close_BtnClick(Sender: TObject);
@@ -1652,7 +1761,43 @@ begin
     Result_File_ComboBox.ItemIndex	:=	0;
   end
   else
-    Result_File_ComboBox.Text  	:=  '';
+		Result_File_ComboBox.Text  	:=  '';
 end;
+
+function TF_Main.SearchAndReplace(s : String): string;
+var
+	i	:	Integer;
+begin
+	for i := 1 to F_Setup.ValueListEditor_SeachAndReplace.RowCount - 1 do
+		begin
+			if F_Setup.ValueListEditor_SeachAndReplace.Keys[i] <> '' then
+				s	:=	StringReplace(s,
+																	F_Setup.ValueListEditor_SeachAndReplace.Keys[i],
+																	F_Setup.ValueListEditor_SeachAndReplace.Values[F_Setup.ValueListEditor_SeachAndReplace.Keys[i]],
+																	[rfReplaceAll, rfIgnoreCase]);
+	end;
+	Result	:=	s;
+end;
+
+function TF_Main.ReplaceVariablesInResult(s,
+																					artist,
+																					album,
+																					track,
+																					title,
+																					year  : String) : String;
+begin
+	s	:=	StringReplace(s, '%artist%', artist, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%album%', album, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%track%', track, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%title%', title, [rfReplaceAll, rfIgnoreCase]);
+
+	Result	:=	StringReplace(s, '%year%', year, [rfReplaceAll, rfIgnoreCase]);
+
+	//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
+end;
+
 
 end.
