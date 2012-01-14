@@ -96,7 +96,7 @@ type
 		Result_File_Label: TLabel;
 		CDList_Template_SpeedButton: TSpeedButton;
 		Result_File_SaveDialog: TSaveDialog;
-		CDList_Source_File_OpenDialog: TOpenDialog;
+    OpenDialog_FileSelect: TOpenDialog;
 		CDList_Result_Label: TLabel;
 		TabSheet4: TTabSheet;
 		ListBox_Error: TListBox;
@@ -112,12 +112,11 @@ type
     TabSheet2: TTabSheet;
     XMLDocument1: TXMLDocument;
     Label7: TLabel;
-    Edit2: TEdit;
-    BitBtn3: TBitBtn;
+    Go_Btn2: TBitBtn;
     HTML_OutputButton2: TBitBtn;
     NameCheck_ListBox: TListBox;
     MP3_ListBox: TListBox;
-    Label8: TLabel;
+    Lab_Scan_Time3: TLabel;
     Label9: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -126,7 +125,9 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
-    Label17: TLabel;
+    Lab_Scan_Time4: TLabel;
+    CB_XML_File: TComboBox;
+    Btn_XML_File_Select: TSpeedButton;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -183,7 +184,7 @@ type
 		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
 		procedure Goo1Click(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
-		procedure BitBtn3Click(Sender: TObject);
+		procedure Go_Btn2Click(Sender: TObject);
 		function SearchAndReplace(s : String): string;
 		function ReplaceVariablesInResult(s,
 																					artist,
@@ -191,6 +192,7 @@ type
 																					track,
 																					title,
 																					year  : String) : String;
+		procedure Btn_XML_File_SelectClick(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -253,6 +255,7 @@ var
 	mp3list_Character_stringlists       : array[0..26]  of TStringList;
 	mp3list_text_file_encoding					:	Integer;            //	0 : UTF8; 1 : ANSI
 	mp3list_SearchAndReplace			      : TStringList;
+	xmllist_last_used_files             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
 
 	{Variablen für CD-Archive}
 	cdarchive_path_to_read_in		        : String;
@@ -376,6 +379,9 @@ begin
 	cdarchive_path_to_act_archive       :=	cdarchive_last_used_pathes[0];
 
 	for i := 0 to 9 do
+		xmllist_last_used_files[i]	      :=  Ini.ReadString ('XMLLIST',   'File'+IntToStr(i), '');
+
+	for i := 0 to 9 do
 		cdlist_last_used_pathes[i]	      :=  Ini.ReadString ('CDLIST',    'SourcePath'+IntToStr(i), '');
 
 	for i := 0 to 9 do
@@ -396,7 +402,7 @@ begin
 	mp3list_html_output_file    :=	mp3list_html_file_name + mp3list_html_file_ending;
 	mp3list_text_output_file    :=  mp3list_html_file_name + '.txt';
 
-  {Set filter-options}
+	{Set filter-options}
 	filter_ComboBox.ItemIndex		:=	0;	 //	default is mp3
 	search_filter_expression		:=	filter_ComboBox.Items[filter_ComboBox.ItemIndex];
 
@@ -431,6 +437,18 @@ begin
 	Set_Language(gui_language);
   init_text(Sender);
 //  Set_Language(Reg.language);
+
+	{Combobox neu füllen}
+	CB_XML_File.Clear;
+	for i := 0 to 9 do
+	begin
+		if FileExists(xmllist_last_used_files[i]) then
+		begin
+			CB_XML_File.Items.Add(xmllist_last_used_files[i]);
+			Go_Btn2.Enabled :=  True;
+		end;
+	end;
+	CB_XML_File.ItemIndex	:=	0;
 
 end;
 
@@ -1297,17 +1315,17 @@ procedure TF_Main.TabSheet3Show(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  {Combobox neu füllen}
-  CDList_Source_File_CB.Clear;
-  for i := 0 to 9 do
-  begin
-    if FileExists(cdlist_last_used_pathes[i]) then
-    begin
-      CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
-	    Go_Btn3.Enabled :=  True;
-    end;
-  end;
-  CDList_Source_File_CB.ItemIndex	:=	0;
+	{Combobox neu füllen}
+	CDList_Source_File_CB.Clear;
+	for i := 0 to 9 do
+	begin
+		if FileExists(cdlist_last_used_pathes[i]) then
+		begin
+			CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
+			Go_Btn3.Enabled :=  True;
+		end;
+	end;
+	CDList_Source_File_CB.ItemIndex	:=	0;
 
   Result_File_ComboBox.Clear;
   for i := 0 to 9 do
@@ -1368,7 +1386,7 @@ begin
     begin
       CDListe_StringGrid.Cells[i,cdlist_result_count]  :=  cdlist_tab_values[i];
       cdlist_tab_values[i]  :=  '';
-    end;
+		end;
 
     {counter}
     cdlist_result_count :=  cdlist_result_count + 1;
@@ -1411,32 +1429,32 @@ var
 	i	:	Integer;
 begin
 	if DirectoryExists('C:\') then
-  	CDList_Source_File_OpenDialog.InitialDir	:=	'c:\';
+		OpenDialog_FileSelect.InitialDir	:=	'c:\';
 
-  if CDList_Source_File_OpenDialog.Execute = True then
-  begin
-    if FileExists(CDList_Source_File_OpenDialog.FileName) then
+	if OpenDialog_FileSelect.Execute = True then
+	begin
+		if FileExists(OpenDialog_FileSelect.FileName) then
     begin
-      Go_Btn3.Enabled :=  True;
+			Go_Btn3.Enabled :=  True;
 			{neuen Pfad merken und einordnen}
-      move_memory_combos(cdlist_last_used_pathes, CDList_Source_File_OpenDialog.FileName);
+			move_memory_combos(cdlist_last_used_pathes, OpenDialog_FileSelect.FileName);
 
-      {Pfade speichern}
-      Ini := TIniFile.Create(ini_file_name);
+			{Pfade speichern}
+			Ini := TIniFile.Create(ini_file_name);
 
-		  for i := 0 to 9 do
-		  	Ini.WriteString ('CDLIST',  'SourcePath' + IntToStr(i), cdlist_last_used_pathes[i]);
+			for i := 0 to 9 do
+				Ini.WriteString ('CDLIST',  'SourcePath' + IntToStr(i), cdlist_last_used_pathes[i]);
 
-      Ini.Free;
+			Ini.Free;
 
-      {Combobox neu füllen}
-      CDList_Source_File_CB.Clear;
-      for i := 0 to 9 do
-      begin
-        if FileExists(cdlist_last_used_pathes[i]) then
-          CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
-      end;
-      CDList_Source_File_CB.ItemIndex	:=	0;
+			{Combobox neu füllen}
+			CDList_Source_File_CB.Clear;
+			for i := 0 to 9 do
+			begin
+				if FileExists(cdlist_last_used_pathes[i]) then
+					CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
+			end;
+			CDList_Source_File_CB.ItemIndex	:=	0;
     end
   end
   else
@@ -1446,7 +1464,7 @@ begin
 end;
 
 
-procedure TF_Main.BitBtn3Click(Sender: TObject);
+procedure TF_Main.Go_Btn2Click(Sender: TObject);
 var
 	i,
 	i2,
@@ -1462,16 +1480,18 @@ var
 	TrackType  : String;
 	HasVideo		:	Boolean;
 begin
-	if not FileExists(Edit2.Text) then
+	if not FileExists(CB_XML_File.Text) then
 	begin
-		if MessageDlg('File  "' + Edit2.Text + '" not found.',
+		if MessageDlg('File  "' + CB_XML_File.Text + '" not found.',
 								mtWarning,[mbYes, mbNo], 0) = mrYes then begin
 		end;
 	end
 	else
 		MP3_ListBox.Clear;
 
-	XMLDocument1.LoadFromFile(Edit2.Text);
+	// Get XML File
+	XMLDocument1.LoadFromFile(CB_XML_File.Text);
+
 	for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
 	begin
 //		ShowMessage((XMLDocument1.DocumentElement.ChildNodes[i].LocalName ));
@@ -1488,8 +1508,12 @@ begin
 //		ShowMessage(IntToStr(MyChild2.ChildNodes.Count));
 //		ShowMessage(MyChild2.ChildNodes['key'].Text);
 
+		{Startzeit des scans}
+		start_scan_time := Time;
+
 		for i3 := 0 to MyChild2.ChildNodes.Count - 1 do
 		begin
+			Application.ProcessMessages;
 			//
 //			ShowMessage(MyChild2.ChildNodes[i3].LocalName);
 			if MyChild2.ChildNodes[i3].LocalName = 'dict' then
@@ -1553,11 +1577,50 @@ begin
 
 			end;
 		end;
+		{Ende der Suchzeit}
+		end_scan_time           :=  Time;
+
+		{Anzeige der Suchzeit.}
+		Lab_Scan_Time4.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+
 		MP3_ListBox.Sorted	:=	True;
 		Label13.Caption	:=	IntToStr(MP3_ListBox.Items.Count);
 	end;
 
 	HTML_OutputButton2.Enabled :=	MP3_ListBox.Items.Count > 0;
+end;
+
+procedure TF_Main.Btn_XML_File_SelectClick(Sender: TObject);
+var
+	i	:	Integer;
+	INI	:	TIniFile;
+begin
+	if OpenDialog_FileSelect.Execute = True then
+	begin
+		CB_XML_File.Items.Add(OpenDialog_FileSelect.FileName);
+		CB_XML_File.Text	:=	OpenDialog_FileSelect.FileName;
+
+		Go_Btn2.Enabled :=  True;
+		{neuen Pfad merken und einordnen}
+		move_memory_combos(xmllist_last_used_files, OpenDialog_FileSelect.FileName);
+
+		{Pfade speichern}
+		Ini := TIniFile.Create(ini_file_name);
+
+		for i := 0 to 9 do
+			Ini.WriteString ('XMLLIST',  'File' + IntToStr(i), xmllist_last_used_files[i]);
+
+		Ini.Free;
+
+		{Combobox neu füllen}
+		CB_XML_File.Clear;
+		for i := 0 to 9 do
+		begin
+			if FileExists(xmllist_last_used_files[i]) then
+				CB_XML_File.Items.Add(xmllist_last_used_files[i]);
+		end;
+		CB_XML_File.ItemIndex	:=	0;
+	end;
 end;
 
 {--- CDList : Close Form ------------------------------------------------------}
@@ -1690,7 +1753,7 @@ begin
 end;
 
 procedure TF_Main.NameCheck_ListBoxMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+	Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if  NameCheck_ListBox.ItemIndex >= 0 then
 		Char_Count_Lab.Caption  :=  IntToStr(Length(NameCheck_ListBox.Items[NameCheck_ListBox.ItemIndex]));

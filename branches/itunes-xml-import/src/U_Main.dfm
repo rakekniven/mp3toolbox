@@ -31,7 +31,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -40,8 +40,6 @@ object F_Main: TF_Main
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??mp3list'
-      ExplicitLeft = -11
-      ExplicitTop = 23
       DesignSize = (
         784
         362)
@@ -1413,9 +1411,9 @@ object F_Main: TF_Main
         Height = 16
         Caption = '??Which xml file'
       end
-      object Label8: TLabel
+      object Lab_Scan_Time3: TLabel
         Left = 571
-        Top = 248
+        Top = 188
         Width = 119
         Height = 16
         Margins.Left = 4
@@ -1435,11 +1433,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        Visible = False
       end
       object Label9: TLabel
         Left = 571
-        Top = 228
+        Top = 300
         Width = 119
         Height = 16
         Margins.Left = 4
@@ -1463,7 +1460,7 @@ object F_Main: TF_Main
       end
       object Label10: TLabel
         Left = 571
-        Top = 208
+        Top = 280
         Width = 119
         Height = 16
         Margins.Left = 4
@@ -1487,7 +1484,7 @@ object F_Main: TF_Main
       end
       object Label11: TLabel
         Left = 571
-        Top = 188
+        Top = 260
         Width = 119
         Height = 16
         Margins.Left = 4
@@ -1557,7 +1554,7 @@ object F_Main: TF_Main
       end
       object Label14: TLabel
         Left = 698
-        Top = 188
+        Top = 260
         Width = 64
         Height = 16
         Margins.Left = 4
@@ -1579,7 +1576,7 @@ object F_Main: TF_Main
       end
       object Label15: TLabel
         Left = 698
-        Top = 207
+        Top = 279
         Width = 64
         Height = 16
         Margins.Left = 4
@@ -1601,7 +1598,7 @@ object F_Main: TF_Main
       end
       object Label16: TLabel
         Left = 698
-        Top = 228
+        Top = 300
         Width = 64
         Height = 16
         Margins.Left = 4
@@ -1621,9 +1618,9 @@ object F_Main: TF_Main
         Layout = tlCenter
         Visible = False
       end
-      object Label17: TLabel
+      object Lab_Scan_Time4: TLabel
         Left = 698
-        Top = 248
+        Top = 188
         Width = 64
         Height = 16
         Margins.Left = 4
@@ -1641,17 +1638,28 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        Visible = False
       end
-      object Edit2: TEdit
-        Left = 19
-        Top = 33
-        Width = 374
-        Height = 24
-        TabOrder = 0
-        Text = 't:\Zuletzt hinzugef'#252'gt.xml'
+      object Btn_XML_File_Select: TSpeedButton
+        Left = 400
+        Top = 34
+        Width = 41
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Glyph.Data = {
+          E6000000424DE60000000000000076000000280000000E0000000E0000000100
+          0400000000007000000000000000000000001000000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
+          33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
+          33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
+          33003333333333333300}
+        OnClick = Btn_XML_File_SelectClick
       end
-      object BitBtn3: TBitBtn
+      object Go_Btn2: TBitBtn
         Left = 571
         Top = 30
         Width = 185
@@ -1686,8 +1694,8 @@ object F_Main: TF_Main
         NumGlyphs = 2
         ParentDoubleBuffered = False
         ParentFont = False
-        TabOrder = 1
-        OnClick = BitBtn3Click
+        TabOrder = 0
+        OnClick = Go_Btn2Click
       end
       object HTML_OutputButton2: TBitBtn
         Left = 571
@@ -1738,8 +1746,16 @@ object F_Main: TF_Main
         Margin = 10
         ParentDoubleBuffered = False
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
         OnClick = HTML_OutputButtonClick
+      end
+      object CB_XML_File: TComboBox
+        Left = 19
+        Top = 34
+        Width = 374
+        Height = 24
+        TabOrder = 2
+        Text = 't:\Zuletzt hinzugef'#252'gt.xml'
       end
     end
   end
@@ -1944,7 +1960,7 @@ object F_Main: TF_Main
     Left = 480
     Top = 144
   end
-  object CDList_Source_File_OpenDialog: TOpenDialog
+  object OpenDialog_FileSelect: TOpenDialog
     FilterIndex = 0
     Left = 480
     Top = 48
