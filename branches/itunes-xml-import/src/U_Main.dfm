@@ -1773,10 +1773,10 @@ object F_Main: TF_Main
     OnMouseUp = NameCheck_ListBoxMouseUp
   end
   object MP3_ListBox: TListBox
-    Left = 3
+    Left = 0
     Top = 395
-    Width = 780
-    Height = 239
+    Width = 792
+    Height = 246
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4

@@ -1557,23 +1557,23 @@ begin
 
 				end;
 
+				ResultString	:=	mp3list_html_output_format;
+
+				// Edit_Output_Format
+				ResultString	:=	ReplaceVariablesInResult(ResultString,
+																										Artist,
+																										Album,
+																										Track,
+																										Title,
+																										Year);
+
+				// check search and replace list
+				ResultString	:=	SearchAndReplace (ResultString);
+
 				if (TrackType <> 'URL') and not HasVideo then //	No URL's, no Videos
-				begin
-					// Edit_Output_Format
-					ResultString	:=	mp3list_html_output_format;
-
-					ResultString	:=	ReplaceVariablesInResult(ResultString,
-																											Artist,
-																											Album,
-																											Track,
-																											Title,
-																											Year);
-
-					// check search and replace list
-					ResultString	:=	SearchAndReplace (ResultString);
-
-					MP3_ListBox.Items.Add(ResultString);
-				end;
+					MP3_ListBox.Items.Add(ResultString)
+				else
+					ListBox_Error.Items.Add(ResultString);
 
 			end;
 		end;
@@ -1585,6 +1585,13 @@ begin
 
 		MP3_ListBox.Sorted	:=	True;
 		Label13.Caption	:=	IntToStr(MP3_ListBox.Items.Count);
+
+		if not TabSheet4.TabVisible then
+		begin
+			if ListBox_Error.Count > 0 then
+				TabSheet4.TabVisible	:=	True;
+		end;
+
 	end;
 
 	HTML_OutputButton2.Enabled :=	MP3_ListBox.Items.Count > 0;
