@@ -904,10 +904,10 @@ begin
 														(end_search_time - start_search_time);
 
 		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
-    mp3list_result_count		  :=	MP3_ListBox.Items.Count;
+		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
-    Result_Label.Caption		  :=	IntToStr(MP3_ListBox.Items.Count);
+		Result_Label.Caption		  :=	IntToStr(mp3list_result_count);
 
     {If result are present then allow output}
 		TXT_Output_Btn.Enabled		:=	MP3_ListBox.Items.Count > 0;
@@ -1512,6 +1512,7 @@ begin
 			MP3_ListBox.Clear;
 
 		// Get XML File
+//		XMLDocument1.
 		XMLDocument1.LoadFromFile(CB_XML_File.Text);
 
 		for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
@@ -1618,8 +1619,14 @@ begin
 			{Anzeige der Suchzeit.}
 			Lab_Scan_Time4.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
 
+			total_work_duration	:=  (end_scan_time - start_scan_time) +
+															(end_search_time - start_search_time);
+
+			{total counter (wird für ausgabenschleife benötigt TXT und HTML}
+			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
+
 			MP3_ListBox.Sorted	:=	True;
-			Label13.Caption	:=	IntToStr(MP3_ListBox.Items.Count);
+			Label13.Caption	:=	IntToStr(mp3list_result_count);
 
 			if not TabSheet4.TabVisible then
 			begin

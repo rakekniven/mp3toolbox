@@ -1966,6 +1966,7 @@ object F_Main: TF_Main
     Top = 48
   end
   object XMLDocument1: TXMLDocument
+    FileName = 'T:\Zuletzt hinzugef'#252'gt.xml'
     Left = 336
     Top = 328
     DOMVendorDesc = 'MSXML'
