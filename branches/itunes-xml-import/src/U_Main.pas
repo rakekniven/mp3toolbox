@@ -85,7 +85,7 @@ type
 		DateiausListeentfernen1: TMenuItem;
 		Char_Count_Lab: TLabel;
 		Char_Count_Lab2: TLabel;
-		CD_Single_SaveDialog: TSaveDialog;
+    SaveDialog_File: TSaveDialog;
 		checkfilenamesfornoof1: TMenuItem;
 		AboutMP3Toolbox1: TMenuItem;
 		Result_File_SpeedButton: TSpeedButton;
@@ -128,6 +128,7 @@ type
     Lab_Scan_Time4: TLabel;
     CB_XML_File: TComboBox;
     Btn_XML_File_Select: TSpeedButton;
+    Speichernunter1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -193,6 +194,7 @@ type
 																					title,
 																					year  : String) : String;
 		procedure Btn_XML_File_SelectClick(Sender: TObject);
+    procedure Speichernunter1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -460,7 +462,7 @@ begin
 
 	for i := 0 to CDListe_StringGrid.ColCount - 1 do
   begin
-    CDListe_StringGrid.ColWidths[i] :=  (CDListe_StringGrid.ClientWidth - 19 ) div CDListe_StringGrid.ColCount;
+		CDListe_StringGrid.ColWidths[i] :=  (CDListe_StringGrid.ClientWidth - 19 ) div CDListe_StringGrid.ColCount;
   end;
 end;
 
@@ -468,6 +470,24 @@ end;
 procedure TF_Main.Setup1Click(Sender: TObject);
 begin
 	F_Setup.Show;
+end;
+
+procedure TF_Main.Speichernunter1Click(Sender: TObject);
+var
+	ToF	:TextFile;
+  i: Integer;
+begin
+	//
+//  SaveDialog_File.InitialDir	:=	lib1.gGetTempDir;
+	if SaveDialog_File.Execute() then
+	begin
+		AssignFile(ToF, SaveDialog_File.FileName);
+		Rewrite(ToF);
+		for i := 0 to MP3_ListBox.Count - 1 do
+			writeln(ToF, MP3_ListBox.Items[i]);
+		CloseFile(ToF);
+	end;
+
 end;
 
 {--- OnShow -------------------------------------------------------------------}
@@ -1483,8 +1503,10 @@ var
 	track,
 	title,
 	year,
-	TrackType  : String;
-	HasVideo		:	Boolean;
+	TrackType,
+	genre  : String;
+	HasVideo,
+	podcast		:	Boolean;
 begin
 	Label13.Caption	:=	'...';
 	Lab_Scan_Time4.Caption	:=	'...';
@@ -1560,6 +1582,7 @@ begin
 					Title	:=	'';
 					Year	:=	'';
 					HasVideo	:=	False;
+					Podcast		:=	False;
 
 					for i2 := 0 to MyChild.ChildNodes.Count - 1 do
 					begin
@@ -1586,8 +1609,14 @@ begin
 						if MyChild.ChildNodes[i2].Text = 'Track Type' then
 							TrackType	:=	MyChild.ChildNodes[i2 +1 ].Text;
 
+						if MyChild.ChildNodes[i2].Text = 'Genre' then
+							genre	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
 						if MyChild.ChildNodes[i2].Text = 'Has Video' then
 							HasVideo	:=	True;
+
+						if MyChild.ChildNodes[i2].Text = 'Podcast' then
+							podcast	:=	True;
 
 	//			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
 
@@ -1606,7 +1635,13 @@ begin
 					// check search and replace list
 					ResultString	:=	SearchAndReplace (ResultString);
 
-					if (TrackType <> 'URL') and not HasVideo then //	No URL's, no Videos
+					if (TrackType <> 'URL') and
+							(genre <> 'Hörbuch') and
+							(genre <> 'Kinderlieder') and
+//							(genre <> 'C') and
+							not HasVideo and
+							not podcast
+					then //	No URL's, no Videos
 						MP3_ListBox.Items.Add(ResultString)
 					else
 						ListBox_Error.Items.Add(ResultString);

@@ -2,7 +2,7 @@ object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
-  ClientHeight = 643
+  ClientHeight = 723
   ClientWidth = 792
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,12 +19,12 @@ object F_Main: TF_Main
   OnShow = FormShow
   DesignSize = (
     792
-    643)
+    723)
   PixelsPerInch = 96
   TextHeight = 16
   object PageControl1: TPageControl
     Left = 0
-    Top = 0
+    Top = 3
     Width = 792
     Height = 393
     Margins.Left = 4
@@ -1763,7 +1763,7 @@ object F_Main: TF_Main
     Left = 7
     Top = 404
     Width = 734
-    Height = 218
+    Height = 298
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1771,12 +1771,13 @@ object F_Main: TF_Main
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     OnMouseUp = NameCheck_ListBoxMouseUp
+    ExplicitHeight = 218
   end
   object MP3_ListBox: TListBox
     Left = 0
     Top = 395
     Width = 790
-    Height = 246
+    Height = 326
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1796,6 +1797,7 @@ object F_Main: TF_Main
     TabOrder = 2
     OnClick = MP3_ListBoxClick
     OnMouseUp = MP3_ListBoxMouseUp
+    ExplicitHeight = 246
   end
   object MainMenu1: TMainMenu
     Left = 328
@@ -1922,6 +1924,10 @@ object F_Main: TF_Main
       Caption = 'check filenames for allowed no. of '#39'-'#39
       OnClick = checkfilenamesfornoof1Click
     end
+    object Speichernunter1: TMenuItem
+      Caption = 'Speichern unter ...'
+      OnClick = Speichernunter1Click
+    end
   end
   object Pacman_Move_Timer: TTimer
     Enabled = False
@@ -1941,7 +1947,7 @@ object F_Main: TF_Main
       OnClick = DateiausListeentfernen1Click
     end
   end
-  object CD_Single_SaveDialog: TSaveDialog
+  object SaveDialog_File: TSaveDialog
     DefaultExt = '.txt'
     Filter = 'textfiles (txt)|*.txt'
     FilterIndex = 0
