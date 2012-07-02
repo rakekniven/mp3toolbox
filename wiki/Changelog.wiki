@@ -1,0 +1,7 @@
+#summary See what has been done.
+#labels Featured
+
+= Version 1.1.19 2012-07-02 =
+* New: Import of iTunes music library by reading xml export files
+
+to be completed
