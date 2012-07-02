@@ -2,7 +2,7 @@ object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
-  ClientHeight = 643
+  ClientHeight = 723
   ClientWidth = 792
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,19 +17,22 @@ object F_Main: TF_Main
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
+  DesignSize = (
+    792
+    723)
   PixelsPerInch = 96
   TextHeight = 16
   object PageControl1: TPageControl
     Left = 0
-    Top = 0
+    Top = 3
     Width = 792
-    Height = 643
+    Height = 393
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet1
-    Align = alClient
+    ActivePage = TabSheet2
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
       Margins.Left = 4
@@ -39,7 +42,7 @@ object F_Main: TF_Main
       Caption = '??mp3list'
       DesignSize = (
         784
-        612)
+        362)
       object Pacman_Btn: TSpeedButton
         Left = 571
         Top = 267
@@ -253,8 +256,8 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Char_Count_Lab: TLabel
-        Left = 550
-        Top = 377
+        Left = 613
+        Top = 0
         Width = 7
         Height = 16
         Margins.Left = 4
@@ -265,8 +268,8 @@ object F_Main: TF_Main
         Visible = False
       end
       object Char_Count_Lab2: TLabel
-        Left = 565
-        Top = 377
+        Left = 628
+        Top = 0
         Width = 62
         Height = 16
         Margins.Left = 4
@@ -453,44 +456,6 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-      end
-      object NameCheck_ListBox: TListBox
-        Left = 4
-        Top = 401
-        Width = 734
-        Height = 195
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        TabOrder = 5
-        OnMouseUp = NameCheck_ListBoxMouseUp
-      end
-      object MP3_ListBox: TListBox
-        Left = 0
-        Top = 345
-        Width = 780
-        Height = 263
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        ExtendedSelect = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = 15
-        Font.Name = 'arial'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ItemHeight = 15
-        MultiSelect = True
-        ParentFont = False
-        PopupMenu = MP3List_PopupMenu
-        TabOrder = 4
-        OnClick = MP3_ListBoxClick
-        OnMouseUp = MP3_ListBoxMouseUp
       end
       object Multi_Dir_GroupBox: TGroupBox
         Left = 0
@@ -945,7 +910,7 @@ object F_Main: TF_Main
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        TabOrder = 6
+        TabOrder = 4
         Visible = False
         object Pacman_Speed_Edit: TEdit
           Left = 10
@@ -1013,7 +978,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         Enabled = False
-        TabOrder = 7
+        TabOrder = 5
       end
     end
     object TabSheet3: TTabSheet
@@ -1027,7 +992,7 @@ object F_Main: TF_Main
       OnShow = TabSheet3Show
       DesignSize = (
         784
-        612)
+        362)
       object CDList_Result_Label: TLabel
         Left = 611
         Top = 142
@@ -1069,7 +1034,7 @@ object F_Main: TF_Main
         Left = 0
         Top = 216
         Width = 780
-        Height = 392
+        Height = 142
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1428,11 +1393,409 @@ object F_Main: TF_Main
         Left = 0
         Top = 0
         Width = 784
-        Height = 612
+        Height = 362
         Align = alClient
         TabOrder = 0
       end
     end
+    object TabSheet2: TTabSheet
+      Caption = '??iTunes import'
+      ImageIndex = 3
+      DesignSize = (
+        784
+        362)
+      object Label7: TLabel
+        Left = 19
+        Top = 12
+        Width = 92
+        Height = 16
+        Caption = '??Which xml file'
+      end
+      object Lab_Scan_Time3: TLabel
+        Left = 571
+        Top = 188
+        Width = 119
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '??Scan time'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label9: TLabel
+        Left = 571
+        Top = 300
+        Width = 119
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '??Tags scanned'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+        Visible = False
+      end
+      object Label10: TLabel
+        Left = 571
+        Top = 280
+        Width = 119
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '??Search time'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+        Visible = False
+      end
+      object Label11: TLabel
+        Left = 571
+        Top = 260
+        Width = 119
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '??Directories searched'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+        Visible = False
+      end
+      object Label12: TLabel
+        Left = 571
+        Top = 168
+        Width = 119
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '??Items found'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label13: TLabel
+        Left = 698
+        Top = 168
+        Width = 64
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '000000'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label14: TLabel
+        Left = 698
+        Top = 260
+        Width = 64
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '00000'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        Visible = False
+      end
+      object Label15: TLabel
+        Left = 698
+        Top = 279
+        Width = 64
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '00:00:00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        Visible = False
+      end
+      object Label16: TLabel
+        Left = 698
+        Top = 300
+        Width = 64
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '000000'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        Visible = False
+      end
+      object Lab_Scan_Time4: TLabel
+        Left = 698
+        Top = 188
+        Width = 64
+        Height = 16
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = '00:00:00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Btn_XML_File_Select: TSpeedButton
+        Left = 400
+        Top = 34
+        Width = 41
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Glyph.Data = {
+          E6000000424DE60000000000000076000000280000000E0000000E0000000100
+          0400000000007000000000000000000000001000000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33003333333333333300300000000333330000B7B7B7B03333000B0B7B7B7B03
+          33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
+          33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
+          33003333333333333300}
+        OnClick = Btn_XML_File_SelectClick
+      end
+      object Go_Btn2: TBitBtn
+        Left = 571
+        Top = 30
+        Width = 185
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        Caption = '??Go !'
+        DoubleBuffered = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 15
+        Font.Name = 'arial'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000130B0000130B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33333333333333333333EEEEEEEEEEEEEEE333FFFFFFFFFFFFF3E00000000000
+          00E337777777777777F3E0F77777777770E337F33333333337F3E0F333333333
+          70E337F3333F333337F3E0F33303333370E337F3337FF33337F3E0F333003333
+          70E337F33377FF3337F3E0F33300033370E337F333777FF337F3E0F333000033
+          70E337F33377773337F3E0F33300033370E337F33377733337F3E0F333003333
+          70E337F33377333337F3E0F33303333370E337F33373333337F3E0F333333333
+          70E337F33333333337F3E0FFFFFFFFFFF0E337FFFFFFFFFFF7F3E00000000000
+          00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
+        Margin = 10
+        NumGlyphs = 2
+        ParentDoubleBuffered = False
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Go_Btn2Click
+      end
+      object HTML_OutputButton2: TBitBtn
+        Left = 571
+        Top = 69
+        Width = 185
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        Caption = '??create &website'
+        DoubleBuffered = True
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 15
+        Font.Name = 'arial'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000120B0000120B00000000000000000000000000000000
+          0000000000005858583030303030303030303030303030303030303030308000
+          80000000303030303030000000000000000000000000585858B4BDC2A2ACB19B
+          AAB4A0B5C29BB3C591AFC088AABF800080C000C0000000303030000000000000
+          000000000000422C15422C15422C15505A5C8E9CA493A4B0A5BCCCB3CFE28000
+          80FFC0FFC000C0000000000000000000422C15643D1E8A5C2E56524037484831
+          4237422C15767A7E91A1ABAAC0D0800080800080800080800080000000442917
+          A4743DBC7642CC72393796AE40768331585E3C3127422C15727D7E9CAEB9C1DC
+          ECBAD6E985A6BC3030300000008C582AD48F58DAA063D48E496EB7D54A98A954
+          5857643D1E3E2C237C6F659AA6ADCAE0EEC2DBEC8AA8BC303030593822C78650
+          DDA976B8976F6FBADABE8458A67B4EB96E3AA6512556361E422C15A1ABB2D4E6
+          F1CADFEC90ABBC3030305F3926DAAB80AB906F95D7F29A9B7CB5A289DF8E51D0
+          7D45B0602F7C401E422C15A8B0B4DCEBF3D4E2EC97AEBC303030825025BE844A
+          CBDDE6E5F0FF86D1F76FBCDCA9784DCE7A41B363337D4221432C15BBC0C4E3ED
+          F3DCE7EE97AEBC303030000000825025C6E1E7EAF5FFABDEEE81D0E4539AB89C
+          784DAD5C2E6E3C1F817265DADCDDECF0F4D9E0E7AFB6BE303030000000A96E37
+          B8C9B8BFE0FEC1E6F086C2D368B1B079816C9B5226422C15BDBBBBF5F5F6DEE0
+          E2B1B7BC84898F303030000000000000A96E3740768371D2F295AE9EC7864F9B
+          6239653E1CC5C0BBFFFFFF8989897070706B6B6B424242303030800080000000
+          0000000000009B6239653E1C7164438F908CFFFFFFFFFFFFFCFCFC707070CECE
+          CEFFFFFF999999303030800080FFC0FFC000C0000000585858DEDEDEFFFFFFFF
+          FFFFFFFFFFFFFFFFEAEAEA6D6D6DFFFFFF999999585858000000000000800080
+          FFC0FF000000585858DEDEDEDEDEDEDEDEDEDEDEDEDEDEDEB1B7BC5858589999
+          9958585800000000000000000000000080008080008058585858585858585858
+          5858585858585858585858585858585858000000000000000000}
+        Margin = 10
+        ParentDoubleBuffered = False
+        ParentFont = False
+        TabOrder = 1
+        OnClick = HTML_OutputButtonClick
+      end
+      object CB_XML_File: TComboBox
+        Left = 19
+        Top = 34
+        Width = 374
+        Height = 24
+        TabOrder = 2
+        Text = 't:\Zuletzt hinzugef'#252'gt.xml'
+      end
+    end
+  end
+  object NameCheck_ListBox: TListBox
+    Left = 7
+    Top = 404
+    Width = 734
+    Height = 298
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 1
+    OnMouseUp = NameCheck_ListBoxMouseUp
+  end
+  object MP3_ListBox: TListBox
+    Left = 0
+    Top = 395
+    Width = 790
+    Height = 326
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    ExtendedSelect = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = 15
+    Font.Name = 'arial'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ItemHeight = 15
+    MultiSelect = True
+    ParentFont = False
+    PopupMenu = MP3List_PopupMenu
+    TabOrder = 2
+    OnClick = MP3_ListBoxClick
+    OnMouseUp = MP3_ListBoxMouseUp
   end
   object MainMenu1: TMainMenu
     Left = 328
@@ -1559,6 +1922,10 @@ object F_Main: TF_Main
       Caption = 'check filenames for allowed no. of '#39'-'#39
       OnClick = checkfilenamesfornoof1Click
     end
+    object Speichernunter1: TMenuItem
+      Caption = 'Speichern unter ...'
+      OnClick = Speichernunter1Click
+    end
   end
   object Pacman_Move_Timer: TTimer
     Enabled = False
@@ -1578,7 +1945,7 @@ object F_Main: TF_Main
       OnClick = DateiausListeentfernen1Click
     end
   end
-  object CD_Single_SaveDialog: TSaveDialog
+  object SaveDialog_File: TSaveDialog
     DefaultExt = '.txt'
     Filter = 'textfiles (txt)|*.txt'
     FilterIndex = 0
@@ -1597,9 +1964,15 @@ object F_Main: TF_Main
     Left = 480
     Top = 144
   end
-  object CDList_Source_File_OpenDialog: TOpenDialog
+  object OpenDialog_FileSelect: TOpenDialog
     FilterIndex = 0
     Left = 480
     Top = 48
+  end
+  object XMLDocument1: TXMLDocument
+    FileName = 'T:\Zuletzt hinzugef'#252'gt.xml'
+    Left = 336
+    Top = 328
+    DOMVendorDesc = 'MSXML'
   end
 end
