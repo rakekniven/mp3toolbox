@@ -1771,7 +1771,6 @@ object F_Main: TF_Main
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     OnMouseUp = NameCheck_ListBoxMouseUp
-    ExplicitHeight = 218
   end
   object MP3_ListBox: TListBox
     Left = 0
@@ -1797,7 +1796,6 @@ object F_Main: TF_Main
     TabOrder = 2
     OnClick = MP3_ListBoxClick
     OnMouseUp = MP3_ListBoxMouseUp
-    ExplicitHeight = 246
   end
   object MainMenu1: TMainMenu
     Left = 328

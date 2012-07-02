@@ -192,6 +192,7 @@ type
 																					album,
 																					track,
 																					title,
+																					genre,
 																					year  : String) : String;
 		procedure Btn_XML_File_SelectClick(Sender: TObject);
     procedure Speichernunter1Click(Sender: TObject);
@@ -883,6 +884,7 @@ begin
 																											ID3v2Tag.Album,
 																											ID3v2Tag.Track,
 																											ID3v2Tag.Title,
+																											ID3v2Tag.Genre,
 																											ID3v2Tag.Year);
 
 					// check search and replace list
@@ -1533,8 +1535,7 @@ begin
 		else
 			MP3_ListBox.Clear;
 
-		// Get XML File
-//		XMLDocument1.
+		// Load XML File
 		XMLDocument1.LoadFromFile(CB_XML_File.Text);
 
 		for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
@@ -1618,8 +1619,6 @@ begin
 						if MyChild.ChildNodes[i2].Text = 'Podcast' then
 							podcast	:=	True;
 
-	//			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
-
 					end;
 
 					ResultString	:=	mp3list_html_output_format;
@@ -1630,6 +1629,7 @@ begin
 																											Album,
 																											Track,
 																											Title,
+																											Genre,
 																											Year);
 
 					// check search and replace list
@@ -1638,7 +1638,6 @@ begin
 					if (TrackType <> 'URL') and
 							(genre <> 'Hörbuch') and
 							(genre <> 'Kinderlieder') and
-//							(genre <> 'C') and
 							not HasVideo and
 							not podcast
 					then //	No URL's, no Videos
@@ -1694,6 +1693,7 @@ begin
 		CB_XML_File.Text	:=	OpenDialog_FileSelect.FileName;
 
 		Go_Btn2.Enabled :=  True;
+
 		{neuen Pfad merken und einordnen}
 		move_memory_combos(xmllist_last_used_files, OpenDialog_FileSelect.FileName);
 
@@ -1940,6 +1940,7 @@ function TF_Main.ReplaceVariablesInResult(s,
 																					album,
 																					track,
 																					title,
+																					genre,
 																					year  : String) : String;
 begin
 	s	:=	StringReplace(s, '%artist%', artist, [rfReplaceAll, rfIgnoreCase]);
@@ -1949,6 +1950,8 @@ begin
 	s	:=	StringReplace(s, '%track%', track, [rfReplaceAll, rfIgnoreCase]);
 
 	s	:=	StringReplace(s, '%title%', title, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%genre%', genre, [rfReplaceAll, rfIgnoreCase]);
 
 	Result	:=	StringReplace(s, '%year%', year, [rfReplaceAll, rfIgnoreCase]);
 
