@@ -62,6 +62,7 @@ Msg=GB
 57 = XML file to process
 58 = iTunes import
 59 = Items found
+60 = Search results
 
 [Setup]
  1 = General

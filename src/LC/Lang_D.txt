@@ -62,6 +62,7 @@ Msg=D
 57 = XML-Datei zum Verarbeiten
 58 = iTunes Import
 59 = Einträge gefunden
+60 = Suchergebnisse
 
 [Setup]
  1 = Allgemein

@@ -22,6 +22,13 @@ object F_Main: TF_Main
     723)
   PixelsPerInch = 96
   TextHeight = 16
+  object SearchResultLab: TLabel
+    Left = 8
+    Top = 401
+    Width = 95
+    Height = 16
+    Caption = 'SearchResultLab'
+  end
   object PageControl1: TPageControl
     Left = 0
     Top = 3
@@ -31,7 +38,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -902,10 +909,10 @@ object F_Main: TF_Main
         OnClick = Go_BtnClick
       end
       object Pacman_Panel: TPanel
-        Left = 571
-        Top = 319
-        Width = 168
-        Height = 50
+        Left = 569
+        Top = 209
+        Width = 187
+        Height = 52
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1761,9 +1768,9 @@ object F_Main: TF_Main
   end
   object NameCheck_ListBox: TListBox
     Left = 7
-    Top = 404
+    Top = 448
     Width = 734
-    Height = 298
+    Height = 254
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1774,9 +1781,9 @@ object F_Main: TF_Main
   end
   object MP3_ListBox: TListBox
     Left = 0
-    Top = 395
+    Top = 424
     Width = 790
-    Height = 326
+    Height = 297
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4

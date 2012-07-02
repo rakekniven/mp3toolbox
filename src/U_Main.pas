@@ -115,7 +115,7 @@ type
     Go_Btn2: TBitBtn;
     HTML_OutputButton2: TBitBtn;
     NameCheck_ListBox: TListBox;
-    MP3_ListBox: TListBox;
+		MP3_ListBox: TListBox;
     Lab_Scan_Time3: TLabel;
     Label9: TLabel;
     Label10: TLabel;
@@ -129,6 +129,7 @@ type
     CB_XML_File: TComboBox;
     Btn_XML_File_Select: TSpeedButton;
     Speichernunter1: TMenuItem;
+    SearchResultLab: TLabel;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -531,6 +532,7 @@ begin
 	Goo1.Caption                           :=  GetTxt( 1, 40, 'Website at Google Code');
 	WebsiteofAuthor1.Caption               :=  GetTxt( 1, 41, 'Website of Author');
 	AboutMP3Toolbox1.Caption               :=  GetTxt( 1, 42, 'About');
+	SearchResultLab.Caption                :=  GetTxt( 1, 60, 'Search results');
 
 	{MP3List}
 	Multi_Dir_GroupBox.Caption             :=  GetTxt( 1,  6, 'Verzeichnisse ');
@@ -576,7 +578,7 @@ end;
 {--- MP3List : Formular schliessen --------------------------------------------}
 procedure TF_Main.Close_Btn1Click(Sender: TObject);
 begin
-  Close;
+	Close;
 end;
 
 {--- MP3List : Menu - Formular schliessen -------------------------------------}
