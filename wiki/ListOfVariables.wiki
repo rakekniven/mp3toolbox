@@ -15,6 +15,7 @@ Use for templates
 Use to create your output string. Adjust it under "Settings" dialog
  * %artist%
  * %album%
+ * %genre%
  * %track%
  * %title%
  * %year%
