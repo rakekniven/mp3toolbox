@@ -2,6 +2,7 @@
 #labels Featured
 
 = Version 1.1.19 2012-07-02 =
-* New: Import of iTunes music library by reading xml export files
+  * New: Import of iTunes music library by reading xml export files
+  * New: Added "genre" to ListOfVariables
 
 to be completed
