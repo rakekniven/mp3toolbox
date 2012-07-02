@@ -24,7 +24,7 @@ interface
 uses
 	Windows, SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
 	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
-	Grids, Mp3FileUtils, fldbrowsUnicode;//, Libc;
+	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc;//, Libc;
 
 type
 	TF_Main = class(TForm)
@@ -54,14 +54,12 @@ type
 		Dir_Count_Label: TLabel;
 		Result_Label: TLabel;
 		Pacman_Btn: TSpeedButton;
-		MP3_ListBox: TListBox;
 		Search_ProgressBar: TProgressBar;
 		MainMenu1: TMainMenu;
 		File1: TMenuItem;
 		Help1: TMenuItem;
 		Setup1: TMenuItem;
 		Exit1: TMenuItem;
-		NameCheck_ListBox: TListBox;
 		CDListe_StringGrid: TStringGrid;
 		Pacman_Panel: TPanel;
 		Pacman_Speed_Edit: TEdit;
@@ -87,7 +85,7 @@ type
 		DateiausListeentfernen1: TMenuItem;
 		Char_Count_Lab: TLabel;
 		Char_Count_Lab2: TLabel;
-		CD_Single_SaveDialog: TSaveDialog;
+    SaveDialog_File: TSaveDialog;
 		checkfilenamesfornoof1: TMenuItem;
 		AboutMP3Toolbox1: TMenuItem;
 		Result_File_SpeedButton: TSpeedButton;
@@ -98,7 +96,7 @@ type
 		Result_File_Label: TLabel;
 		CDList_Template_SpeedButton: TSpeedButton;
 		Result_File_SaveDialog: TSaveDialog;
-		CDList_Source_File_OpenDialog: TOpenDialog;
+    OpenDialog_FileSelect: TOpenDialog;
 		CDList_Result_Label: TLabel;
 		TabSheet4: TTabSheet;
 		ListBox_Error: TListBox;
@@ -111,6 +109,26 @@ type
 		Lab_Scan_Time: TLabel;
 		Goo1: TMenuItem;
 		WebsiteofAuthor1: TMenuItem;
+    TabSheet2: TTabSheet;
+    XMLDocument1: TXMLDocument;
+    Label7: TLabel;
+    Go_Btn2: TBitBtn;
+    HTML_OutputButton2: TBitBtn;
+    NameCheck_ListBox: TListBox;
+    MP3_ListBox: TListBox;
+    Lab_Scan_Time3: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Lab_Scan_Time4: TLabel;
+    CB_XML_File: TComboBox;
+    Btn_XML_File_Select: TSpeedButton;
+    Speichernunter1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -167,6 +185,17 @@ type
 		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
 		procedure Goo1Click(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
+		procedure Go_Btn2Click(Sender: TObject);
+		function SearchAndReplace(s : String): string;
+		function ReplaceVariablesInResult(s,
+																					artist,
+																					album,
+																					track,
+																					title,
+																					genre,
+																					year  : String) : String;
+		procedure Btn_XML_File_SelectClick(Sender: TObject);
+    procedure Speichernunter1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -229,6 +258,7 @@ var
 	mp3list_Character_stringlists       : array[0..26]  of TStringList;
 	mp3list_text_file_encoding					:	Integer;            //	0 : UTF8; 1 : ANSI
 	mp3list_SearchAndReplace			      : TStringList;
+	xmllist_last_used_files             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
 
 	{Variablen für CD-Archive}
 	cdarchive_path_to_read_in		        : String;
@@ -352,6 +382,9 @@ begin
 	cdarchive_path_to_act_archive       :=	cdarchive_last_used_pathes[0];
 
 	for i := 0 to 9 do
+		xmllist_last_used_files[i]	      :=  Ini.ReadString ('XMLLIST',   'File'+IntToStr(i), '');
+
+	for i := 0 to 9 do
 		cdlist_last_used_pathes[i]	      :=  Ini.ReadString ('CDLIST',    'SourcePath'+IntToStr(i), '');
 
 	for i := 0 to 9 do
@@ -372,7 +405,7 @@ begin
 	mp3list_html_output_file    :=	mp3list_html_file_name + mp3list_html_file_ending;
 	mp3list_text_output_file    :=  mp3list_html_file_name + '.txt';
 
-  {Set filter-options}
+	{Set filter-options}
 	filter_ComboBox.ItemIndex		:=	0;	 //	default is mp3
 	search_filter_expression		:=	filter_ComboBox.Items[filter_ComboBox.ItemIndex];
 
@@ -408,6 +441,18 @@ begin
   init_text(Sender);
 //  Set_Language(Reg.language);
 
+	{Combobox neu füllen}
+	CB_XML_File.Clear;
+	for i := 0 to 9 do
+	begin
+		if FileExists(xmllist_last_used_files[i]) then
+		begin
+			CB_XML_File.Items.Add(xmllist_last_used_files[i]);
+			Go_Btn2.Enabled :=  True;
+		end;
+	end;
+	CB_XML_File.ItemIndex	:=	0;
+
 end;
 
 {--- If form is resized -------------------------------------------------------}
@@ -418,7 +463,7 @@ begin
 
 	for i := 0 to CDListe_StringGrid.ColCount - 1 do
   begin
-    CDListe_StringGrid.ColWidths[i] :=  (CDListe_StringGrid.ClientWidth - 19 ) div CDListe_StringGrid.ColCount;
+		CDListe_StringGrid.ColWidths[i] :=  (CDListe_StringGrid.ClientWidth - 19 ) div CDListe_StringGrid.ColCount;
   end;
 end;
 
@@ -426,6 +471,24 @@ end;
 procedure TF_Main.Setup1Click(Sender: TObject);
 begin
 	F_Setup.Show;
+end;
+
+procedure TF_Main.Speichernunter1Click(Sender: TObject);
+var
+	ToF	:TextFile;
+  i: Integer;
+begin
+	//
+//  SaveDialog_File.InitialDir	:=	lib1.gGetTempDir;
+	if SaveDialog_File.Execute() then
+	begin
+		AssignFile(ToF, SaveDialog_File.FileName);
+		Rewrite(ToF);
+		for i := 0 to MP3_ListBox.Count - 1 do
+			writeln(ToF, MP3_ListBox.Items[i]);
+		CloseFile(ToF);
+	end;
+
 end;
 
 {--- OnShow -------------------------------------------------------------------}
@@ -459,6 +522,7 @@ begin
 	{General}
 //  F_Main.Caption                         :=  GetTxt( 1,  2, 'mp3toolbox version ???');
 	TabSheet1.Caption                      :=  GetTxt( 1,  3, 'Laufwerks-archive');
+	TabSheet2.Caption                      :=  GetTxt( 1, 58, 'iTunes Import');
 	TabSheet3.Caption                      :=  GetTxt( 1,  5, 'CD-Liste');
 	File1.Caption                          :=  GetTxt( 1, 14, 'Datei');
 	Help1.Caption                          :=  GetTxt( 1, 15, 'Hilfe');
@@ -477,6 +541,7 @@ begin
 	Own_Filter_CheckBox.Caption            :=  GetTxt( 1, 11, 'eigener Filter');
 	TXT_Output_Btn.Caption                 :=  GetTxt( 1, 12, 'Textdatei erzeugen');
 	HTML_OutputButton.Caption              :=  GetTxt( 1, 13, 'Webseite erzeugen');
+	HTML_OutputButton2.Caption             :=  GetTxt( 1, 13, 'Webseite erzeugen');
 	Load_From_Button.Caption               :=  GetTxt( 1, 43, 'Load directories from config');
 	Save_To_Button.Caption                 :=  GetTxt( 1, 44, 'Save directories');
 	Sel_All_Button.Caption                 :=  GetTxt( 1, 45, 'Select all');
@@ -484,11 +549,15 @@ begin
 	Clear_Sel_Button.Caption               :=  GetTxt( 1, 47, 'Clear selected');
 	Clear_All_Button.Caption               :=  GetTxt( 1, 48, 'Clear all');
 	Go_Btn.Caption               :=  GetTxt( 1, 49, 'Go !');
+	Go_Btn2.Caption               :=  GetTxt( 1, 49, 'Go !');
 	Label1.Caption               :=  GetTxt( 1, 50, 'Files found');
 	Label2.Caption               :=  GetTxt( 1, 51, 'Directories searched');
 	Label3.Caption               :=  GetTxt( 1, 52, 'Search time');
 	Label4.Caption               :=  GetTxt( 1, 53, 'Tags scanned');
 	Label5.Caption               :=  GetTxt( 1, 54, 'Scan time');
+	Lab_Scan_Time3.Caption       :=  GetTxt( 1, 54, 'Scan time');
+	Label7.Caption							 :=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
+	Label12.Caption              :=  GetTxt( 1, 59, 'Items found');
 
 	{CDList}
 	CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
@@ -643,7 +712,7 @@ begin
     Filter_Edit.Visible					:=	True;
   end
   else
-  begin
+	begin
   	Own_Filter_CheckBox.Checked	:=	False;
     filter_ComboBox.Visible			:=	True;
     Filter_Edit.Visible					:=	False;
@@ -674,10 +743,9 @@ end;
 procedure TF_Main.Go_BtnClick(Sender: TObject);
 var
 	Files							:	TStringList;                       //  Stringliste
-	i,
-	i2								:	Integer;
+	i									:	Integer;
 	gauge_step				:	Integer;
-	s1								:	String;
+	ResultString			:	String;
 begin
 	Result_Label.Caption	:=	'...';
 	Dir_Count_Label.Caption	:=	'...';
@@ -691,14 +759,14 @@ begin
 	{When Search is canceled.}
   if search_status  = True then
   begin
-    cancel_search	:=	True;
-  end;
+		cancel_search	:=	True;
+	end;
 
-  if search_status  = False then
+	if search_status  = False then
   begin
     search_status :=  True;
 
-    Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
 		Go_Btn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
 		{Startzeit der suche}
@@ -737,8 +805,8 @@ begin
         					Files,
                   output_with_pathes,
                   search_subdir,
-                  output_with_filesize,
-                  search_filter_expression );
+									output_with_filesize,
+									search_filter_expression );
 				Search_ProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
       end;
     end;
@@ -761,7 +829,7 @@ begin
 		{Anzeige der Suchzeit.}
 		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
-    {Stringliste sortieren}
+		{Stringliste sortieren}
     Files.Sort;
 
 		{filter and fill ListBox}
@@ -782,7 +850,7 @@ begin
     {Pacman aktivieren und starten}
     Pacman_Btn.Visible        :=  True;
 		Pacman_Btn.Repaint;
-    pacman_direction          :=  True;
+		pacman_direction          :=  True;
     Pacman_Move_Timer.Enabled :=  True;
 
 		for i:= 0  to Files.Count - 1 do
@@ -809,47 +877,20 @@ begin
 					// Check existence for each placeholder and replace it
 
 					// Edit_Output_Format
-					s1	:=	F_Setup.Edit_Output_Format.Text;
+					ResultString	:=	mp3list_html_output_format;
 
-					s1	:=	StringReplace(s1, '%artist%', ID3v2Tag.Artist, [rfReplaceAll, rfIgnoreCase]);
+					ResultString	:=	ReplaceVariablesInResult(ResultString,
+																											ID3v2Tag.Artist,
+																											ID3v2Tag.Album,
+																											ID3v2Tag.Track,
+																											ID3v2Tag.Title,
+																											ID3v2Tag.Genre,
+																											ID3v2Tag.Year);
 
-					s1	:=	StringReplace(s1, '%album%', ID3v2Tag.Album, [rfReplaceAll, rfIgnoreCase]);
-
-					s1	:=	StringReplace(s1, '%track%', ID3v2Tag.Track, [rfReplaceAll, rfIgnoreCase]);
-
-					s1	:=	StringReplace(s1, '%title%', ID3v2Tag.Title, [rfReplaceAll, rfIgnoreCase]);
-
-					s1	:=	StringReplace(s1, '%year%', ID3v2Tag.Year, [rfReplaceAll, rfIgnoreCase]);
-
-					//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
-
-					(*
-
-					s1	:= ID3v2Tag.Artist;
-					if ID3v2Tag.Album <> '' then
-						s1	:=	s1 + ' - ' + ID3v2Tag.Album;
-					if ID3v2Tag.Track <> '' then
-					begin
-						if Length(ID3v2Tag.Track) = 1 then
-							s1	:=	s1 + ' - 0' + ID3v2Tag.Track
-						else
-							s1	:=	s1 + ' - ' + ID3v2Tag.Track;
-					end;
-					if ID3v2Tag.Title <> '' then
-						s1	:=	s1 + ' - ' + ID3v2Tag.Title;
-
-*)
 					// check search and replace list
-					for i2 := 1 to F_Setup.ValueListEditor_SeachAndReplace.RowCount - 1 do
-					begin
-						if F_Setup.ValueListEditor_SeachAndReplace.Keys[i2] <> '' then
-							s1	:=	StringReplace(s1,
-																		F_Setup.ValueListEditor_SeachAndReplace.Keys[i2],
-																		F_Setup.ValueListEditor_SeachAndReplace.Values[F_Setup.ValueListEditor_SeachAndReplace.Keys[i2]],
-																		[rfReplaceAll, rfIgnoreCase]);
-					end;
+					ResultString	:=	SearchAndReplace (ResultString);
 
-					MP3_ListBox.Items.Add(s1);
+					MP3_ListBox.Items.Add(ResultString);
 				end;
 
 				// Debug for mark: Check if comment is present
@@ -885,10 +926,10 @@ begin
 														(end_search_time - start_search_time);
 
 		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
-    mp3list_result_count		  :=	MP3_ListBox.Items.Count;
+		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
-    Result_Label.Caption		  :=	IntToStr(MP3_ListBox.Items.Count);
+		Result_Label.Caption		  :=	IntToStr(mp3list_result_count);
 
     {If result are present then allow output}
 		TXT_Output_Btn.Enabled		:=	MP3_ListBox.Items.Count > 0;
@@ -897,12 +938,12 @@ begin
     {Speicher freigeben}
     Files.Free;
 
-    {Button zurücksetzen}
-    Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
-    Go_Btn.Caption  :=  GetTxt( 1, 49, 'Go !');
+		{Button zurücksetzen}
+		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		Go_Btn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
-    cancel_search	:=	False;
-    search_status :=  False;
+		cancel_search	:=	False;
+		search_status :=  False;
 
     {clear progressbar}
     Search_ProgressBar.Position :=	0;
@@ -1048,7 +1089,7 @@ begin
 
       {compare for all letter except numbers}
       for i2 := 0 to Length(dir) - 2 do
-      begin
+			begin
         {	1 means the string start with searched letter}
         if AnsiPos(Lowercase(first_letter), lowercase(dir[i2])) = 1 then
         begin
@@ -1189,7 +1230,7 @@ begin
       	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
   if NameCheck_ListBox.Items.Count > 0 then
-	  NameCheck_ListBox.BringToFront
+		NameCheck_ListBox.BringToFront
   else
 	  MP3_ListBox.BringToFront;
 
@@ -1302,17 +1343,17 @@ procedure TF_Main.TabSheet3Show(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  {Combobox neu füllen}
-  CDList_Source_File_CB.Clear;
-  for i := 0 to 9 do
-  begin
-    if FileExists(cdlist_last_used_pathes[i]) then
-    begin
-      CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
-	    Go_Btn3.Enabled :=  True;
-    end;
-  end;
-  CDList_Source_File_CB.ItemIndex	:=	0;
+	{Combobox neu füllen}
+	CDList_Source_File_CB.Clear;
+	for i := 0 to 9 do
+	begin
+		if FileExists(cdlist_last_used_pathes[i]) then
+		begin
+			CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
+			Go_Btn3.Enabled :=  True;
+		end;
+	end;
+	CDList_Source_File_CB.ItemIndex	:=	0;
 
   Result_File_ComboBox.Clear;
   for i := 0 to 9 do
@@ -1337,30 +1378,30 @@ end;
 
 procedure TF_Main.Go_Btn3Click(Sender: TObject);
 var
-  F         : TextFile;
-  ln        : String;
-  i         : Integer;
+	F         : TextFile;
+	ln        : String;
+	i         : Integer;
 begin
-  {Gesamtzähler}
-  cdlist_result_count :=  0;
+	{Gesamtzähler}
+	cdlist_result_count :=  0;
 
-  {Begin of search}
-  start_search_time :=  Time;
+	{Begin of search}
+	start_search_time :=  Time;
 
-  { - Begin : Get number of tabs and adjust StringGrid - }
-  AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
-  Reset(F);
-  Readln(F, ln);
+	{ - Begin : Get number of tabs and adjust StringGrid - }
+	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	Reset(F);
+	Readln(F, ln);
 
-  CDListe_StringGrid.ColCount :=  separate_string_to_get_tabcount(ln);
+	CDListe_StringGrid.ColCount :=  separate_string_to_get_tabcount(ln);
 
-  F_Main.FormResize(Go_Btn3);
+	F_Main.FormResize(Go_Btn3);
 
-  CloseFile(F);
-  { - End : Get number of tabs and adjust StringGrid - }
+	CloseFile(F);
+	{ - End : Get number of tabs and adjust StringGrid - }
 
   { - Begin : Fill lines - }
-  AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
   Reset(F);
 
   {zeilenweise lesen und zuweisen}
@@ -1373,7 +1414,7 @@ begin
     begin
       CDListe_StringGrid.Cells[i,cdlist_result_count]  :=  cdlist_tab_values[i];
       cdlist_tab_values[i]  :=  '';
-    end;
+		end;
 
     {counter}
     cdlist_result_count :=  cdlist_result_count + 1;
@@ -1416,32 +1457,32 @@ var
 	i	:	Integer;
 begin
 	if DirectoryExists('C:\') then
-  	CDList_Source_File_OpenDialog.InitialDir	:=	'c:\';
+		OpenDialog_FileSelect.InitialDir	:=	'c:\';
 
-  if CDList_Source_File_OpenDialog.Execute = True then
-  begin
-    if FileExists(CDList_Source_File_OpenDialog.FileName) then
+	if OpenDialog_FileSelect.Execute = True then
+	begin
+		if FileExists(OpenDialog_FileSelect.FileName) then
     begin
-      Go_Btn3.Enabled :=  True;
+			Go_Btn3.Enabled :=  True;
 			{neuen Pfad merken und einordnen}
-      move_memory_combos(cdlist_last_used_pathes, CDList_Source_File_OpenDialog.FileName);
+			move_memory_combos(cdlist_last_used_pathes, OpenDialog_FileSelect.FileName);
 
-      {Pfade speichern}
-      Ini := TIniFile.Create(ini_file_name);
+			{Pfade speichern}
+			Ini := TIniFile.Create(ini_file_name);
 
-		  for i := 0 to 9 do
-		  	Ini.WriteString ('CDLIST',  'SourcePath' + IntToStr(i), cdlist_last_used_pathes[i]);
+			for i := 0 to 9 do
+				Ini.WriteString ('CDLIST',  'SourcePath' + IntToStr(i), cdlist_last_used_pathes[i]);
 
-      Ini.Free;
+			Ini.Free;
 
-      {Combobox neu füllen}
-      CDList_Source_File_CB.Clear;
-      for i := 0 to 9 do
-      begin
-        if FileExists(cdlist_last_used_pathes[i]) then
-          CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
-      end;
-      CDList_Source_File_CB.ItemIndex	:=	0;
+			{Combobox neu füllen}
+			CDList_Source_File_CB.Clear;
+			for i := 0 to 9 do
+			begin
+				if FileExists(cdlist_last_used_pathes[i]) then
+					CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
+			end;
+			CDList_Source_File_CB.ItemIndex	:=	0;
     end
   end
   else
@@ -1450,6 +1491,230 @@ begin
   end;
 end;
 
+
+procedure TF_Main.Go_Btn2Click(Sender: TObject);
+var
+	i,
+	i2,
+	i3	:	Integer;
+	MyChild,
+	MyChild2	:	IXMLNode;
+	ResultString,
+	artist,
+	album,
+	track,
+	title,
+	year,
+	TrackType,
+	genre  : String;
+	HasVideo,
+	podcast		:	Boolean;
+begin
+	Label13.Caption	:=	'...';
+	Lab_Scan_Time4.Caption	:=	'...';
+
+	{When Search is canceled.}
+	if search_status  = True then
+	begin
+		cancel_search	:=	True;
+	end;
+
+	if search_status  = False then
+	begin
+		search_status :=  True;
+
+		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		Go_Btn2.Caption  :=  GetTxt( 1, 55, 'Stop');
+
+		if not FileExists(CB_XML_File.Text) then
+		begin
+			if MessageDlg('File  "' + CB_XML_File.Text + '" not found.',
+								mtWarning,[mbYes, mbNo], 0) = mrYes then begin
+			end;
+		end
+		else
+			MP3_ListBox.Clear;
+
+		// Load XML File
+		XMLDocument1.LoadFromFile(CB_XML_File.Text);
+
+		for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
+		begin
+			Application.ProcessMessages;
+
+			if cancel_search then
+				break;
+
+			//		ShowMessage((XMLDocument1.DocumentElement.ChildNodes[i].LocalName ));
+			MyChild	:=	XMLDocument1.DocumentElement.ChildNodes[i];
+//		ShowMessage((MyChild.ChildNodes[i].LocalName ));
+(*
+		for i2 := 0 to MyChild.ChildNodes.Count - 1 do
+		begin
+//		if XMLDocument1.DocumentElement.ChildNodes[i].LocalName <> '' then
+			ShowMessage((MyChild.ChildNodes[i2].LocalName ));
+		end;
+*)
+			MyChild2	:=	MyChild.ChildNodes['dict'];
+//		ShowMessage(IntToStr(MyChild2.ChildNodes.Count));
+//		ShowMessage(MyChild2.ChildNodes['key'].Text);
+
+			{Startzeit des scans}
+			start_scan_time := Time;
+
+			for i3 := 0 to MyChild2.ChildNodes.Count - 1 do
+			begin
+				Application.ProcessMessages;
+
+				if cancel_search then
+					break;
+
+				//
+	//			ShowMessage(MyChild2.ChildNodes[i3].LocalName);
+				if MyChild2.ChildNodes[i3].LocalName = 'dict' then
+				begin
+
+					MyChild	:=	MyChild2.ChildNodes[i3];
+	//				ShowMessage(IntToStr(MyChild.ChildNodes.Count));
+	//				ShowMessage(MyChild.ChildNodes['key'].Text);
+					artist	:=	'';
+					Album	:=	'';
+					Track	:=	'';
+					Title	:=	'';
+					Year	:=	'';
+					HasVideo	:=	False;
+					Podcast		:=	False;
+
+					for i2 := 0 to MyChild.ChildNodes.Count - 1 do
+					begin
+						Application.ProcessMessages;
+
+						if cancel_search then
+							break;
+
+						if MyChild.ChildNodes[i2].Text = 'Artist' then
+							Artist	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Album' then
+							Album	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Track Number' then
+							Track	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Name' then
+							Title	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Year' then
+							Year	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Track Type' then
+							TrackType	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Genre' then
+							genre	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Has Video' then
+							HasVideo	:=	True;
+
+						if MyChild.ChildNodes[i2].Text = 'Podcast' then
+							podcast	:=	True;
+
+					end;
+
+					ResultString	:=	mp3list_html_output_format;
+
+					// Edit_Output_Format
+					ResultString	:=	ReplaceVariablesInResult(ResultString,
+																											Artist,
+																											Album,
+																											Track,
+																											Title,
+																											Genre,
+																											Year);
+
+					// check search and replace list
+					ResultString	:=	SearchAndReplace (ResultString);
+
+					if (TrackType <> 'URL') and
+							(genre <> 'Hörbuch') and
+							(genre <> 'Kinderlieder') and
+							not HasVideo and
+							not podcast
+					then //	No URL's, no Videos
+						MP3_ListBox.Items.Add(ResultString)
+					else
+						ListBox_Error.Items.Add(ResultString);
+
+				end;
+			end;
+			{Ende der Suchzeit}
+			end_scan_time           :=  Time;
+
+			{Anzeige der Suchzeit.}
+			Lab_Scan_Time4.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+
+			total_work_duration	:=  (end_scan_time - start_scan_time) +
+															(end_search_time - start_search_time);
+
+			{total counter (wird für ausgabenschleife benötigt TXT und HTML}
+			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
+
+			MP3_ListBox.Sorted	:=	True;
+			Label13.Caption	:=	IntToStr(mp3list_result_count);
+
+			if not TabSheet4.TabVisible then
+			begin
+				if ListBox_Error.Count > 0 then
+					TabSheet4.TabVisible	:=	True;
+			end;
+
+		end;
+
+		{Button zurücksetzen}
+		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		Go_Btn2.Caption  :=  GetTxt( 1, 49, 'Go !');
+
+		cancel_search	:=	False;
+		search_status :=  False;
+
+	end;
+
+	HTML_OutputButton2.Enabled :=	MP3_ListBox.Items.Count > 0;
+end;
+
+procedure TF_Main.Btn_XML_File_SelectClick(Sender: TObject);
+var
+	i	:	Integer;
+	INI	:	TIniFile;
+begin
+	if OpenDialog_FileSelect.Execute = True then
+	begin
+		CB_XML_File.Items.Add(OpenDialog_FileSelect.FileName);
+		CB_XML_File.Text	:=	OpenDialog_FileSelect.FileName;
+
+		Go_Btn2.Enabled :=  True;
+
+		{neuen Pfad merken und einordnen}
+		move_memory_combos(xmllist_last_used_files, OpenDialog_FileSelect.FileName);
+
+		{Pfade speichern}
+		Ini := TIniFile.Create(ini_file_name);
+
+		for i := 0 to 9 do
+			Ini.WriteString ('XMLLIST',  'File' + IntToStr(i), xmllist_last_used_files[i]);
+
+		Ini.Free;
+
+		{Combobox neu füllen}
+		CB_XML_File.Clear;
+		for i := 0 to 9 do
+		begin
+			if FileExists(xmllist_last_used_files[i]) then
+				CB_XML_File.Items.Add(xmllist_last_used_files[i]);
+		end;
+		CB_XML_File.ItemIndex	:=	0;
+	end;
+end;
 
 {--- CDList : Close Form ------------------------------------------------------}
 procedure TF_Main.CDList_Close_BtnClick(Sender: TObject);
@@ -1581,7 +1846,7 @@ begin
 end;
 
 procedure TF_Main.NameCheck_ListBoxMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+	Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if  NameCheck_ListBox.ItemIndex >= 0 then
 		Char_Count_Lab.Caption  :=  IntToStr(Length(NameCheck_ListBox.Items[NameCheck_ListBox.ItemIndex]));
@@ -1652,7 +1917,46 @@ begin
     Result_File_ComboBox.ItemIndex	:=	0;
   end
   else
-    Result_File_ComboBox.Text  	:=  '';
+		Result_File_ComboBox.Text  	:=  '';
 end;
+
+function TF_Main.SearchAndReplace(s : String): string;
+var
+	i	:	Integer;
+begin
+	for i := 1 to F_Setup.ValueListEditor_SeachAndReplace.RowCount - 1 do
+		begin
+			if F_Setup.ValueListEditor_SeachAndReplace.Keys[i] <> '' then
+				s	:=	StringReplace(s,
+																	F_Setup.ValueListEditor_SeachAndReplace.Keys[i],
+																	F_Setup.ValueListEditor_SeachAndReplace.Values[F_Setup.ValueListEditor_SeachAndReplace.Keys[i]],
+																	[rfReplaceAll, rfIgnoreCase]);
+	end;
+	Result	:=	s;
+end;
+
+function TF_Main.ReplaceVariablesInResult(s,
+																					artist,
+																					album,
+																					track,
+																					title,
+																					genre,
+																					year  : String) : String;
+begin
+	s	:=	StringReplace(s, '%artist%', artist, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%album%', album, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%track%', track, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%title%', title, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%genre%', genre, [rfReplaceAll, rfIgnoreCase]);
+
+	Result	:=	StringReplace(s, '%year%', year, [rfReplaceAll, rfIgnoreCase]);
+
+	//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
+end;
+
 
 end.
