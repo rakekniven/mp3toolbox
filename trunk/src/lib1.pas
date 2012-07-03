@@ -78,6 +78,10 @@ uses
 
 	function  get_version                     (                         )         : String; overload;
 
+	// remove the filename and last separator from a complete string
+	function  get_filename_from_complete_string(whole_string,
+																						 separator          : String)       : String;
+
 implementation
 
 uses
@@ -646,6 +650,30 @@ begin
 	finally
 	FreeMemory(pFileInfo);
 	end;
+end;
+
+{--- remove the filename and last separator from a complete string ------------}
+function  get_filename_from_complete_string   (whole_string,
+																							 separator          : String)       : String;
+var
+	L,
+	i : Integer;
+begin
+	if FileExists(whole_string) then
+	begin
+
+		L := Length(whole_string);
+		for i := L downto 1 do
+		begin
+			if whole_string[i] = separator then
+			begin
+				Result := Copy(whole_string, i + 1 , L - i  + 1);
+				break;
+			end;
+		end;
+	end
+	else
+		Result  :=  '';
 end;
 
 end.
