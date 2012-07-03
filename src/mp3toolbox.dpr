@@ -15,7 +15,8 @@ uses
 	U_CharCode in 'externallibs\U_CharCode.pas',
 	Id3v2Frames in 'externallibs\Id3v2Frames.pas',
 	Mp3FileUtils in 'externallibs\Mp3FileUtils.pas',
-	fldbrowsUnicode in 'externallibs\fldbrowsUnicode.pas';
+	fldbrowsUnicode in 'externallibs\fldbrowsUnicode.pas',
+	U_FTP in 'U_FTP.pas';
 
 {$R *.res}
 

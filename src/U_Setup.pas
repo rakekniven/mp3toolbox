@@ -77,6 +77,11 @@ type
 		Edit_Output_Format: TEdit;
 		ValueListEditor_SeachAndReplace: TValueListEditor;
 		Lab_OutputFormat_Help: TLabel;
+		FtpTS: TTabSheet;
+		LabeledEdit1: TLabeledEdit;
+		LabeledEdit2: TLabeledEdit;
+		LabeledEdit3: TLabeledEdit;
+		LabeledEdit4: TLabeledEdit;
 		procedure FormShow(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -174,7 +179,7 @@ begin
   MP3List_Template_File_Edit.Text				:=  mp3list_single_template_file;
   MP3List_Multi_Template_File_Edit.Text	:=  mp3list_multi_template_file;
   mp3list_filename_Edit.Text	          :=  mp3list_html_file_name;
-  mp3list_file_ending_Edit.Text	        :=  mp3list_html_file_ending;
+	mp3list_file_ending_Edit.Text	        :=  mp3list_html_file_ending;
 
   {Sprache}
   if gui_language = 'D' then
@@ -421,6 +426,16 @@ begin
 		Ini.WriteBool   ('CDLIST',  'html_files_delete_after_zip',cdlist_html_files_delete_after_zip);
 
     Ini.WriteBool   ('DEVELOP', 'PACMAN_ADJUSTMENT',          pacman_adjustment_visible);
+
+		FtpConnection.Hostname	:=	LabeledEdit1.Text;
+		FtpConnection.Username	:=	LabeledEdit2.Text;
+		FtpConnection.Password	:=	LabeledEdit3.Text;
+		FtpConnection.RemoteDir	:=	LabeledEdit4.Text;
+
+		Ini.WriteString ('FTP',    	 'hostname',	FtpConnection.Hostname);
+		Ini.WriteString ('FTP',    	 'username',	FtpConnection.Username);
+		Ini.WriteString ('FTP',    	 'password',	FtpConnection.Password);
+		Ini.WriteString ('FTP',    	 'remotedir',	FtpConnection.RemoteDir);
 
 	  Ini.Free;
 
