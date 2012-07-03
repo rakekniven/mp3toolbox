@@ -38,7 +38,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -310,6 +310,7 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        OnClick = Label1Click
         ExplicitLeft = 571
       end
       object Label2: TLabel
@@ -1007,10 +1008,6 @@ object F_Main: TF_Main
       ImageIndex = 2
       TabVisible = False
       OnShow = TabSheet3Show
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 784
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1051,7 +1048,6 @@ object F_Main: TF_Main
         Anchors = [akTop, akRight]
         Step = 5
         TabOrder = 3
-        ExplicitLeft = 611
       end
       object CDListe_StringGrid: TStringGrid
         Left = 0
@@ -1076,7 +1072,6 @@ object F_Main: TF_Main
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing]
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 780
       end
       object HTML_OutputButton3: TBitBtn
         Left = 609
@@ -1122,7 +1117,6 @@ object F_Main: TF_Main
         ParentDoubleBuffered = False
         TabOrder = 1
         OnClick = HTML_OutputButton3Click
-        ExplicitLeft = 611
       end
       object CDLIst_Choose_GB: TGroupBox
         Left = 0
@@ -1135,7 +1129,6 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 2
-        ExplicitWidth = 595
         DesignSize = (
           593
           179)
@@ -1369,7 +1362,6 @@ object F_Main: TF_Main
           TabOrder = 0
           OnClick = Go_Btn3Click
           OnMouseDown = Go_Btn3MouseDown
-          ExplicitLeft = 475
         end
         object CDList_Template_ComboBox: TComboBox
           Left = 10
@@ -1419,10 +1411,6 @@ object F_Main: TF_Main
       Caption = 'Error'
       ImageIndex = 3
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 784
-      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1911,6 +1899,13 @@ object F_Main: TF_Main
         OnClick = Exit1Click
       end
     end
+    object Extra1: TMenuItem
+      Caption = '??Extra'
+      object UploadtoFTP1: TMenuItem
+        Caption = '??Upload to FTP'
+        OnClick = UploadtoFTP1Click
+      end
+    end
     object Help1: TMenuItem
       Caption = '??Help'
       object Goo1: TMenuItem
@@ -2033,6 +2028,14 @@ object F_Main: TF_Main
     ReplyTo = <>
     ConvertPreamble = True
     Left = 448
+    Top = 328
+  end
+  object IdFTP1: TIdFTP
+    IPVersion = Id_IPv4
+    AutoLogin = True
+    ProxySettings.ProxyType = fpcmNone
+    ProxySettings.Port = 0
+    Left = 496
     Top = 328
   end
 end

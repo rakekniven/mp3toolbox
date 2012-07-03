@@ -617,6 +617,50 @@ object F_Setup: TF_Setup
         OnClick = Pacman_CheckBoxClick
       end
     end
+    object FtpTS: TTabSheet
+      Caption = '??FTP'
+      ImageIndex = 4
+      object LabeledEdit1: TLabeledEdit
+        Left = 24
+        Top = 40
+        Width = 121
+        Height = 24
+        EditLabel.Width = 57
+        EditLabel.Height = 16
+        EditLabel.Caption = 'Hostname'
+        TabOrder = 0
+      end
+      object LabeledEdit2: TLabeledEdit
+        Left = 24
+        Top = 88
+        Width = 121
+        Height = 24
+        EditLabel.Width = 58
+        EditLabel.Height = 16
+        EditLabel.Caption = 'Username'
+        TabOrder = 1
+      end
+      object LabeledEdit3: TLabeledEdit
+        Left = 24
+        Top = 136
+        Width = 121
+        Height = 24
+        EditLabel.Width = 55
+        EditLabel.Height = 16
+        EditLabel.Caption = 'Password'
+        TabOrder = 2
+      end
+      object LabeledEdit4: TLabeledEdit
+        Left = 24
+        Top = 184
+        Width = 121
+        Height = 24
+        EditLabel.Width = 64
+        EditLabel.Height = 16
+        EditLabel.Caption = 'Remote Dir'
+        TabOrder = 3
+      end
+    end
   end
   object Store_And_Close_Btn: TBitBtn
     Left = 453

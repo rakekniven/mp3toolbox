@@ -26,7 +26,8 @@ uses
 	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
 	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, IdMessage;//, Libc;
+  IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, IdMessage,
+  IdFTP, U_FTP;//, Libc;
 
 type
 	TF_Main = class(TForm)
@@ -135,6 +136,9 @@ type
     Sendfeedback1: TMenuItem;
     IdMessage1: TIdMessage;
     Label12: TLabel;
+    IdFTP1: TIdFTP;
+    Extra1: TMenuItem;
+    UploadtoFTP1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -201,8 +205,11 @@ type
 																					genre,
 																					year  : String) : String;
 		procedure Btn_XML_File_SelectClick(Sender: TObject);
-    procedure Speichernunter1Click(Sender: TObject);
-    procedure Sendfeedback1Click(Sender: TObject);
+		procedure Speichernunter1Click(Sender: TObject);
+		procedure Sendfeedback1Click(Sender: TObject);
+		function UploadToFtp : Boolean;
+    procedure Label1Click(Sender: TObject);
+    procedure UploadtoFTP1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -285,6 +292,9 @@ var
 	cdlist_html_files_zip               : Boolean;
 	cdlist_html_files_delete_after_zip  : Boolean;
 
+	FtpConnection	:	TFtpConnection;
+	FtpUploadList	:	TStringList;
+
 	const
 		SELDIRHELP = 1000;
 
@@ -337,6 +347,9 @@ begin
 	for i := 0 to Length(mp3list_Character_stringlists) do
 		mp3list_Character_stringlists[i]  :=  TStringList.Create;
 
+	FtpConnection	:=	TFtpConnection.Create;
+	FtpUploadList	:=	TStringList.Create;
+
 	mp3list_SearchAndReplace  :=  TStringList.Create;
 
 	ID3v2Tag := TID3v2Tag.Create;
@@ -369,6 +382,8 @@ begin
 		mp3list_SearchAndReplace.Add(Ini.ReadString ('GENERAL', 'SeachAndReplace' + IntToStr(i), ''));
 		inc(i);
 	end;
+
+
 
 	mp3list_single_template_file			  :=  Ini.ReadString ('MP3LIST',   'single_template', SlashSep(act_exec_directory, 'templates\mp3list-template2.html'));
 	mp3list_multi_template_file				  :=  Ini.ReadString ('MP3LIST',   'multi_template', 	SlashSep(act_exec_directory, 'templates\mp3list-letter-template2.html'));
@@ -406,6 +421,12 @@ begin
 	cdlist_html_files_delete_after_zip  :=	Ini.ReadBool   ('CDLIST',    'html_files_delete_after_zip',  False);
 
 	pacman_adjustment_visible         	:=  Ini.ReadBool   ('DEVELOP',   'PACMAN_ADJUSTMENT', False);
+
+	FtpConnection.Hostname							:=  Ini.ReadString ('FTP',    	 'hostname', '');
+	FtpConnection.Username							:=  Ini.ReadString ('FTP',    	 'username', '');
+	FtpConnection.Password							:=  Ini.ReadString ('FTP',    	 'password', '');
+	FtpConnection.RemoteDir							:=  Ini.ReadString ('FTP',    	 'remotedir', '');
+
 	Ini.Free;
 	{End: INI-Datei oeffnen und werte setzen}
 
@@ -622,6 +643,11 @@ begin
 end;
 
 {--- MP3List : Load values from inifile ---------------------------------------}
+procedure TF_Main.Label1Click(Sender: TObject);
+begin
+UploadToFtp;
+end;
+
 procedure TF_Main.Load_From_ButtonClick(Sender: TObject);
 var
   i		:	Integer;
@@ -1000,10 +1026,15 @@ begin
 	for I := 0 to MP3_ListBox.Items.Count - 1 do
 		S.Add(MP3_ListBox.Items[i]);
 
+	FtpUploadList.Clear;	//	Fresh list
+
 	if mp3list_text_file_encoding = 0 then
 		S.SaveToFile(SlashSep(text_files_output_path, mp3list_text_output_file), TEncoding.UTF8)
 	else
 		S.SaveToFile(SlashSep(text_files_output_path, mp3list_text_output_file));
+
+	// Add full path to upload list
+	FtpUploadList.Add(SlashSep(text_files_output_path, mp3list_text_output_file));
 
 	F_Main.Search_ProgressBar.Position	:=	0;
 
@@ -1117,15 +1148,18 @@ begin
     Search_ProgressBar.Position :=	0;
     Search_ProgressBar.Max      :=  Length(dir) - 1;
 
+		FtpUploadList.Clear;	//	Fresh list
 
-    {Eine Seite pro Buchstabe}
-    for i := 0 to Length(dir) - 1 do
-	  begin
-      {Body}
+		{Eine Seite pro Buchstabe}
+		for i := 0 to Length(dir) - 1 do
+		begin
+			{Body}
 			create_html_output(mp3list_multi_template_file,
-  	  									 SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)),
-                         dir[i],
-                         i);
+												 SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)),
+												 dir[i],
+												 i);
+			// Add full path to upload list
+			FtpUploadList.Add(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)));
 
       Search_ProgressBar.Position :=	i;
 	  end;
@@ -1167,7 +1201,12 @@ begin
 
   end;
 
-	lib1.Start_External_Program(self.WindowHandle, 'open', 'explorer', html_files_output_path, '', SW_SHOW);
+	lib1.Start_External_Program(self.WindowHandle,
+															'open',
+															'explorer',
+															html_files_output_path,
+															'',
+															SW_SHOW);
 
 end;
 
@@ -1278,7 +1317,7 @@ begin
   if NameCheck_ListBox.Items.Count > 0 then
 	  NameCheck_ListBox.BringToFront
   else
-	  MP3_ListBox.BringToFront;
+		MP3_ListBox.BringToFront;
 end;
 
 {--- MP3List : Bring MP3List to front if clicked ------------------------------}
@@ -1986,5 +2025,48 @@ begin
 	//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
 end;
 
+function TF_Main.UploadToFtp : Boolean;
+var
+	i	:	Integer;
+begin
+	IdFTP1.Host			:=	FtpConnection.Hostname;
+	IdFTP1.Username	:=	FtpConnection.Username;
+	IdFTP1.Password	:=	FtpConnection.Password;
+	IdFTP1.Connect;
+
+	if IdFTP1.Connected then
+	begin
+		IdFTP1.ChangeDir(FtpConnection.RemoteDir);
+		for i := 0 to FtpUploadList.Count - 1 do
+
+			IdFTP1.Put(FtpUploadList[i], get_filename_from_complete_string(FtpUploadList[i], '\'), False);
+
+		Result	:=	True;
+	end
+	else
+		Result	:=	False;
+
+	IdFTP1.Disconnect;
+
+end;
+
+procedure TF_Main.UploadtoFTP1Click(Sender: TObject);
+begin
+	if FtpConnection.Hostname <> '' then
+	begin
+	if FtpUploadList.Count > 0 then
+	begin
+		if UploadtoFTP then
+			ShowMessage('66666 Upload ok')
+		else
+			ShowMessage('66666 Upload failed.')
+	end
+	else
+			ShowMessage('66666 Nothing to upload. Queue is empty')
+	end
+	else
+			ShowMessage('66666 No FTP connection data found. Check settings')
+
+end;
 
 end.
