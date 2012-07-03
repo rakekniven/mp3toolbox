@@ -24,7 +24,9 @@ interface
 uses
 	Windows, SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
 	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
-	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc;//, Libc;
+	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
+  IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, IdMessage;//, Libc;
 
 type
 	TF_Main = class(TForm)
@@ -120,7 +122,6 @@ type
     Label9: TLabel;
     Label10: TLabel;
     Label11: TLabel;
-    Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
@@ -130,6 +131,10 @@ type
     Btn_XML_File_Select: TSpeedButton;
     Speichernunter1: TMenuItem;
     SearchResultLab: TLabel;
+    IdSMTP1: TIdSMTP;
+    Sendfeedback1: TMenuItem;
+    IdMessage1: TIdMessage;
+    Label12: TLabel;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -197,6 +202,7 @@ type
 																					year  : String) : String;
 		procedure Btn_XML_File_SelectClick(Sender: TObject);
     procedure Speichernunter1Click(Sender: TObject);
+    procedure Sendfeedback1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -1842,9 +1848,29 @@ begin
 	  MP3_ListBox.BringToFront;
 end;
 
+procedure TF_Main.Sendfeedback1Click(Sender: TObject);
+begin
+//
+	IdMessage1.From.Text	:=	'mp3toolbox@rakekniven.de';
+	IdMessage1.Sender.Text	:=	IdMessage1.From.Text;
+	IdMessage1.Recipients.EMailAddresses	:=	'mp3toolbox@rakekniven.de';
+	IdMessage1.Subject	:=	'Feedback mp3toolbox';
+	IdMessage1.Body.Add(DateTimeToStr(Now));
+
+	IdSMTP1.Host			:=	'';
+	IdSMTP1.Username	:=	'';
+	IdSMTP1.Password	:=	'';
+	IdSMTP1.Connect;
+	try
+		IdSMTP1.Send(IdMessage1);
+	finally
+		IdSMTP1.Disconnect();
+	end;
+end;
+
 procedure TF_Main.AboutMP3Toolbox1Click(Sender: TObject);
 begin
-  About_F.Show;
+	About_F.Show;
 end;
 
 procedure TF_Main.NameCheck_ListBoxMouseUp(Sender: TObject;

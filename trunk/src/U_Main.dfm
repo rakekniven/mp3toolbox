@@ -2,8 +2,8 @@ object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
-  ClientHeight = 723
-  ClientWidth = 792
+  ClientHeight = 720
+  ClientWidth = 790
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object F_Main: TF_Main
   OnResize = FormResize
   OnShow = FormShow
   DesignSize = (
-    792
-    723)
+    790
+    720)
   PixelsPerInch = 96
   TextHeight = 16
   object SearchResultLab: TLabel
@@ -32,7 +32,7 @@ object F_Main: TF_Main
   object PageControl1: TPageControl
     Left = 0
     Top = 3
-    Width = 792
+    Width = 790
     Height = 393
     Margins.Left = 4
     Margins.Top = 4
@@ -48,7 +48,7 @@ object F_Main: TF_Main
       Margins.Bottom = 4
       Caption = '??mp3list'
       DesignSize = (
-        784
+        782
         362)
       object Pacman_Btn: TSpeedButton
         Left = 571
@@ -219,7 +219,7 @@ object F_Main: TF_Main
         Visible = False
       end
       object Dir_Count_Label: TLabel
-        Left = 698
+        Left = 696
         Top = 188
         Width = 64
         Height = 16
@@ -238,9 +238,10 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 698
       end
       object Result_Label: TLabel
-        Left = 698
+        Left = 696
         Top = 168
         Width = 64
         Height = 16
@@ -261,6 +262,7 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 698
       end
       object Char_Count_Lab: TLabel
         Left = 613
@@ -287,7 +289,7 @@ object F_Main: TF_Main
         Visible = False
       end
       object Label1: TLabel
-        Left = 571
+        Left = 569
         Top = 168
         Width = 119
         Height = 16
@@ -308,9 +310,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 571
       end
       object Label2: TLabel
-        Left = 571
+        Left = 569
         Top = 188
         Width = 119
         Height = 16
@@ -331,9 +334,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 571
       end
       object Label3: TLabel
-        Left = 571
+        Left = 569
         Top = 208
         Width = 119
         Height = 16
@@ -354,9 +358,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 571
       end
       object Label4: TLabel
-        Left = 571
+        Left = 569
         Top = 228
         Width = 119
         Height = 16
@@ -377,9 +382,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 571
       end
       object Label5: TLabel
-        Left = 571
+        Left = 569
         Top = 248
         Width = 119
         Height = 16
@@ -400,9 +406,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 571
       end
       object Lab_Scan_Result: TLabel
-        Left = 698
+        Left = 696
         Top = 228
         Width = 64
         Height = 16
@@ -421,9 +428,10 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 698
       end
       object Lab_Scan_Time: TLabel
-        Left = 698
+        Left = 696
         Top = 248
         Width = 64
         Height = 16
@@ -442,9 +450,10 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 698
       end
       object Search_Time_Lab: TLabel
-        Left = 698
+        Left = 696
         Top = 207
         Width = 64
         Height = 16
@@ -463,11 +472,12 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 698
       end
       object Multi_Dir_GroupBox: TGroupBox
         Left = 0
         Top = 5
-        Width = 537
+        Width = 535
         Height = 332
         Margins.Left = 4
         Margins.Top = 4
@@ -477,12 +487,12 @@ object F_Main: TF_Main
         Caption = '??Directories'
         TabOrder = 3
         DesignSize = (
-          537
+          535
           332)
         object Multi_Dir_ListBox: TListBox
           Left = 187
           Top = 30
-          Width = 334
+          Width = 332
           Height = 291
           Margins.Left = 4
           Margins.Top = 4
@@ -787,7 +797,7 @@ object F_Main: TF_Main
         end
       end
       object TXT_Output_Btn: TBitBtn
-        Left = 571
+        Left = 569
         Top = 92
         Width = 185
         Height = 30
@@ -818,7 +828,7 @@ object F_Main: TF_Main
         OnClick = TXT_Output_BtnClick
       end
       object HTML_OutputButton: TBitBtn
-        Left = 571
+        Left = 569
         Top = 53
         Width = 185
         Height = 31
@@ -870,7 +880,7 @@ object F_Main: TF_Main
         OnClick = HTML_OutputButtonClick
       end
       object Go_Btn: TBitBtn
-        Left = 571
+        Left = 569
         Top = 14
         Width = 185
         Height = 31
@@ -975,7 +985,7 @@ object F_Main: TF_Main
         end
       end
       object Search_ProgressBar: TProgressBar
-        Left = 571
+        Left = 569
         Top = 130
         Width = 185
         Height = 30
@@ -997,11 +1007,15 @@ object F_Main: TF_Main
       ImageIndex = 2
       TabVisible = False
       OnShow = TabSheet3Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 784
+      ExplicitHeight = 0
       DesignSize = (
-        784
+        782
         362)
       object CDList_Result_Label: TLabel
-        Left = 611
+        Left = 609
         Top = 142
         Width = 151
         Height = 31
@@ -1023,9 +1037,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 611
       end
       object CDList_ProgressBar: TProgressBar
-        Left = 611
+        Left = 609
         Top = 90
         Width = 151
         Height = 31
@@ -1036,11 +1051,12 @@ object F_Main: TF_Main
         Anchors = [akTop, akRight]
         Step = 5
         TabOrder = 3
+        ExplicitLeft = 611
       end
       object CDListe_StringGrid: TStringGrid
         Left = 0
         Top = 216
-        Width = 780
+        Width = 778
         Height = 142
         Margins.Left = 4
         Margins.Top = 4
@@ -1060,9 +1076,10 @@ object F_Main: TF_Main
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing]
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 780
       end
       object HTML_OutputButton3: TBitBtn
-        Left = 611
+        Left = 609
         Top = 34
         Width = 151
         Height = 31
@@ -1105,11 +1122,12 @@ object F_Main: TF_Main
         ParentDoubleBuffered = False
         TabOrder = 1
         OnClick = HTML_OutputButton3Click
+        ExplicitLeft = 611
       end
       object CDLIst_Choose_GB: TGroupBox
         Left = 0
         Top = 9
-        Width = 595
+        Width = 593
         Height = 179
         Margins.Left = 4
         Margins.Top = 4
@@ -1117,11 +1135,12 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 2
+        ExplicitWidth = 595
         DesignSize = (
-          595
+          593
           179)
         object Choose_CDList_Source_File_Btn: TSpeedButton
-          Left = 417
+          Left = 415
           Top = 25
           Width = 50
           Height = 30
@@ -1166,9 +1185,10 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
           OnClick = Choose_CDList_Source_File_BtnClick
+          ExplicitLeft = 417
         end
         object Result_File_SpeedButton: TSpeedButton
-          Left = 417
+          Left = 415
           Top = 140
           Width = 50
           Height = 31
@@ -1213,9 +1233,10 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
           OnClick = Result_File_SpeedButtonClick
+          ExplicitLeft = 417
         end
         object CDList_Template_SpeedButton: TSpeedButton
-          Left = 417
+          Left = 415
           Top = 81
           Width = 50
           Height = 31
@@ -1260,6 +1281,7 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
           OnClick = CDList_Template_SpeedButtonClick
+          ExplicitLeft = 417
         end
         object CD_List_Open_File_Lab: TLabel
           Left = 10
@@ -1297,7 +1319,7 @@ object F_Main: TF_Main
         object CDList_Source_File_CB: TComboBox
           Left = 10
           Top = 25
-          Width = 399
+          Width = 397
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
@@ -1317,7 +1339,7 @@ object F_Main: TF_Main
           TabOrder = 1
         end
         object Go_Btn3: TBitBtn
-          Left = 475
+          Left = 473
           Top = 25
           Width = 110
           Height = 30
@@ -1347,11 +1369,12 @@ object F_Main: TF_Main
           TabOrder = 0
           OnClick = Go_Btn3Click
           OnMouseDown = Go_Btn3MouseDown
+          ExplicitLeft = 475
         end
         object CDList_Template_ComboBox: TComboBox
           Left = 10
           Top = 81
-          Width = 399
+          Width = 397
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
@@ -1372,7 +1395,7 @@ object F_Main: TF_Main
         object Result_File_ComboBox: TComboBox
           Left = 10
           Top = 140
-          Width = 399
+          Width = 397
           Height = 21
           Margins.Left = 4
           Margins.Top = 4
@@ -1396,10 +1419,14 @@ object F_Main: TF_Main
       Caption = 'Error'
       ImageIndex = 3
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 784
+      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
-        Width = 784
+        Width = 782
         Height = 362
         Align = alClient
         TabOrder = 0
@@ -1409,7 +1436,7 @@ object F_Main: TF_Main
       Caption = '??iTunes import'
       ImageIndex = 3
       DesignSize = (
-        784
+        782
         362)
       object Label7: TLabel
         Left = 19
@@ -1419,16 +1446,15 @@ object F_Main: TF_Main
         Caption = '??Which xml file'
       end
       object Lab_Scan_Time3: TLabel
-        Left = 571
+        Left = 569
         Top = 188
-        Width = 119
-        Height = 16
+        Width = 59
+        Height = 13
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
-        AutoSize = False
         Caption = '??Scan time'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
@@ -1442,7 +1468,7 @@ object F_Main: TF_Main
         Layout = tlCenter
       end
       object Label9: TLabel
-        Left = 571
+        Left = 569
         Top = 300
         Width = 119
         Height = 16
@@ -1464,9 +1490,10 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
         Visible = False
+        ExplicitLeft = 571
       end
       object Label10: TLabel
-        Left = 571
+        Left = 569
         Top = 280
         Width = 119
         Height = 16
@@ -1488,9 +1515,10 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
         Visible = False
+        ExplicitLeft = 571
       end
       object Label11: TLabel
-        Left = 571
+        Left = 569
         Top = 260
         Width = 119
         Height = 16
@@ -1512,32 +1540,28 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
         Visible = False
+        ExplicitLeft = 571
       end
       object Label12: TLabel
-        Left = 571
-        Top = 168
-        Width = 119
+        Left = 569
+        Top = 167
+        Width = 82
         Height = 16
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
-        AutoSize = False
         Caption = '??Items found'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clRed
-        Font.Height = 13
+        Font.Height = -13
         Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
         Font.Style = []
-        ParentColor = False
         ParentFont = False
-        Layout = tlCenter
       end
       object Label13: TLabel
-        Left = 698
+        Left = 696
         Top = 168
         Width = 64
         Height = 16
@@ -1558,9 +1582,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 698
       end
       object Label14: TLabel
-        Left = 698
+        Left = 696
         Top = 260
         Width = 64
         Height = 16
@@ -1580,9 +1605,10 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
         Visible = False
+        ExplicitLeft = 698
       end
       object Label15: TLabel
-        Left = 698
+        Left = 696
         Top = 279
         Width = 64
         Height = 16
@@ -1602,9 +1628,10 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
         Visible = False
+        ExplicitLeft = 698
       end
       object Label16: TLabel
-        Left = 698
+        Left = 696
         Top = 300
         Width = 64
         Height = 16
@@ -1624,9 +1651,10 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
         Visible = False
+        ExplicitLeft = 698
       end
       object Lab_Scan_Time4: TLabel
-        Left = 698
+        Left = 696
         Top = 188
         Width = 64
         Height = 16
@@ -1645,6 +1673,7 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitLeft = 698
       end
       object Btn_XML_File_Select: TSpeedButton
         Left = 400
@@ -1667,7 +1696,7 @@ object F_Main: TF_Main
         OnClick = Btn_XML_File_SelectClick
       end
       object Go_Btn2: TBitBtn
-        Left = 571
+        Left = 569
         Top = 30
         Width = 185
         Height = 31
@@ -1705,7 +1734,7 @@ object F_Main: TF_Main
         OnClick = Go_Btn2Click
       end
       object HTML_OutputButton2: TBitBtn
-        Left = 571
+        Left = 569
         Top = 69
         Width = 185
         Height = 31
@@ -1769,8 +1798,8 @@ object F_Main: TF_Main
   object NameCheck_ListBox: TListBox
     Left = 7
     Top = 448
-    Width = 734
-    Height = 254
+    Width = 732
+    Height = 251
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1782,8 +1811,8 @@ object F_Main: TF_Main
   object MP3_ListBox: TListBox
     Left = 0
     Top = 424
-    Width = 790
-    Height = 297
+    Width = 788
+    Height = 294
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1892,6 +1921,11 @@ object F_Main: TF_Main
         Caption = '??Website of Author'
         OnClick = WebsiteofAuthor1Click
       end
+      object Sendfeedback1: TMenuItem
+        Caption = '??Send feedback'
+        Visible = False
+        OnClick = Sendfeedback1Click
+      end
       object AboutMP3Toolbox1: TMenuItem
         Caption = '??About MP3Toolbox'
         OnClick = AboutMP3Toolbox1Click
@@ -1981,5 +2015,24 @@ object F_Main: TF_Main
     Left = 336
     Top = 328
     DOMVendorDesc = 'MSXML'
+  end
+  object IdSMTP1: TIdSMTP
+    SASLMechanisms = <>
+    Left = 400
+    Top = 328
+  end
+  object IdMessage1: TIdMessage
+    AttachmentEncoding = 'UUE'
+    BccList = <>
+    CCList = <>
+    Encoding = meDefault
+    FromList = <
+      item
+      end>
+    Recipients = <>
+    ReplyTo = <>
+    ConvertPreamble = True
+    Left = 448
+    Top = 328
   end
 end
