@@ -74,7 +74,7 @@ type
 		CB_TXT_Encoding: TComboBox;
 		Lab_Enc: TLabel;
 		Lab_OutputFormat: TLabel;
-		Edit_Output_Format: TEdit;
+		MP3List_Output_Format_Edit: TEdit;
 		ValueListEditor_SeachAndReplace: TValueListEditor;
 		Lab_OutputFormat_Help: TLabel;
 		FtpTS: TTabSheet;
@@ -109,7 +109,7 @@ type
 		procedure CDList_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
 		procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
 		procedure CB_TXT_EncodingChange(Sender: TObject);
-		procedure Edit_Output_FormatChange(Sender: TObject);
+		procedure MP3List_Output_Format_EditChange(Sender: TObject);
 		procedure ValueListEditor_SeachAndReplaceExit(Sender: TObject);
 		procedure Lab_OutputFormat_HelpClick(Sender: TObject);
 	private
@@ -180,6 +180,7 @@ begin
   MP3List_Multi_Template_File_Edit.Text	:=  mp3list_multi_template_file;
   mp3list_filename_Edit.Text	          :=  mp3list_html_file_name;
 	mp3list_file_ending_Edit.Text	        :=  mp3list_html_file_ending;
+	MP3List_Output_Format_Edit.Text				:=	mp3list_html_output_format;
 
   {Sprache}
   if gui_language = 'D' then
@@ -238,7 +239,13 @@ begin
   if cdlist_html_files_delete_after_zip then
 	  cdlist_CLear_HTML_files_after_zip_CB.Checked	:=	True
 	else
-	  cdlist_CLear_HTML_files_after_zip_CB.Checked	:=	False;
+		cdlist_CLear_HTML_files_after_zip_CB.Checked	:=	False;
+
+	// ftp
+	LabeledEdit1.Text	:=	FtpConnection.Hostname;
+	LabeledEdit2.Text	:=	FtpConnection.Username;
+	LabeledEdit3.Text	:=	FtpConnection.Password;
+	LabeledEdit4.Text	:=	FtpConnection.RemoteDir;
 end;
 
 {--- Wenn Pfad zu TXT-Fileausgabe verändert wird. ------------------------------}
@@ -352,9 +359,9 @@ begin
   end;
 end;
 
-procedure TF_Setup.Edit_Output_FormatChange(Sender: TObject);
+procedure TF_Setup.MP3List_Output_Format_EditChange(Sender: TObject);
 begin
-	mp3list_html_output_format	:=  Edit_Output_Format.Text;
+	mp3list_html_output_format	:=  MP3List_Output_Format_Edit.Text;
 end;
 
 {--- Pacman - Adjustment Visible ? --------------------------------------------}
@@ -437,9 +444,9 @@ begin
 		Ini.WriteString ('FTP',    	 'password',	FtpConnection.Password);
 		Ini.WriteString ('FTP',    	 'remotedir',	FtpConnection.RemoteDir);
 
-	  Ini.Free;
+		Ini.Free;
 
-    F_Main.Load_From_Button.Enabled	:=	True;
+		F_Main.Load_From_Button.Enabled	:=	True;
 	  Close;
   end;
 
