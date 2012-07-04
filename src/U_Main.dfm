@@ -2,7 +2,7 @@ object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
-  ClientHeight = 720
+  ClientHeight = 740
   ClientWidth = 790
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object F_Main: TF_Main
   OnShow = FormShow
   DesignSize = (
     790
-    720)
+    740)
   PixelsPerInch = 96
   TextHeight = 16
   object SearchResultLab: TLabel
@@ -38,7 +38,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet1
+    ActivePage = GenreTS
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -1006,12 +1006,7 @@ object F_Main: TF_Main
       Margins.Bottom = 4
       Caption = 'cdlist'
       ImageIndex = 2
-      TabVisible = False
       OnShow = TabSheet3Show
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1414,11 +1409,6 @@ object F_Main: TF_Main
     object TabSheet4: TTabSheet
       Caption = 'Error'
       ImageIndex = 3
-      TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1431,10 +1421,6 @@ object F_Main: TF_Main
     object TabSheet2: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1794,12 +1780,30 @@ object F_Main: TF_Main
         Text = 't:\Zuletzt hinzugef'#252'gt.xml'
       end
     end
+    object GenreTS: TTabSheet
+      Caption = '??GenreTS'
+      ImageIndex = 4
+      object GenreLab: TLabel
+        Left = 16
+        Top = 3
+        Width = 90
+        Height = 16
+        Caption = '??Found genres'
+      end
+      object Genre_CheckListBox: TCheckListBox
+        Left = 16
+        Top = 25
+        Width = 465
+        Height = 315
+        TabOrder = 0
+      end
+    end
   end
   object NameCheck_ListBox: TListBox
     Left = 7
     Top = 448
     Width = 732
-    Height = 251
+    Height = 271
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1807,12 +1811,13 @@ object F_Main: TF_Main
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     OnMouseUp = NameCheck_ListBoxMouseUp
+    ExplicitHeight = 251
   end
   object MP3_ListBox: TListBox
     Left = 0
     Top = 424
     Width = 788
-    Height = 294
+    Height = 314
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1832,6 +1837,7 @@ object F_Main: TF_Main
     TabOrder = 2
     OnClick = MP3_ListBoxClick
     OnMouseUp = MP3_ListBoxMouseUp
+    ExplicitHeight = 294
   end
   object MainMenu1: TMainMenu
     Left = 328
@@ -1916,6 +1922,10 @@ object F_Main: TF_Main
       object UploadtoFTP1: TMenuItem
         Caption = '??Upload to FTP'
         OnClick = UploadtoFTP1Click
+      end
+      object Showfoundgenres1: TMenuItem
+        Caption = '??Show found genres'
+        OnClick = Showfoundgenres1Click
       end
     end
     object Help1: TMenuItem
