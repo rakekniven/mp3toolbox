@@ -1008,6 +1008,10 @@ object F_Main: TF_Main
       ImageIndex = 2
       TabVisible = False
       OnShow = TabSheet3Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1411,6 +1415,10 @@ object F_Main: TF_Main
       Caption = 'Error'
       ImageIndex = 3
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1423,6 +1431,10 @@ object F_Main: TF_Main
     object TabSheet2: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         782
         362)

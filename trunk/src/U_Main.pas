@@ -2075,7 +2075,10 @@ begin
 		if FtpUploadList.Count > 0 then
 		begin
 			if UploadtoFTP then
-				ShowMessage(GetTxt( 1, 63, 'Upload ok'))
+			begin
+				ShowMessage(GetTxt( 1, 63, 'Upload ok'));
+				FtpUploadList.Clear;	//	Start fresh after upload
+			end
 			else
 				ShowMessage(GetTxt( 1, 64, 'Upload failed'))
 		end
