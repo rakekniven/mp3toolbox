@@ -27,7 +27,7 @@ uses
 	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, IdMessage,
-  IdFTP, U_FTP;//, Libc;
+  IdFTP, U_FTP, CheckLst;//, Libc;
 
 type
 	TF_Main = class(TForm)
@@ -139,6 +139,10 @@ type
     IdFTP1: TIdFTP;
     Extra1: TMenuItem;
     UploadtoFTP1: TMenuItem;
+    GenreTS: TTabSheet;
+    Genre_CheckListBox: TCheckListBox;
+    Showfoundgenres1: TMenuItem;
+    GenreLab: TLabel;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -210,6 +214,7 @@ type
 		function UploadToFtp : Boolean;
     procedure Label1Click(Sender: TObject);
     procedure UploadtoFTP1Click(Sender: TObject);
+    procedure Showfoundgenres1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -327,6 +332,12 @@ procedure TF_Main.FormCreate(Sender: TObject);
 var
 	i :Integer;
 begin
+
+	TabSheet3.TabVisible	:=	False;
+	TabSheet4.TabVisible	:=	False;
+	GenreTS.TabVisible		:=	False;
+	PageControl1.ActivePage	:=	TabSheet1;
+
 	init_ok :=  True;
 	GetDir(0, act_exec_directory);
 
@@ -359,9 +370,6 @@ begin
 
 	if not FileExists(ini_file_name) then
 		FirstStart	:=	True;
-
-//    init_ok                   :=  False;
-//    Load_From_Button.Enabled  :=  False;
 
 	{Begin: INI-Datei oeffnen und werte setzen}
 	if FirstStart then
@@ -466,8 +474,7 @@ begin
 
   {Sprache}
 	Set_Language(gui_language);
-  init_text(Sender);
-//  Set_Language(Reg.language);
+	init_text(Sender);
 
 	{Combobox neu füllen}
 	CB_XML_File.Clear;
@@ -499,6 +506,11 @@ end;
 procedure TF_Main.Setup1Click(Sender: TObject);
 begin
 	F_Setup.Show;
+end;
+
+procedure TF_Main.Showfoundgenres1Click(Sender: TObject);
+begin
+	GenreTS.TabVisible	:=	True;
 end;
 
 procedure TF_Main.Speichernunter1Click(Sender: TObject);
@@ -562,6 +574,9 @@ begin
 	SearchResultLab.Caption                :=  GetTxt( 1, 60, 'Search results');
 	Extra1.Caption                				 :=  GetTxt( 1, 61, 'Extra');
 	UploadtoFTP1.Caption                	 :=  GetTxt( 1, 62, 'Upload via FTP');
+	GenreTS.Caption			                	 :=  GetTxt( 1, 67, 'Genre');
+	GenreLab.Caption			                 :=  GetTxt( 1, 68, 'Found genres');
+	Showfoundgenres1.Caption			         :=  GetTxt( 1, 69, 'Show found genres');
 
 	{MP3List}
 	Multi_Dir_GroupBox.Caption             :=  GetTxt( 1,  6, 'Verzeichnisse ');
@@ -1560,7 +1575,8 @@ procedure TF_Main.Go_Btn2Click(Sender: TObject);
 var
 	i,
 	i2,
-	i3	:	Integer;
+	i3,
+	i4	:	Integer;
 	MyChild,
 	MyChild2	:	IXMLNode;
 	ResultString,
@@ -1573,6 +1589,7 @@ var
 	genre  : String;
 	HasVideo,
 	podcast		:	Boolean;
+  GenreFound: Boolean;
 begin
 	Label13.Caption	:=	'...';
 	Lab_Scan_Time4.Caption	:=	'...';
@@ -1683,6 +1700,31 @@ begin
 
 						if MyChild.ChildNodes[i2].Text = 'Podcast' then
 							podcast	:=	True;
+
+						// Add genre to listbox
+						if Genre_CheckListBox.Items.Count > 0 then
+						begin
+
+							GenreFound	:=	False;
+
+							for i4 := 0 to Genre_CheckListBox.Items.Count - 1 do
+							begin
+								if Genre_CheckListBox.Items[i4] = genre then
+								begin
+									GenreFound	:=	True;
+									break;
+								end;
+							end;
+
+							if not GenreFound then
+								Genre_CheckListBox.Items.Add(genre);
+
+						end
+						else
+							Genre_CheckListBox.Items.Add(genre);
+
+						Genre_CheckListBox.Sorted	:=	True;
+
 
 					end;
 

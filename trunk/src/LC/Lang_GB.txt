@@ -69,6 +69,9 @@ Msg=GB
 64 = Upload failed
 65 = Nothing to upload. Queue is empty
 66 = No FTP connection data found. Check settings
+67 = Genre
+68 = Found genres
+69 = Show found genres
 
 [Setup]
  1 = General

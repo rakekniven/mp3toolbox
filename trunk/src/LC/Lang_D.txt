@@ -69,6 +69,9 @@ Msg=D
 64 = Upload fehlgeschlagen
 65 = Es gibt nichts zum Hochladen. Die Warteschlange ist leer.
 66 = Es sind keine Einstellungen für FTP vorhanden. Prüfen Sie diese.
+67 = Genre
+68 = Gefundene Genres
+69 = Gefundene Genres anzeigen
 
 [Setup]
  1 = Allgemein
