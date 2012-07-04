@@ -82,6 +82,7 @@ type
 		LabeledEdit2: TLabeledEdit;
 		LabeledEdit3: TLabeledEdit;
 		LabeledEdit4: TLabeledEdit;
+    FtpTestConnectionBtn: TButton;
 		procedure FormShow(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -112,6 +113,11 @@ type
 		procedure MP3List_Output_Format_EditChange(Sender: TObject);
 		procedure ValueListEditor_SeachAndReplaceExit(Sender: TObject);
 		procedure Lab_OutputFormat_HelpClick(Sender: TObject);
+    procedure FtpTestConnectionBtnClick(Sender: TObject);
+    procedure LabeledEdit1Change(Sender: TObject);
+    procedure LabeledEdit2Change(Sender: TObject);
+    procedure LabeledEdit3Change(Sender: TObject);
+    procedure LabeledEdit4Change(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -434,11 +440,6 @@ begin
 
     Ini.WriteBool   ('DEVELOP', 'PACMAN_ADJUSTMENT',          pacman_adjustment_visible);
 
-		FtpConnection.Hostname	:=	LabeledEdit1.Text;
-		FtpConnection.Username	:=	LabeledEdit2.Text;
-		FtpConnection.Password	:=	LabeledEdit3.Text;
-		FtpConnection.RemoteDir	:=	LabeledEdit4.Text;
-
 		Ini.WriteString ('FTP',    	 'hostname',	FtpConnection.Hostname);
 		Ini.WriteString ('FTP',    	 'username',	FtpConnection.Username);
 		Ini.WriteString ('FTP',    	 'password',	FtpConnection.Password);
@@ -537,6 +538,7 @@ begin
 	LabeledEdit3.EditLabel.Caption									:=	GetTxt( 2, 35, 'Password');
 	LabeledEdit4.EditLabel.Caption									:=	GetTxt( 2, 36, 'Remote Dir');
 //	FtpTS.Caption																		:=	GetTxt( 2, 32, '');
+	FtpTestConnectionBtn.Caption										:=  GetTxt( 1, 72, 'Test connection');
 
 (*
 	First_Start_Memo.Clear;
@@ -577,7 +579,7 @@ begin
   if mp3list_ZIP_txt_CheckBox.Checked then
 		mp3list_text_files_zip    :=  True
   else
-    mp3list_text_files_zip    :=  False;
+		mp3list_text_files_zip    :=  False;
 end;
 
 {--- MP3List : zip html files -------------------------------------------------}
@@ -594,7 +596,7 @@ procedure TF_Setup.MP3List_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
 begin
   if mp3list_CLear_TXT_files_after_zip_CB.Checked then
     mp3list_text_files_delete_after_zip    :=  True
-  else
+	else
     mp3list_text_files_delete_after_zip    :=  False;
 end;
 
@@ -614,6 +616,18 @@ begin
 		cdlist_text_files_zip    :=  True
   else
 		cdlist_text_files_zip    :=  False;
+end;
+
+procedure TF_Setup.FtpTestConnectionBtnClick(Sender: TObject);
+var
+	error	:	String;
+begin
+	if U_Main.F_Main.FtpTestConnection(error) then
+		ShowMessage(GetTxt( 1, 70, 'Test ok'))
+	else
+		ShowMessage(GetTxt( 1, 71, 'Test failed') +
+								'. Error: ' +
+								error)
 end;
 
 procedure TF_Setup.CB_TXT_EncodingChange(Sender: TObject);
@@ -659,6 +673,26 @@ begin
 															'',
 															SW_SHOW);
 
+end;
+
+procedure TF_Setup.LabeledEdit1Change(Sender: TObject);
+begin
+	FtpConnection.Hostname	:=	LabeledEdit1.Text;
+end;
+
+procedure TF_Setup.LabeledEdit2Change(Sender: TObject);
+begin
+	FtpConnection.Username	:=	LabeledEdit2.Text;
+end;
+
+procedure TF_Setup.LabeledEdit3Change(Sender: TObject);
+begin
+	FtpConnection.Password	:=	LabeledEdit3.Text;
+end;
+
+procedure TF_Setup.LabeledEdit4Change(Sender: TObject);
+begin
+	FtpConnection.RemoteDir	:=	LabeledEdit4.Text;
 end;
 
 end.
