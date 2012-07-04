@@ -629,6 +629,7 @@ object F_Setup: TF_Setup
         EditLabel.Height = 16
         EditLabel.Caption = 'Hostname'
         TabOrder = 0
+        OnChange = LabeledEdit1Change
       end
       object LabeledEdit2: TLabeledEdit
         Left = 24
@@ -639,6 +640,7 @@ object F_Setup: TF_Setup
         EditLabel.Height = 16
         EditLabel.Caption = 'Username'
         TabOrder = 1
+        OnChange = LabeledEdit2Change
       end
       object LabeledEdit3: TLabeledEdit
         Left = 24
@@ -649,6 +651,7 @@ object F_Setup: TF_Setup
         EditLabel.Height = 16
         EditLabel.Caption = 'Password'
         TabOrder = 2
+        OnChange = LabeledEdit3Change
       end
       object LabeledEdit4: TLabeledEdit
         Left = 24
@@ -659,6 +662,16 @@ object F_Setup: TF_Setup
         EditLabel.Height = 16
         EditLabel.Caption = 'Remote Dir'
         TabOrder = 3
+        OnChange = LabeledEdit4Change
+      end
+      object FtpTestConnectionBtn: TButton
+        Left = 24
+        Top = 224
+        Width = 121
+        Height = 25
+        Caption = '??Test connection'
+        TabOrder = 4
+        OnClick = FtpTestConnectionBtnClick
       end
     end
   end

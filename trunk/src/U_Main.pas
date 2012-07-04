@@ -139,7 +139,7 @@ type
     IdFTP1: TIdFTP;
     Extra1: TMenuItem;
     UploadtoFTP1: TMenuItem;
-    GenreTS: TTabSheet;
+		GenreTS: TTabSheet;
     Genre_CheckListBox: TCheckListBox;
     Showfoundgenres1: TMenuItem;
     GenreLab: TLabel;
@@ -212,9 +212,10 @@ type
 		procedure Speichernunter1Click(Sender: TObject);
 		procedure Sendfeedback1Click(Sender: TObject);
 		function UploadToFtp : Boolean;
-    procedure Label1Click(Sender: TObject);
-    procedure UploadtoFTP1Click(Sender: TObject);
-    procedure Showfoundgenres1Click(Sender: TObject);
+		function FtpTestConnection (var error : String) : Boolean;
+		procedure Label1Click(Sender: TObject);
+		procedure UploadtoFTP1Click(Sender: TObject);
+		procedure Showfoundgenres1Click(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -2107,6 +2108,38 @@ begin
 		Result	:=	False;
 
 	IdFTP1.Disconnect;
+
+end;
+
+function TF_Main.FtpTestConnection (var error	:	String) : Boolean;
+begin
+	IdFTP1.Host			:=	FtpConnection.Hostname;
+	IdFTP1.Username	:=	FtpConnection.Username;
+	IdFTP1.Password	:=	FtpConnection.Password;
+
+	Result	:=	True;
+
+	try
+		IdFTP1.Connect;
+	except
+		Result	:=	False;
+		error	:=	'Unable to connect';
+	end;
+
+	if IdFTP1.Connected then
+	begin
+		try
+			IdFTP1.ChangeDir(FtpConnection.RemoteDir);
+		except
+			Result	:=	False;
+			error	:=	'Cannot change remote directory';//SysErrorMessage(GetLastError);
+		end;
+
+		IdFTP1.Disconnect;
+
+	end
+	else
+		Result	:=	False;
 
 end;
 

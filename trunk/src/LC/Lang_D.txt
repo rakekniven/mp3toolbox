@@ -72,6 +72,9 @@ Msg=D
 67 = Genre
 68 = Gefundene Genres
 69 = Gefundene Genres anzeigen
+70 = Test ok
+71 = Test fehlgeschlagen
+72 = Verbindung testen
 
 [Setup]
  1 = Allgemein

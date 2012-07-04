@@ -72,6 +72,9 @@ Msg=GB
 67 = Genre
 68 = Found genres
 69 = Show found genres
+70 = Test ok
+71 = Test failed
+72 = Test connection
 
 [Setup]
  1 = General
