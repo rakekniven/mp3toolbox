@@ -1,6 +1,9 @@
 #summary See what has been done.
 #labels Featured,Phase-Support
 
+== Version 1.1.20 2012-07-04 ==
+  * New: Upload generated files to your FTP server with just one click
+
 == Version 1.1.19 2012-07-02 ==
   * New: Import of iTunes music library by reading xml export files
   * New: Added "genre" as variable. See ListOfVariables
