@@ -531,6 +531,13 @@ begin
 	ValueListEditor_SeachAndReplace.TitleCaptions[0]	:=	GetTxt( 2, 29, 'Suchen');
 	ValueListEditor_SeachAndReplace.TitleCaptions[1]	:=	GetTxt( 2, 30, 'Ersetzen');
 
+	FtpTS.Caption																		:=	GetTxt( 2, 32, 'FTP');
+	LabeledEdit1.EditLabel.Caption									:=	GetTxt( 2, 33, 'Hostname');
+	LabeledEdit2.EditLabel.Caption									:=	GetTxt( 2, 34, 'Username');
+	LabeledEdit3.EditLabel.Caption									:=	GetTxt( 2, 35, 'Password');
+	LabeledEdit4.EditLabel.Caption									:=	GetTxt( 2, 36, 'Remote Dir');
+//	FtpTS.Caption																		:=	GetTxt( 2, 32, '');
+
 (*
 	First_Start_Memo.Clear;
 	First_Start_Memo.Lines.Add                         (GetTxt( 2,  8, 'Beim ersten Programmstart sollten noch'));

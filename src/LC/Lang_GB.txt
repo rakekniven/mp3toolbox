@@ -63,6 +63,12 @@ Msg=GB
 58 = iTunes import
 59 = Items found
 60 = Search results
+61 = Extra
+62 = Upload using FTP
+63 = Upload ok
+64 = Upload failed
+65 = Nothing to upload. Queue is empty
+66 = No FTP connection data found. Check settings
 
 [Setup]
  1 = General
@@ -96,4 +102,9 @@ Msg=GB
 29 = Search
 30 = Replace
 31 = Output format
+32 = FTP
+33 = Hostname
+34 = Username
+35 = Password
+36 = Remote directory
 

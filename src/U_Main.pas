@@ -560,6 +560,8 @@ begin
 	WebsiteofAuthor1.Caption               :=  GetTxt( 1, 41, 'Website of Author');
 	AboutMP3Toolbox1.Caption               :=  GetTxt( 1, 42, 'About');
 	SearchResultLab.Caption                :=  GetTxt( 1, 60, 'Search results');
+	Extra1.Caption                				 :=  GetTxt( 1, 61, 'Extra');
+	UploadtoFTP1.Caption                	 :=  GetTxt( 1, 62, 'Upload via FTP');
 
 	{MP3List}
 	Multi_Dir_GroupBox.Caption             :=  GetTxt( 1,  6, 'Verzeichnisse ');
@@ -578,7 +580,7 @@ begin
 	Clear_Sel_Button.Caption               :=  GetTxt( 1, 47, 'Clear selected');
 	Clear_All_Button.Caption               :=  GetTxt( 1, 48, 'Clear all');
 	Go_Btn.Caption               :=  GetTxt( 1, 49, 'Go !');
-	Go_Btn2.Caption               :=  GetTxt( 1, 49, 'Go !');
+	Go_Btn2.Caption              :=  GetTxt( 1, 49, 'Go !');
 	Label1.Caption               :=  GetTxt( 1, 50, 'Files found');
 	Label2.Caption               :=  GetTxt( 1, 51, 'Directories searched');
 	Label3.Caption               :=  GetTxt( 1, 52, 'Search time');
@@ -1060,13 +1062,23 @@ begin
 
 	S.Free;
 
-	lib1.Start_External_Program(self.WindowHandle, 'open', 'explorer', text_files_output_path, '', SW_SHOW);
+	lib1.Start_External_Program(self.WindowHandle,
+															'open',
+															'explorer',
+															text_files_output_path,
+															'',
+															SW_SHOW);
 
 end;
 
 procedure TF_Main.WebsiteofAuthor1Click(Sender: TObject);
 begin
-	lib1.Start_External_Program(self.WindowHandle, 'open', 'http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project', '', '', SW_SHOW);
+	lib1.Start_External_Program(self.WindowHandle,
+															'open',
+															'http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project',
+															'',
+															'',
+															SW_SHOW);
 end;
 
 
@@ -1420,7 +1432,12 @@ end;
 {--- CDList : Start to read in the textfile -----------------------------------}
 procedure TF_Main.Goo1Click(Sender: TObject);
 begin
-	lib1.Start_External_Program(self.WindowHandle, 'open', 'http://code.google.com/p/mp3toolbox/', '', '', SW_SHOW);
+	lib1.Start_External_Program(self.WindowHandle,
+															'open',
+															'http://code.google.com/p/mp3toolbox/',
+															'',
+															'',
+															SW_SHOW);
 end;
 
 procedure TF_Main.Go_Btn3Click(Sender: TObject);
@@ -1576,7 +1593,8 @@ begin
 		if not FileExists(CB_XML_File.Text) then
 		begin
 			if MessageDlg('File  "' + CB_XML_File.Text + '" not found.',
-								mtWarning,[mbYes, mbNo], 0) = mrYes then begin
+								mtWarning,[mbYes, mbNo], 0) = mrYes then
+			begin
 			end;
 		end
 		else
@@ -2054,19 +2072,18 @@ procedure TF_Main.UploadtoFTP1Click(Sender: TObject);
 begin
 	if FtpConnection.Hostname <> '' then
 	begin
-	if FtpUploadList.Count > 0 then
-	begin
-		if UploadtoFTP then
-			ShowMessage('66666 Upload ok')
+		if FtpUploadList.Count > 0 then
+		begin
+			if UploadtoFTP then
+				ShowMessage(GetTxt( 1, 63, 'Upload ok'))
+			else
+				ShowMessage(GetTxt( 1, 64, 'Upload failed'))
+		end
 		else
-			ShowMessage('66666 Upload failed.')
+			ShowMessage(GetTxt( 1, 65, 'Nothing to upload. Queue is empty'))
 	end
 	else
-			ShowMessage('66666 Nothing to upload. Queue is empty')
-	end
-	else
-			ShowMessage('66666 No FTP connection data found. Check settings')
-
+		ShowMessage(GetTxt( 1, 66, 'No FTP connection data found. Check settings'))
 end;
 
 end.
