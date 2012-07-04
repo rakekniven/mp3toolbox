@@ -63,6 +63,12 @@ Msg=D
 58 = iTunes Import
 59 = Einträge gefunden
 60 = Suchergebnisse
+61 = Extra
+62 = Mit FTP hochladen
+63 = Upload erfolgreich
+64 = Upload fehlgeschlagen
+65 = Es gibt nichts zum Hochladen. Die Warteschlange ist leer.
+66 = Es sind keine Einstellungen für FTP vorhanden. Prüfen Sie diese.
 
 [Setup]
  1 = Allgemein
@@ -96,4 +102,9 @@ Msg=D
 29 = Suchen
 30 = Ersetzen
 31 = Ausgabeformat
+32 = FTP
+33 = Hostname
+34 = Benutzername
+35 = Passwort
+36 = Entferntes Verzeichnis
 

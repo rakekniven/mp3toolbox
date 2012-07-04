@@ -67,6 +67,8 @@
 			<DCCReference Include="externallibs\Mp3FileUtils.pas"/>
 			<DCCReference Include="externallibs\fldbrowsUnicode.pas"/>
 			<DCCReference Include="U_FTP.pas"/>
+			<None Include="LC\Lang_D.txt"/>
+			<None Include="LC\Lang_GB.txt"/>
 			<BuildConfiguration Include="Basis">
 				<Key>Base</Key>
 			</BuildConfiguration>

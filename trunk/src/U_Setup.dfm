@@ -28,7 +28,7 @@ object F_Setup: TF_Setup
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = Allgemein
+    ActivePage = FtpTS
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4
@@ -217,10 +217,6 @@ object F_Setup: TF_Setup
       Margins.Bottom = 4
       Caption = '??MP3-Liste'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object MP3List_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -536,10 +532,6 @@ object F_Setup: TF_Setup
       Caption = 'Album-Liste'
       ImageIndex = 3
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object CDList_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -611,10 +603,6 @@ object F_Setup: TF_Setup
       Margins.Bottom = 4
       Caption = '??Debug and Dev.'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Pacman_CheckBox: TCheckBox
         Left = 39
         Top = 30
@@ -632,10 +620,6 @@ object F_Setup: TF_Setup
     object FtpTS: TTabSheet
       Caption = '??FTP'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object LabeledEdit1: TLabeledEdit
         Left = 24
         Top = 40
