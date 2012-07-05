@@ -27,7 +27,8 @@ uses
 	Forms,
 	Windows,
 	Shellapi,
-	dialogs;
+	dialogs,
+	StrUtils;
 
 
 	function	SlashSep(const Path, S: string): string;
@@ -81,6 +82,9 @@ uses
 	// remove the filename and last separator from a complete string
 	function  get_filename_from_complete_string(whole_string,
 																						 separator          : String)       : String;
+
+	function Version1IsBiggerThanVersion2			(Vers1,
+																						 Vers2							:	String)				:	Boolean;
 
 implementation
 
@@ -674,6 +678,88 @@ begin
 	end
 	else
 		Result  :=  '';
+end;
+
+function Version1IsBiggerThanVersion2(Vers1,Vers2:String):Boolean;
+var
+	ComCount1,
+	ComCount2   : Integer;
+	pos1,pos2   : Integer;
+	oldPos1,
+	oldPos2     : Integer;
+	temps1,
+	temps2      : string;
+	lang1,
+	lang2       : Integer;
+	ende        : Boolean;
+begin
+	if (Vers1 = '') or (Vers2 = '') then
+	begin
+		Result	:=	False;
+		exit;
+	end;
+
+	ComCount1   := 0;
+	ComCount2   := 0;
+
+	Pos1:=Pos('.',Vers1);
+	while Pos1 <> 0 do
+	begin
+		Inc(ComCount1);
+		Pos1:=PosEx('.',Vers1,Pos1+1);
+	end;
+
+	Pos1:=Pos('.',Vers2);
+	while Pos1 <> 0 do
+	begin
+		Inc(ComCount2);
+		Pos1:=PosEx('.',Vers2,Pos1+1);
+	end;
+
+	if ComCount1 <> ComCount2 then  //versions-Strings müssen das gleiche Format besitzen
+		Result := false
+	else
+	begin
+		try
+			Pos1 := 0;
+			Pos2 := 0;
+			Ende := false;
+
+			repeat
+				oldPos1 := Pos1;
+				oldPos2 := Pos2;
+				Pos1    := PosEx('.',Vers1,oldPos1+1);
+				Pos2    := PosEx('.',Vers2,oldPos2+1);
+				if Pos1 <> 0 then
+				begin
+					// Abstand neuer Pkt - alter Pkt -1(für Punkt selber)
+					lang1:=Pos1-oldPos1-1;
+					lang2:=Pos2-oldPos2-1;
+				end
+				else
+				begin                //beim Letzen Abstand Ende zum letzten Pkt.
+					lang1:=Length(Vers1)-oldPos1;
+					lang2:=Length(Vers2)-oldPos2;
+				end;
+
+				temps1:=copy(Vers1,oldPos1+1,lang1);
+				temps2:=copy(Vers2,oldPos2+1,lang2);
+				comCount1:= StrtoInt(temps1);
+				comCount2:= StrtoInt(temps2);
+				if (comCount1 = comCount2) then
+					result  :=false
+				else
+				begin
+					Ende    := true;
+					result  := (comCount1 > comCount2); // else (comCount1 < comCount2)
+				end;
+
+			until((Pos1 = 0) or (Pos2 = 0) or (Ende));
+
+		except
+			Result:=false;
+		end;
+	end;
 end;
 
 end.
