@@ -29,6 +29,46 @@ object F_Main: TF_Main
     Height = 16
     Caption = 'SearchResultLab'
   end
+  object IWURL1: TIWURL
+    Left = 272
+    Top = 336
+    Width = 65
+    Height = 17
+    Cursor = crAuto
+    IW50Hint = False
+    ParentShowHint = False
+    ShowHint = True
+    ZIndex = 0
+    RenderSize = True
+    StyleRenderOptions.RenderSize = True
+    StyleRenderOptions.RenderPosition = True
+    StyleRenderOptions.RenderFont = True
+    StyleRenderOptions.RenderZIndex = True
+    StyleRenderOptions.RenderVisibility = True
+    StyleRenderOptions.RenderStatus = True
+    StyleRenderOptions.RenderAbsolute = True
+    Alignment = taLeftJustify
+    Color = clNone
+    Font.Color = clNone
+    Font.Size = 10
+    Font.Style = [fsUnderline]
+    ScriptEvents = <>
+    TargetOptions.AddressBar = False
+    TargetOptions.Height = -1
+    TargetOptions.Left = -1
+    TargetOptions.Menu = False
+    TargetOptions.Resizable = True
+    TargetOptions.Scrollbars = True
+    TargetOptions.Toolbar = False
+    TargetOptions.Top = -1
+    TargetOptions.Width = -1
+    TerminateApp = False
+    UseTarget = False
+    FriendlyName = 'IWURL1'
+    TabOrder = -1
+    RawText = False
+    Caption = 'IWURL1'
+  end
   object PageControl1: TPageControl
     Left = 0
     Top = 3
@@ -1798,6 +1838,15 @@ object F_Main: TF_Main
         TabOrder = 2
         Text = 't:\Zuletzt hinzugef'#252'gt.xml'
       end
+      object Button1: TButton
+        Left = 96
+        Top = 296
+        Width = 75
+        Height = 25
+        Caption = 'Button1'
+        TabOrder = 3
+        OnClick = Button1Click
+      end
     end
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
@@ -1947,6 +1996,10 @@ object F_Main: TF_Main
     end
     object Help1: TMenuItem
       Caption = '??Help'
+      object CheckforUpdate1: TMenuItem
+        Caption = '??Check for Update'
+        OnClick = CheckforUpdate1Click
+      end
       object Goo1: TMenuItem
         Caption = '??Website at Google Code'
         OnClick = Goo1Click
@@ -2069,12 +2122,24 @@ object F_Main: TF_Main
     Left = 448
     Top = 328
   end
-  object IdFTP1: TIdFTP
+  object IdFTP_Upload: TIdFTP
     IPVersion = Id_IPv4
     AutoLogin = True
     ProxySettings.ProxyType = fpcmNone
     ProxySettings.Port = 0
     Left = 496
     Top = 328
+  end
+  object IdHTTP_Updater: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.Accept = 'text/html, */*'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 256
+    Top = 320
   end
 end
