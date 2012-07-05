@@ -75,6 +75,10 @@ Msg=D
 70 = Test ok
 71 = Test fehlgeschlagen
 72 = Verbindung testen
+73 = http://www.rakekniven.de/content/mp3toolbox-import-apple-itunes-media-library
+74 = http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project
+75 = http://code.google.com/p/mp3toolbox/
+76 = Woher bekomme ich diese XML-Dateien?
 
 [Setup]
  1 = Allgemein
