@@ -38,7 +38,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = GenreTS
+    ActivePage = TabSheet2
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -1680,6 +1680,25 @@ object F_Main: TF_Main
           33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
           33003333333333333300}
         OnClick = Btn_XML_File_SelectClick
+      end
+      object Hyperlink_Label: TLabel
+        Left = 19
+        Top = 75
+        Width = 175
+        Height = 16
+        Cursor = crHandPoint
+        Anchors = [akLeft, akBottom]
+        Caption = '??How to get these XML files?'
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlue
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Pitch = fpVariable
+        Font.Style = [fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = Hyperlink_LabelClick
       end
       object Go_Btn2: TBitBtn
         Left = 569

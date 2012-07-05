@@ -75,6 +75,10 @@ Msg=GB
 70 = Test ok
 71 = Test failed
 72 = Test connection
+73 = http://www.rakekniven.de/content/mp3toolbox-import-apple-itunes-media-library
+74 = http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project
+75 = http://code.google.com/p/mp3toolbox/
+76 = How to get these XML files?
 
 [Setup]
  1 = General

@@ -143,6 +143,7 @@ type
     Genre_CheckListBox: TCheckListBox;
     Showfoundgenres1: TMenuItem;
     GenreLab: TLabel;
+    Hyperlink_Label: TLabel;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -216,6 +217,7 @@ type
 		procedure Label1Click(Sender: TObject);
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
+    procedure Hyperlink_LabelClick(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -560,8 +562,6 @@ end;
 {--- assign captions and texts-------------------------------------------------}
 procedure TF_Main.init_text(Sender: TObject);
 begin
-	{General}
-//  F_Main.Caption                         :=  GetTxt( 1,  2, 'mp3toolbox version ???');
 	TabSheet1.Caption                      :=  GetTxt( 1,  3, 'Laufwerks-archive');
 	TabSheet2.Caption                      :=  GetTxt( 1, 58, 'iTunes Import');
 	TabSheet3.Caption                      :=  GetTxt( 1,  5, 'CD-Liste');
@@ -578,39 +578,38 @@ begin
 	GenreTS.Caption			                	 :=  GetTxt( 1, 67, 'Genre');
 	GenreLab.Caption			                 :=  GetTxt( 1, 68, 'Found genres');
 	Showfoundgenres1.Caption			         :=  GetTxt( 1, 69, 'Show found genres');
-
-	{MP3List}
-	Multi_Dir_GroupBox.Caption             :=  GetTxt( 1,  6, 'Verzeichnisse ');
-	Output_with_filesize_CB.Caption        :=  GetTxt( 1,  7, 'Ausgabe mit Dateigroesse');
-	Output_with_path_CB.Caption            :=  GetTxt( 1,  8, 'Ausgabe mit Pfad');
-	Subdir_CheckBox.Caption                :=  GetTxt( 1,  9, 'Unterverz. durchsuchen');
-	Sel_Dir_Btn.Caption                    :=  GetTxt( 1, 10, 'Pfad auswaehlen');
-	Own_Filter_CheckBox.Caption            :=  GetTxt( 1, 11, 'eigener Filter');
-	TXT_Output_Btn.Caption                 :=  GetTxt( 1, 12, 'Textdatei erzeugen');
-	HTML_OutputButton.Caption              :=  GetTxt( 1, 13, 'Webseite erzeugen');
-	HTML_OutputButton2.Caption             :=  GetTxt( 1, 13, 'Webseite erzeugen');
-	Load_From_Button.Caption               :=  GetTxt( 1, 43, 'Load directories from config');
-	Save_To_Button.Caption                 :=  GetTxt( 1, 44, 'Save directories');
-	Sel_All_Button.Caption                 :=  GetTxt( 1, 45, 'Select all');
-	Sel_None_Button.Caption                :=  GetTxt( 1, 46, 'Select none');
-	Clear_Sel_Button.Caption               :=  GetTxt( 1, 47, 'Clear selected');
-	Clear_All_Button.Caption               :=  GetTxt( 1, 48, 'Clear all');
-	Go_Btn.Caption               :=  GetTxt( 1, 49, 'Go !');
-	Go_Btn2.Caption              :=  GetTxt( 1, 49, 'Go !');
-	Label1.Caption               :=  GetTxt( 1, 50, 'Files found');
-	Label2.Caption               :=  GetTxt( 1, 51, 'Directories searched');
-	Label3.Caption               :=  GetTxt( 1, 52, 'Search time');
-	Label4.Caption               :=  GetTxt( 1, 53, 'Tags scanned');
-	Label5.Caption               :=  GetTxt( 1, 54, 'Scan time');
-	Lab_Scan_Time3.Caption       :=  GetTxt( 1, 54, 'Scan time');
-	Label7.Caption							 :=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
-	Label12.Caption              :=  GetTxt( 1, 59, 'Items found');
+	Multi_Dir_GroupBox.Caption             	:=  GetTxt( 1,  6, 'Verzeichnisse ');
+	Output_with_filesize_CB.Caption        	:=  GetTxt( 1,  7, 'Ausgabe mit Dateigroesse');
+	Output_with_path_CB.Caption            	:=  GetTxt( 1,  8, 'Ausgabe mit Pfad');
+	Subdir_CheckBox.Caption                	:=  GetTxt( 1,  9, 'Unterverz. durchsuchen');
+	Sel_Dir_Btn.Caption                    	:=  GetTxt( 1, 10, 'Pfad auswaehlen');
+	Own_Filter_CheckBox.Caption            	:=  GetTxt( 1, 11, 'eigener Filter');
+	TXT_Output_Btn.Caption                 	:=  GetTxt( 1, 12, 'Textdatei erzeugen');
+	HTML_OutputButton.Caption              	:=  GetTxt( 1, 13, 'Webseite erzeugen');
+	HTML_OutputButton2.Caption             	:=  GetTxt( 1, 13, 'Webseite erzeugen');
+	Load_From_Button.Caption               	:=  GetTxt( 1, 43, 'Load directories from config');
+	Save_To_Button.Caption                 	:=  GetTxt( 1, 44, 'Save directories');
+	Sel_All_Button.Caption                 	:=  GetTxt( 1, 45, 'Select all');
+	Sel_None_Button.Caption                	:=  GetTxt( 1, 46, 'Select none');
+	Clear_Sel_Button.Caption               	:=  GetTxt( 1, 47, 'Clear selected');
+	Clear_All_Button.Caption               	:=  GetTxt( 1, 48, 'Clear all');
+	Go_Btn.Caption                         	:=  GetTxt( 1, 49, 'Go !');
+	Go_Btn2.Caption                        	:=  GetTxt( 1, 49, 'Go !');
+	Label1.Caption                         	:=  GetTxt( 1, 50, 'Files found');
+	Label2.Caption                         	:=  GetTxt( 1, 51, 'Directories searched');
+	Label3.Caption                         	:=  GetTxt( 1, 52, 'Search time');
+	Label4.Caption                         	:=  GetTxt( 1, 53, 'Tags scanned');
+	Label5.Caption                         	:=  GetTxt( 1, 54, 'Scan time');
+	Lab_Scan_Time3.Caption                 	:=  GetTxt( 1, 54, 'Scan time');
+	Label7.Caption							           	:=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
+	Label12.Caption              						:=  GetTxt( 1, 59, 'Items found');
+	Hyperlink_Label.Caption									:=	GetTxt( 1, 76, 'How to get these XML files?');
 
 	{CDList}
 	CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
-  HTML_OutputButton3.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
-  CDList_Template_Label.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
-  Result_File_Label.Caption              :=  GetTxt( 1, 28, 'Ausgabedatei :');
+	HTML_OutputButton3.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
+	CDList_Template_Label.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
+	Result_File_Label.Caption              :=  GetTxt( 1, 28, 'Ausgabedatei :');
 
 end;
 
@@ -668,7 +667,7 @@ end;
 
 procedure TF_Main.Load_From_ButtonClick(Sender: TObject);
 var
-  i		:	Integer;
+	i		:	Integer;
   s   : string;
 begin
   Multi_Dir_ListBox.Clear;
@@ -715,7 +714,7 @@ var
 	i	:	Integer;
 begin
 	if Multi_Dir_ListBox.Items.Count > 0 then
-    for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
+		for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
     	Multi_Dir_ListBox.Selected[i]	:=	True;
 
 	{set Go-Button}
@@ -762,7 +761,7 @@ begin
     Own_Filter_CheckBox.Checked	:=	True;
     filter_ComboBox.Visible			:=	False;
     Filter_Edit.Visible					:=	True;
-  end
+	end
   else
 	begin
   	Own_Filter_CheckBox.Checked	:=	False;
@@ -809,7 +808,7 @@ begin
   NameCheck_ListBox.Clear;
 
 	{When Search is canceled.}
-  if search_status  = True then
+	if search_status  = True then
   begin
 		cancel_search	:=	True;
 	end;
@@ -856,7 +855,7 @@ begin
         GetFiles( Multi_Dir_ListBox.Items[i],
         					Files,
                   output_with_pathes,
-                  search_subdir,
+									search_subdir,
 									output_with_filesize,
 									search_filter_expression );
 				Search_ProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
@@ -903,7 +902,7 @@ begin
     Pacman_Btn.Visible        :=  True;
 		Pacman_Btn.Repaint;
 		pacman_direction          :=  True;
-    Pacman_Move_Timer.Enabled :=  True;
+		Pacman_Move_Timer.Enabled :=  True;
 
 		for i:= 0  to Files.Count - 1 do
 		begin
@@ -997,7 +996,7 @@ begin
 		cancel_search	:=	False;
 		search_status :=  False;
 
-    {clear progressbar}
+		{clear progressbar}
     Search_ProgressBar.Position :=	0;
   end;
 end;
@@ -1087,11 +1086,31 @@ begin
 
 end;
 
+procedure TF_Main.Goo1Click(Sender: TObject);
+begin
+	lib1.Start_External_Program(self.WindowHandle,
+															'open',
+															GetTxt(1, 75, ''),
+															'',
+															'',
+															SW_SHOW);
+end;
+
+procedure TF_Main.Hyperlink_LabelClick(Sender: TObject);
+begin
+	lib1.Start_External_Program(self.WindowHandle,
+															'open',
+															GetTxt(1, 73, ''),
+															'',
+															'',
+															SW_SHOW);
+end;
+
 procedure TF_Main.WebsiteofAuthor1Click(Sender: TObject);
 begin
 	lib1.Start_External_Program(self.WindowHandle,
 															'open',
-															'http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project',
+															GetTxt(1, 74, ''),
 															'',
 															'',
 															SW_SHOW);
@@ -1237,7 +1256,6 @@ begin
 															SW_SHOW);
 
 end;
-
 
 {--- MP3List : PopUp - Check filenames for anallowed characters ---------------}
 procedure TF_Main.checkfilenames1Click(Sender: TObject);
@@ -1446,16 +1464,6 @@ begin
 end;
 
 {--- CDList : Start to read in the textfile -----------------------------------}
-procedure TF_Main.Goo1Click(Sender: TObject);
-begin
-	lib1.Start_External_Program(self.WindowHandle,
-															'open',
-															'http://code.google.com/p/mp3toolbox/',
-															'',
-															'',
-															SW_SHOW);
-end;
-
 procedure TF_Main.Go_Btn3Click(Sender: TObject);
 var
 	F         : TextFile;
@@ -1993,7 +2001,7 @@ begin
     begin
 //      Go_Btn3.Enabled :=  True;
 			{neuen Pfad merken und einordnen}
-      move_memory_combos(cdlist_last_used_template_files, Template_OpenDialog.FileName);
+			move_memory_combos(cdlist_last_used_template_files, Template_OpenDialog.FileName);
 
       {Pfade speichern}
       Ini := TIniFile.Create(ini_file_name);
