@@ -27,7 +27,8 @@ uses
 	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, IdMessage,
-  IdFTP, U_FTP, CheckLst;//, Libc;
+  IdFTP, U_FTP, CheckLst, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
+  IWControl, IWHTMLControls, IdHTTP;//, Libc;
 
 type
 	TF_Main = class(TForm)
@@ -136,7 +137,7 @@ type
     Sendfeedback1: TMenuItem;
     IdMessage1: TIdMessage;
     Label12: TLabel;
-    IdFTP1: TIdFTP;
+    IdFTP_Upload: TIdFTP;
     Extra1: TMenuItem;
     UploadtoFTP1: TMenuItem;
 		GenreTS: TTabSheet;
@@ -144,6 +145,10 @@ type
     Showfoundgenres1: TMenuItem;
     GenreLab: TLabel;
     Hyperlink_Label: TLabel;
+    IdHTTP_Updater: TIdHTTP;
+    IWURL1: TIWURL;
+    Button1: TButton;
+    CheckforUpdate1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -218,6 +223,10 @@ type
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
     procedure Hyperlink_LabelClick(Sender: TObject);
+		procedure Button1Click(Sender: TObject);
+		procedure CheckForUpdates;
+    procedure CheckforUpdate1Click(Sender: TObject);
+
 	private
 		{ Private-Deklarationen }
 	public
@@ -471,7 +480,7 @@ begin
   {Pacman}
   if pacman_adjustment_visible  =  True then
     Pacman_Panel.Visible  :=  True;
-  Pacman_Speed_Edit.Text			:=  IntToStr(pacman_speed);
+	Pacman_Speed_Edit.Text			:=  IntToStr(pacman_speed);
   Pacman_Move_Timer.Interval  :=  pacman_speed;
 
 
@@ -847,7 +856,7 @@ begin
     {Schleife für Abarbeiten der Verzeichnisauswahl}
     for i := 0 to (Multi_Dir_ListBox.Items.Count - 1) do
     begin
-      if Multi_Dir_ListBox.Selected[i] then
+			if Multi_Dir_ListBox.Selected[i] then
 			begin
         gauge_step	:=	gauge_step + 1;
         {Aufruf der Suchprozedur}
@@ -1129,7 +1138,7 @@ var
 begin
 	{Wenn eine gesamte Seite erzeugt werden soll.}
 	if mp3list_html_multi_output = 0 then
-  begin
+	begin
 		create_html_output(mp3list_single_template_file,
 											 SlashSep(html_files_output_path, mp3list_html_output_file),
                        '',
@@ -1176,7 +1185,7 @@ begin
       {compare for all letter except numbers}
       for i2 := 0 to Length(dir) - 2 do
 			begin
-        {	1 means the string start with searched letter}
+				{	1 means the string start with searched letter}
         if AnsiPos(Lowercase(first_letter), lowercase(dir[i2])) = 1 then
         begin
           letter_found  :=  True;
@@ -1223,7 +1232,7 @@ begin
           files_to_zip  :=  files_to_zip + SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)) + ' ';
         Search_ProgressBar.Position :=	i;
       end;
-      {zip files}
+			{zip files}
       { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
 (*
 66666
@@ -1270,7 +1279,7 @@ begin
       	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
   if NameCheck_ListBox.Items.Count > 0 then
-	  NameCheck_ListBox.BringToFront
+		NameCheck_ListBox.BringToFront
   else
 	  MP3_ListBox.BringToFront;
 
@@ -1411,7 +1420,7 @@ begin
     Pacman_Btn.Glyph.LoadFromResourceName(HInstance,'eater-r');
     if Pacman_Btn.Left > TabSheet1.ClientWidth - 45 then
       pacman_direction  :=  False;
-    Pacman_Btn.Left :=  Pacman_Btn.Left + 8 ;
+		Pacman_Btn.Left :=  Pacman_Btn.Left + 8 ;
     Pacman_Btn.Repaint;
   end
   else
@@ -1458,7 +1467,7 @@ begin
   begin
     if FileExists(cdlist_last_used_template_files[i]) then
       CDList_Template_ComboBox.Items.Add(cdlist_last_used_template_files[i]);
-  end;
+	end;
   CDList_Template_ComboBox.ItemIndex	:=	0;
 
 end;
@@ -1505,7 +1514,7 @@ begin
 		end;
 
     {counter}
-    cdlist_result_count :=  cdlist_result_count + 1;
+		cdlist_result_count :=  cdlist_result_count + 1;
 
   end;
   CloseFile(F);
@@ -1832,6 +1841,11 @@ begin
 	end;
 end;
 
+procedure TF_Main.Button1Click(Sender: TObject);
+begin
+
+end;
+
 {--- CDList : Close Form ------------------------------------------------------}
 procedure TF_Main.CDList_Close_BtnClick(Sender: TObject);
 begin
@@ -2098,52 +2112,52 @@ function TF_Main.UploadToFtp : Boolean;
 var
 	i	:	Integer;
 begin
-	IdFTP1.Host			:=	FtpConnection.Hostname;
-	IdFTP1.Username	:=	FtpConnection.Username;
-	IdFTP1.Password	:=	FtpConnection.Password;
-	IdFTP1.Connect;
+	IdFTP_Upload.Host			:=	FtpConnection.Hostname;
+	IdFTP_Upload.Username	:=	FtpConnection.Username;
+	IdFTP_Upload.Password	:=	FtpConnection.Password;
+	IdFTP_Upload.Connect;
 
-	if IdFTP1.Connected then
+	if IdFTP_Upload.Connected then
 	begin
-		IdFTP1.ChangeDir(FtpConnection.RemoteDir);
+		IdFTP_Upload.ChangeDir(FtpConnection.RemoteDir);
 		for i := 0 to FtpUploadList.Count - 1 do
 
-			IdFTP1.Put(FtpUploadList[i], get_filename_from_complete_string(FtpUploadList[i], '\'), False);
+			IdFTP_Upload.Put(FtpUploadList[i], get_filename_from_complete_string(FtpUploadList[i], '\'), False);
 
 		Result	:=	True;
 	end
 	else
 		Result	:=	False;
 
-	IdFTP1.Disconnect;
+	IdFTP_Upload.Disconnect;
 
 end;
 
 function TF_Main.FtpTestConnection (var error	:	String) : Boolean;
 begin
-	IdFTP1.Host			:=	FtpConnection.Hostname;
-	IdFTP1.Username	:=	FtpConnection.Username;
-	IdFTP1.Password	:=	FtpConnection.Password;
+	IdFTP_Upload.Host			:=	FtpConnection.Hostname;
+	IdFTP_Upload.Username	:=	FtpConnection.Username;
+	IdFTP_Upload.Password	:=	FtpConnection.Password;
 
 	Result	:=	True;
 
 	try
-		IdFTP1.Connect;
+		IdFTP_Upload.Connect;
 	except
 		Result	:=	False;
 		error	:=	'Unable to connect';
 	end;
 
-	if IdFTP1.Connected then
+	if IdFTP_Upload.Connected then
 	begin
 		try
-			IdFTP1.ChangeDir(FtpConnection.RemoteDir);
+			IdFTP_Upload.ChangeDir(FtpConnection.RemoteDir);
 		except
 			Result	:=	False;
 			error	:=	'Cannot change remote directory';//SysErrorMessage(GetLastError);
 		end;
 
-		IdFTP1.Disconnect;
+		IdFTP_Upload.Disconnect;
 
 	end
 	else
@@ -2170,6 +2184,28 @@ begin
 	end
 	else
 		ShowMessage(GetTxt( 1, 66, 'No FTP connection data found. Check settings'))
+end;
+
+procedure TF_Main.CheckforUpdate1Click(Sender: TObject);
+begin
+  CheckForUpdates;
+end;
+
+procedure TF_Main.CheckForUpdates;
+var
+	WebString: string;
+begin
+	try
+		WebString	:= IdHTTP_Updater.Get('http://www.rakekniven.de/sites/rakekniven.de/files/mp3toolbox.xml');
+	finally
+	end;
+
+	if WebString <> '' then
+	begin
+		//
+		if Version1IsBiggerThanVersion2(WebString, get_version()) then
+			ShowMessage('There is a newer version available');
+	end;
 end;
 
 end.
