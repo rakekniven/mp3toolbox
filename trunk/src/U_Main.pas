@@ -27,7 +27,10 @@ uses
 	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, IdMessage,
-  IdFTP, U_FTP, CheckLst, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
+	IdFTP,
+	U_FTP,
+	U_Update,
+	CheckLst, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWHTMLControls, IdHTTP;//, Libc;
 
 type
@@ -115,7 +118,7 @@ type
 		WebsiteofAuthor1: TMenuItem;
     TabSheet2: TTabSheet;
     XMLDocument1: TXMLDocument;
-    Label7: TLabel;
+		Label7: TLabel;
     Go_Btn2: TBitBtn;
     HTML_OutputButton2: TBitBtn;
     NameCheck_ListBox: TListBox;
@@ -149,6 +152,7 @@ type
     IWURL1: TIWURL;
     Button1: TButton;
     CheckforUpdate1: TMenuItem;
+    XMLDocumentUpdate: TXMLDocument;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -222,9 +226,9 @@ type
 		procedure Label1Click(Sender: TObject);
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
-    procedure Hyperlink_LabelClick(Sender: TObject);
+		procedure Hyperlink_LabelClick(Sender: TObject);
 		procedure Button1Click(Sender: TObject);
-		procedure CheckForUpdates;
+		procedure CheckForUpdates(AQuiet	:	Boolean);
     procedure CheckforUpdate1Click(Sender: TObject);
 
 	private
@@ -559,6 +563,9 @@ begin
 	Search_Time_Lab.Caption	:=	'...';
 	Lab_Scan_Result.Caption	:=	'...';
 	Lab_Scan_Time.Caption	:=	'...';
+
+	//66666
+	CheckForUpdates(True);;
 end;
 
 {--- OnActivate ---------------------------------------------------------------}
@@ -613,7 +620,7 @@ begin
 	Label7.Caption							           	:=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
 	Label12.Caption              						:=  GetTxt( 1, 59, 'Items found');
 	Hyperlink_Label.Caption									:=	GetTxt( 1, 76, 'How to get these XML files?');
-
+	CheckforUpdate1.Caption									:=  GetTxt( 1, 84, 'Scan time');
 	{CDList}
 	CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
 	HTML_OutputButton3.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
@@ -1992,7 +1999,7 @@ end;
 
 procedure TF_Main.AboutMP3Toolbox1Click(Sender: TObject);
 begin
-	About_F.Show;
+	F_About.Show;
 end;
 
 procedure TF_Main.NameCheck_ListBoxMouseUp(Sender: TObject;
@@ -2188,24 +2195,57 @@ end;
 
 procedure TF_Main.CheckforUpdate1Click(Sender: TObject);
 begin
-  CheckForUpdates;
+	CheckForUpdates(False);
 end;
 
-procedure TF_Main.CheckForUpdates;
+procedure TF_Main.CheckForUpdates(AQuiet	:	Boolean);
 var
+	s,
 	WebString: string;
+	i	:	Integer;
+	MyChild,
+	MyChild2	:	IXMLNode;
 begin
 	try
-		WebString	:= IdHTTP_Updater.Get('http://www.rakekniven.de/sites/rakekniven.de/files/mp3toolbox.xml');
-	finally
+		WebString	:= IdHTTP_Updater.Get('http://www.rakekniven.de/sites/rakekniven.de/files/mp3toolboxupdate.xml');
+
+		//	Debug
+		//		WebString	:= IdHTTP_Updater.Get('http://192.168.178.201/mp3toolboxupdate.xml');
+	except
 	end;
 
 	if WebString <> '' then
 	begin
 		//
-		if Version1IsBiggerThanVersion2(WebString, get_version()) then
-			ShowMessage('There is a newer version available');
-	end;
+		XMLDocumentUpdate.LoadFromXML(WebString);
+
+		MyChild	:=	XMLDocumentUpdate.DocumentElement;//.ChildNodes[i];
+
+		s	:=	MyChild.NodeName;
+
+		if MyChild.Attributes['id'] = 'mp3toolbox' then
+		begin
+			F_Update.LatestVersion		:=	MyChild.ChildValues['Version'];
+			F_Update.InstalledVersion	:=	get_version;
+			F_Update.ReleaseDate			:=	MyChild.ChildValues['ReleaseDate'];
+			F_Update.DownloadUrl			:=	MyChild.ChildValues['DownloadUrl'];
+			F_Update.ChangelogUrl			:=	MyChild.ChildValues['ChangelogUrl'];
+
+			MyChild2	:=	MyChild.ChildNodes['ReleaseNotes'];
+
+			for i := 1 to MyChild2.ChildNodes.Count do
+				F_Update.ReleaseNotes.Add(MyChild2.ChildValues['Note' + IntToStr(i)]);
+		end;
+
+
+		if Version1IsBiggerThanVersion2(F_Update.LatestVersion, F_Update.InstalledVersion) then
+			F_Update.ShowModal;
+	end
+	else
+	begin
+		if not AQuiet then
+			ShowMessage(GetTxt(1, 85, 'Up-to-date check failed. Could not connect to server.'));
+  end;
 end;
 
 end.

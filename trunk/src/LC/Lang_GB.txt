@@ -79,6 +79,15 @@ Msg=GB
 74 = http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project
 75 = http://code.google.com/p/mp3toolbox/
 76 = How to get these XML files?
+77 = Latest version
+78 = Release date
+79 = Software history
+80 = Installed version
+81 = Changelog
+82 = Download
+83 = Update
+84 = Check for Update
+85 = Up-to-date check failed. Could not connect to server.
 
 [Setup]
  1 = General
