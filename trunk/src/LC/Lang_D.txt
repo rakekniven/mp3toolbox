@@ -88,6 +88,7 @@ Msg=D
 83 = Aktualisierung
 84 = Nach Aktualisierung suchen
 85 = Suche nach Aktualisierung ist fehlgeschlagen. Server konnte nicht erreicht werden.
+86 = Kein Update gefunden. Sie benutzen bereits die neueste Version.
 
 [Setup]
  1 = Allgemein
