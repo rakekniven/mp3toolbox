@@ -79,6 +79,15 @@ Msg=D
 74 = http://www.rakekniven.de/content/mp3-toolbox-open-source-mp3-toolbox-project
 75 = http://code.google.com/p/mp3toolbox/
 76 = Woher bekomme ich diese XML-Dateien?
+77 = Verfügbare Version
+78 = Veröffentlicht am
+79 = Software-Historie
+80 = Installierte Version
+81 = Liste der Veränderungen
+82 = Download
+83 = Aktualisierung
+84 = Nach Aktualisierung suchen
+85 = Suche nach Aktualisierung ist fehlgeschlagen. Server konnte nicht erreicht werden.
 
 [Setup]
  1 = Allgemein

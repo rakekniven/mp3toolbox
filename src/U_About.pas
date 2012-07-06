@@ -52,7 +52,7 @@ type
   end;
 
 var
-  About_F: TAbout_F;
+  F_About: TAbout_F;
 
 implementation
 

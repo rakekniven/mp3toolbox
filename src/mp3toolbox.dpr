@@ -16,7 +16,8 @@ uses
 	Id3v2Frames in 'externallibs\Id3v2Frames.pas',
 	Mp3FileUtils in 'externallibs\Mp3FileUtils.pas',
 	fldbrowsUnicode in 'externallibs\fldbrowsUnicode.pas',
-	U_FTP in 'U_FTP.pas';
+	U_FTP in 'U_FTP.pas',
+	U_Update in 'U_Update.pas' {F_Update};
 
 {$R *.res}
 
@@ -24,6 +25,7 @@ begin
 	Application.Initialize;
 	Application.CreateForm(TF_Main, F_Main);
 	Application.CreateForm(TF_Setup, F_Setup);
-	Application.CreateForm(TAbout_F, About_F);
+	Application.CreateForm(TF_Update, F_Update);
+	Application.CreateForm(TAbout_F, F_About);
 	Application.Run;
 end.

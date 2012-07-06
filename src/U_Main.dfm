@@ -2100,13 +2100,13 @@ object F_Main: TF_Main
   object XMLDocument1: TXMLDocument
     FileName = 'T:\Zuletzt hinzugef'#252'gt.xml'
     Left = 336
-    Top = 328
+    Top = 296
     DOMVendorDesc = 'MSXML'
   end
   object IdSMTP1: TIdSMTP
     SASLMechanisms = <>
-    Left = 400
-    Top = 328
+    Left = 408
+    Top = 296
   end
   object IdMessage1: TIdMessage
     AttachmentEncoding = 'UUE'
@@ -2119,8 +2119,8 @@ object F_Main: TF_Main
     Recipients = <>
     ReplyTo = <>
     ConvertPreamble = True
-    Left = 448
-    Top = 328
+    Left = 408
+    Top = 336
   end
   object IdFTP_Upload: TIdFTP
     IPVersion = Id_IPv4
@@ -2128,7 +2128,7 @@ object F_Main: TF_Main
     ProxySettings.ProxyType = fpcmNone
     ProxySettings.Port = 0
     Left = 496
-    Top = 328
+    Top = 296
   end
   object IdHTTP_Updater: TIdHTTP
     AllowCookies = True
@@ -2139,7 +2139,12 @@ object F_Main: TF_Main
     Request.BasicAuthentication = False
     Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
     HTTPOptions = [hoForceEncodeParams]
-    Left = 256
-    Top = 320
+    Left = 216
+    Top = 336
+  end
+  object XMLDocumentUpdate: TXMLDocument
+    Left = 216
+    Top = 296
+    DOMVendorDesc = 'MSXML'
   end
 end
