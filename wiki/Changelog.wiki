@@ -1,6 +1,9 @@
 #summary See what has been done.
 #labels Featured,Phase-Support
 
+== Version 1.1.21 2012-07-06 ==
+  * Update check will show you when new version is available
+
 == Version 1.1.20 2012-07-04 ==
   * New: Upload generated files to your FTP server with just one click
 
