@@ -88,6 +88,7 @@ Msg=GB
 83 = Update
 84 = Check for Update
 85 = Up-to-date check failed. Could not connect to server.
+86 = No update found. You are using already the latest version.
 
 [Setup]
  1 = General

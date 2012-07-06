@@ -2239,13 +2239,17 @@ begin
 
 
 		if Version1IsBiggerThanVersion2(F_Update.LatestVersion, F_Update.InstalledVersion) then
-			F_Update.ShowModal;
+			F_Update.ShowModal
+		else
+			if not AQuiet then
+				ShowMessage(GetTxt(1, 86, 'No update found. You are using already the latest version.'));
+
 	end
 	else
 	begin
 		if not AQuiet then
 			ShowMessage(GetTxt(1, 85, 'Up-to-date check failed. Could not connect to server.'));
-  end;
+	end;
 end;
 
 end.
