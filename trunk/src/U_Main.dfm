@@ -87,6 +87,10 @@ object F_Main: TF_Main
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??mp3list'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1047,6 +1051,10 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1449,6 +1457,10 @@ object F_Main: TF_Main
     object TabSheet4: TTabSheet
       Caption = 'Error'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1838,19 +1850,14 @@ object F_Main: TF_Main
         TabOrder = 2
         Text = 't:\Zuletzt hinzugef'#252'gt.xml'
       end
-      object Button1: TButton
-        Left = 96
-        Top = 296
-        Width = 75
-        Height = 25
-        Caption = 'Button1'
-        TabOrder = 3
-        OnClick = Button1Click
-      end
     end
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GenreLab: TLabel
         Left = 16
         Top = 3

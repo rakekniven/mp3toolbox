@@ -150,7 +150,6 @@ type
     Hyperlink_Label: TLabel;
     IdHTTP_Updater: TIdHTTP;
     IWURL1: TIWURL;
-    Button1: TButton;
     CheckforUpdate1: TMenuItem;
     XMLDocumentUpdate: TXMLDocument;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
@@ -227,9 +226,8 @@ type
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
 		procedure Hyperlink_LabelClick(Sender: TObject);
-		procedure Button1Click(Sender: TObject);
 		procedure CheckForUpdates(AQuiet	:	Boolean);
-    procedure CheckforUpdate1Click(Sender: TObject);
+		procedure CheckforUpdate1Click(Sender: TObject);
 
 	private
 		{ Private-Deklarationen }
@@ -1846,11 +1844,6 @@ begin
 		end;
 		CB_XML_File.ItemIndex	:=	0;
 	end;
-end;
-
-procedure TF_Main.Button1Click(Sender: TObject);
-begin
-
 end;
 
 {--- CDList : Close Form ------------------------------------------------------}
