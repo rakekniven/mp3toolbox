@@ -1,6 +1,9 @@
 #summary See what has been done.
 #labels Featured,Phase-Support
 
+== Version 1.1.22 not released ==
+  * Fix loading of iTunes xml export and included DTD information
+
 == Version 1.1.21 2012-07-06 ==
   * Update check will show you when new version is available
 
