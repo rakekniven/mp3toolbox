@@ -30,8 +30,8 @@ uses
 	IdFTP,
 	U_FTP,
 	U_Update,
-	CheckLst, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
-  IWControl, IWHTMLControls, IdHTTP;//, Libc;
+	CheckLst, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
+	IWHTMLControls;
 
 type
 	TF_Main = class(TForm)
@@ -152,6 +152,7 @@ type
     CheckforUpdate1: TMenuItem;
     XMLDocumentUpdate: TXMLDocument;
     StatusBar: TStatusBar;
+    LogListBox: TListBox;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -228,7 +229,9 @@ type
 		procedure Hyperlink_LabelClick(Sender: TObject);
 		procedure CheckForUpdates(AQuiet	:	Boolean);
 		procedure CheckforUpdate1Click(Sender: TObject);
-    procedure StatusBarClick(Sender: TObject);
+		procedure StatusBarClick(Sender: TObject);
+		procedure AddLogMessage(AMessage : String);
+    procedure LogListBoxClick(Sender: TObject);
 
 	private
     cnt: Integer;
@@ -316,6 +319,8 @@ var
 	FtpConnection	:	TFtpConnection;
 	FtpUploadList	:	TStringList;
 
+	LogList				:	TStringList;
+
 	const
 		SELDIRHELP = 1000;
 
@@ -376,6 +381,8 @@ begin
 
 	FtpConnection	:=	TFtpConnection.Create;
 	FtpUploadList	:=	TStringList.Create;
+
+	LogList				:=	TStringList.Create;
 
 	mp3list_SearchAndReplace  :=  TStringList.Create;
 
@@ -1143,6 +1150,8 @@ var
 	files_to_zip  : String;
 	letter_found  : Boolean;
 begin
+	AddLogMessage('Start creating websites ...');
+
 	{Wenn eine gesamte Seite erzeugt werden soll.}
 	if mp3list_html_multi_output = 0 then
 	begin
@@ -1262,7 +1271,9 @@ begin
 
     Search_ProgressBar.Position     	:=	0;
 
-  end;
+	end;
+
+	AddLogMessage('Websites created');
 
 	lib1.Start_External_Program(self.WindowHandle,
 															'open',
@@ -1401,7 +1412,8 @@ end;
 procedure TF_Main.StatusBarClick(Sender: TObject);
 begin
 	// Show log history
-
+	LogListBox.Visible	:=	True;
+	LogListBox.BringToFront;
 end;
 
 {--- MP3List : Close PACMAN setuppanel ----------------------------------------}
@@ -1655,7 +1667,7 @@ begin
 		// Ignoring second line > DTD
 		//	http://code.google.com/p/mp3toolbox/issues/detail?id=34
 
-		StatusBar.Panels[0].Text	:=	'Preloading XML file';
+		AddLogMessage('Preloading XML file');
 		AssignFile(F, CB_XML_File.Text);
 		Reset(F);
 		cnt	:=	0;
@@ -1670,6 +1682,7 @@ begin
 
 		XMLDocumentiTunesImport.Active	:=	True;
 
+		AddLogMessage('Processing XML content');
 		for i := 0 to XMLDocumentiTunesImport.DocumentElement.ChildNodes.Count - 1 do
 		begin
 			Application.ProcessMessages;
@@ -1841,6 +1854,8 @@ begin
 
 		XMLDocumentiTunesImport.Active	:=	False;
 		XMLDocumentiTunesImport.XML.Clear;
+
+		AddLogMessage('XML processing done.');
 
 	end;
 
@@ -2206,10 +2221,13 @@ begin
 	begin
 		if FtpUploadList.Count > 0 then
 		begin
+			AddLogMessage('Uploading files with ftp ...');
+
 			if UploadtoFTP then
 			begin
 				ShowMessage(GetTxt( 1, 63, 'Upload ok'));
 				FtpUploadList.Clear;	//	Start fresh after upload
+				AddLogMessage(GetTxt( 1, 63, 'Upload ok'));
 			end
 			else
 				ShowMessage(GetTxt( 1, 64, 'Upload failed'))
@@ -2269,15 +2287,32 @@ begin
 		if Version1IsBiggerThanVersion2(F_Update.LatestVersion, F_Update.InstalledVersion) then
 			F_Update.ShowModal
 		else
+		begin
+			AddLogMessage(GetTxt(1, 86, 'No update found. You are using already the latest version.'));
+
 			if not AQuiet then
 				ShowMessage(GetTxt(1, 86, 'No update found. You are using already the latest version.'));
+		end;
 
 	end
 	else
 	begin
+		AddLogMessage(GetTxt(1, 85, 'Up-to-date check failed. Could not connect to server.'));
 		if not AQuiet then
 			ShowMessage(GetTxt(1, 85, 'Up-to-date check failed. Could not connect to server.'));
 	end;
+end;
+
+procedure TF_Main.LogListBoxClick(Sender: TObject);
+begin
+	LoglistBox.Visible	:=	False;
+end;
+
+procedure TF_Main.AddLogMessage(AMessage : String);
+begin
+	LogList.Add(AMessage);
+	LogListBox.Items.Add(AMessage);
+	StatusBar.Panels[0].Text	:=	LogList[LogList.Count - 1];
 end;
 
 end.
