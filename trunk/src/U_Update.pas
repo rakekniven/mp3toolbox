@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
 	Dialogs, StdCtrls,
 	lib1,
-	U_Language, Buttons, pngimage, ExtCtrls;
+	U_Language, Buttons, pngimage, ExtCtrls, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdHTTP;
 
 type
   TF_Update = class(TForm)
@@ -15,12 +16,13 @@ type
 		InstalledVersionLab: TLabel;
     ReleaseDateLab: TLabel;
     LatestReleaseLab2: TLabel;
-    ReleaseDateLab2: TLabel;
+		ReleaseDateLab2: TLabel;
 		InstalledVersionLab2: TLabel;
 		Image1: TImage;
 		DownloadBtn: TBitBtn;
 		ChangelogLab: TLabel;
 		ChangelogLab2: TLabel;
+    IdHTTP_Updater: TIdHTTP;
 		procedure Button1Click(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure FormShow(Sender: TObject);
