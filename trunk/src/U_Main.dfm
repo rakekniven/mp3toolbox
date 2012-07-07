@@ -1906,9 +1906,30 @@ object F_Main: TF_Main
         Width = 50
       end>
     OnClick = StatusBarClick
-    ExplicitLeft = 688
-    ExplicitTop = 400
-    ExplicitWidth = 0
+  end
+  object LogListBox: TListBox
+    Left = 1
+    Top = 424
+    Width = 789
+    Height = 297
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    ExtendedSelect = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = 15
+    Font.Name = 'arial'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ItemHeight = 15
+    MultiSelect = True
+    ParentFont = False
+    TabOrder = 4
+    Visible = False
+    OnClick = LogListBoxClick
   end
   object MainMenu1: TMainMenu
     Left = 328
