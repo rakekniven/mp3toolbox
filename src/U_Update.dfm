@@ -2592,4 +2592,16 @@ object F_Update: TF_Update
     TabOrder = 1
     OnClick = DownloadBtnClick
   end
+  object IdHTTP_Updater: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.Accept = 'text/html, */*'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 24
+    Top = 264
+  end
 end

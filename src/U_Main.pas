@@ -117,7 +117,7 @@ type
 		Goo1: TMenuItem;
 		WebsiteofAuthor1: TMenuItem;
     TabSheet2: TTabSheet;
-    XMLDocument1: TXMLDocument;
+		XMLDocumentiTunesImport: TXMLDocument;
 		Label7: TLabel;
     Go_Btn2: TBitBtn;
     HTML_OutputButton2: TBitBtn;
@@ -148,10 +148,10 @@ type
     Showfoundgenres1: TMenuItem;
     GenreLab: TLabel;
     Hyperlink_Label: TLabel;
-    IdHTTP_Updater: TIdHTTP;
     IWURL1: TIWURL;
     CheckforUpdate1: TMenuItem;
     XMLDocumentUpdate: TXMLDocument;
+    StatusBar: TStatusBar;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -228,8 +228,10 @@ type
 		procedure Hyperlink_LabelClick(Sender: TObject);
 		procedure CheckForUpdates(AQuiet	:	Boolean);
 		procedure CheckforUpdate1Click(Sender: TObject);
+    procedure StatusBarClick(Sender: TObject);
 
 	private
+    cnt: Integer;
 		{ Private-Deklarationen }
 	public
 		{ Public-Deklarationen }
@@ -1315,7 +1317,7 @@ begin
 	if MP3_ListBox.Items.Count > 0 then
   	for i := 0 to MP3_ListBox.Items.Count - 1 do
       if check_filename_for_length(MP3_ListBox.Items[i], 64) then
-      	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
+				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
   if NameCheck_ListBox.Items.Count > 0 then
 	  NameCheck_ListBox.BringToFront
@@ -1357,7 +1359,7 @@ begin
 
   if NameCheck_ListBox.Items.Count > 0 then
 	  NameCheck_ListBox.BringToFront
-  else
+	else
 	  MP3_ListBox.BringToFront;
 
 end;
@@ -1394,6 +1396,12 @@ begin
   Pacman_Move_Timer.Enabled :=  True;
   pacman_direction          :=  True;
   Pacman_Speed_Edit.Text    :=  IntToStr(Pacman_Move_Timer.Interval);
+end;
+
+procedure TF_Main.StatusBarClick(Sender: TObject);
+begin
+	// Show log history
+
 end;
 
 {--- MP3List : Close PACMAN setuppanel ----------------------------------------}
@@ -1435,7 +1443,7 @@ begin
 			pacman_direction  :=  True;
     Pacman_Btn.Left :=  Pacman_Btn.Left - 8 ;
     Pacman_Btn.Repaint;
-  end;
+	end;
 end;
 
 
@@ -1507,9 +1515,9 @@ begin
   Reset(F);
 
   {zeilenweise lesen und zuweisen}
-  While not Eof(F) do
-  begin
-    Readln(F, ln);
+	While not Eof(F) do
+	begin
+		Readln(F, ln);
     separate_string_by_tab(ln);
 
     for i := 0 to CDListe_StringGrid.ColCount - 1 do
@@ -1609,10 +1617,12 @@ var
 	title,
 	year,
 	TrackType,
-	genre  : String;
+	genre	: String;
+	ln	:	RawByteString;
 	HasVideo,
 	podcast		:	Boolean;
-  GenreFound: Boolean;
+	GenreFound: Boolean;
+	F: TextFile;
 begin
 	Label13.Caption	:=	'...';
 	Lab_Scan_Time4.Caption	:=	'...';
@@ -1641,9 +1651,26 @@ begin
 			MP3_ListBox.Clear;
 
 		// Load XML File
-		XMLDocument1.LoadFromFile(CB_XML_File.Text);
 
-		for i := 0 to XMLDocument1.DocumentElement.ChildNodes.Count - 1 do
+		// Ignoring second line > DTD
+		//	http://code.google.com/p/mp3toolbox/issues/detail?id=34
+
+		StatusBar.Panels[0].Text	:=	'Preloading XML file';
+		AssignFile(F, CB_XML_File.Text);
+		Reset(F);
+		cnt	:=	0;
+		While not Eof(F) do
+		begin
+			inc(cnt);
+			Readln(F, ln);
+			if not (cnt = 2) then
+				XMLDocumentiTunesImport.XML.Add(UTF8ToString(ln));
+		end;
+		CloseFile(F);
+
+		XMLDocumentiTunesImport.Active	:=	True;
+
+		for i := 0 to XMLDocumentiTunesImport.DocumentElement.ChildNodes.Count - 1 do
 		begin
 			Application.ProcessMessages;
 
@@ -1651,7 +1678,7 @@ begin
 				break;
 
 			//		ShowMessage((XMLDocument1.DocumentElement.ChildNodes[i].LocalName ));
-			MyChild	:=	XMLDocument1.DocumentElement.ChildNodes[i];
+			MyChild	:=	XMLDocumentiTunesImport.DocumentElement.ChildNodes[i];
 //		ShowMessage((MyChild.ChildNodes[i].LocalName ));
 (*
 		for i2 := 0 to MyChild.ChildNodes.Count - 1 do
@@ -1682,11 +1709,13 @@ begin
 					MyChild	:=	MyChild2.ChildNodes[i3];
 	//				ShowMessage(IntToStr(MyChild.ChildNodes.Count));
 	//				ShowMessage(MyChild.ChildNodes['key'].Text);
-					artist	:=	'';
-					Album	:=	'';
-					Track	:=	'';
-					Title	:=	'';
-					Year	:=	'';
+					artist		:=	'';
+					Album			:=	'';
+					Track			:=	'';
+					Title			:=	'';
+					Year			:=	'';
+					TrackType	:=	'';
+					Genre			:=	'';
 					HasVideo	:=	False;
 					Podcast		:=	False;
 
@@ -1765,15 +1794,18 @@ begin
 					// check search and replace list
 					ResultString	:=	SearchAndReplace (ResultString);
 
-					if (TrackType <> 'URL') and
-							(genre <> 'Hörbuch') and
-							(genre <> 'Kinderlieder') and
-							not HasVideo and
-							not podcast
-					then //	No URL's, no Videos
-						MP3_ListBox.Items.Add(ResultString)
+					if (TrackType = 'URL') then
+						ListBox_Error.Items.Add(ResultString + ' (Tracktype: URL)')
+					else if (genre = 'Hörbuch') then
+						ListBox_Error.Items.Add(ResultString + ' (Genre: Hörbuch)')
+					else if (genre = 'Kinderlieder') then
+						ListBox_Error.Items.Add(ResultString + ' (Genre: Kinderlieder)')
+					else if HasVideo then
+						ListBox_Error.Items.Add(ResultString + ' (Is Video)')
+					else if podcast then
+						ListBox_Error.Items.Add(ResultString + ' (Is Podcast)')
 					else
-						ListBox_Error.Items.Add(ResultString);
+						MP3_ListBox.Items.Add(ResultString);
 
 				end;
 			end;
@@ -1806,6 +1838,9 @@ begin
 
 		cancel_search	:=	False;
 		search_status :=  False;
+
+		XMLDocumentiTunesImport.Active	:=	False;
+		XMLDocumentiTunesImport.XML.Clear;
 
 	end;
 
@@ -2200,7 +2235,7 @@ var
 	MyChild2	:	IXMLNode;
 begin
 	try
-		WebString	:= IdHTTP_Updater.Get('http://www.rakekniven.de/sites/rakekniven.de/files/mp3toolboxupdate.xml');
+		WebString	:= F_Update.IdHTTP_Updater.Get('http://www.rakekniven.de/sites/rakekniven.de/files/mp3toolboxupdate.xml');
 
 		//	Debug
 		//		WebString	:= IdHTTP_Updater.Get('http://192.168.178.201/mp3toolboxupdate.xml');

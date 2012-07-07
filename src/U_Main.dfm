@@ -87,10 +87,6 @@ object F_Main: TF_Main
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??mp3list'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1051,10 +1047,6 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1457,10 +1449,6 @@ object F_Main: TF_Main
     object TabSheet4: TTabSheet
       Caption = 'Error'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1854,10 +1842,6 @@ object F_Main: TF_Main
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1890,8 +1874,8 @@ object F_Main: TF_Main
   object MP3_ListBox: TListBox
     Left = 0
     Top = 424
-    Width = 788
-    Height = 314
+    Width = 789
+    Height = 297
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -1911,6 +1895,20 @@ object F_Main: TF_Main
     TabOrder = 2
     OnClick = MP3_ListBoxClick
     OnMouseUp = MP3_ListBoxMouseUp
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Top = 721
+    Width = 790
+    Height = 19
+    Panels = <
+      item
+        Width = 50
+      end>
+    OnClick = StatusBarClick
+    ExplicitLeft = 688
+    ExplicitTop = 400
+    ExplicitWidth = 0
   end
   object MainMenu1: TMainMenu
     Left = 328
@@ -2104,8 +2102,7 @@ object F_Main: TF_Main
     Left = 480
     Top = 48
   end
-  object XMLDocument1: TXMLDocument
-    FileName = 'T:\Zuletzt hinzugef'#252'gt.xml'
+  object XMLDocumentiTunesImport: TXMLDocument
     Left = 336
     Top = 296
     DOMVendorDesc = 'MSXML'
@@ -2136,18 +2133,6 @@ object F_Main: TF_Main
     ProxySettings.Port = 0
     Left = 496
     Top = 296
-  end
-  object IdHTTP_Updater: TIdHTTP
-    AllowCookies = True
-    ProxyParams.BasicAuthentication = False
-    ProxyParams.ProxyPort = 0
-    Request.ContentLength = -1
-    Request.Accept = 'text/html, */*'
-    Request.BasicAuthentication = False
-    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
-    HTTPOptions = [hoForceEncodeParams]
-    Left = 216
-    Top = 336
   end
   object XMLDocumentUpdate: TXMLDocument
     Left = 216
