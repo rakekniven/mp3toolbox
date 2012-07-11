@@ -223,6 +223,7 @@ type
 		procedure Sendfeedback1Click(Sender: TObject);
 		function UploadToFtp : Boolean;
 		function FtpTestConnection (var error : String) : Boolean;
+		procedure DeleteFilesAfterFtpUpload;
 		procedure Label1Click(Sender: TObject);
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
@@ -298,6 +299,7 @@ var
 	mp3list_SearchAndReplace			      : TStringList;
 	xmllist_last_used_files             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
 	InsertSortingZero										: Boolean;
+	DeleteAfterFtpUpload								: Boolean;
 
 	{Variablen für CD-Archive}
 	cdarchive_path_to_read_in		        : String;
@@ -406,7 +408,8 @@ begin
 	text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     text_files_output_path);
 	html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     html_files_output_path);
 	pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
-	InsertSortingZero										:=	Ini.ReadBool	 ('GENERAL',   'InsertSortingZero', True);
+	InsertSortingZero										:=	Ini.ReadBool	 ('GENERAL',   'InsertSortingZero',				True);
+	DeleteAfterFtpUpload								:=	Ini.ReadBool	 ('GENERAL',   'DeleteAfterFtpUpload',		True);
 
 	// Read all search & replace pairs from INI
 	i	:=	0;
@@ -2237,6 +2240,14 @@ begin
 
 end;
 
+procedure TF_Main.DeleteFilesAfterFtpUpload;
+var
+  i: Integer;
+begin
+	for i := 0 to FtpUploadList.Count - 1 do
+		DeleteFile(FtpUploadList[i]);
+end;
+
 procedure TF_Main.UploadtoFTP1Click(Sender: TObject);
 begin
 	if FtpConnection.Hostname <> '' then
@@ -2248,6 +2259,8 @@ begin
 			if UploadtoFTP then
 			begin
 				ShowMessage(GetTxt( 1, 63, 'Upload ok'));
+				if DeleteAfterFtpUpload then
+					DeleteFilesAfterFtpUpload();
 				FtpUploadList.Clear;	//	Start fresh after upload
 				AddLogMessage(GetTxt( 1, 63, 'Upload ok'));
 			end

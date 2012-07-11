@@ -83,8 +83,9 @@ type
 		LabeledEdit3: TLabeledEdit;
 		LabeledEdit4: TLabeledEdit;
 		FtpTestConnectionBtn: TButton;
-    MiscTS: TTabSheet;
-    InsertSortingZeroCB: TCheckBox;
+		MiscTS: TTabSheet;
+		InsertSortingZeroCB: TCheckBox;
+		DeleteAfterFtpUploadCB: TCheckBox;
 		procedure FormShow(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -121,6 +122,7 @@ type
 		procedure LabeledEdit3Change(Sender: TObject);
 		procedure LabeledEdit4Change(Sender: TObject);
 		procedure InsertSortingZeroCBClick(Sender: TObject);
+		procedure DeleteAfterFtpUploadCBClick(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -182,7 +184,8 @@ begin
   else
 	  Pacman_CheckBox.Checked	:=	False;
 
-	InsertSortingZeroCB.Checked		:=	InsertSortingZero;
+	InsertSortingZeroCB.Checked			:=	InsertSortingZero;
+	DeleteAfterFtpUploadCB.Checked	:=	DeleteAfterFtpUpload;
 
 	{set values of editfields}
 	TXT_File_Output_Edit.Text	 						:=	text_files_output_path;
@@ -409,6 +412,8 @@ begin
 		Ini.WriteString ('GENERAL', 'textdateien', 		            text_files_output_path);
 		Ini.WriteString ('GENERAL', 'htmldateien', 		            html_files_output_path);
 		Ini.WriteBool		('GENERAL', 'InsertSortingZero', 		      InsertSortingZero);
+		Ini.WriteBool		('GENERAL', 'DeleteAfterFtpUpload', 			DeleteAfterFtpUpload);
+
 
 		for i := 0 to mp3list_SearchAndReplace.Count - 1 do
 		begin
@@ -547,6 +552,7 @@ begin
 	FtpTestConnectionBtn.Caption										:=  GetTxt( 1, 72, 'Test connection');
 	InsertSortingZeroCB.Caption											:=  GetTxt( 1, 87, 'InsertSortingZero');
 	MiscTS.Caption																	:=	GetTXT( 1, 88, 'Misc');
+	DeleteAfterFtpUploadCB.Caption									:=	GetTXT( 1, 89, 'DeleteAfterFtpUpload');
 (*
 	First_Start_Memo.Clear;
 	First_Start_Memo.Lines.Add                         (GetTxt( 2,  8, 'Beim ersten Programmstart sollten noch'));
@@ -628,6 +634,11 @@ begin
 		cdlist_text_files_zip    :=  True
   else
 		cdlist_text_files_zip    :=  False;
+end;
+
+procedure TF_Setup.DeleteAfterFtpUploadCBClick(Sender: TObject);
+begin
+	DeleteAfterFtpUpload	:=	DeleteAfterFtpUploadCB.Checked;
 end;
 
 procedure TF_Setup.FtpTestConnectionBtnClick(Sender: TObject);
