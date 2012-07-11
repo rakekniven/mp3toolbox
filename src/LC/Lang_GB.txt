@@ -89,6 +89,8 @@ Msg=GB
 84 = Check for Update
 85 = Up-to-date check failed. Could not connect to server.
 86 = No update found. You are using already the latest version.
+87 = Insert leading zero at one-digit track no. for sorting
+88 = Misc
 
 [Setup]
  1 = General

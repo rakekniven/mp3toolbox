@@ -20,7 +20,7 @@ object F_Setup: TF_Setup
   PixelsPerInch = 96
   TextHeight = 16
   object Setup_Book: TPageControl
-    Left = 10
+    Left = 9
     Top = 10
     Width = 661
     Height = 464
@@ -28,7 +28,7 @@ object F_Setup: TF_Setup
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = FtpTS
+    ActivePage = MiscTS
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4
@@ -596,27 +596,6 @@ object F_Setup: TF_Setup
         end
       end
     end
-    object Debug_Dev: TTabSheet
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      Caption = '??Debug and Dev.'
-      ImageIndex = 2
-      object Pacman_CheckBox: TCheckBox
-        Left = 39
-        Top = 30
-        Width = 208
-        Height = 36
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Caption = '??Pacman einstellen'
-        TabOrder = 0
-        OnClick = Pacman_CheckBoxClick
-      end
-    end
     object FtpTS: TTabSheet
       Caption = '??FTP'
       ImageIndex = 4
@@ -672,6 +651,44 @@ object F_Setup: TF_Setup
         Caption = '??Test connection'
         TabOrder = 4
         OnClick = FtpTestConnectionBtnClick
+      end
+    end
+    object MiscTS: TTabSheet
+      Caption = '??Misc'
+      ImageIndex = 5
+      object InsertSortingZeroCB: TCheckBox
+        Left = 23
+        Top = 22
+        Width = 482
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = '??Insert sorting zero'
+        TabOrder = 0
+        OnClick = InsertSortingZeroCBClick
+      end
+    end
+    object Debug_Dev: TTabSheet
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caption = '??Debug and Dev.'
+      ImageIndex = 2
+      object Pacman_CheckBox: TCheckBox
+        Left = 23
+        Top = 22
+        Width = 208
+        Height = 36
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = '??Pacman einstellen'
+        TabOrder = 0
+        OnClick = Pacman_CheckBoxClick
       end
     end
   end

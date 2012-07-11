@@ -297,6 +297,7 @@ var
 	mp3list_text_file_encoding					:	Integer;            //	0 : UTF8; 1 : ANSI
 	mp3list_SearchAndReplace			      : TStringList;
 	xmllist_last_used_files             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
+	InsertSortingZero										: Boolean;
 
 	{Variablen für CD-Archive}
 	cdarchive_path_to_read_in		        : String;
@@ -405,6 +406,7 @@ begin
 	text_files_output_path	            :=	Ini.ReadString ('GENERAL',   'textdateien',     text_files_output_path);
 	html_files_output_path	            :=	Ini.ReadString ('GENERAL',   'htmldateien',     html_files_output_path);
 	pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
+	InsertSortingZero										:=	Ini.ReadBool	 ('GENERAL',   'InsertSortingZero', True);
 
 	// Read all search & replace pairs from INI
 	i	:=	0;
@@ -711,7 +713,7 @@ end;
 {--- MP3List : Save values to inifile -----------------------------------------}
 procedure TF_Main.Save_To_ButtonClick(Sender: TObject);
 var
-  i		:	Integer;
+	i		:	Integer;
 begin
   {save directory from Listbox}
   Ini := TIniFile.Create(ini_file_name);
@@ -753,7 +755,7 @@ var
 	i	:	Integer;
 begin
 	if Multi_Dir_ListBox.Items.Count > 0 then
-  	for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
+		for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
     	Multi_Dir_ListBox.Selected[i]	:=	False;
 
   Go_Btn.Enabled  :=  False;
@@ -828,17 +830,17 @@ begin
 	Lab_Scan_Time.Caption	:=	'...';
 
 	MP3_ListBox.BringToFront;
-  NameCheck_ListBox.Clear;
+	NameCheck_ListBox.Clear;
 
 	{When Search is canceled.}
 	if search_status  = True then
-  begin
+	begin
 		cancel_search	:=	True;
 	end;
 
 	if search_status  = False then
-  begin
-    search_status :=  True;
+	begin
+		search_status :=  True;
 
 		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
 		Go_Btn.Caption  :=  GetTxt( 1, 55, 'Stop');
@@ -847,51 +849,51 @@ begin
 		start_search_time := Time;
 
 
-    {Pacman aktivieren und starten}
-    Pacman_Btn.Visible        :=  True;
-    Pacman_Btn.Repaint;
+		{Pacman aktivieren und starten}
+		Pacman_Btn.Visible        :=  True;
+		Pacman_Btn.Repaint;
 		pacman_direction          :=  True;
-    Pacman_Move_Timer.Enabled :=  True;
+		Pacman_Move_Timer.Enabled :=  True;
 
 
-    {Liste löschen}
-    MP3_ListBox.items.Clear;
+		{Liste löschen}
+		MP3_ListBox.items.Clear;
 
 		{Wenn eigener Filter angewaehlt wurde}
 		if Own_Filter_CheckBox.Checked	=	True then
-      search_filter_expression	:=	Filter_Edit.Text;
+			search_filter_expression	:=	Filter_Edit.Text;
 
-    searched_dir_count	:=	0;           // Verzeichniszähler
-    gauge_step					:=	0;           // Zähler für Gauge-Fortschrittsanzeige
+		searched_dir_count	:=	0;           // Verzeichniszähler
+		gauge_step					:=	0;           // Zähler für Gauge-Fortschrittsanzeige
 
-    {Stringliste initialisieren}
-    Files							:=	TStringList.Create;
+		{Stringliste initialisieren}
+		Files							:=	TStringList.Create;
 
-    {Schleife für Abarbeiten der Verzeichnisauswahl}
-    for i := 0 to (Multi_Dir_ListBox.Items.Count - 1) do
-    begin
+		{Schleife für Abarbeiten der Verzeichnisauswahl}
+		for i := 0 to (Multi_Dir_ListBox.Items.Count - 1) do
+		begin
 			if Multi_Dir_ListBox.Selected[i] then
 			begin
-        gauge_step	:=	gauge_step + 1;
-        {Aufruf der Suchprozedur}
-        if cancel_search = True then Break;
-        GetFiles( Multi_Dir_ListBox.Items[i],
-        					Files,
-                  output_with_pathes,
+				gauge_step	:=	gauge_step + 1;
+				{Aufruf der Suchprozedur}
+				if cancel_search = True then Break;
+				GetFiles( Multi_Dir_ListBox.Items[i],
+									Files,
+									output_with_pathes,
 									search_subdir,
 									output_with_filesize,
 									search_filter_expression );
 				Search_ProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
-      end;
-    end;
+			end;
+		end;
 
 
 		{Pacman anhalten}
 		Pacman_Move_Timer.Enabled :=  False;
 		Pacman_Btn.Visible        :=  False;
 
-    {fill progressbar up}
-    Search_ProgressBar.Position :=	100;
+		{fill progressbar up}
+		Search_ProgressBar.Position :=	100;
 
 		{Ende der Suchzeit}
 		end_search_time           :=  Time;
@@ -904,7 +906,7 @@ begin
 		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
 		{Stringliste sortieren}
-    Files.Sort;
+		Files.Sort;
 
 		{filter and fill ListBox}
 (*
@@ -921,7 +923,7 @@ begin
 		{Startzeit des scans}
 		start_scan_time := Time;
 
-    {Pacman aktivieren und starten}
+		{Pacman aktivieren und starten}
     Pacman_Btn.Visible        :=  True;
 		Pacman_Btn.Repaint;
 		pacman_direction          :=  True;
@@ -949,6 +951,16 @@ begin
 				else
 				begin
 					// Check existence for each placeholder and replace it
+
+					//	check Tracknr for given digits
+					if InsertSortingZero and (ID3v2Tag.Track <> '') then
+					begin
+						try
+							if StrToInt(ID3v2Tag.Track) < 10 then
+								ID3v2Tag.Track	:=	'0' + ID3v2Tag.Track;
+						except
+						end;
+					end;
 
 					// Edit_Output_Format
 					ResultString	:=	mp3list_html_output_format;
@@ -1005,7 +1017,7 @@ begin
     {Anzahl gefundener Treffer anzeigen.}
 		Result_Label.Caption		  :=	IntToStr(mp3list_result_count);
 
-    {If result are present then allow output}
+		{If result are present then allow output}
 		TXT_Output_Btn.Enabled		:=	MP3_ListBox.Items.Count > 0;
 		HTML_OutputButton.Enabled :=	MP3_ListBox.Items.Count > 0;
 
@@ -1047,7 +1059,7 @@ procedure TF_Main.Output_with_filesize_CBClick(Sender: TObject);
 begin
   if Output_with_filesize_CB.Checked then
     output_with_filesize  :=  True
-  else
+	else
     output_with_filesize  :=  False;
 end;
 
@@ -1299,7 +1311,7 @@ begin
   if NameCheck_ListBox.Items.Count > 0 then
 		NameCheck_ListBox.BringToFront
   else
-	  MP3_ListBox.BringToFront;
+		MP3_ListBox.BringToFront;
 
 end;
 
@@ -1383,7 +1395,7 @@ begin
   NameCheck_ListBox.Clear;
 
 	if MP3_ListBox.Items.Count > 0 then
-  	for i := 0 to MP3_ListBox.Items.Count - 1 do
+		for i := 0 to MP3_ListBox.Items.Count - 1 do
       if check_filename_for_length(MP3_ListBox.Items[i], 128) then
       	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
@@ -1425,7 +1437,7 @@ begin
 	Pacman_Panel.Visible			:=	False;
 
   {Pfade speichern}
-  Ini := TIniFile.Create(ini_file_name);
+	Ini := TIniFile.Create(ini_file_name);
   Ini.WriteInteger ('GENERAL',  'pacmanspeed' , Pacman_Move_Timer.Interval);
   Ini.Free;
 end;
@@ -1794,6 +1806,16 @@ begin
 					end;
 
 					ResultString	:=	mp3list_html_output_format;
+
+					//	check Tracknr for given digits
+					if InsertSortingZero and (Track <> '') then
+					begin
+						try
+							if StrToInt(Track) < 10 then
+								Track	:=	'0' + Track;
+						except
+						end;
+					end;
 
 					// Edit_Output_Format
 					ResultString	:=	ReplaceVariablesInResult(ResultString,

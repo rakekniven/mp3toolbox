@@ -82,7 +82,9 @@ type
 		LabeledEdit2: TLabeledEdit;
 		LabeledEdit3: TLabeledEdit;
 		LabeledEdit4: TLabeledEdit;
-    FtpTestConnectionBtn: TButton;
+		FtpTestConnectionBtn: TButton;
+    MiscTS: TTabSheet;
+    InsertSortingZeroCB: TCheckBox;
 		procedure FormShow(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -113,11 +115,12 @@ type
 		procedure MP3List_Output_Format_EditChange(Sender: TObject);
 		procedure ValueListEditor_SeachAndReplaceExit(Sender: TObject);
 		procedure Lab_OutputFormat_HelpClick(Sender: TObject);
-    procedure FtpTestConnectionBtnClick(Sender: TObject);
-    procedure LabeledEdit1Change(Sender: TObject);
-    procedure LabeledEdit2Change(Sender: TObject);
-    procedure LabeledEdit3Change(Sender: TObject);
-    procedure LabeledEdit4Change(Sender: TObject);
+		procedure FtpTestConnectionBtnClick(Sender: TObject);
+		procedure LabeledEdit1Change(Sender: TObject);
+		procedure LabeledEdit2Change(Sender: TObject);
+		procedure LabeledEdit3Change(Sender: TObject);
+		procedure LabeledEdit4Change(Sender: TObject);
+		procedure InsertSortingZeroCBClick(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -163,7 +166,7 @@ begin
 
 	{set radiobuttons}
   if mp3list_html_multi_output = 0 then
-  begin
+	begin
   	RadioButton1.Checked	:=	True;
   	RadioButton2.Checked	:=	False;
   end
@@ -178,6 +181,8 @@ begin
 	  Pacman_CheckBox.Checked	:=	True
   else
 	  Pacman_CheckBox.Checked	:=	False;
+
+	InsertSortingZeroCB.Checked		:=	InsertSortingZero;
 
 	{set values of editfields}
 	TXT_File_Output_Edit.Text	 						:=	text_files_output_path;
@@ -194,7 +199,7 @@ begin
   if gui_language = 'GB' then
     Language_CB.ItemIndex				:=	1;
 
-  {GUI-Sprache umschalten.}
+	{GUI-Sprache umschalten.}
   init_text(Sender);
 
 	{}
@@ -236,7 +241,7 @@ begin
 	  cdlist_ZIP_html_CheckBox.Checked	:=	False;
 
 	{}
-  if cdlist_text_files_delete_after_zip then
+	if cdlist_text_files_delete_after_zip then
 	  cdlist_CLear_TXT_files_after_zip_CB.Checked	:=	True
   else
 	  cdlist_CLear_TXT_files_after_zip_CB.Checked	:=	False;
@@ -287,7 +292,7 @@ begin
  	if Language_CB.ItemIndex	=	1 then
     gui_language := 'GB' ;
 
-  {GUI-Sprache umschalten.}
+	{GUI-Sprache umschalten.}
   Set_Language(gui_language);
   init_text(Sender);
 end;
@@ -362,7 +367,7 @@ begin
   begin
     MP3List_Multi_Template_File_Edit.Text :=  '';
 		mp3list_multi_template_file			  		:=  MP3List_Multi_Template_File_Edit.Text;
-  end;
+	end;
 end;
 
 procedure TF_Setup.MP3List_Output_Format_EditChange(Sender: TObject);
@@ -374,35 +379,36 @@ end;
 procedure TF_Setup.Pacman_CheckBoxClick(Sender: TObject);
 begin
 	if Pacman_CheckBox.Checked  =  True then
-  begin
+	begin
 		pacman_adjustment_visible    :=  True;
-    F_Main.Pacman_Panel.Visible  :=  True
-  end
-  else
-  begin
-    pacman_adjustment_visible    :=  False;
-    F_Main.Pacman_Panel.Visible  :=  False;
-  end;
+		F_Main.Pacman_Panel.Visible  :=  True
+	end
+	else
+	begin
+		pacman_adjustment_visible    :=  False;
+		F_Main.Pacman_Panel.Visible  :=  False;
+	end;
 end;
 
 
 {--- Store all settings -------------------------------------------------------}
 procedure TF_Setup.Store_And_Close_BtnClick(Sender: TObject);
 var
-  all_entries_ok  : Boolean;
+	all_entries_ok  : Boolean;
 	Ini             : TIniFile;
 	i,
 	i2								:	Integer;
 begin
 	all_entries_ok  :=  True;
 
-  if all_entries_ok then
-  begin
+	if all_entries_ok then
+	begin
 		Ini := TIniFile.Create(ini_file_name);
 
-    Ini.WriteString ('GENERAL', 'gui_language', 	            gui_language);
- 	  Ini.WriteString ('GENERAL', 'textdateien', 		            text_files_output_path);
+		Ini.WriteString ('GENERAL', 'gui_language', 	            gui_language);
+		Ini.WriteString ('GENERAL', 'textdateien', 		            text_files_output_path);
 		Ini.WriteString ('GENERAL', 'htmldateien', 		            html_files_output_path);
+		Ini.WriteBool		('GENERAL', 'InsertSortingZero', 		      InsertSortingZero);
 
 		for i := 0 to mp3list_SearchAndReplace.Count - 1 do
 		begin
@@ -421,7 +427,7 @@ begin
 			end;
 		end;
 
-    Ini.WriteString ('MP3LIST', 'single_template',            mp3list_single_template_file);
+		Ini.WriteString ('MP3LIST', 'single_template',            mp3list_single_template_file);
 		Ini.WriteString ('MP3LIST', 'multi_template',             mp3list_multi_template_file);
 		Ini.WriteInteger('MP3LIST', 'multi_output', 	            mp3list_html_multi_output);
 		Ini.WriteString ('MP3LIST', 'mp3list_html_file_name', 	  mp3list_html_file_name);
@@ -438,7 +444,7 @@ begin
 		Ini.WriteBool   ('CDLIST',  'text_files_delete_after_zip',cdlist_text_files_delete_after_zip);
 		Ini.WriteBool   ('CDLIST',  'html_files_delete_after_zip',cdlist_html_files_delete_after_zip);
 
-    Ini.WriteBool   ('DEVELOP', 'PACMAN_ADJUSTMENT',          pacman_adjustment_visible);
+		Ini.WriteBool   ('DEVELOP', 'PACMAN_ADJUSTMENT',          pacman_adjustment_visible);
 
 		Ini.WriteString ('FTP',    	 'hostname',	FtpConnection.Hostname);
 		Ini.WriteString ('FTP',    	 'username',	FtpConnection.Username);
@@ -448,8 +454,8 @@ begin
 		Ini.Free;
 
 		F_Main.Load_From_Button.Enabled	:=	True;
-	  Close;
-  end;
+		Close;
+	end;
 
 end;
 
@@ -506,10 +512,10 @@ begin
 
 	{Nur wenn Ordner ausgewählt wurde.}
 	if sOutDir	<>	'' then
-  begin
-	  html_files_output_path	    :=	sOutDir;
-  	HTML_File_Output_Edit.Text	:=  sOutDir;
-  end;
+	begin
+		html_files_output_path	    :=	sOutDir;
+		HTML_File_Output_Edit.Text	:=  sOutDir;
+	end;
 end;
 
 {--- set captions to objects --------------------------------------------------}
@@ -519,10 +525,10 @@ begin
 	Allgemein.Caption                               :=  GetTxt( 2,  1, 'Allgemein');
 	MP3List.Caption                                 :=  GetTxt( 2,  2, 'MP3-Liste');
 	Album_Liste.Caption                             :=  GetTxt( 2,  3, 'Ascii-Liste');
-  Debug_Dev.Caption                               :=  GetTxt( 2,  4, 'Debug und Zusatz');
-  TXT_File_Output_Lab.Caption                     :=  GetTxt( 2,  5, 'Wo sollen die Textdateien gespeichert werden :');
-  HTML_File_Output_Lab.Caption                    :=  GetTxt( 2,  6, 'Wo sollen die Webseiten gespeichert werden :');
-  Store_And_Close_Btn.Caption                     :=  GetTxt( 2,  7, '&Sichern und Schliessen');
+	Debug_Dev.Caption                               :=  GetTxt( 2,  4, 'Debug und Zusatz');
+	TXT_File_Output_Lab.Caption                     :=  GetTxt( 2,  5, 'Wo sollen die Textdateien gespeichert werden :');
+	HTML_File_Output_Lab.Caption                    :=  GetTxt( 2,  6, 'Wo sollen die Webseiten gespeichert werden :');
+	Store_And_Close_Btn.Caption                     :=  GetTxt( 2,  7, '&Sichern und Schliessen');
 	F_Setup.Caption                                 :=  GetTxt( 2, 10, 'Setup');
 	Language_GB.Caption                             :=  GetTxt( 2, 25, 'Sprache / Language ');
 
@@ -539,7 +545,8 @@ begin
 	LabeledEdit4.EditLabel.Caption									:=	GetTxt( 2, 36, 'Remote Dir');
 //	FtpTS.Caption																		:=	GetTxt( 2, 32, '');
 	FtpTestConnectionBtn.Caption										:=  GetTxt( 1, 72, 'Test connection');
-
+	InsertSortingZeroCB.Caption											:=  GetTxt( 1, 87, 'InsertSortingZero');
+	MiscTS.Caption																	:=	GetTXT( 1, 88, 'Misc');
 (*
 	First_Start_Memo.Clear;
 	First_Start_Memo.Lines.Add                         (GetTxt( 2,  8, 'Beim ersten Programmstart sollten noch'));
@@ -571,6 +578,11 @@ begin
 
 	{Debug}
 	Pacman_CheckBox.Caption                         :=  GetTxt( 2, 20, 'Pacman einstellen');
+end;
+
+procedure TF_Setup.InsertSortingZeroCBClick(Sender: TObject);
+begin
+	InsertSortingZero	:=	InsertSortingZeroCB.Checked;
 end;
 
 {--- MP3List : zip txt files --------------------------------------------------}
