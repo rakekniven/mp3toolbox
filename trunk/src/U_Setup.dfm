@@ -669,6 +669,19 @@ object F_Setup: TF_Setup
         TabOrder = 0
         OnClick = InsertSortingZeroCBClick
       end
+      object DeleteAfterFtpUploadCB: TCheckBox
+        Left = 23
+        Top = 47
+        Width = 482
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = '??Delete files after FTP upload'
+        TabOrder = 1
+        OnClick = DeleteAfterFtpUploadCBClick
+      end
     end
     object Debug_Dev: TTabSheet
       Margins.Left = 4

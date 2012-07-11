@@ -91,6 +91,7 @@ Msg=GB
 86 = No update found. You are using already the latest version.
 87 = Insert leading zero at one-digit track no. for sorting
 88 = Misc
+89 = Delete files after FTP upload
 
 [Setup]
  1 = General

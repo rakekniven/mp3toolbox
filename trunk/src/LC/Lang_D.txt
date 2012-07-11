@@ -91,6 +91,7 @@ Msg=D
 86 = Kein Update gefunden. Sie benutzen bereits die neueste Version.
 87 = Führende Null bei einstelligen Tracknummern anfügen
 88 = Verschiedenes
+89 = Dateien nach dem Hochladen auf FTP-Server löschen
 
 [Setup]
  1 = Allgemein
