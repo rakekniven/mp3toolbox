@@ -21,4 +21,4 @@ Use to create your output string. Adjust it by opening "Settings" dialog
 ||%title%||x||x||
 ||%year%||x||x||
 ||%discno%|| || ||
-||%disctotal%|| || ||
+||%disccnt%|| || ||
