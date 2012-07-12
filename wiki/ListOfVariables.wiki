@@ -12,10 +12,13 @@ Use for templates
 ||{#mp3list:detail_result_list}||Wird ersetzt durch die Liste mit den gefundenen MP3s zum jeweiligen Buchstaben.||
 ||{#mp3list:index_character}||Wird ersetzt durch den Buchstaben der aktuell erstellten Seite (nur bei Multi-Ausgabe).||
 
-Use to create your output string. Adjust it under "Settings" dialog
- * %artist%
- * %album%
- * %genre%
- * %track%
- * %title%
- * %year%
+Use to create your output string. Adjust it by opening "Settings" dialog
+|| *Variable name* || *ID3* || *iTunes* ||
+||%artist%||x||x||
+||%album%||x||x||
+||%genre%||x||x||
+||%track%||x||x||
+||%title%||x||x||
+||%year%||x||x||
+||%discno%|| || ||
+||%disctotal%|| || ||
