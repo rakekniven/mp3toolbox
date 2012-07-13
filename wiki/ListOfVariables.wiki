@@ -14,11 +14,11 @@ Use for templates
 
 Use to create your output string. Adjust it by opening "Settings" dialog
 || *Variable name* || *ID3* || *iTunes* ||
-||%artist%||x||x||
-||%album%||x||x||
-||%genre%||x||x||
-||%track%||x||x||
-||%title%||x||x||
-||%year%||x||x||
-||%discno%|| || ||
-||%disccnt%|| || ||
+||%Artist%||x||x||
+||%Album%||x||x||
+||%Genre%||x||x||
+||%Track%||x||x||
+||%Title%||x||x||
+||%Year%||x||x||
+||%DiscNo%|| || ||
+||%DiscCnt%|| || ||
