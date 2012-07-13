@@ -78,7 +78,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -1752,6 +1752,7 @@ object F_Main: TF_Main
         Anchors = [akTop, akRight]
         Caption = '??Go !'
         DoubleBuffered = True
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = 15
@@ -1837,6 +1838,7 @@ object F_Main: TF_Main
         Height = 24
         TabOrder = 2
         Text = 't:\Zuletzt hinzugef'#252'gt.xml'
+        OnChange = CB_XML_FileChange
       end
     end
     object GenreTS: TTabSheet
