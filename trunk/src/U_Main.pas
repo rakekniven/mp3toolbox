@@ -217,7 +217,9 @@ type
 																					track,
 																					title,
 																					genre,
-																					year  : String) : String;
+																					year,
+																					DiscNo,
+																					DiscCnt  : String) : String;
 		procedure Btn_XML_File_SelectClick(Sender: TObject);
 		procedure Speichernunter1Click(Sender: TObject);
 		procedure Sendfeedback1Click(Sender: TObject);
@@ -975,7 +977,9 @@ begin
 																											ID3v2Tag.Track,
 																											ID3v2Tag.Title,
 																											ID3v2Tag.Genre,
-																											ID3v2Tag.Year);
+																											ID3v2Tag.Year,
+																											'',
+																											'');
 
 					// check search and replace list
 					ResultString	:=	SearchAndReplace (ResultString);
@@ -1651,6 +1655,8 @@ var
 	podcast		:	Boolean;
 	GenreFound: Boolean;
 	F: TextFile;
+	DiscNo: string;
+	DiscCnt: string;
 begin
 	Label13.Caption	:=	'...';
 	Lab_Scan_Time4.Caption	:=	'...';
@@ -1747,6 +1753,8 @@ begin
 					Genre			:=	'';
 					HasVideo	:=	False;
 					Podcast		:=	False;
+					DiscNo		:=	'';
+					DiscCnt		:=	'';
 
 					for i2 := 0 to MyChild.ChildNodes.Count - 1 do
 					begin
@@ -1781,6 +1789,12 @@ begin
 
 						if MyChild.ChildNodes[i2].Text = 'Podcast' then
 							podcast	:=	True;
+
+						if MyChild.ChildNodes[i2].Text = 'Disc Number' then
+							DiscNo	:=	MyChild.ChildNodes[i2 +1 ].Text;
+
+						if MyChild.ChildNodes[i2].Text = 'Disc Count' then
+							DiscCnt	:=	MyChild.ChildNodes[i2 +1 ].Text;
 
 						// Add genre to listbox
 						if Genre_CheckListBox.Items.Count > 0 then
@@ -1828,7 +1842,9 @@ begin
 																											Track,
 																											Title,
 																											Genre,
-																											Year);
+																											Year,
+																											DiscNo,
+																											DiscCnt);
 
 					// check search and replace list
 					ResultString	:=	SearchAndReplace (ResultString);
@@ -2172,7 +2188,9 @@ function TF_Main.ReplaceVariablesInResult(s,
 																					track,
 																					title,
 																					genre,
-																					year  : String) : String;
+																					year,
+																					DiscNo,
+																					DiscCnt  : String) : String;
 begin
 	s	:=	StringReplace(s, '%artist%', artist, [rfReplaceAll, rfIgnoreCase]);
 
@@ -2184,7 +2202,13 @@ begin
 
 	s	:=	StringReplace(s, '%genre%', genre, [rfReplaceAll, rfIgnoreCase]);
 
-	Result	:=	StringReplace(s, '%year%', year, [rfReplaceAll, rfIgnoreCase]);
+	s	:=	StringReplace(s, '%year%', year, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%discno%', DiscNo, [rfReplaceAll, rfIgnoreCase]);
+
+	s	:=	StringReplace(s, '%disccnt%', DiscCnt, [rfReplaceAll, rfIgnoreCase]);
+
+	Result	:=	s;
 
 	//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
 end;
