@@ -233,6 +233,7 @@ type
 		procedure StatusBarClick(Sender: TObject);
 		procedure AddLogMessage(AMessage : String);
     procedure LogListBoxClick(Sender: TObject);
+    procedure CB_XML_FileChange(Sender: TObject);
 
 	private
     cnt: Integer;
@@ -1922,6 +1923,11 @@ begin
 end;
 
 {--- CDList : Close Form ------------------------------------------------------}
+procedure TF_Main.CB_XML_FileChange(Sender: TObject);
+begin
+	Go_Btn2.Enabled	:=	CB_XML_File.Text <> '';
+end;
+
 procedure TF_Main.CDList_Close_BtnClick(Sender: TObject);
 begin
 	Close;
