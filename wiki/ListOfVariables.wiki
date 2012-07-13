@@ -20,5 +20,5 @@ Use to create your output string. Adjust it by opening "Settings" dialog
 ||%Track%||x||x||
 ||%Title%||x||x||
 ||%Year%||x||x||
-||%DiscNo%|| || ||
-||%DiscCnt%|| || ||
+||%DiscNo%|| ||x||
+||%DiscCnt%|| ||x||
