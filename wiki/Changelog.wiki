@@ -1,8 +1,13 @@
 #summary See what has been done.
 #labels Featured,Phase-Support
 
-== Version 1.1.22 not released ==
+== Version 1.1.22 2012-07-22 ==
   * Fix loading of iTunes xml export and included DTD information
+  * Added statusbar to provide better log messages
+  * iTunes XML: Add leading Zero at one-digit track numbers for better sorting
+  * Config option to delete created files after successful upload to ftp server
+  * Go button is only enabled when xml file selected
+  * Variables %DiscNo% and %DiscCnt% can now be used when importing iTunes xml
 
 == Version 1.1.21 2012-07-06 ==
   * Update check will show you when new version is available
