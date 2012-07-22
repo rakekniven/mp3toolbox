@@ -18,11 +18,11 @@ type
     LatestReleaseLab2: TLabel;
 		ReleaseDateLab2: TLabel;
 		InstalledVersionLab2: TLabel;
-		Image1: TImage;
 		DownloadBtn: TBitBtn;
 		ChangelogLab: TLabel;
 		ChangelogLab2: TLabel;
     IdHTTP_Updater: TIdHTTP;
+    UpdateAvailableLab: TLabel;
 		procedure Button1Click(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure FormShow(Sender: TObject);
@@ -71,7 +71,7 @@ begin
 	InstalledVersionLab2.Caption	:=	InstalledVersion;
 
 	DownloadBtn.Caption						:=	GetTxt(1, 82, 'Download');
-
+	UpdateAvailableLab.Caption		:=	GetTxt(1, 90, '');
 end;
 
 procedure TF_Update.DownloadBtnClick(Sender: TObject);

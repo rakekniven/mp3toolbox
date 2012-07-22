@@ -92,6 +92,7 @@ Msg=D
 87 = Führende Null bei einstelligen Tracknummern anfügen
 88 = Verschiedenes
 89 = Dateien nach dem Hochladen auf FTP-Server löschen
+90 = Aktualisierung verfügbar
 
 [Setup]
  1 = Allgemein

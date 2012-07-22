@@ -92,6 +92,7 @@ Msg=GB
 87 = Insert leading zero at one-digit track no. for sorting
 88 = Misc
 89 = Delete files after FTP upload
+90 = Update available
 
 [Setup]
  1 = General
