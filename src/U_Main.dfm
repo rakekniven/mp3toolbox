@@ -35,7 +35,6 @@ object F_Main: TF_Main
     Width = 65
     Height = 17
     Cursor = crAuto
-    IW50Hint = False
     ParentShowHint = False
     ShowHint = True
     ZIndex = 0
@@ -775,7 +774,6 @@ object F_Main: TF_Main
           Margins.Right = 4
           Margins.Bottom = 4
           Caption = '??Select Dir'
-          DoubleBuffered = True
           Glyph.Data = {
             26040000424D2604000000000000360000002800000012000000120000000100
             180000000000F0030000120B0000120B00000000000000000000000000000000
@@ -811,7 +809,6 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
-          ParentDoubleBuffered = False
           TabOrder = 0
           OnClick = Sel_Dir_BtnClick
         end
@@ -848,7 +845,6 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         Caption = '??create &textfile'
-        DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -863,7 +859,6 @@ object F_Main: TF_Main
           00007FFE0000000000007FFE0000000000007FFE000000000000000000000000
           0000}
         Margin = 10
-        ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 0
         OnClick = TXT_Output_BtnClick
@@ -879,7 +874,6 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         Caption = '??create &website'
-        DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -915,7 +909,6 @@ object F_Main: TF_Main
           9958585800000000000000000000000080008080008058585858585858585858
           5858585858585858585858585858585858000000000000000000}
         Margin = 10
-        ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 1
         OnClick = HTML_OutputButtonClick
@@ -931,7 +924,6 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         Caption = '??Go !'
-        DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -954,7 +946,6 @@ object F_Main: TF_Main
           00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
         Margin = 10
         NumGlyphs = 2
-        ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 2
         OnClick = Go_BtnClick
@@ -1012,14 +1003,12 @@ object F_Main: TF_Main
           Margins.Right = 4
           Margins.Bottom = 4
           Caption = 'close'
-          DoubleBuffered = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = 15
           Font.Name = 'arial'
           Font.Pitch = fpVariable
           Font.Style = []
-          ParentDoubleBuffered = False
           ParentFont = False
           TabOrder = 2
           OnClick = Close_Pacman_BtnClick
@@ -1123,7 +1112,6 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         Caption = 'create &website'
-        DoubleBuffered = True
         Enabled = False
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -1153,7 +1141,6 @@ object F_Main: TF_Main
           9958585800000000000000000000000080008080008058585858585858585858
           5858585858585858585858585858585858000000000000000000}
         Margin = 10
-        ParentDoubleBuffered = False
         TabOrder = 1
         OnClick = HTML_OutputButton3Click
       end
@@ -1381,7 +1368,6 @@ object F_Main: TF_Main
           Margins.Bottom = 4
           Anchors = [akTop, akRight]
           Caption = 'Go !'
-          DoubleBuffered = True
           Enabled = False
           Glyph.Data = {
             76010000424D7601000000000000760000002800000020000000100000000100
@@ -1397,7 +1383,6 @@ object F_Main: TF_Main
             70E337F33333333337F3E0FFFFFFFFFFF0E337FFFFFFFFFFF7F3E00000000000
             00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
           NumGlyphs = 2
-          ParentDoubleBuffered = False
           TabOrder = 0
           OnClick = Go_Btn3Click
           OnMouseDown = Go_Btn3MouseDown
@@ -1751,7 +1736,6 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         Caption = '??Go !'
-        DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1774,7 +1758,6 @@ object F_Main: TF_Main
           00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
         Margin = 10
         NumGlyphs = 2
-        ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 0
         OnClick = Go_Btn2Click
@@ -1790,7 +1773,6 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         Anchors = [akTop, akRight]
         Caption = '??create &website'
-        DoubleBuffered = True
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1826,7 +1808,6 @@ object F_Main: TF_Main
           9958585800000000000000000000000080008080008058585858585858585858
           5858585858585858585858585858585858000000000000000000}
         Margin = 10
-        ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 1
         OnClick = HTML_OutputButtonClick
@@ -2151,7 +2132,9 @@ object F_Main: TF_Main
   end
   object IdFTP_Upload: TIdFTP
     IPVersion = Id_IPv4
-    AutoLogin = True
+    NATKeepAlive.UseKeepAlive = False
+    NATKeepAlive.IdleTimeMS = 0
+    NATKeepAlive.IntervalMS = 0
     ProxySettings.ProxyType = fpcmNone
     ProxySettings.Port = 0
     Left = 496
