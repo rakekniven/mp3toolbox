@@ -29,45 +29,6 @@ object F_Main: TF_Main
     Height = 16
     Caption = 'SearchResultLab'
   end
-  object IWURL1: TIWURL
-    Left = 272
-    Top = 336
-    Width = 65
-    Height = 17
-    Cursor = crAuto
-    ParentShowHint = False
-    ShowHint = True
-    ZIndex = 0
-    RenderSize = True
-    StyleRenderOptions.RenderSize = True
-    StyleRenderOptions.RenderPosition = True
-    StyleRenderOptions.RenderFont = True
-    StyleRenderOptions.RenderZIndex = True
-    StyleRenderOptions.RenderVisibility = True
-    StyleRenderOptions.RenderStatus = True
-    StyleRenderOptions.RenderAbsolute = True
-    Alignment = taLeftJustify
-    Color = clNone
-    Font.Color = clNone
-    Font.Size = 10
-    Font.Style = [fsUnderline]
-    ScriptEvents = <>
-    TargetOptions.AddressBar = False
-    TargetOptions.Height = -1
-    TargetOptions.Left = -1
-    TargetOptions.Menu = False
-    TargetOptions.Resizable = True
-    TargetOptions.Scrollbars = True
-    TargetOptions.Toolbar = False
-    TargetOptions.Top = -1
-    TargetOptions.Width = -1
-    TerminateApp = False
-    UseTarget = False
-    FriendlyName = 'IWURL1'
-    TabOrder = -1
-    RawText = False
-    Caption = 'IWURL1'
-  end
   object PageControl1: TPageControl
     Left = 0
     Top = 3
@@ -1036,6 +997,10 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1434,6 +1399,10 @@ object F_Main: TF_Main
     object TabSheet4: TTabSheet
       Caption = 'Error'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1446,6 +1415,10 @@ object F_Main: TF_Main
     object TabSheet2: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1825,6 +1798,10 @@ object F_Main: TF_Main
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GenreLab: TLabel
         Left = 16
         Top = 3

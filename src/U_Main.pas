@@ -30,8 +30,8 @@ uses
 	IdFTP,
 	U_FTP,
 	U_Update,
-	CheckLst, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
-	IWHTMLControls;
+	CheckLst,
+	System.UITypes;
 
 type
 	TF_Main = class(TForm)
@@ -148,8 +148,7 @@ type
     Showfoundgenres1: TMenuItem;
     GenreLab: TLabel;
     Hyperlink_Label: TLabel;
-    IWURL1: TIWURL;
-    CheckforUpdate1: TMenuItem;
+		CheckforUpdate1: TMenuItem;
     XMLDocumentUpdate: TXMLDocument;
     StatusBar: TStatusBar;
     LogListBox: TListBox;
