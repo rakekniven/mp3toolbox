@@ -26,115 +26,115 @@ interface
 		classes,
 		WideStrUtils;
 
-  procedure	HTML_Multi_Index_Seite(HTML_Outputfile :	String);
+	procedure	HTML_Multi_Index_Seite(AHtmlOutputFile :	String);
 
-	procedure	CDList_HTML_Main_Table_Output(OutputStrings	:	TStringList);
+	procedure	CDList_HTML_Main_Table_Output(AOutputStrings	:	TStringList);
 
-	procedure create_html_output(Template_file,
-  														 HTML_Outputfile,
-                               Letter           :	String;
-                               Array_pointer    : Integer);
+	procedure create_html_output(AHtmlTemplateFile,
+															 AHtmlOutputFile,
+															 ALetter           :	String;
+															 AArrayPointer    : Integer);
 implementation
 
 uses
-  U_Main,
-  U_Setup,
-  lib1;
+	U_Main,
+	U_Setup,
+	lib1;
 
-    {--- Variables in templates :	---}
+		{--- Variables in templates :	---}
 
 		{#general:update_date}
-    {#general:version}
+		{#general:version}
 
-    {#cdlist:total_cd_counter}
-    {#cdlist:searchtime}
+		{#cdlist:total_cd_counter}
+		{#cdlist:searchtime}
 		{#cdlist:result_table}
 
-    {#mp3list:total_mpg_counter}
-    {#mp3list:searchtime}
-    {#mp3list:result_list}
+		{#mp3list:total_mpg_counter}
+		{#mp3list:searchtime}
+		{#mp3list:result_list}
 		{#mp3list:detail_mpg_counter}
 		{#mp3list:detail_result_list}
 
 
 {--- Index-Seite für Multioutput. ---------------------------------------------}
-procedure	HTML_Multi_Index_Seite(HTML_Outputfile :	String);
+procedure	HTML_Multi_Index_Seite(AHtmlOutputFile :	String);
 var
-  i1		:	Integer;
-  i2		:	Integer;
-  count	:	array[0..25] of Integer;		//	array to countfor every letter
-  dir		:	array[0..25] of Char;				//	array fot the letters
+	i1		:	Integer;
+	i2		:	Integer;
+	count	:	array[0..25] of Integer;		//	array to countfor every letter
+	dir		:	array[0..25] of Char;				//	array fot the letters
 begin
-  {Array mit Buchstaben}
-  dir :=	'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	{Array mit Buchstaben}
+	dir :=	'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-  for i1 := 0 to 25 do
+	for i1 := 0 to 25 do
 	begin
 		count[i1]	:=	0;
 		{Schleife für ListBox-Ausgabe}
-	  for i2 := 0 to (mp3list_result_count - 1) do
-    begin
+		for i2 := 0 to (mp3list_result_count - 1) do
+		begin
 			{	> 0 bedeutet String ist vorhanden}
-      if (AnsiPos(dir[i1], AnsiUpperCase(F_Main.MP3_ListBox.Items[i2])) = 1) then
+			if (AnsiPos(dir[i1], AnsiUpperCase(F_Main.MP3_ListBox.Items[i2])) = 1) then
 				count[i1]	:=	count[i1] + 1;
-    end;
+		end;
 	end;
 end;
 
 {--- HTML - Body für CDList erzeugen. ----------------------------------------}
-procedure	CDList_HTML_Main_Table_Output(OutputStrings	:	TStringList);
+procedure	CDList_HTML_Main_Table_Output(AOutputStrings	:	TStringList);
 var
 	InFile    :	TextFile;
-  ln        : String;
-  linecount : Integer;
-  i1        : Integer;
+	ln        : String;
+	linecount : Integer;
+	i1        : Integer;
 begin
-  {Einzelne Seite ausgeben}
-  AssignFile(InFile, F_Main.CDList_Source_File_CB.Items[F_Main.CDList_Source_File_CB.ItemIndex]);
-  Reset(InFile);
+	{Einzelne Seite ausgeben}
+	AssignFile(InFile, F_Main.CDList_Source_File_CB.Items[F_Main.CDList_Source_File_CB.ItemIndex]);
+	Reset(InFile);
 
-  {zeilenweise lesen und zuweisen}
-  linecount :=  0;
-  OutputStrings.Add('<table align="center" border="0" cellspacing="2" cellpadding="2">');
+	{zeilenweise lesen und zuweisen}
+	linecount :=  0;
+	AOutputStrings.Add('<table align="center" border="0" cellspacing="2" cellpadding="2">');
 
-  While not Eof(InFile) do
-  begin
-    Readln(InFile, ln);
-    separate_string_by_tab(ln);
-    OutputStrings.Add('<tr>');
+	While not Eof(InFile) do
+	begin
+		Readln(InFile, ln);
+		separate_string_by_tab(ln);
+		AOutputStrings.Add('<tr>');
 
-    {First line bold}
-    if linecount= 0  then
-      OutputStrings.Add('<td><b>Number</b></td>')
-    else
-      OutputStrings.Add('<td>' + IntToStr(linecount) + '</td>');
+		{First line bold}
+		if linecount= 0  then
+			AOutputStrings.Add('<td><b>Number</b></td>')
+		else
+			AOutputStrings.Add('<td>' + IntToStr(linecount) + '</td>');
 
-    for i1 := 0 to F_Main.CDListe_StringGrid.ColCount - 1 do
-    begin
-    if linecount = 0 then
-      OutputStrings.Add('<td><b>'  + cdlist_tab_values[i1]  + '</b></td>')
-    else
-      OutputStrings.Add('<td>'     + cdlist_tab_values[i1]  + '</td>');
-    end;
+		for i1 := 0 to F_Main.CDListe_StringGrid.ColCount - 1 do
+		begin
+		if linecount = 0 then
+			AOutputStrings.Add('<td><b>'  + cdlist_tab_values[i1]  + '</b></td>')
+		else
+			AOutputStrings.Add('<td>'     + cdlist_tab_values[i1]  + '</td>');
+		end;
 
-    OutputStrings.Add('</tr>');
-    linecount :=  linecount + 1;
-    F_Main.CDList_ProgressBar.Position  :=  linecount;
+		AOutputStrings.Add('</tr>');
+		linecount :=  linecount + 1;
+		F_Main.CDList_ProgressBar.Position  :=  linecount;
 
-  end;
-  OutputStrings.Add('</table>');
+	end;
+	AOutputStrings.Add('</table>');
 
-  CloseFile(InFile);
+	CloseFile(InFile);
 end;
 
 {--- create html output and replace keywords ----------------------------------}
-procedure create_html_output(Template_file,
-														 HTML_Outputfile,
-                             Letter 					:	String;
-                             Array_pointer    : Integer);
+procedure create_html_output(AHtmlTemplateFile,
+														 AHtmlOutputFile,
+														 ALetter 					:	String;
+														 AArrayPointer    : Integer);
 var
 	OutFile	  	                   	:	TextFile;
-  InFile	  	                   	: TextFile;
+	InFile	  	                   	: TextFile;
 	lnraw				                   	: RawByteString;
 	ln					                   	: String;
 	cdlist_table                   	:	TStringList;
@@ -146,17 +146,17 @@ begin
 	//	docs: https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
 
 	{check if template is present}
-	if FileExists(Template_file) then
+	if FileExists(AHtmlTemplateFile) then
 	begin
 		{Init}
 		cdlist_table	:=  TStringList.Create;
 
 		{Open Outputfile}
-		AssignFile(OutFile, HTML_Outputfile);
+		AssignFile(OutFile, AHtmlOutputFile);
 		Rewrite	(OutFile);
 
 		{Open template file}
-		AssignFile(InFile, Template_file);
+		AssignFile(InFile, AHtmlTemplateFile);
 		Reset(InFile);
 
 		cnt	:=	0;
@@ -172,12 +172,12 @@ begin
 
 			ln	:=	UTF8ToString(lnraw);
 
-      {--- Begin : Prüfungen ob werte ersetzt werden müssen ---}
+			{--- Begin : Prüfungen ob werte ersetzt werden müssen ---}
 
-      {replace general : update_date}
-      if AnsiStrPos(PChar(ln), '{#general:update_date}') <> nil then
-      begin
-        ln	:=	StringReplace(ln, '{#general:update_date}', DateTimeToStr(Now), []);
+			{replace general : update_date}
+			if AnsiStrPos(PChar(ln), '{#general:update_date}') <> nil then
+			begin
+				ln	:=	StringReplace(ln, '{#general:update_date}', DateTimeToStr(Now), []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))
@@ -185,8 +185,8 @@ begin
 					writeln (OutFile, ln);
 			end
 
-      {replace general : version}
-      else if AnsiStrPos(PChar(ln), '{#general:version}') <> nil then
+			{replace general : version}
+			else if AnsiStrPos(PChar(ln), '{#general:version}') <> nil then
 			begin
 				ln	:=	StringReplace(ln, '{#general:version}', F_Main.version, []);
 
@@ -253,10 +253,10 @@ begin
 					writeln (OutFile, ln);
 			end
 
-      {replace mp3list : index character for multi output}
-      else if AnsiStrPos(PChar(ln), '{#mp3list:index_character}') <> nil then
-      begin
-        ln	:=	StringReplace(ln, '{#mp3list:index_character}', Letter, []);
+			{replace mp3list : index character for multi output}
+			else if AnsiStrPos(PChar(ln), '{#mp3list:index_character}') <> nil then
+			begin
+				ln	:=	StringReplace(ln, '{#mp3list:index_character}', ALetter, []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))
@@ -264,10 +264,10 @@ begin
 					writeln (OutFile, ln);
 			end
 
-      {replace mp3list : searchtime}
-      else if AnsiStrPos(PChar(ln), '{#mp3list:searchtime}') <> nil then
-      begin
-        ln	:=	StringReplace(ln, '{#mp3list:searchtime}', TimeToStr(end_search_time - start_search_time), []);
+			{replace mp3list : searchtime}
+			else if AnsiStrPos(PChar(ln), '{#mp3list:searchtime}') <> nil then
+			begin
+				ln	:=	StringReplace(ln, '{#mp3list:searchtime}', TimeToStr(end_search_time - start_search_time), []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))
@@ -275,8 +275,8 @@ begin
 					writeln (OutFile, ln);
 			end
 
-      {replace mp3list : result_list}
-      else if AnsiStrPos(PChar(ln), '{#mp3list:result_list}') <> nil then
+			{replace mp3list : result_list}
+			else if AnsiStrPos(PChar(ln), '{#mp3list:result_list}') <> nil then
 			begin
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:result_list}', 'start')))
@@ -306,7 +306,7 @@ begin
 			{replace mp3list : detail_mpg_counter}
 			else if AnsiStrPos(PChar(ln), '{#mp3list:detail_mpg_counter}') <> nil then
 			begin
-				ln	:=	StringReplace(ln, '{#mp3list:detail_mpg_counter}', IntToStr(mp3list_Character_stringlists[Array_pointer].Count), []);
+				ln	:=	StringReplace(ln, '{#mp3list:detail_mpg_counter}', IntToStr(mp3list_Character_stringlists[AArrayPointer].Count), []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))
@@ -328,15 +328,15 @@ begin
 *)
 
 				// Sort list before writing result
-				mp3list_Character_stringlists[Array_pointer].Sort;
+				mp3list_Character_stringlists[AArrayPointer].Sort;
 
-				for i := 0 to mp3list_Character_stringlists[Array_pointer].Count - 1 do
+				for i := 0 to mp3list_Character_stringlists[AArrayPointer].Count - 1 do
 				begin
 
 					if TplIsUnicode then
-						writeln (OutFile, AnsiToUTF8(mp3list_Character_stringlists[Array_pointer][i]) + '<br />')
+						writeln (OutFile, AnsiToUTF8(mp3list_Character_stringlists[AArrayPointer][i]) + '<br />')
 					else
-						writeln (OutFile, mp3list_Character_stringlists[Array_pointer][i] + '<br />');
+						writeln (OutFile, mp3list_Character_stringlists[AArrayPointer][i] + '<br />');
 
 				end;
 
@@ -355,17 +355,17 @@ begin
 					writeln (OutFile, ln);
 			end;
 
-      { End : Prüfungen ob werte ersetzt werden müssen}
-    end;
-	  cdlist_table.Free;
+			{ End : Prüfungen ob werte ersetzt werden müssen}
+		end;
+		cdlist_table.Free;
 
-	  CloseFile(InFile);
+		CloseFile(InFile);
 		CloseFile(OutFile);
-  end
-  else
-  begin
+	end
+	else
+	begin
 		ShowMessage('No template found.');
-  end;
+	end;
 
 end;
 
