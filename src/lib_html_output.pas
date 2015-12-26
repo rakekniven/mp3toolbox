@@ -21,8 +21,9 @@ unit lib_html_output;
 
 interface
 	uses
-    SysUtils,
-    Dialogs,
+		Windows,
+		SysUtils,
+		Dialogs,
 		classes,
 		WideStrUtils;
 
@@ -152,7 +153,7 @@ begin
 		cdlist_table	:=  TStringList.Create;
 
 		{Open Outputfile}
-		AssignFile(OutFile, AHtmlOutputFile);
+		AssignFile(OutFile, AHtmlOutputFile, CP_UTF8);
 		Rewrite	(OutFile);
 
 		{Open template file}
