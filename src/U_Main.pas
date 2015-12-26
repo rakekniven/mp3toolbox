@@ -233,7 +233,7 @@ type
 		procedure CB_XML_FileChange(Sender: TObject);
 
 	private
-    cnt: Integer;
+		cnt: Integer;
 		{ Private-Deklarationen }
 	public
 		{ Public-Deklarationen }
@@ -1232,7 +1232,7 @@ begin
     end;
 
     Search_ProgressBar.Min     	:=	0;
-    Search_ProgressBar.Position :=	0;
+		Search_ProgressBar.Position :=	0;
     Search_ProgressBar.Max      :=  Length(dir) - 1;
 
 		FtpUploadList.Clear;	//	Fresh list
@@ -1952,7 +1952,7 @@ begin
 
 	{Seite erstellen}
 //  create_html_output(cdlist_template_file_dir_and_name,
-  create_html_output(CDList_Template_ComboBox.Items[CDList_Template_ComboBox.ItemIndex],
+	create_html_output(CDList_Template_ComboBox.Items[CDList_Template_ComboBox.ItemIndex],
 //  									 SlashSep(html_files_output_path, cdlist_html_output_file),
   									 Result_File_ComboBox.Items[Result_File_ComboBox.ItemIndex],
                      '',
@@ -2353,6 +2353,7 @@ begin
 	LogList.Add(AMessage);
 	LogListBox.Items.Add(AMessage);
 	StatusBar.Panels[0].Text	:=	LogList[LogList.Count - 1];
+	Application.ProcessMessages;
 end;
 
 end.

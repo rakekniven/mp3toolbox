@@ -38,7 +38,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet5
+    ActivePage = TabSheet2
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -875,7 +875,7 @@ object F_Main: TF_Main
         OnClick = HTML_OutputButtonClick
       end
       object Go_Btn: TBitBtn
-        Left = 569
+        Left = 571
         Top = 14
         Width = 185
         Height = 31
@@ -1798,19 +1798,6 @@ object F_Main: TF_Main
         Top = 25
         Width = 465
         Height = 315
-        TabOrder = 0
-      end
-    end
-    object TabSheet5: TTabSheet
-      Caption = 'TabSheet5'
-      ImageIndex = 5
-      object Memo1: TMemo
-        Left = 24
-        Top = 24
-        Width = 457
-        Height = 201
-        Lines.Strings = (
-          'Memo1')
         TabOrder = 0
       end
     end
