@@ -1970,7 +1970,7 @@ object F_Main: TF_Main
         OnClick = CheckforUpdate1Click
       end
       object Goo1: TMenuItem
-        Caption = '??Website at Google Code'
+        Caption = '??Website at Github'
         OnClick = Goo1Click
       end
       object WebsiteofAuthor1: TMenuItem
