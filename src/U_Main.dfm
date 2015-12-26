@@ -38,7 +38,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet1
+    ActivePage = TabSheet5
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -997,10 +997,6 @@ object F_Main: TF_Main
       Caption = 'cdlist'
       ImageIndex = 2
       OnShow = TabSheet3Show
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1399,10 +1395,6 @@ object F_Main: TF_Main
     object TabSheet4: TTabSheet
       Caption = 'Error'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1415,10 +1407,6 @@ object F_Main: TF_Main
     object TabSheet2: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1798,10 +1786,6 @@ object F_Main: TF_Main
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1814,6 +1798,19 @@ object F_Main: TF_Main
         Top = 25
         Width = 465
         Height = 315
+        TabOrder = 0
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'TabSheet5'
+      ImageIndex = 5
+      object Memo1: TMemo
+        Left = 24
+        Top = 24
+        Width = 457
+        Height = 201
+        Lines.Strings = (
+          'Memo1')
         TabOrder = 0
       end
     end
@@ -1994,11 +1991,6 @@ object F_Main: TF_Main
         Caption = '??Website of Author'
         OnClick = WebsiteofAuthor1Click
       end
-      object Sendfeedback1: TMenuItem
-        Caption = '??Send feedback'
-        Visible = False
-        OnClick = Sendfeedback1Click
-      end
       object AboutMP3Toolbox1: TMenuItem
         Caption = '??About MP3Toolbox'
         OnClick = AboutMP3Toolbox1Click
@@ -2087,25 +2079,6 @@ object F_Main: TF_Main
     Left = 336
     Top = 296
     DOMVendorDesc = 'MSXML'
-  end
-  object IdSMTP1: TIdSMTP
-    SASLMechanisms = <>
-    Left = 408
-    Top = 296
-  end
-  object IdMessage1: TIdMessage
-    AttachmentEncoding = 'UUE'
-    BccList = <>
-    CCList = <>
-    Encoding = meDefault
-    FromList = <
-      item
-      end>
-    Recipients = <>
-    ReplyTo = <>
-    ConvertPreamble = True
-    Left = 408
-    Top = 336
   end
   object IdFTP_Upload: TIdFTP
     IPVersion = Id_IPv4
