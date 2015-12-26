@@ -6,14 +6,16 @@ Name: de; MessagesFile: compiler:Languages\German.isl
 Name: fr; MessagesFile: compiler:Languages\French.isl
 Name: it; MessagesFile: compiler:Languages\Italian.isl
 Name: es; MessagesFile: compiler:Languages\Spanish.isl
+
 [Setup]
 AppCopyright=Mark Ziegler
 AppName=MP3Toolbox
-AppVerName=Version 1.1.22
+AppVersion=1.1.23
+;AppVerName=1.1.23
 DefaultDirName={pf}\MP3Toolbox
 DefaultGroupName=MP3Toolbox
 
-VersionInfoVersion=1.1.22
+VersionInfoVersion=1.1.23
 VersionInfoCompany=Mark Ziegler
 VersionInfoCopyright=Mark Ziegler
 VersionInfoDescription=MP3Toolbox
@@ -25,15 +27,17 @@ AppPublisherURL=http://www.rakekniven.de
 AppSupportURL=http://www.rakekniven.de
 AppUpdatesURL=http://www.rakekniven.de
 UninstallDisplayName=MP3Toolbox
-MinVersion=4.0.950,4.0.1381
+MinVersion=0,6.1.7600
 DisableStartupPrompt=true
 ShowUndisplayableLanguages=true
 UninstallDisplayIcon={app}\mp3toolbox.exe
 CreateAppDir=true
-OutputBaseFilename=MP3ToolboxSetup-1.1.22
+OutputBaseFilename=MP3ToolboxSetup-1.1.23
 UninstallFilesDir={pf}\MP3Toolbox Uninstall
 ;WizardImageFile=..\..\..\misc\trunk\setup\Inno Setup\Bilder\WizModernImage-IS-weinig.bmp
 ;WizardSmallImageFile=..\..\..\misc\trunk\setup\Inno Setup\Bilder\WizModernSmallImage-IS-weinig.bmp
+AppVerName=1.1.23
+
 [Icons]
 Name: {group}\MP3Toolbox; Filename: {app}\mp3toolbox.exe; WorkingDir: {app}; IconIndex: 0
 [Files]
