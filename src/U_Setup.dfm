@@ -28,7 +28,7 @@ object F_Setup: TF_Setup
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = MiscTS
+    ActivePage = Allgemein
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4
@@ -599,6 +599,13 @@ object F_Setup: TF_Setup
     object FtpTS: TTabSheet
       Caption = '??FTP'
       ImageIndex = 4
+      object GroupBox2: TGroupBox
+        Left = 10
+        Top = 10
+        Width = 185
+        Height = 270
+        TabOrder = 6
+      end
       object LabeledEdit1: TLabeledEdit
         Left = 24
         Top = 40
@@ -652,6 +659,19 @@ object F_Setup: TF_Setup
         TabOrder = 4
         OnClick = FtpTestConnectionBtnClick
       end
+      object DeleteAfterFtpUploadCB: TCheckBox
+        Left = 24
+        Top = 287
+        Width = 482
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = '??Delete files after FTP upload'
+        TabOrder = 5
+        OnClick = DeleteAfterFtpUploadCBClick
+      end
     end
     object MiscTS: TTabSheet
       Caption = '??Misc'
@@ -668,19 +688,6 @@ object F_Setup: TF_Setup
         Caption = '??Insert sorting zero'
         TabOrder = 0
         OnClick = InsertSortingZeroCBClick
-      end
-      object DeleteAfterFtpUploadCB: TCheckBox
-        Left = 23
-        Top = 47
-        Width = 482
-        Height = 17
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Caption = '??Delete files after FTP upload'
-        TabOrder = 1
-        OnClick = DeleteAfterFtpUploadCBClick
       end
     end
     object Debug_Dev: TTabSheet

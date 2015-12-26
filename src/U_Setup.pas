@@ -85,7 +85,8 @@ type
 		FtpTestConnectionBtn: TButton;
 		MiscTS: TTabSheet;
 		InsertSortingZeroCB: TCheckBox;
-		DeleteAfterFtpUploadCB: TCheckBox;
+    DeleteAfterFtpUploadCB: TCheckBox;
+    GroupBox2: TGroupBox;
 		procedure FormShow(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure TXT_File_Output_EditChange(Sender: TObject);
