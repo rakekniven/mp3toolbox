@@ -57,9 +57,9 @@ type
 		TXT_Output_Btn: TBitBtn;
 		HTML_OutputButton: TBitBtn;
 		Go_Btn: TBitBtn;
-		Search_Time_Lab: TLabel;
-		Dir_Count_Label: TLabel;
-		Result_Label: TLabel;
+    MP3FilesListSearchTimeLab2: TLabel;
+    MP3FilesListDirCntLab2: TLabel;
+    MP3FilesListResultLab2: TLabel;
 		Pacman_Btn: TSpeedButton;
 		Search_ProgressBar: TProgressBar;
 		MainMenu1: TMainMenu;
@@ -107,9 +107,9 @@ type
 		CDList_Result_Label: TLabel;
 		TabSheet4: TTabSheet;
 		ListBox_Error: TListBox;
-		Label1: TLabel;
-		Label2: TLabel;
-		Label3: TLabel;
+    MP3FilesListResultLab1: TLabel;
+    MP3FilesListDirCntLab1: TLabel;
+    MP3FilesListSearchTimeLab1: TLabel;
 		Label4: TLabel;
 		Label5: TLabel;
 		Lab_Scan_Result: TLabel;
@@ -137,7 +137,7 @@ type
     Speichernunter1: TMenuItem;
     SearchResultLab: TLabel;
     Label12: TLabel;
-    IdFTP_Upload: TIdFTP;
+		FtpUpload: TIdFTP;
     Extra1: TMenuItem;
     UploadtoFTP1: TMenuItem;
 		GenreTS: TTabSheet;
@@ -207,21 +207,21 @@ type
 		procedure WebsiteofAuthor1Click(Sender: TObject);
 		procedure Go_Btn2Click(Sender: TObject);
 		function SearchAndReplace(s : String): string;
-		function ReplaceVariablesInResult(s,
-																					artist,
-																					album,
-																					track,
-																					title,
-																					genre,
-																					year,
-																					DiscNo,
-																					DiscCnt  : String) : String;
+		function ReplaceVariablesInResult(AString,
+																			AArtist,
+																			AAlbum,
+																			ATrack,
+																			ATitle,
+																			AGenre,
+																			AYear,
+																			ADiscNo,
+																			ADiscCnt  : String) : String;
 		procedure Btn_XML_File_SelectClick(Sender: TObject);
 		procedure Speichernunter1Click(Sender: TObject);
 		function UploadToFtp : Boolean;
 		function FtpTestConnection (var error : String) : Boolean;
 		procedure DeleteFilesAfterFtpUpload;
-		procedure Label1Click(Sender: TObject);
+		procedure MP3FilesListResultLab1Click(Sender: TObject);
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
 		procedure Hyperlink_LabelClick(Sender: TObject);
@@ -568,9 +568,9 @@ begin
 		F_Setup.ShowModal;
 	end;
 
-	Result_Label.Caption	:=	'...';
-	Dir_Count_Label.Caption	:=	'...';
-	Search_Time_Lab.Caption	:=	'...';
+	MP3FilesListResultLab2.Caption	:=	'...';
+	MP3FilesListDirCntLab1.Caption	:=	'...';
+	MP3FilesListSearchTimeLab2.Caption	:=	'...';
 	Lab_Scan_Result.Caption	:=	'...';
 	Lab_Scan_Time.Caption	:=	'...';
 
@@ -621,9 +621,9 @@ begin
 	Clear_All_Button.Caption               	:=  GetTxt( 1, 48, 'Clear all');
 	Go_Btn.Caption                         	:=  GetTxt( 1, 49, 'Go !');
 	Go_Btn2.Caption                        	:=  GetTxt( 1, 49, 'Go !');
-	Label1.Caption                         	:=  GetTxt( 1, 50, 'Files found');
-	Label2.Caption                         	:=  GetTxt( 1, 51, 'Directories searched');
-	Label3.Caption                         	:=  GetTxt( 1, 52, 'Search time');
+	MP3FilesListResultLab1.Caption         	:=  GetTxt( 1, 50, 'Files found');
+	MP3FilesListDirCntLab1.Caption                         	:=  GetTxt( 1, 51, 'Directories searched');
+	MP3FilesListSearchTimeLab1.Caption                         	:=  GetTxt( 1, 52, 'Search time');
 	Label4.Caption                         	:=  GetTxt( 1, 53, 'Tags scanned');
 	Label5.Caption                         	:=  GetTxt( 1, 54, 'Scan time');
 	Lab_Scan_Time3.Caption                 	:=  GetTxt( 1, 54, 'Scan time');
@@ -686,7 +686,7 @@ begin
 end;
 
 {--- MP3List : Load values from inifile ---------------------------------------}
-procedure TF_Main.Label1Click(Sender: TObject);
+procedure TF_Main.MP3FilesListResultLab1Click(Sender: TObject);
 begin
 UploadToFtp;
 end;
@@ -824,9 +824,9 @@ var
 	gauge_step				:	Integer;
 	ResultString			:	String;
 begin
-	Result_Label.Caption	:=	'...';
-	Dir_Count_Label.Caption	:=	'...';
-	Search_Time_Lab.Caption	:=	'...';
+	MP3FilesListResultLab2.Caption	:=	'...';
+	MP3FilesListDirCntLab1.Caption	:=	'...';
+	MP3FilesListSearchTimeLab2.Caption	:=	'...';
 	Lab_Scan_Result.Caption	:=	'...';
 	Lab_Scan_Time.Caption	:=	'...';
 
@@ -900,11 +900,11 @@ begin
 		end_search_time           :=  Time;
 
 		{Anzahl durchgesuchter Verzeichnisse anzeigen.}
-		Dir_Count_Label.Caption	  :=	IntToStr(searched_dir_count);
+		MP3FilesListDirCntLab1.Caption	  :=	IntToStr(searched_dir_count);
 
 
 		{Anzeige der Suchzeit.}
-		Search_Time_Lab.Caption		:=	TimeToStr(end_search_time - start_search_time);
+		MP3FilesListSearchTimeLab2.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
 		{Stringliste sortieren}
 		Files.Sort;
@@ -1018,7 +1018,7 @@ begin
 		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
-		Result_Label.Caption		  :=	IntToStr(mp3list_result_count);
+		MP3FilesListResultLab2.Caption		  :=	IntToStr(mp3list_result_count);
 
 		{If result are present then allow output}
 		TXT_Output_Btn.Enabled		:=	MP3_ListBox.Items.Count > 0;
@@ -2157,33 +2157,33 @@ begin
 	Result	:=	s;
 end;
 
-function TF_Main.ReplaceVariablesInResult(s,
-																					artist,
-																					album,
-																					track,
-																					title,
-																					genre,
-																					year,
-																					DiscNo,
-																					DiscCnt  : String) : String;
+function TF_Main.ReplaceVariablesInResult(AString,
+																					AArtist,
+																					AAlbum,
+																					ATrack,
+																					ATitle,
+																					AGenre,
+																					AYear,
+																					ADiscNo,
+																					ADiscCnt  : String) : String;
 begin
-	s	:=	StringReplace(s, '%artist%', artist, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%artist%', AArtist, [rfReplaceAll, rfIgnoreCase]);
 
-	s	:=	StringReplace(s, '%album%', album, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%album%', AAlbum, [rfReplaceAll, rfIgnoreCase]);
 
-	s	:=	StringReplace(s, '%track%', track, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%track%', ATrack, [rfReplaceAll, rfIgnoreCase]);
 
-	s	:=	StringReplace(s, '%title%', title, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%title%', ATitle, [rfReplaceAll, rfIgnoreCase]);
 
-	s	:=	StringReplace(s, '%genre%', genre, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%genre%', AGenre, [rfReplaceAll, rfIgnoreCase]);
 
-	s	:=	StringReplace(s, '%year%', year, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%year%', AYear, [rfReplaceAll, rfIgnoreCase]);
 
-	s	:=	StringReplace(s, '%discno%', DiscNo, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%discno%', ADiscNo, [rfReplaceAll, rfIgnoreCase]);
 
-	s	:=	StringReplace(s, '%disccnt%', DiscCnt, [rfReplaceAll, rfIgnoreCase]);
+	AString	:=	StringReplace(AString, '%disccnt%', ADiscCnt, [rfReplaceAll, rfIgnoreCase]);
 
-	Result	:=	s;
+	Result	:=	AString;
 
 	//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
 end;
@@ -2192,52 +2192,52 @@ function TF_Main.UploadToFtp : Boolean;
 var
 	i	:	Integer;
 begin
-	IdFTP_Upload.Host			:=	FtpConnection.Hostname;
-	IdFTP_Upload.Username	:=	FtpConnection.Username;
-	IdFTP_Upload.Password	:=	FtpConnection.Password;
-	IdFTP_Upload.Connect;
+	FtpUpload.Host			:=	FtpConnection.Hostname;
+	FtpUpload.Username	:=	FtpConnection.Username;
+	FtpUpload.Password	:=	FtpConnection.Password;
+	FtpUpload.Connect;
 
-	if IdFTP_Upload.Connected then
+	if FtpUpload.Connected then
 	begin
-		IdFTP_Upload.ChangeDir(FtpConnection.RemoteDir);
+		FtpUpload.ChangeDir(FtpConnection.RemoteDir);
 		for i := 0 to FtpUploadList.Count - 1 do
 
-			IdFTP_Upload.Put(FtpUploadList[i], get_filename_from_complete_string(FtpUploadList[i], '\'), False);
+			FtpUpload.Put(FtpUploadList[i], get_filename_from_complete_string(FtpUploadList[i], '\'), False);
 
 		Result	:=	True;
 	end
 	else
 		Result	:=	False;
 
-	IdFTP_Upload.Disconnect;
+	FtpUpload.Disconnect;
 
 end;
 
 function TF_Main.FtpTestConnection (var error	:	String) : Boolean;
 begin
-	IdFTP_Upload.Host			:=	FtpConnection.Hostname;
-	IdFTP_Upload.Username	:=	FtpConnection.Username;
-	IdFTP_Upload.Password	:=	FtpConnection.Password;
+	FtpUpload.Host			:=	FtpConnection.Hostname;
+	FtpUpload.Username	:=	FtpConnection.Username;
+	FtpUpload.Password	:=	FtpConnection.Password;
 
 	Result	:=	True;
 
 	try
-		IdFTP_Upload.Connect;
+		FtpUpload.Connect;
 	except
 		Result	:=	False;
 		error	:=	'Unable to connect';
 	end;
 
-	if IdFTP_Upload.Connected then
+	if FtpUpload.Connected then
 	begin
 		try
-			IdFTP_Upload.ChangeDir(FtpConnection.RemoteDir);
+			FtpUpload.ChangeDir(FtpConnection.RemoteDir);
 		except
 			Result	:=	False;
 			error	:=	'Cannot change remote directory';//SysErrorMessage(GetLastError);
 		end;
 
-		IdFTP_Upload.Disconnect;
+		FtpUpload.Disconnect;
 
 	end
 	else

@@ -218,7 +218,7 @@ object F_Main: TF_Main
         Transparent = False
         Visible = False
       end
-      object Dir_Count_Label: TLabel
+      object MP3FilesListDirCntLab2: TLabel
         Left = 696
         Top = 188
         Width = 64
@@ -238,9 +238,8 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 698
       end
-      object Result_Label: TLabel
+      object MP3FilesListResultLab2: TLabel
         Left = 696
         Top = 168
         Width = 64
@@ -288,7 +287,7 @@ object F_Main: TF_Main
         Caption = 'Characters'
         Visible = False
       end
-      object Label1: TLabel
+      object MP3FilesListResultLab1: TLabel
         Left = 569
         Top = 168
         Width = 119
@@ -310,10 +309,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        OnClick = Label1Click
+        OnClick = MP3FilesListResultLab1Click
         ExplicitLeft = 571
       end
-      object Label2: TLabel
+      object MP3FilesListDirCntLab1: TLabel
         Left = 569
         Top = 188
         Width = 119
@@ -337,7 +336,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object Label3: TLabel
+      object MP3FilesListSearchTimeLab1: TLabel
         Left = 569
         Top = 208
         Width = 119
@@ -453,7 +452,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object Search_Time_Lab: TLabel
+      object MP3FilesListSearchTimeLab2: TLabel
         Left = 696
         Top = 207
         Width = 64
@@ -2067,7 +2066,7 @@ object F_Main: TF_Main
     Top = 296
     DOMVendorDesc = 'MSXML'
   end
-  object IdFTP_Upload: TIdFTP
+  object FtpUpload: TIdFTP
     IPVersion = Id_IPv4
     NATKeepAlive.UseKeepAlive = False
     NATKeepAlive.IdleTimeMS = 0
