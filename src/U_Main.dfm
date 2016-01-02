@@ -22,13 +22,6 @@ object F_Main: TF_Main
     740)
   PixelsPerInch = 96
   TextHeight = 16
-  object SearchResultLab: TLabel
-    Left = 8
-    Top = 401
-    Width = 95
-    Height = 16
-    Caption = 'SearchResultLab'
-  end
   object PageControl1: TPageControl
     Left = 0
     Top = 3
@@ -38,10 +31,10 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet3
+    ActivePage = ITunesImportTS
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
-    object TabSheet1: TTabSheet
+    object FolderScanTS: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -988,14 +981,14 @@ object F_Main: TF_Main
         TabOrder = 5
       end
     end
-    object TabSheet3: TTabSheet
+    object CdListTS: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'cdlist'
       ImageIndex = 2
-      OnShow = TabSheet3Show
+      OnShow = CdListTSShow
       DesignSize = (
         782
         362)
@@ -1391,19 +1384,7 @@ object F_Main: TF_Main
         end
       end
     end
-    object TabSheet4: TTabSheet
-      Caption = 'Error'
-      ImageIndex = 3
-      object ListBox_Error: TListBox
-        Left = 0
-        Top = 0
-        Width = 782
-        Height = 362
-        Align = alClient
-        TabOrder = 0
-      end
-    end
-    object TabSheet2: TTabSheet
+    object ITunesImportTS: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
       DesignSize = (
@@ -1782,6 +1763,98 @@ object F_Main: TF_Main
         OnChange = CB_XML_FileChange
       end
     end
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Top = 721
+    Width = 790
+    Height = 19
+    Panels = <
+      item
+        Width = 50
+      end>
+    OnClick = StatusBarClick
+  end
+  object PageControl2: TPageControl
+    Left = 0
+    Top = 423
+    Width = 790
+    Height = 298
+    ActivePage = ErrorTS
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 3
+    OnChange = PageControl2Change
+    object SearchResultTS: TTabSheet
+      Caption = '?!SearchResult'
+      ImageIndex = 1
+      object MP3_ListBox: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 267
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Align = alClient
+        ExtendedSelect = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 15
+        Font.Name = 'arial'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ItemHeight = 15
+        MultiSelect = True
+        ParentFont = False
+        PopupMenu = MP3List_PopupMenu
+        TabOrder = 0
+        OnClick = MP3_ListBoxClick
+        OnMouseUp = MP3_ListBoxMouseUp
+      end
+    end
+    object LogTS: TTabSheet
+      Caption = '?!Log'
+      object LogListBox: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 267
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Align = alClient
+        ExtendedSelect = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 15
+        Font.Name = 'arial'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ItemHeight = 15
+        MultiSelect = True
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object NameCheckTS: TTabSheet
+      Caption = '?!NameCheckTS'
+      ImageIndex = 2
+      object NameCheck_ListBox: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 267
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Align = alClient
+        TabOrder = 0
+        OnMouseUp = NameCheck_ListBoxMouseUp
+      end
+    end
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
@@ -1800,86 +1873,25 @@ object F_Main: TF_Main
         TabOrder = 0
       end
     end
-  end
-  object NameCheck_ListBox: TListBox
-    Left = 7
-    Top = 448
-    Width = 732
-    Height = 271
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 1
-    OnMouseUp = NameCheck_ListBoxMouseUp
-  end
-  object MP3_ListBox: TListBox
-    Left = 0
-    Top = 424
-    Width = 789
-    Height = 297
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    ExtendedSelect = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = 15
-    Font.Name = 'arial'
-    Font.Pitch = fpVariable
-    Font.Style = []
-    ItemHeight = 15
-    MultiSelect = True
-    ParentFont = False
-    PopupMenu = MP3List_PopupMenu
-    TabOrder = 2
-    OnClick = MP3_ListBoxClick
-    OnMouseUp = MP3_ListBoxMouseUp
-  end
-  object StatusBar: TStatusBar
-    Left = 0
-    Top = 721
-    Width = 790
-    Height = 19
-    Panels = <
-      item
-        Width = 50
-      end>
-    OnClick = StatusBarClick
-  end
-  object LogListBox: TListBox
-    Left = 1
-    Top = 424
-    Width = 789
-    Height = 297
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    ExtendedSelect = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = 15
-    Font.Name = 'arial'
-    Font.Pitch = fpVariable
-    Font.Style = []
-    ItemHeight = 15
-    MultiSelect = True
-    ParentFont = False
-    TabOrder = 4
-    Visible = False
-    OnClick = LogListBoxClick
+    object ErrorTS: TTabSheet
+      Caption = 'Error'
+      ImageIndex = 3
+      object ListBox_Error: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 267
+        Align = alClient
+        TabOrder = 0
+      end
+    end
   end
   object MainSelectionPanel: TPanel
-    Left = 120
-    Top = 112
+    Left = 771
+    Top = 136
     Width = 573
     Height = 361
-    TabOrder = 5
+    TabOrder = 2
     object Button1: TButton
       Left = 96
       Top = 63
