@@ -31,7 +31,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = ITunesImportTS
+    ActivePage = FolderScanTS
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object FolderScanTS: TTabSheet
@@ -986,7 +986,7 @@ object F_Main: TF_Main
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = 'cdlist'
+      Caption = '?!cdlist'
       ImageIndex = 2
       OnShow = CdListTSShow
       DesignSize = (
@@ -1777,21 +1777,22 @@ object F_Main: TF_Main
   end
   object PageControl2: TPageControl
     Left = 0
-    Top = 423
+    Top = 398
     Width = 790
-    Height = 298
-    ActivePage = ErrorTS
+    Height = 323
+    ActivePage = SearchResultTS
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 3
     OnChange = PageControl2Change
     object SearchResultTS: TTabSheet
       Caption = '?!SearchResult'
       ImageIndex = 1
+      ExplicitHeight = 267
       object MP3_ListBox: TListBox
         Left = 0
         Top = 0
         Width = 782
-        Height = 267
+        Height = 292
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1811,15 +1812,17 @@ object F_Main: TF_Main
         TabOrder = 0
         OnClick = MP3_ListBoxClick
         OnMouseUp = MP3_ListBoxMouseUp
+        ExplicitHeight = 267
       end
     end
     object LogTS: TTabSheet
       Caption = '?!Log'
+      ExplicitHeight = 267
       object LogListBox: TListBox
         Left = 0
         Top = 0
         Width = 782
-        Height = 267
+        Height = 292
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1836,16 +1839,18 @@ object F_Main: TF_Main
         MultiSelect = True
         ParentFont = False
         TabOrder = 0
+        ExplicitHeight = 267
       end
     end
     object NameCheckTS: TTabSheet
       Caption = '?!NameCheckTS'
       ImageIndex = 2
+      ExplicitHeight = 267
       object NameCheck_ListBox: TListBox
         Left = 0
         Top = 0
         Width = 782
-        Height = 267
+        Height = 292
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -1853,11 +1858,13 @@ object F_Main: TF_Main
         Align = alClient
         TabOrder = 0
         OnMouseUp = NameCheck_ListBoxMouseUp
+        ExplicitHeight = 267
       end
     end
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
+      ExplicitHeight = 267
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1874,15 +1881,17 @@ object F_Main: TF_Main
       end
     end
     object ErrorTS: TTabSheet
-      Caption = 'Error'
+      Caption = '?!Error'
       ImageIndex = 3
+      ExplicitHeight = 267
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
         Width = 782
-        Height = 267
+        Height = 292
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 267
       end
     end
   end
