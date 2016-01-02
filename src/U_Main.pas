@@ -2050,7 +2050,7 @@ begin
   Ini.Free;
 
   {Refill listbox}
-	TabSheet3Show(DateiausListeentfernen1);
+	CdListTSShow(DateiausListeentfernen1);
 end;
 
 
