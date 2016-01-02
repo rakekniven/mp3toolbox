@@ -38,7 +38,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet2
+    ActivePage = TabSheet3
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -1874,6 +1874,31 @@ object F_Main: TF_Main
     Visible = False
     OnClick = LogListBoxClick
   end
+  object MainSelectionPanel: TPanel
+    Left = 120
+    Top = 112
+    Width = 573
+    Height = 361
+    TabOrder = 5
+    object Button1: TButton
+      Left = 96
+      Top = 63
+      Width = 406
+      Height = 108
+      Caption = '?!Scan your folders for MP3 files and create your websites'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 96
+      Top = 177
+      Width = 406
+      Height = 108
+      Caption = '?!Import your iTunes library and create your websites'
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+  end
   object MainMenu1: TMainMenu
     Left = 328
     Top = 16
@@ -2047,23 +2072,23 @@ object F_Main: TF_Main
   end
   object Template_OpenDialog: TOpenDialog
     FilterIndex = 0
-    Left = 480
-    Top = 96
+    Left = 544
+    Top = 16
   end
   object Result_File_SaveDialog: TSaveDialog
     FilterIndex = 0
     Title = 'Speichern'
-    Left = 480
-    Top = 144
+    Left = 616
+    Top = 16
   end
   object OpenDialog_FileSelect: TOpenDialog
     FilterIndex = 0
     Left = 480
-    Top = 48
+    Top = 16
   end
   object XMLDocumentiTunesImport: TXMLDocument
-    Left = 336
-    Top = 296
+    Left = 752
+    Top = 16
     DOMVendorDesc = 'MSXML'
   end
   object FtpUpload: TIdFTP
@@ -2073,12 +2098,12 @@ object F_Main: TF_Main
     NATKeepAlive.IntervalMS = 0
     ProxySettings.ProxyType = fpcmNone
     ProxySettings.Port = 0
-    Left = 496
-    Top = 296
+    Left = 664
+    Top = 16
   end
   object XMLDocumentUpdate: TXMLDocument
-    Left = 216
-    Top = 296
+    Left = 712
+    Top = 16
     DOMVendorDesc = 'MSXML'
   end
 end

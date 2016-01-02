@@ -149,6 +149,9 @@ type
     XMLDocumentUpdate: TXMLDocument;
     StatusBar: TStatusBar;
     LogListBox: TListBox;
+    MainSelectionPanel: TPanel;
+    Button1: TButton;
+    Button2: TButton;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -231,6 +234,8 @@ type
 		procedure AddLogMessage(AMessage : String);
 		procedure LogListBoxClick(Sender: TObject);
 		procedure CB_XML_FileChange(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
 
 	private
 		cnt: Integer;
@@ -354,11 +359,12 @@ procedure TF_Main.FormCreate(Sender: TObject);
 var
 	i :Integer;
 begin
+	MainSelectionPanel.Align	:=	alClient;
 
-	TabSheet3.TabVisible	:=	False;
-	TabSheet4.TabVisible	:=	False;
-	GenreTS.TabVisible		:=	False;
-	PageControl1.ActivePage	:=	TabSheet1;
+//	TabSheet3.TabVisible	:=	False;
+//	TabSheet4.TabVisible	:=	False;
+//	GenreTS.TabVisible		:=	False;
+//	PageControl1.ActivePage	:=	TabSheet1;
 
 	init_ok :=  True;
 	GetDir(0, act_exec_directory);
@@ -1933,6 +1939,26 @@ begin
 	end;
 end;
 
+procedure TF_Main.Button1Click(Sender: TObject);
+begin
+	MainSelectionPanel.Visible	:=	False;
+	TabSheet1.TabVisible	:=	True;
+	TabSheet2.TabVisible	:=	False;
+	TabSheet3.TabVisible	:=	False;
+	TabSheet4.TabVisible	:=	False;
+	GenreTS.TabVisible	:=	False;
+end;
+
+procedure TF_Main.Button2Click(Sender: TObject);
+begin
+	MainSelectionPanel.Visible	:=	False;
+	TabSheet2.TabVisible	:=	True;
+	TabSheet1.TabVisible	:=	False;
+	TabSheet3.TabVisible	:=	False;
+	TabSheet4.TabVisible	:=	False;
+	GenreTS.TabVisible	:=	False;
+end;
+
 {--- CDList : Close Form ------------------------------------------------------}
 procedure TF_Main.CB_XML_FileChange(Sender: TObject);
 begin
@@ -2021,7 +2047,7 @@ begin
   Ini.Free;
 
   {Refill listbox}
-  TabSheet3Show(DateiausListeentfernen1);
+	TabSheet3Show(DateiausListeentfernen1);
 end;
 
 
