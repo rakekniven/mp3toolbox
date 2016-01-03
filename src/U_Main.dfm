@@ -1390,14 +1390,14 @@ object F_Main: TF_Main
       DesignSize = (
         782
         362)
-      object Label7: TLabel
+      object ITunesImportXmlFileLab: TLabel
         Left = 19
         Top = 12
         Width = 92
         Height = 16
         Caption = '??Which xml file'
       end
-      object Lab_Scan_Time3: TLabel
+      object ITunesImportScanTime1: TLabel
         Left = 569
         Top = 188
         Width = 59
@@ -1494,7 +1494,7 @@ object F_Main: TF_Main
         Visible = False
         ExplicitLeft = 571
       end
-      object Label12: TLabel
+      object ITunesImportFoundCntLab1: TLabel
         Left = 569
         Top = 167
         Width = 82
@@ -1512,9 +1512,9 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
       end
-      object Label13: TLabel
+      object ITunesImportFoundCntLab2: TLabel
         Left = 696
-        Top = 168
+        Top = 164
         Width = 64
         Height = 16
         Margins.Left = 4
@@ -1534,7 +1534,6 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 698
       end
       object Label14: TLabel
         Left = 696
@@ -1605,7 +1604,7 @@ object F_Main: TF_Main
         Visible = False
         ExplicitLeft = 698
       end
-      object Lab_Scan_Time4: TLabel
+      object ITunesImportScanTime2: TLabel
         Left = 696
         Top = 188
         Width = 64
@@ -1627,7 +1626,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object Btn_XML_File_Select: TSpeedButton
+      object ITunesImportXmlFileSelectBtn: TSpeedButton
         Left = 400
         Top = 34
         Width = 41
@@ -1645,9 +1644,9 @@ object F_Main: TF_Main
           33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
           33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
           33003333333333333300}
-        OnClick = Btn_XML_File_SelectClick
+        OnClick = ITunesImportXmlFileSelectBtnClick
       end
-      object Hyperlink_Label: TLabel
+      object ITunesImportHyperlinkLab: TLabel
         Left = 19
         Top = 75
         Width = 175
@@ -1664,7 +1663,7 @@ object F_Main: TF_Main
         Font.Style = [fsUnderline]
         ParentColor = False
         ParentFont = False
-        OnClick = Hyperlink_LabelClick
+        OnClick = ITunesImportHyperlinkLabClick
       end
       object ITunesImportGoBtn: TBitBtn
         Left = 569
@@ -1753,14 +1752,14 @@ object F_Main: TF_Main
         TabOrder = 1
         OnClick = FolderScanHtmlOutputBtnClick
       end
-      object CB_XML_File: TComboBox
+      object ITunesImportXmlFileCB: TComboBox
         Left = 19
         Top = 34
         Width = 374
         Height = 24
         TabOrder = 2
         Text = 't:\Zuletzt hinzugef'#252'gt.xml'
-        OnChange = CB_XML_FileChange
+        OnChange = ITunesImportXmlFileCBChange
       end
     end
   end

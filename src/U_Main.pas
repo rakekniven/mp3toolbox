@@ -118,22 +118,22 @@ type
 		WebsiteofAuthor1: TMenuItem;
 		ITunesImportTS: TTabSheet;
 		XMLDocumentiTunesImport: TXMLDocument;
-		Label7: TLabel;
+		ITunesImportXmlFileLab: TLabel;
 		ITunesImportGoBtn: TBitBtn;
 		ITunesImportHtmlOutputBtn: TBitBtn;
-		Lab_Scan_Time3: TLabel;
+		ITunesImportScanTime1: TLabel;
 		Label9: TLabel;
 		Label10: TLabel;
 		Label11: TLabel;
-		Label13: TLabel;
+		ITunesImportFoundCntLab2: TLabel;
 		Label14: TLabel;
 		Label15: TLabel;
 		Label16: TLabel;
-		Lab_Scan_Time4: TLabel;
-		CB_XML_File: TComboBox;
-		Btn_XML_File_Select: TSpeedButton;
+		ITunesImportScanTime2: TLabel;
+		ITunesImportXmlFileCB: TComboBox;
+		ITunesImportXmlFileSelectBtn: TSpeedButton;
 		Speichernunter1: TMenuItem;
-		Label12: TLabel;
+		ITunesImportFoundCntLab1: TLabel;
 		FtpUpload: TIdFTP;
 		Extra1: TMenuItem;
 		UploadtoFTP1: TMenuItem;
@@ -141,7 +141,7 @@ type
 		Genre_CheckListBox: TCheckListBox;
 		Showfoundgenres1: TMenuItem;
 		GenreLab: TLabel;
-		Hyperlink_Label: TLabel;
+		ITunesImportHyperlinkLab: TLabel;
 		CheckforUpdate1: TMenuItem;
 		XMLDocumentUpdate: TXMLDocument;
 		StatusBar: TStatusBar;
@@ -222,7 +222,7 @@ type
 																			AYear,
 																			ADiscNo,
 																			ADiscCnt  : String) : String;
-		procedure Btn_XML_File_SelectClick(Sender: TObject);
+		procedure ITunesImportXmlFileSelectBtnClick(Sender: TObject);
 		procedure Speichernunter1Click(Sender: TObject);
 		function UploadToFtp : Boolean;
 		function FtpTestConnection (var error : String) : Boolean;
@@ -230,12 +230,12 @@ type
 		procedure MP3FilesListResultLab1Click(Sender: TObject);
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
-		procedure Hyperlink_LabelClick(Sender: TObject);
+		procedure ITunesImportHyperlinkLabClick(Sender: TObject);
 		procedure CheckForUpdates(AQuiet	:	Boolean);
 		procedure CheckforUpdate1Click(Sender: TObject);
 		procedure StatusBarClick(Sender: TObject);
 		procedure AddLogMessage(AMessage : String);
-		procedure CB_XML_FileChange(Sender: TObject);
+		procedure ITunesImportXmlFileCBChange(Sender: TObject);
 		procedure Button1Click(Sender: TObject);
 		procedure Button2Click(Sender: TObject);
 		procedure PageControl2Change(Sender: TObject);
@@ -515,16 +515,16 @@ begin
 	init_text(Sender);
 
 	{Combobox neu füllen}
-	CB_XML_File.Clear;
+	ITunesImportXmlFileCB.Clear;
 	for i := 0 to 9 do
 	begin
 		if FileExists(xmllist_last_used_files[i]) then
 		begin
-			CB_XML_File.Items.Add(xmllist_last_used_files[i]);
+			ITunesImportXmlFileCB.Items.Add(xmllist_last_used_files[i]);
 			ITunesImportGoBtn.Enabled :=  True;
 		end;
 	end;
-	CB_XML_File.ItemIndex	:=	0;
+	ITunesImportXmlFileCB.ItemIndex	:=	0;
 
 end;
 
@@ -638,10 +638,10 @@ begin
 	MP3FilesListSearchTimeLab1.Caption                         	:=  GetTxt( 1, 52, 'Search time');
 	Label4.Caption                         	:=  GetTxt( 1, 53, 'Tags scanned');
 	Label5.Caption                         	:=  GetTxt( 1, 54, 'Scan time');
-	Lab_Scan_Time3.Caption                 	:=  GetTxt( 1, 54, 'Scan time');
-	Label7.Caption							           	:=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
-	Label12.Caption              						:=  GetTxt( 1, 59, 'Items found');
-	Hyperlink_Label.Caption									:=	GetTxt( 1, 76, 'How to get these XML files?');
+	ITunesImportScanTime1.Caption          	:=  GetTxt( 1, 54, 'Scan time');
+	ITunesImportXmlFileLab.Caption					:=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
+	ITunesImportFoundCntLab1.Caption				:=  GetTxt( 1, 59, 'Items found');
+	ITunesImportHyperlinkLab.Caption				:=	GetTxt( 1, 76, 'How to get these XML files?');
 	CheckforUpdate1.Caption									:=  GetTxt( 1, 84, 'Scan time');
 	{CDList}
 	CdListOpenFileLab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
@@ -1146,7 +1146,7 @@ begin
 															SW_SHOW);
 end;
 
-procedure TF_Main.Hyperlink_LabelClick(Sender: TObject);
+procedure TF_Main.ITunesImportHyperlinkLabClick(Sender: TObject);
 begin
 	lib1.Start_External_Program(self.WindowHandle,
 															'open',
@@ -1663,8 +1663,8 @@ var
 	DiscNo: string;
 	DiscCnt: string;
 begin
-	Label13.Caption	:=	'...';
-	Lab_Scan_Time4.Caption	:=	'...';
+	ITunesImportFoundCntLab2.Caption	:=	'...';
+	ITunesImportScanTime2.Caption	:=	'...';
 	ListBox_Error.Clear;
 
 	{When Search is canceled.}
@@ -1680,9 +1680,9 @@ begin
 		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
 		ITunesImportGoBtn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
-		if not FileExists(CB_XML_File.Text) then
+		if not FileExists(ITunesImportXmlFileCB.Text) then
 		begin
-			if MessageDlg('File  "' + CB_XML_File.Text + '" not found.',
+			if MessageDlg('File  "' + ITunesImportXmlFileCB.Text + '" not found.',
 								mtWarning,[mbYes, mbNo], 0) = mrYes then
 			begin
 			end;
@@ -1696,7 +1696,7 @@ begin
 		//	http://code.google.com/p/mp3toolbox/issues/detail?id=34
 
 		AddLogMessage('Preloading XML file');
-		AssignFile(F, CB_XML_File.Text);
+		AssignFile(F, ITunesImportXmlFileCB.Text);
 		Reset(F);
 		cnt	:=	0;
 		While not Eof(F) do
@@ -1874,7 +1874,7 @@ begin
 			end_scan_time           :=  Time;
 
 			{Anzeige der Suchzeit.}
-			Lab_Scan_Time4.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+			ITunesImportFoundCntLab2.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
 
 			total_work_duration	:=  (end_scan_time - start_scan_time) +
 															(end_search_time - start_search_time);
@@ -1883,7 +1883,7 @@ begin
 			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
 			MP3_ListBox.Sorted	:=	True;
-			Label13.Caption	:=	IntToStr(mp3list_result_count);
+			ITunesImportFoundCntLab2.Caption	:=	IntToStr(mp3list_result_count);
 
 			if not ErrorTS.TabVisible then
 			begin
@@ -1910,15 +1910,15 @@ begin
 	ITunesImportHtmlOutputBtn.Enabled :=	MP3_ListBox.Items.Count > 0;
 end;
 
-procedure TF_Main.Btn_XML_File_SelectClick(Sender: TObject);
+procedure TF_Main.ITunesImportXmlFileSelectBtnClick(Sender: TObject);
 var
 	i	:	Integer;
 	INI	:	TIniFile;
 begin
 	if OpenDialog_FileSelect.Execute = True then
 	begin
-		CB_XML_File.Items.Add(OpenDialog_FileSelect.FileName);
-		CB_XML_File.Text	:=	OpenDialog_FileSelect.FileName;
+		ITunesImportXmlFileCB.Items.Add(OpenDialog_FileSelect.FileName);
+		ITunesImportXmlFileCB.Text	:=	OpenDialog_FileSelect.FileName;
 
 		ITunesImportGoBtn.Enabled :=  True;
 
@@ -1934,13 +1934,13 @@ begin
 		Ini.Free;
 
 		{Combobox neu füllen}
-		CB_XML_File.Clear;
+		ITunesImportXmlFileCB.Clear;
 		for i := 0 to 9 do
 		begin
 			if FileExists(xmllist_last_used_files[i]) then
-				CB_XML_File.Items.Add(xmllist_last_used_files[i]);
+				ITunesImportXmlFileCB.Items.Add(xmllist_last_used_files[i]);
 		end;
-		CB_XML_File.ItemIndex	:=	0;
+		ITunesImportXmlFileCB.ItemIndex	:=	0;
 	end;
 end;
 
@@ -1963,9 +1963,9 @@ begin
 end;
 
 {--- CDList : Close Form ------------------------------------------------------}
-procedure TF_Main.CB_XML_FileChange(Sender: TObject);
+procedure TF_Main.ITunesImportXmlFileCBChange(Sender: TObject);
 begin
-	ITunesImportGoBtn.Enabled	:=	CB_XML_File.Text <> '';
+	ITunesImportGoBtn.Enabled	:=	ITunesImportXmlFileCB.Text <> '';
 end;
 
 procedure TF_Main.CDList_Close_BtnClick(Sender: TObject);
