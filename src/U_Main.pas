@@ -366,6 +366,7 @@ begin
 
 	LogTS.TabVisible	:=	False;
 	NameCheckTS.TabVisible	:=	False;
+	CdListTS.TabVisible	:=	False;
 //	TabSheet3.TabVisible	:=	False;
 //	TabSheet4.TabVisible	:=	False;
 //	GenreTS.TabVisible		:=	False;
@@ -1947,7 +1948,6 @@ begin
 	MainSelectionPanel.Visible	:=	False;
 	FolderScanTS.TabVisible	:=	True;
 	ITunesImportTS.TabVisible	:=	False;
-	CdListTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
 end;
@@ -1957,7 +1957,6 @@ begin
 	MainSelectionPanel.Visible	:=	False;
 	ITunesImportTS.TabVisible	:=	True;
 	FolderScanTS.TabVisible	:=	False;
-	CdListTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
 end;
