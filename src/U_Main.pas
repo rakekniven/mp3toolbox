@@ -56,7 +56,7 @@ type
 		Output_with_filesize_CB: TCheckBox;
 		TXT_Output_Btn: TBitBtn;
 		HTML_OutputButton: TBitBtn;
-		Go_Btn: TBitBtn;
+    FolderScanGoBtn: TBitBtn;
 		MP3FilesListSearchTimeLab2: TLabel;
 		MP3FilesListDirCntLab2: TLabel;
 		MP3FilesListResultLab2: TLabel;
@@ -119,7 +119,7 @@ type
 		ITunesImportTS: TTabSheet;
 		XMLDocumentiTunesImport: TXMLDocument;
 		Label7: TLabel;
-		Go_Btn2: TBitBtn;
+    ITunesImportGoBtn: TBitBtn;
 		HTML_OutputButton2: TBitBtn;
 		Lab_Scan_Time3: TLabel;
 		Label9: TLabel;
@@ -169,7 +169,7 @@ type
 		procedure filter_ComboBoxChange(Sender: TObject);
 		procedure Multi_Dir_ListBoxMouseUp(Sender: TObject;
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-		procedure Go_BtnClick(Sender: TObject);
+		procedure FolderScanGoBtnClick(Sender: TObject);
 		procedure Subdir_CheckBoxClick(Sender: TObject);
 		procedure Output_with_path_CBClick(Sender: TObject);
 		procedure Output_with_filesize_CBClick(Sender: TObject);
@@ -211,7 +211,7 @@ type
 		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
 		procedure Goo1Click(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
-		procedure Go_Btn2Click(Sender: TObject);
+		procedure ITunesImportGoBtnClick(Sender: TObject);
 		function SearchAndReplace(s : String): string;
 		function ReplaceVariablesInResult(AString,
 																			AArtist,
@@ -521,7 +521,7 @@ begin
 		if FileExists(xmllist_last_used_files[i]) then
 		begin
 			CB_XML_File.Items.Add(xmllist_last_used_files[i]);
-			Go_Btn2.Enabled :=  True;
+			ITunesImportGoBtn.Enabled :=  True;
 		end;
 	end;
 	CB_XML_File.ItemIndex	:=	0;
@@ -631,8 +631,8 @@ begin
 	Sel_None_Button.Caption                	:=  GetTxt( 1, 46, 'Select none');
 	Clear_Sel_Button.Caption               	:=  GetTxt( 1, 47, 'Clear selected');
 	Clear_All_Button.Caption               	:=  GetTxt( 1, 48, 'Clear all');
-	Go_Btn.Caption                         	:=  GetTxt( 1, 49, 'Go !');
-	Go_Btn2.Caption                        	:=  GetTxt( 1, 49, 'Go !');
+	FolderScanGoBtn.Caption                	:=  GetTxt( 1, 49, 'Go !');
+	ITunesImportGoBtn.Caption              	:=  GetTxt( 1, 49, 'Go !');
 	MP3FilesListResultLab1.Caption         	:=  GetTxt( 1, 50, 'Files found');
 	MP3FilesListDirCntLab1.Caption                         	:=  GetTxt( 1, 51, 'Directories searched');
 	MP3FilesListSearchTimeLab1.Caption                         	:=  GetTxt( 1, 52, 'Search time');
@@ -757,9 +757,9 @@ begin
 
 	{set Go-Button}
   if Multi_Dir_ListBox.SelCount > 0 then
-	 	Go_Btn.Enabled	:=	True
+		FolderScanGoBtn.Enabled	:=	True
   else
-	 	Go_Btn.Enabled	:=	False;
+		FolderScanGoBtn.Enabled	:=	False;
 end;
 
 {--- MP3List : Select no pathentries in listbox -------------------------------}
@@ -771,7 +771,7 @@ begin
 		for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
     	Multi_Dir_ListBox.Selected[i]	:=	False;
 
-  Go_Btn.Enabled  :=  False;
+	FolderScanGoBtn.Enabled  :=  False;
 end;
 
 {--- MP3List : Remove selected pathentries in listbox -------------------------}
@@ -788,7 +788,7 @@ end;
 procedure TF_Main.Clear_All_ButtonClick(Sender: TObject);
 begin
 	Multi_Dir_ListBox.Clear;
-	Go_Btn.Enabled  :=  False;			//	Erst wenn Pfad gewählt wurde.
+	FolderScanGoBtn.Enabled  :=  False;			//	Erst wenn Pfad gewählt wurde.
 end;
 
 {--- MP3List : if own filter should be used -----------------------------------}
@@ -822,14 +822,14 @@ procedure TF_Main.Multi_Dir_ListBoxMouseUp(Sender: TObject;
 begin
 	{set Go-Button}
   if Multi_Dir_ListBox.SelCount > 0 then
-	 	Go_Btn.Enabled	:=	True
+		FolderScanGoBtn.Enabled	:=	True
   else
-	 	Go_Btn.Enabled	:=	False;
+		FolderScanGoBtn.Enabled	:=	False;
 end;
 
 
 {--- MP3List : search selected pathes and fill listbox ------------------------}
-procedure TF_Main.Go_BtnClick(Sender: TObject);
+procedure TF_Main.FolderScanGoBtnClick(Sender: TObject);
 var
 	Files							:	TStringList;                       //  Stringliste
 	i									:	Integer;
@@ -855,8 +855,8 @@ begin
 	begin
 		search_status :=  True;
 
-		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
-		Go_Btn.Caption  :=  GetTxt( 1, 55, 'Stop');
+		FolderScanGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		FolderScanGoBtn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
 		{Startzeit der suche}
 		start_search_time := Time;
@@ -1040,8 +1040,8 @@ begin
     Files.Free;
 
 		{Button zurücksetzen}
-		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
-		Go_Btn.Caption  :=  GetTxt( 1, 49, 'Go !');
+		FolderScanGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		FolderScanGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
 		cancel_search	:=	False;
 		search_status :=  False;
@@ -1639,7 +1639,7 @@ begin
 end;
 
 
-procedure TF_Main.Go_Btn2Click(Sender: TObject);
+procedure TF_Main.ITunesImportGoBtnClick(Sender: TObject);
 var
 	i,
 	i2,
@@ -1677,8 +1677,8 @@ begin
 	begin
 		search_status :=  True;
 
-		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrstop');
-		Go_Btn2.Caption  :=  GetTxt( 1, 55, 'Stop');
+		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		ITunesImportGoBtn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
 		if not FileExists(CB_XML_File.Text) then
 		begin
@@ -1894,8 +1894,8 @@ begin
 		end;
 
 		{Button zurücksetzen}
-		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrplay');
-		Go_Btn2.Caption  :=  GetTxt( 1, 49, 'Go !');
+		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		ITunesImportGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
 		cancel_search	:=	False;
 		search_status :=  False;
@@ -1920,7 +1920,7 @@ begin
 		CB_XML_File.Items.Add(OpenDialog_FileSelect.FileName);
 		CB_XML_File.Text	:=	OpenDialog_FileSelect.FileName;
 
-		Go_Btn2.Enabled :=  True;
+		ITunesImportGoBtn.Enabled :=  True;
 
 		{neuen Pfad merken und einordnen}
 		move_memory_combos(xmllist_last_used_files, OpenDialog_FileSelect.FileName);
@@ -1965,7 +1965,7 @@ end;
 {--- CDList : Close Form ------------------------------------------------------}
 procedure TF_Main.CB_XML_FileChange(Sender: TObject);
 begin
-	Go_Btn2.Enabled	:=	CB_XML_File.Text <> '';
+	ITunesImportGoBtn.Enabled	:=	CB_XML_File.Text <> '';
 end;
 
 procedure TF_Main.CDList_Close_BtnClick(Sender: TObject);

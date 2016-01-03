@@ -40,6 +40,7 @@ object F_Main: TF_Main
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??mp3list'
+      ExplicitTop = 26
       DesignSize = (
         782
         362)
@@ -866,7 +867,7 @@ object F_Main: TF_Main
         TabOrder = 1
         OnClick = HTML_OutputButtonClick
       end
-      object Go_Btn: TBitBtn
+      object FolderScanGoBtn: TBitBtn
         Left = 571
         Top = 14
         Width = 185
@@ -901,7 +902,7 @@ object F_Main: TF_Main
         NumGlyphs = 2
         ParentFont = False
         TabOrder = 2
-        OnClick = Go_BtnClick
+        OnClick = FolderScanGoBtnClick
       end
       object Pacman_Panel: TPanel
         Left = 569
@@ -1666,7 +1667,7 @@ object F_Main: TF_Main
         ParentFont = False
         OnClick = Hyperlink_LabelClick
       end
-      object Go_Btn2: TBitBtn
+      object ITunesImportGoBtn: TBitBtn
         Left = 569
         Top = 30
         Width = 185
@@ -1701,7 +1702,7 @@ object F_Main: TF_Main
         NumGlyphs = 2
         ParentFont = False
         TabOrder = 0
-        OnClick = Go_Btn2Click
+        OnClick = ITunesImportGoBtnClick
       end
       object HTML_OutputButton2: TBitBtn
         Left = 569
@@ -1891,7 +1892,7 @@ object F_Main: TF_Main
         Height = 292
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 267
+        ExplicitTop = -2
       end
     end
   end
