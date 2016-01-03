@@ -55,8 +55,8 @@ type
 		Sel_Dir_Btn: TBitBtn;
 		Output_with_filesize_CB: TCheckBox;
 		TXT_Output_Btn: TBitBtn;
-		HTML_OutputButton: TBitBtn;
-    FolderScanGoBtn: TBitBtn;
+		FolderScanHtmlOutputBtn: TBitBtn;
+		FolderScanGoBtn: TBitBtn;
 		MP3FilesListSearchTimeLab2: TLabel;
 		MP3FilesListDirCntLab2: TLabel;
 		MP3FilesListResultLab2: TLabel;
@@ -72,13 +72,13 @@ type
 		Pacman_Speed_Edit: TEdit;
 		Start_Pacman_Btn: TButton;
 		Close_Pacman_Btn: TBitBtn;
-		CDList_ProgressBar: TProgressBar;
-		HTML_OutputButton3: TBitBtn;
-		CDLIst_Choose_GB: TGroupBox;
-		Choose_CDList_Source_File_Btn: TSpeedButton;
-		CD_List_Open_File_Lab: TLabel;
-		Go_Btn3: TBitBtn;
-		CDList_Source_File_CB: TComboBox;
+		CdListProgressBar: TProgressBar;
+		CdListHtmlOutputButton: TBitBtn;
+		CdListChooseGB: TGroupBox;
+		CdListSourceFileChooseBtn: TSpeedButton;
+		CdListOpenFileLab: TLabel;
+		CdListGoBtn: TBitBtn;
+		CdListSourceFileCB: TComboBox;
 		MP3List_PopupMenu: TPopupMenu;
 		checkfilenames1: TMenuItem;
 		checkfilenamesforallowedlength1: TMenuItem;
@@ -87,7 +87,7 @@ type
 		ISO9660Level2311: TMenuItem;
 		Romeo1281: TMenuItem;
 		Pacman_Move_Timer: TTimer;
-		CDList_Popup: TPopupMenu;
+		CdListPopup: TPopupMenu;
 		Dateibearbeiten1: TMenuItem;
 		DateiausListeentfernen1: TMenuItem;
 		Char_Count_Lab: TLabel;
@@ -96,15 +96,15 @@ type
 		checkfilenamesfornoof1: TMenuItem;
 		AboutMP3Toolbox1: TMenuItem;
 		Result_File_SpeedButton: TSpeedButton;
-		CDList_Template_Label: TLabel;
+		CdListTemplateLab: TLabel;
 		Result_File_ComboBox: TComboBox;
 		Template_OpenDialog: TOpenDialog;
-		CDList_Template_ComboBox: TComboBox;
+		CdListTemplateCB: TComboBox;
 		Result_File_Label: TLabel;
-		CDList_Template_SpeedButton: TSpeedButton;
+		CdListTemplateSpeedBtn: TSpeedButton;
 		Result_File_SaveDialog: TSaveDialog;
 		OpenDialog_FileSelect: TOpenDialog;
-		CDList_Result_Label: TLabel;
+		CdListResultLab: TLabel;
 		ErrorTS: TTabSheet;
 		ListBox_Error: TListBox;
 		MP3FilesListResultLab1: TLabel;
@@ -119,8 +119,8 @@ type
 		ITunesImportTS: TTabSheet;
 		XMLDocumentiTunesImport: TXMLDocument;
 		Label7: TLabel;
-    ITunesImportGoBtn: TBitBtn;
-		HTML_OutputButton2: TBitBtn;
+		ITunesImportGoBtn: TBitBtn;
+		ITunesImportHtmlOutputBtn: TBitBtn;
 		Lab_Scan_Time3: TLabel;
 		Label9: TLabel;
 		Label10: TLabel;
@@ -175,7 +175,7 @@ type
 		procedure Output_with_filesize_CBClick(Sender: TObject);
 		procedure TXT_Output_BtnClick(Sender: TObject);
 		procedure Setup1Click(Sender: TObject);
-		procedure HTML_OutputButtonClick(Sender: TObject);
+		procedure FolderScanHtmlOutputBtnClick(Sender: TObject);
 		procedure checkfilenames1Click(Sender: TObject);
 		procedure Joliet601Click(Sender: TObject);
 		procedure ISO9660Level1121Click(Sender: TObject);
@@ -188,13 +188,13 @@ type
 		procedure Pacman_Speed_EditChange(Sender: TObject);
 		procedure Pacman_Move_TimerTimer(Sender: TObject);
 		procedure CdListTSShow(Sender: TObject);
-		procedure Go_Btn3Click(Sender: TObject);
-		procedure Go_Btn3MouseDown(Sender: TObject; Button: TMouseButton;
+		procedure CdListGoBtnClick(Sender: TObject);
+		procedure CdListGoBtnMouseDown(Sender: TObject; Button: TMouseButton;
 			Shift: TShiftState; X, Y: Integer);
-		procedure Choose_CDList_Source_File_BtnClick(Sender: TObject);
+		procedure CdListSourceFileChooseBtnClick(Sender: TObject);
 		procedure CDList_Close_BtnClick(Sender: TObject);
 		procedure FormResize(Sender: TObject);
-		procedure HTML_OutputButton3Click(Sender: TObject);
+		procedure CdListHtmlOutputButtonClick(Sender: TObject);
 		procedure Dateibearbeiten1Click(Sender: TObject);
 		procedure DateiausListeentfernen1Click(Sender: TObject);
 		procedure init_text(Sender:TObject);
@@ -208,7 +208,7 @@ type
 		procedure NameCheck_ListBoxMouseUp(Sender: TObject;
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 		procedure Result_File_SpeedButtonClick(Sender: TObject);
-		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
+		procedure CdListTemplateSpeedBtnClick(Sender: TObject);
 		procedure Goo1Click(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
 		procedure ITunesImportGoBtnClick(Sender: TObject);
@@ -623,8 +623,8 @@ begin
 	Sel_Dir_Btn.Caption                    	:=  GetTxt( 1, 10, 'Pfad auswaehlen');
 	Own_Filter_CheckBox.Caption            	:=  GetTxt( 1, 11, 'eigener Filter');
 	TXT_Output_Btn.Caption                 	:=  GetTxt( 1, 12, 'Textdatei erzeugen');
-	HTML_OutputButton.Caption              	:=  GetTxt( 1, 13, 'Webseite erzeugen');
-	HTML_OutputButton2.Caption             	:=  GetTxt( 1, 13, 'Webseite erzeugen');
+	FolderScanHtmlOutputBtn.Caption              	:=  GetTxt( 1, 13, 'Webseite erzeugen');
+	ITunesImportHtmlOutputBtn.Caption             	:=  GetTxt( 1, 13, 'Webseite erzeugen');
 	Load_From_Button.Caption               	:=  GetTxt( 1, 43, 'Load directories from config');
 	Save_To_Button.Caption                 	:=  GetTxt( 1, 44, 'Save directories');
 	Sel_All_Button.Caption                 	:=  GetTxt( 1, 45, 'Select all');
@@ -644,9 +644,9 @@ begin
 	Hyperlink_Label.Caption									:=	GetTxt( 1, 76, 'How to get these XML files?');
 	CheckforUpdate1.Caption									:=  GetTxt( 1, 84, 'Scan time');
 	{CDList}
-	CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
-	HTML_OutputButton3.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
-	CDList_Template_Label.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
+	CdListOpenFileLab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
+	CdListHtmlOutputButton.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
+	CdListTemplateLab.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
 	Result_File_Label.Caption              :=  GetTxt( 1, 28, 'Ausgabedatei :');
 
 end;
@@ -1034,7 +1034,7 @@ begin
 
 		{If result are present then allow output}
 		TXT_Output_Btn.Enabled		:=	MP3_ListBox.Items.Count > 0;
-		HTML_OutputButton.Enabled :=	MP3_ListBox.Items.Count > 0;
+		FolderScanHtmlOutputBtn.Enabled :=	MP3_ListBox.Items.Count > 0;
 
     {Speicher freigeben}
     Files.Free;
@@ -1168,7 +1168,7 @@ end;
 
 
 {--- MP3List : write mp3list as an website ------------------------------------}
-procedure TF_Main.HTML_OutputButtonClick(Sender: TObject);
+procedure TF_Main.FolderScanHtmlOutputBtnClick(Sender: TObject);
 var
 	i		          :	Integer;
 	i2	          :	Integer;
@@ -1496,34 +1496,34 @@ var
 	i	:	Integer;
 begin
 	{Combobox neu füllen}
-	CDList_Source_File_CB.Clear;
+	CdListSourceFileCB.Clear;
 	for i := 0 to 9 do
 	begin
 		if FileExists(cdlist_last_used_pathes[i]) then
 		begin
-			CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
-			Go_Btn3.Enabled :=  True;
+			CdListSourceFileCB.Items.Add(cdlist_last_used_pathes[i]);
+			CdListGoBtn.Enabled :=  True;
 		end;
 	end;
-	CDList_Source_File_CB.ItemIndex	:=	0;
+	CdListSourceFileCB.ItemIndex	:=	0;
 
   Result_File_ComboBox.Clear;
   for i := 0 to 9 do
     Result_File_ComboBox.Items.Add(cdlist_last_used_export_files[i]);
   Result_File_ComboBox.ItemIndex	:=	0;
 
-  CDList_Template_ComboBox.Clear;
+  CdListTemplateCB.Clear;
   for i := 0 to 9 do
   begin
     if FileExists(cdlist_last_used_template_files[i]) then
-      CDList_Template_ComboBox.Items.Add(cdlist_last_used_template_files[i]);
+      CdListTemplateCB.Items.Add(cdlist_last_used_template_files[i]);
 	end;
-  CDList_Template_ComboBox.ItemIndex	:=	0;
+  CdListTemplateCB.ItemIndex	:=	0;
 
 end;
 
 {--- CDList : Start to read in the textfile -----------------------------------}
-procedure TF_Main.Go_Btn3Click(Sender: TObject);
+procedure TF_Main.CdListGoBtnClick(Sender: TObject);
 var
 	F         : TextFile;
 	ln        : String;
@@ -1536,19 +1536,19 @@ begin
 	start_search_time :=  Time;
 
 	{ - Begin : Get number of tabs and adjust StringGrid - }
-	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	AssignFile(F, CdListSourceFileCB.Items[CdListSourceFileCB.ItemIndex]);
 	Reset(F);
 	Readln(F, ln);
 
 	CDListe_StringGrid.ColCount :=  separate_string_to_get_tabcount(ln);
 
-	F_Main.FormResize(Go_Btn3);
+	F_Main.FormResize(CdListGoBtn);
 
 	CloseFile(F);
 	{ - End : Get number of tabs and adjust StringGrid - }
 
   { - Begin : Fill lines - }
-	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	AssignFile(F, CdListSourceFileCB.Items[CdListSourceFileCB.ItemIndex]);
   Reset(F);
 
   {zeilenweise lesen und zuweisen}
@@ -1578,28 +1578,28 @@ begin
     cdlist_result_count :=  cdlist_result_count - 1;
 
   {Anzahl gefundener Treffer anzeigen.}
-  CDList_Result_Label.Color			  :=  clBlack;
-  CDList_Result_Label.Caption		  :=	IntToStr(cdlist_result_count) + ' Titel gefunden ';
+  CdListResultLab.Color			  :=  clBlack;
+  CdListResultLab.Caption		  :=	IntToStr(cdlist_result_count) + ' Titel gefunden ';
 
   {Ende der Suche}
   end_search_time :=  Time;
 
   {Buttons einstellen}
   if cdlist_result_count > 0 then
-    HTML_OutputButton3.Enabled  :=  True;
+    CdListHtmlOutputButton.Enabled  :=  True;
 end;
 
 {--- CDList : When Go3-Btn is clicked (Mouse down) ----------------------------}
-procedure TF_Main.Go_Btn3MouseDown(Sender: TObject; Button: TMouseButton;
+procedure TF_Main.CdListGoBtnMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  CDList_ProgressBar.Position   :=  0;
-	CDList_Result_Label.Color			:=	clBtnFace;
-	CDList_Result_Label.Caption		:=	'...';
+  CdListProgressBar.Position   :=  0;
+	CdListResultLab.Color			:=	clBtnFace;
+	CdListResultLab.Caption		:=	'...';
 end;
 
 {--- CDList : Choose textfile with cds ----------------------------------------}
-procedure TF_Main.Choose_CDList_Source_File_BtnClick(Sender: TObject);
+procedure TF_Main.CdListSourceFileChooseBtnClick(Sender: TObject);
 var
 	i	:	Integer;
 begin
@@ -1610,7 +1610,7 @@ begin
 	begin
 		if FileExists(OpenDialog_FileSelect.FileName) then
     begin
-			Go_Btn3.Enabled :=  True;
+			CdListGoBtn.Enabled :=  True;
 			{neuen Pfad merken und einordnen}
 			move_memory_combos(cdlist_last_used_pathes, OpenDialog_FileSelect.FileName);
 
@@ -1623,18 +1623,18 @@ begin
 			Ini.Free;
 
 			{Combobox neu füllen}
-			CDList_Source_File_CB.Clear;
+			CdListSourceFileCB.Clear;
 			for i := 0 to 9 do
 			begin
 				if FileExists(cdlist_last_used_pathes[i]) then
-					CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
+					CdListSourceFileCB.Items.Add(cdlist_last_used_pathes[i]);
 			end;
-			CDList_Source_File_CB.ItemIndex	:=	0;
+			CdListSourceFileCB.ItemIndex	:=	0;
     end
   end
   else
   begin
-    CDList_Source_File_CB.Text  	:=  '';
+    CdListSourceFileCB.Text  	:=  '';
   end;
 end;
 
@@ -1907,7 +1907,7 @@ begin
 
 	end;
 
-	HTML_OutputButton2.Enabled :=	MP3_ListBox.Items.Count > 0;
+	ITunesImportHtmlOutputBtn.Enabled :=	MP3_ListBox.Items.Count > 0;
 end;
 
 procedure TF_Main.Btn_XML_File_SelectClick(Sender: TObject);
@@ -1974,14 +1974,14 @@ begin
 end;
 
 {--- CDList : create website --------------------------------------------------}
-procedure TF_Main.HTML_OutputButton3Click(Sender: TObject);
+procedure TF_Main.CdListHtmlOutputButtonClick(Sender: TObject);
 begin
 	{Progressbar maximum einstellen}
-  CDList_ProgressBar.Max  :=  cdlist_result_count;
+  CdListProgressBar.Max  :=  cdlist_result_count;
 
 	{Seite erstellen}
 //  create_html_output(cdlist_template_file_dir_and_name,
-	create_html_output(CDList_Template_ComboBox.Items[CDList_Template_ComboBox.ItemIndex],
+	create_html_output(CdListTemplateCB.Items[CdListTemplateCB.ItemIndex],
 //  									 SlashSep(html_files_output_path, cdlist_html_output_file),
   									 Result_File_ComboBox.Items[Result_File_ComboBox.ItemIndex],
                      '',
@@ -2009,7 +2009,7 @@ begin
   end;
 
 	{clear progressbar}
-  CDList_ProgressBar.Position  :=  0;
+  CdListProgressBar.Position  :=  0;
 end;
 
 {--- CDList : PopUp - Edit selected file --------------------------------------}
@@ -2033,7 +2033,7 @@ begin
 	{check for filename in array and overwrite it with nothing}
 	for i := 0 to Length(cdlist_last_used_pathes) - 1 do
   begin
-    if cdlist_last_used_pathes[i] = CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex] then
+    if cdlist_last_used_pathes[i] = CdListSourceFileCB.Items[CdListSourceFileCB.ItemIndex] then
     begin
     	cdlist_last_used_pathes[i]	:=	'';
 
@@ -2102,7 +2102,7 @@ begin
 		Char_Count_Lab.Caption  :=  IntToStr(Length(NameCheck_ListBox.Items[NameCheck_ListBox.ItemIndex]));
 end;
 
-procedure TF_Main.CDList_Template_SpeedButtonClick(Sender: TObject);
+procedure TF_Main.CdListTemplateSpeedBtnClick(Sender: TObject);
 var
 	i	:	Integer;
 begin
@@ -2126,17 +2126,17 @@ begin
       Ini.Free;
 
       {Combobox neu füllen}
-      CDList_Template_ComboBox.Clear;
+      CdListTemplateCB.Clear;
       for i := 0 to 9 do
       begin
         if FileExists(cdlist_last_used_template_files[i]) then
-          CDList_Template_ComboBox.Items.Add(cdlist_last_used_template_files[i]);
+          CdListTemplateCB.Items.Add(cdlist_last_used_template_files[i]);
       end;
-      CDList_Template_ComboBox.ItemIndex	:=	0;
+      CdListTemplateCB.ItemIndex	:=	0;
     end
   end
   else
-    CDList_Template_ComboBox.Text  	:=  '';
+    CdListTemplateCB.Text  	:=  '';
 end;
 
 procedure TF_Main.Result_File_SpeedButtonClick(Sender: TObject);

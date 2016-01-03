@@ -91,7 +91,7 @@ var
 	i1        : Integer;
 begin
 	{Einzelne Seite ausgeben}
-	AssignFile(InFile, F_Main.CDList_Source_File_CB.Items[F_Main.CDList_Source_File_CB.ItemIndex]);
+	AssignFile(InFile, F_Main.CdListSourceFileCB.Items[F_Main.CdListSourceFileCB.ItemIndex]);
 	Reset(InFile);
 
 	{zeilenweise lesen und zuweisen}
@@ -120,7 +120,7 @@ begin
 
 		AOutputStrings.Add('</tr>');
 		linecount :=  linecount + 1;
-		F_Main.CDList_ProgressBar.Position  :=  linecount;
+		F_Main.CdListProgressBar.Position  :=  linecount;
 
 	end;
 	AOutputStrings.Add('</table>');

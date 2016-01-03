@@ -40,7 +40,6 @@ object F_Main: TF_Main
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??mp3list'
-      ExplicitTop = 26
       DesignSize = (
         782
         362)
@@ -817,7 +816,7 @@ object F_Main: TF_Main
         TabOrder = 0
         OnClick = TXT_Output_BtnClick
       end
-      object HTML_OutputButton: TBitBtn
+      object FolderScanHtmlOutputBtn: TBitBtn
         Left = 569
         Top = 53
         Width = 185
@@ -865,7 +864,7 @@ object F_Main: TF_Main
         Margin = 10
         ParentFont = False
         TabOrder = 1
-        OnClick = HTML_OutputButtonClick
+        OnClick = FolderScanHtmlOutputBtnClick
       end
       object FolderScanGoBtn: TBitBtn
         Left = 571
@@ -993,7 +992,7 @@ object F_Main: TF_Main
       DesignSize = (
         782
         362)
-      object CDList_Result_Label: TLabel
+      object CdListResultLab: TLabel
         Left = 609
         Top = 142
         Width = 151
@@ -1018,7 +1017,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 611
       end
-      object CDList_ProgressBar: TProgressBar
+      object CdListProgressBar: TProgressBar
         Left = 609
         Top = 90
         Width = 151
@@ -1055,7 +1054,7 @@ object F_Main: TF_Main
         ParentFont = False
         TabOrder = 0
       end
-      object HTML_OutputButton3: TBitBtn
+      object CdListHtmlOutputButton: TBitBtn
         Left = 609
         Top = 34
         Width = 151
@@ -1096,9 +1095,9 @@ object F_Main: TF_Main
           5858585858585858585858585858585858000000000000000000}
         Margin = 10
         TabOrder = 1
-        OnClick = HTML_OutputButton3Click
+        OnClick = CdListHtmlOutputButtonClick
       end
-      object CDLIst_Choose_GB: TGroupBox
+      object CdListChooseGB: TGroupBox
         Left = 0
         Top = 9
         Width = 593
@@ -1112,7 +1111,7 @@ object F_Main: TF_Main
         DesignSize = (
           593
           179)
-        object Choose_CDList_Source_File_Btn: TSpeedButton
+        object CdListSourceFileChooseBtn: TSpeedButton
           Left = 415
           Top = 25
           Width = 50
@@ -1157,7 +1156,7 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
-          OnClick = Choose_CDList_Source_File_BtnClick
+          OnClick = CdListSourceFileChooseBtnClick
           ExplicitLeft = 417
         end
         object Result_File_SpeedButton: TSpeedButton
@@ -1208,7 +1207,7 @@ object F_Main: TF_Main
           OnClick = Result_File_SpeedButtonClick
           ExplicitLeft = 417
         end
-        object CDList_Template_SpeedButton: TSpeedButton
+        object CdListTemplateSpeedBtn: TSpeedButton
           Left = 415
           Top = 81
           Width = 50
@@ -1253,10 +1252,10 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
-          OnClick = CDList_Template_SpeedButtonClick
+          OnClick = CdListTemplateSpeedBtnClick
           ExplicitLeft = 417
         end
-        object CD_List_Open_File_Lab: TLabel
+        object CdListOpenFileLab: TLabel
           Left = 10
           Top = 4
           Width = 124
@@ -1267,7 +1266,7 @@ object F_Main: TF_Main
           Margins.Bottom = 4
           Caption = 'Which file to read in :'
         end
-        object CDList_Template_Label: TLabel
+        object CdListTemplateLab: TLabel
           Left = 10
           Top = 59
           Width = 63
@@ -1289,7 +1288,7 @@ object F_Main: TF_Main
           Margins.Bottom = 4
           Caption = 'Result file :'
         end
-        object CDList_Source_File_CB: TComboBox
+        object CdListSourceFileCB: TComboBox
           Left = 10
           Top = 25
           Width = 397
@@ -1308,10 +1307,10 @@ object F_Main: TF_Main
           Font.Pitch = fpVariable
           Font.Style = []
           ParentFont = False
-          PopupMenu = CDList_Popup
+          PopupMenu = CdListPopup
           TabOrder = 1
         end
-        object Go_Btn3: TBitBtn
+        object CdListGoBtn: TBitBtn
           Left = 473
           Top = 25
           Width = 110
@@ -1338,10 +1337,10 @@ object F_Main: TF_Main
             00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
           NumGlyphs = 2
           TabOrder = 0
-          OnClick = Go_Btn3Click
-          OnMouseDown = Go_Btn3MouseDown
+          OnClick = CdListGoBtnClick
+          OnMouseDown = CdListGoBtnMouseDown
         end
-        object CDList_Template_ComboBox: TComboBox
+        object CdListTemplateCB: TComboBox
           Left = 10
           Top = 81
           Width = 397
@@ -1704,7 +1703,7 @@ object F_Main: TF_Main
         TabOrder = 0
         OnClick = ITunesImportGoBtnClick
       end
-      object HTML_OutputButton2: TBitBtn
+      object ITunesImportHtmlOutputBtn: TBitBtn
         Left = 569
         Top = 69
         Width = 185
@@ -1752,7 +1751,7 @@ object F_Main: TF_Main
         Margin = 10
         ParentFont = False
         TabOrder = 1
-        OnClick = HTML_OutputButtonClick
+        OnClick = FolderScanHtmlOutputBtnClick
       end
       object CB_XML_File: TComboBox
         Left = 19
@@ -1788,7 +1787,6 @@ object F_Main: TF_Main
     object SearchResultTS: TTabSheet
       Caption = '?!SearchResult'
       ImageIndex = 1
-      ExplicitHeight = 267
       object MP3_ListBox: TListBox
         Left = 0
         Top = 0
@@ -1813,12 +1811,10 @@ object F_Main: TF_Main
         TabOrder = 0
         OnClick = MP3_ListBoxClick
         OnMouseUp = MP3_ListBoxMouseUp
-        ExplicitHeight = 267
       end
     end
     object LogTS: TTabSheet
       Caption = '?!Log'
-      ExplicitHeight = 267
       object LogListBox: TListBox
         Left = 0
         Top = 0
@@ -1840,13 +1836,11 @@ object F_Main: TF_Main
         MultiSelect = True
         ParentFont = False
         TabOrder = 0
-        ExplicitHeight = 267
       end
     end
     object NameCheckTS: TTabSheet
       Caption = '?!NameCheckTS'
       ImageIndex = 2
-      ExplicitHeight = 267
       object NameCheck_ListBox: TListBox
         Left = 0
         Top = 0
@@ -1859,13 +1853,11 @@ object F_Main: TF_Main
         Align = alClient
         TabOrder = 0
         OnMouseUp = NameCheck_ListBoxMouseUp
-        ExplicitHeight = 267
       end
     end
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
-      ExplicitHeight = 267
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1884,7 +1876,6 @@ object F_Main: TF_Main
     object ErrorTS: TTabSheet
       Caption = '?!Error'
       ImageIndex = 3
-      ExplicitHeight = 267
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1892,7 +1883,6 @@ object F_Main: TF_Main
         Height = 292
         Align = alClient
         TabOrder = 0
-        ExplicitTop = -2
       end
     end
   end
@@ -2072,7 +2062,7 @@ object F_Main: TF_Main
     Left = 328
     Top = 48
   end
-  object CDList_Popup: TPopupMenu
+  object CdListPopup: TPopupMenu
     Left = 400
     Top = 16
     object Dateibearbeiten1: TMenuItem
