@@ -700,7 +700,7 @@ end;
 {--- MP3List : Load values from inifile ---------------------------------------}
 procedure TF_Main.MP3FilesListResultLab1Click(Sender: TObject);
 begin
-UploadToFtp;
+	UploadToFtp;
 end;
 
 procedure TF_Main.Load_From_ButtonClick(Sender: TObject);
@@ -1202,7 +1202,7 @@ begin
 												SlashSep(html_files_output_path, mp3list_html_output_file)));
 *)
 			if mp3list_html_files_delete_after_zip then
-      begin
+			begin
         if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
           ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
       end;
@@ -1236,7 +1236,7 @@ begin
         end;
       end;
 
-      {add to letter stringlist or number stringlist}
+			{add to letter stringlist or number stringlist}
       if letter_found then
         mp3list_Character_stringlists[i2].Add(MP3_ListBox.Items[i])
       else
@@ -2229,9 +2229,10 @@ begin
 	begin
 		FtpUpload.ChangeDir(FtpConnection.RemoteDir);
 		for i := 0 to FtpUploadList.Count - 1 do
-
+		begin
 			FtpUpload.Put(FtpUploadList[i], get_filename_from_complete_string(FtpUploadList[i], '\'), False);
-
+			AddLogMessage('Uploaded file ' + IntToStr(i + 1) + ' of ' + IntToStr(FtpUploadList.Count));
+		end;
 		Result	:=	True;
 	end
 	else
