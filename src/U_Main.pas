@@ -1665,7 +1665,8 @@ var
 begin
 	Label13.Caption	:=	'...';
 	Lab_Scan_Time4.Caption	:=	'...';
-
+	ListBox_Error.Clear;
+
 	{When Search is canceled.}
 	if search_status  = True then
 	begin
