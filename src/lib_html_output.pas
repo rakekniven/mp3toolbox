@@ -220,7 +220,7 @@ begin
 			{replace mp3list : searchtime}
 			else if AnsiStrPos(PChar(ln), '{#mp3list:searchtime}') <> nil then
 			begin
-				ln	:=	StringReplace(ln, '{#mp3list:searchtime}', TimeToStr(end_search_time - start_search_time), []);
+				ln	:=	StringReplace(ln, '{#mp3list:searchtime}', TimeToStr(StopWatchSearchTimeEnd - StopWatchSearchTimeStart), []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))

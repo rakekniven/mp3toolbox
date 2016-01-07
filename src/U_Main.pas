@@ -228,10 +228,12 @@ var
 	ini_file_name                       : string;
 	default_ini_file_name               : string;
 
-	start_search_time                   : TDateTime;          //  Startzeitpunkt der Suche
-	end_search_time                     : TDateTime;          //  Stopzeitpunkt der Suche
-	start_scan_time                   	: TDateTime;          //  Startzeitpunkt der Suche
-	end_scan_time                     	: TDateTime;          //  Stopzeitpunkt der Suche
+	StopWatchSearchTimeStart            : TDateTime;          //  Startzeitpunkt der Suche
+	StopWatchSearchTimeEnd              : TDateTime;          //  Stopzeitpunkt der Suche
+	StopWatchScanTimeStart              : TDateTime;          //  Startzeitpunkt
+	StopWatchScanTimeEnd                : TDateTime;          //  Stopzeitpunkt
+	StopWatchStart                      : TDateTime;          //  Startzeitpunkt
+	StopWatchEnd                        : TDateTime;          //  Stopzeitpunkt
 	total_work_duration									: TDateTime;
 
 	pacman_adjustment_visible           : Boolean;						//	Soll PacmanBox sichtbar sein
@@ -778,7 +780,7 @@ begin
 		FolderScanGoBtn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
 		{Startzeit der suche}
-		start_search_time := Time;
+		StopWatchSearchTimeStart := Time;
 
 
 		{Pacman aktivieren und starten}
@@ -828,14 +830,14 @@ begin
 		FolderScanSearchProgressBar.Position :=	100;
 
 		{Ende der Suchzeit}
-		end_search_time           :=  Time;
+		StopWatchSearchTimeEnd           :=  Time;
 
 		{Anzahl durchgesuchter Verzeichnisse anzeigen.}
 		FolderScanListDirCntLab2.Caption	  :=	IntToStr(searched_dir_count);
 
 
 		{Anzeige der Suchzeit.}
-		FolderScanListSearchTimeLab2.Caption		:=	TimeToStr(end_search_time - start_search_time);
+		FolderScanListSearchTimeLab2.Caption		:=	TimeToStr(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
 		{Stringliste sortieren}
 		Files.Sort;
@@ -853,7 +855,7 @@ begin
 		ErrorTS.TabVisible	:=	False;
 
 		{Startzeit des scans}
-		start_scan_time := Time;
+		StopWatchScanTimeStart := Time;
 
 		{Pacman aktivieren und starten}
     FolderScanPacmanBtn.Visible        :=  True;
@@ -933,17 +935,17 @@ begin
 		FolderScanSearchProgressBar.Position	:=	100;
 
 		{Ende der Suchzeit}
-		end_scan_time           :=  Time;
+		StopWatchScanTimeEnd           :=  Time;
 
 		{Pacman anhalten}
 		Pacman_Move_Timer.Enabled :=  False;
 		FolderScanPacmanBtn.Visible        :=  False;
 
 		{Anzeige der Suchzeit.}
-		FolderScanScanTimeLab2.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+		FolderScanScanTimeLab2.Caption		:=	TimeToStr(StopWatchScanTimeEnd - StopWatchScanTimeStart);
 
-		total_work_duration	:=  (end_scan_time - start_scan_time) +
-														(end_search_time - start_search_time);
+		total_work_duration	:=  (StopWatchScanTimeEnd - StopWatchScanTimeStart) +
+														(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
 		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
 		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
@@ -1431,6 +1433,8 @@ begin
 	ITunesImportScanTime2.Caption	:=	'...';
 	ListBox_Error.Clear;
 
+	StopWatchStart := Time;
+
 	{When Search is canceled.}
 	if search_status  = True then
 	begin
@@ -1497,7 +1501,7 @@ begin
 //		ShowMessage(MyChild2.ChildNodes['key'].Text);
 
 			{Startzeit des scans}
-			start_scan_time := Time;
+			StopWatchScanTimeStart := Time;
 
 			for i3 := 0 to MyChild2.ChildNodes.Count - 1 do
 			begin
@@ -1635,13 +1639,13 @@ begin
 				end;
 			end;
 			{Ende der Suchzeit}
-			end_scan_time           :=  Time;
+			StopWatchScanTimeEnd           :=  Time;
 
 			{Anzeige der Suchzeit.}
-			ITunesImportFoundCntLab2.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+			ITunesImportFoundCntLab2.Caption		:=	TimeToStr(StopWatchScanTimeEnd - StopWatchScanTimeStart);
 
-			total_work_duration	:=  (end_scan_time - start_scan_time) +
-															(end_search_time - start_search_time);
+			total_work_duration	:=  (StopWatchScanTimeEnd - StopWatchScanTimeStart) +
+															(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
 			{total counter (wird für ausgabenschleife benötigt TXT und HTML}
 			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
@@ -1670,6 +1674,10 @@ begin
 		AddLogMessage('XML processing done.');
 
 	end;
+
+	StopWatchEnd           :=  Time;
+
+	ITunesImportScanTime2.Caption		:=	TimeToStr(StopWatchEnd - StopWatchStart);
 
 	ITunesImportHtmlOutputBtn.Enabled :=	MP3_ListBox.Items.Count > 0;
 end;
