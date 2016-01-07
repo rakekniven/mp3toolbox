@@ -292,11 +292,11 @@ begin
 					else
 						writeln (OutFile, F_Main.MP3_ListBox.Items[i] + '<br />');
 
-					F_Main.Search_ProgressBar.Position	:= ((i + 1) * 100) div F_Main.MP3_ListBox.Items.Count;
+					F_Main.FolderScanSearchProgressBar.Position	:= ((i + 1) * 100) div F_Main.MP3_ListBox.Items.Count;
 				end;
 				{fill up gauge}
-				F_Main.Search_ProgressBar.Position	:=	100;
-				F_Main.Search_ProgressBar.Position	:=	0;
+				F_Main.FolderScanSearchProgressBar.Position	:=	100;
+				F_Main.FolderScanSearchProgressBar.Position	:=	0;
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:result_list}', 'end')))

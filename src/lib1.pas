@@ -156,12 +156,12 @@ begin
 			Files.Add(SearchRec.Name);
 
     {Anzahl gefundene Files darstellen}
-		F_Main.MP3FilesListResultLab2.Caption	:=	IntToStr(Files.Count);
-		F_Main.MP3FilesListResultLab2.Refresh;
+		F_Main.FolderScanListResultLab2.Caption	:=	IntToStr(Files.Count);
+		F_Main.FolderScanListResultLab2.Refresh;
 
     {Anzahl durchsuchter Verzeichnisse}
-		F_Main.MP3FilesListDirCntLab1.Caption	:=	IntToStr(searched_dir_count);
-    F_Main.MP3FilesListDirCntLab1.Refresh;
+		F_Main.FolderScanListDirCntLab2.Caption	:=	IntToStr(searched_dir_count);
+		F_Main.FolderScanListDirCntLab2.Refresh;
 
     nStatus := FindNext(SearchRec);
   end;

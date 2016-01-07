@@ -43,7 +43,7 @@ object F_Main: TF_Main
       DesignSize = (
         782
         362)
-      object Pacman_Btn: TSpeedButton
+      object FolderScanPacmanBtn: TSpeedButton
         Left = 571
         Top = 267
         Width = 47
@@ -211,7 +211,7 @@ object F_Main: TF_Main
         Transparent = False
         Visible = False
       end
-      object MP3FilesListDirCntLab2: TLabel
+      object FolderScanListDirCntLab2: TLabel
         Left = 696
         Top = 188
         Width = 64
@@ -232,7 +232,7 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
       end
-      object MP3FilesListResultLab2: TLabel
+      object FolderScanListResultLab2: TLabel
         Left = 696
         Top = 168
         Width = 64
@@ -280,7 +280,7 @@ object F_Main: TF_Main
         Caption = 'Characters'
         Visible = False
       end
-      object MP3FilesListResultLab1: TLabel
+      object FolderScanListResultLab1: TLabel
         Left = 569
         Top = 168
         Width = 119
@@ -302,10 +302,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        OnClick = MP3FilesListResultLab1Click
+        OnClick = FolderScanListResultLab1Click
         ExplicitLeft = 571
       end
-      object MP3FilesListDirCntLab1: TLabel
+      object FolderScanListDirCntLab1: TLabel
         Left = 569
         Top = 188
         Width = 119
@@ -329,7 +329,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object MP3FilesListSearchTimeLab1: TLabel
+      object FolderScanListSearchTimeLab1: TLabel
         Left = 569
         Top = 208
         Width = 119
@@ -353,7 +353,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object Label4: TLabel
+      object FolderScanScanResult1: TLabel
         Left = 569
         Top = 228
         Width = 119
@@ -377,7 +377,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object Label5: TLabel
+      object FolderScanScanTimeLab1: TLabel
         Left = 569
         Top = 248
         Width = 119
@@ -401,7 +401,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object Lab_Scan_Result: TLabel
+      object FolderScanScanResult2: TLabel
         Left = 696
         Top = 228
         Width = 64
@@ -423,7 +423,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object Lab_Scan_Time: TLabel
+      object FolderScanScanTimeLab2: TLabel
         Left = 696
         Top = 248
         Width = 64
@@ -445,7 +445,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object MP3FilesListSearchTimeLab2: TLabel
+      object FolderScanListSearchTimeLab2: TLabel
         Left = 696
         Top = 207
         Width = 64
@@ -467,7 +467,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object Multi_Dir_GroupBox: TGroupBox
+      object FolderScanMultiDirGroupBox: TGroupBox
         Left = 0
         Top = 5
         Width = 535
@@ -787,7 +787,7 @@ object F_Main: TF_Main
           OnClick = Output_with_filesize_CBClick
         end
       end
-      object TXT_Output_Btn: TBitBtn
+      object FolderScanTxtOutputBtn: TBitBtn
         Left = 569
         Top = 92
         Width = 185
@@ -814,7 +814,7 @@ object F_Main: TF_Main
         Margin = 10
         ParentFont = False
         TabOrder = 0
-        OnClick = TXT_Output_BtnClick
+        OnClick = FolderScanTxtOutputBtnClick
       end
       object FolderScanHtmlOutputBtn: TBitBtn
         Left = 569
@@ -903,7 +903,7 @@ object F_Main: TF_Main
         TabOrder = 2
         OnClick = FolderScanGoBtnClick
       end
-      object Pacman_Panel: TPanel
+      object FolderScanPacmanPanel: TPanel
         Left = 569
         Top = 209
         Width = 187
@@ -914,7 +914,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         TabOrder = 4
         Visible = False
-        object Pacman_Speed_Edit: TEdit
+        object FolderScanPacmanSpeedEdit: TEdit
           Left = 10
           Top = 11
           Width = 50
@@ -924,9 +924,9 @@ object F_Main: TF_Main
           Margins.Right = 4
           Margins.Bottom = 4
           TabOrder = 0
-          OnChange = Pacman_Speed_EditChange
+          OnChange = FolderScanPacmanSpeedEditChange
         end
-        object Start_Pacman_Btn: TButton
+        object FolderScanPacmanStartBtn: TButton
           Left = 69
           Top = 15
           Width = 31
@@ -944,9 +944,9 @@ object F_Main: TF_Main
           Font.Style = []
           ParentFont = False
           TabOrder = 1
-          OnClick = Start_Pacman_BtnClick
+          OnClick = FolderScanPacmanStartBtnClick
         end
-        object Close_Pacman_Btn: TBitBtn
+        object FolderScanPacmanCloseBtn: TBitBtn
           Left = 108
           Top = 15
           Width = 51
@@ -964,10 +964,10 @@ object F_Main: TF_Main
           Font.Style = []
           ParentFont = False
           TabOrder = 2
-          OnClick = Close_Pacman_BtnClick
+          OnClick = FolderScanPacmanCloseBtnClick
         end
       end
-      object Search_ProgressBar: TProgressBar
+      object FolderScanSearchProgressBar: TProgressBar
         Left = 569
         Top = 130
         Width = 185
@@ -1419,81 +1419,6 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
       end
-      object Label9: TLabel
-        Left = 569
-        Top = 300
-        Width = 119
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '??Tags scanned'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 571
-      end
-      object Label10: TLabel
-        Left = 569
-        Top = 280
-        Width = 119
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '??Search time'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 571
-      end
-      object Label11: TLabel
-        Left = 569
-        Top = 260
-        Width = 119
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '??Directories searched'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 571
-      end
       object ITunesImportFoundCntLab1: TLabel
         Left = 569
         Top = 167
@@ -1534,75 +1459,6 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      end
-      object Label14: TLabel
-        Left = 696
-        Top = 260
-        Width = 64
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '00000'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 698
-      end
-      object Label15: TLabel
-        Left = 696
-        Top = 279
-        Width = 64
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '00:00:00'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 698
-      end
-      object Label16: TLabel
-        Left = 696
-        Top = 300
-        Width = 64
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '000000'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 698
       end
       object ITunesImportScanTime2: TLabel
         Left = 696
@@ -1806,7 +1662,7 @@ object F_Main: TF_Main
         ItemHeight = 15
         MultiSelect = True
         ParentFont = False
-        PopupMenu = MP3List_PopupMenu
+        PopupMenu = FolderScanPopupMenu
         TabOrder = 0
         OnClick = MP3_ListBoxClick
         OnMouseUp = MP3_ListBoxMouseUp
@@ -1885,29 +1741,37 @@ object F_Main: TF_Main
       end
     end
   end
-  object MainSelectionPanel: TPanel
+  object MainSelectionPanel1: TPanel
     Left = 771
     Top = 136
     Width = 573
     Height = 361
     TabOrder = 2
-    object Button1: TButton
-      Left = 96
-      Top = 63
+    object MainSelectionPanel2: TPanel
+      Left = 91
+      Top = 69
       Width = 406
-      Height = 108
-      Caption = '?!Scan your folders for MP3 files and create your websites'
+      Height = 223
+      BevelOuter = bvNone
       TabOrder = 0
-      OnClick = Button1Click
-    end
-    object Button2: TButton
-      Left = 96
-      Top = 177
-      Width = 406
-      Height = 108
-      Caption = '?!Import your iTunes library and create your websites'
-      TabOrder = 1
-      OnClick = Button2Click
+      object MainSelectionBtn1: TButton
+        Left = 0
+        Top = 0
+        Width = 406
+        Height = 108
+        Caption = '?!Scan your folders for MP3 files and create your websites'
+        TabOrder = 0
+        OnClick = MainSelectionBtn1Click
+      end
+      object MainSelectionBtn2: TButton
+        Left = 0
+        Top = 115
+        Width = 406
+        Height = 108
+        Caption = '?!Import your iTunes library and create your websites'
+        TabOrder = 1
+        OnClick = MainSelectionBtn2Click
+      end
     end
   end
   object MainMenu1: TMainMenu
@@ -2019,8 +1883,8 @@ object F_Main: TF_Main
       end
     end
   end
-  object MP3List_PopupMenu: TPopupMenu
-    OnPopup = MP3List_PopupMenuPopup
+  object FolderScanPopupMenu: TPopupMenu
+    OnPopup = FolderScanPopupMenuPopup
     Left = 362
     Top = 17
     object checkfilenames1: TMenuItem
