@@ -44,8 +44,6 @@ uses
 
 	function	separate_string_to_get_tabcount(complex_string : String) : Integer;
 
-	procedure separate_string_by_tab(complex_string : String);
-
   function	seperate_string_in_parts(whole_string,
 																		middle_string,
                                     position : String): String;
@@ -228,52 +226,6 @@ begin
   end
 	else
     result	:=	' <no size>';
-end;
-
-
-{--- Procedure um Strings anhand des Tabulators zu zerlegen. ------------------}
-procedure separate_string_by_tab(complex_string : String);
-var
-  i           : Integer;
-  i1          : Integer;
-  tabcount    : Integer;
-  temp_string : String;
-  last_part   : Boolean;
-begin
-  last_part :=  False;
-
-  {for every tab in the first line of the sourcefile}
-  for tabcount := 0 to F_Main.CDListe_StringGrid.ColCount - 1 do
-  begin
-    temp_string :=  '';
-
-    {get porsition of next tab}
-    i1  :=  AnsiPos(#9, complex_string);
-
-    {if no tab exists > end of string}
-    if i1 = 0 then
-    begin
-      i1  :=  Length(complex_string) + 1;
-      last_part :=  True;
-		end;
-
-    {get text before tab}
-    for i := 1 to i1 - 1 do
-    begin
-      temp_string := temp_string + complex_string[i];
-    end;
-
-    {put text to array}
-    cdlist_tab_values[tabcount]  := temp_string;
-
-    {replace text with none for next in row}
-    if last_part then
-      complex_string  :=  StringReplace(complex_string, temp_string ,'', [])
-		else
-      complex_string  :=  StringReplace(complex_string, temp_string + #9,'', []);
-
-  end;
-
 end;
 
 {--- Ein FIFO mit einem Array : String wird eingefügt -------------------------}

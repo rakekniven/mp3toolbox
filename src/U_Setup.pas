@@ -50,7 +50,6 @@ type
 		RadioButton1: TRadioButton;
 		RadioButton2: TRadioButton;
 		Album_Liste: TTabSheet;
-		CDList_Template_GB: TGroupBox;
 		Debug_Dev: TTabSheet;
 		Store_And_Close_Btn: TBitBtn;
 		Pacman_CheckBox: TCheckBox;
@@ -61,12 +60,8 @@ type
 		mp3list_file_ending_Edit: TEdit;
 		MP3List_ZIP_txt_CheckBox: TCheckBox;
 		MP3List_CLear_TXT_files_after_zip_CB: TCheckBox;
-		CDList_ZIP_txt_CheckBox: TCheckBox;
-		CDList_CLear_TXT_files_after_zip_CB: TCheckBox;
 		MP3List_ZIP_html_CheckBox: TCheckBox;
 		MP3List_CLear_HTML_files_after_zip_CB: TCheckBox;
-		CDList_ZIP_html_CheckBox: TCheckBox;
-		CDList_CLear_HTML_files_after_zip_CB: TCheckBox;
 		GroupBox1: TGroupBox;
 		SpeedButton1: TSpeedButton;
 		SpeedButton2: TSpeedButton;
@@ -109,10 +104,6 @@ type
 		procedure mp3list_file_ending_EditExit(Sender: TObject);
 		procedure MP3List_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
 		procedure MP3List_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
-		procedure CDList_ZIP_txt_CheckBoxClick(Sender: TObject);
-		procedure CDList_ZIP_html_CheckBoxClick(Sender: TObject);
-		procedure CDList_CLear_HTML_files_after_zip_CBClick(Sender: TObject);
-		procedure CDList_CLear_TXT_files_after_zip_CBClick(Sender: TObject);
 		procedure CB_TXT_EncodingChange(Sender: TObject);
 		procedure MP3List_Output_Format_EditChange(Sender: TObject);
 		procedure ValueListEditor_SeachAndReplaceExit(Sender: TObject);
@@ -231,30 +222,6 @@ begin
 		MP3List_CLear_HTML_files_after_zip_CB.Checked	:=	False;
 
 	CB_TXT_Encoding.ItemIndex	:=	mp3list_text_file_encoding;
-
-	{}
-	if cdlist_text_files_zip then
-	  cdlist_ZIP_txt_CheckBox.Checked	:=	True
-	else
-	  cdlist_ZIP_txt_CheckBox.Checked	:=	False;
-
-	{}
-  if cdlist_html_files_zip then
-	  cdlist_ZIP_html_CheckBox.Checked	:=	True
-  else
-	  cdlist_ZIP_html_CheckBox.Checked	:=	False;
-
-	{}
-	if cdlist_text_files_delete_after_zip then
-	  cdlist_CLear_TXT_files_after_zip_CB.Checked	:=	True
-  else
-	  cdlist_CLear_TXT_files_after_zip_CB.Checked	:=	False;
-
-	{}
-  if cdlist_html_files_delete_after_zip then
-	  cdlist_CLear_HTML_files_after_zip_CB.Checked	:=	True
-	else
-		cdlist_CLear_HTML_files_after_zip_CB.Checked	:=	False;
 
 	// ftp
 	LabeledEdit1.Text	:=	FtpConnection.Hostname;
@@ -445,11 +412,6 @@ begin
 		Ini.WriteInteger('MP3LIST', 'text_file_encoding',    			mp3list_text_file_encoding);
 		Ini.WriteString ('MP3LIST', 'output_format',						  mp3list_html_output_format);
 
-		Ini.WriteBool   ('CDLIST',  'zip_text_files',             cdlist_text_files_zip);
-		Ini.WriteBool   ('CDLIST',  'zip_html_files',             cdlist_html_files_zip);
-		Ini.WriteBool   ('CDLIST',  'text_files_delete_after_zip',cdlist_text_files_delete_after_zip);
-		Ini.WriteBool   ('CDLIST',  'html_files_delete_after_zip',cdlist_html_files_delete_after_zip);
-
 		Ini.WriteBool   ('DEVELOP', 'PACMAN_ADJUSTMENT',          pacman_adjustment_visible);
 
 		Ini.WriteString ('FTP',    	 'hostname',	FtpConnection.Hostname);
@@ -577,12 +539,6 @@ begin
 	Lab_File_Prefix.Caption                         :=  GetTxt( 2, 27, 'Dateiname');
 	Lab_File_Ext.Caption                            :=  GetTxt( 2, 28, 'Dateiendung');
 
-  {CDList}
-	CDList_ZIP_txt_CheckBox.Caption                 :=  GetTxt( 2, 21, 'ZIP die Textdateien');
-  CDList_ZIP_html_CheckBox.Caption                :=  GetTxt( 2, 22, 'ZIP die HTML-Dateien');
-	CDList_CLear_TXT_files_after_zip_CB.Caption     :=  GetTxt( 2, 23, 'Lösche Textdateien nach ZIPPEN');
-	CDList_CLear_HTML_files_after_zip_CB.Caption    :=  GetTxt( 2, 24, 'Lösche HTML-Dateien nach ZIPPEN');
-
 	{Debug}
 	Pacman_CheckBox.Caption                         :=  GetTxt( 2, 20, 'Pacman einstellen');
 end;
@@ -628,15 +584,6 @@ begin
     mp3list_html_files_delete_after_zip    :=  False;
 end;
 
-{--- CDList : zip txt files ---------------------------------------------------}
-procedure TF_Setup.CDList_ZIP_txt_CheckBoxClick(Sender: TObject);
-begin
-  if CDList_ZIP_txt_CheckBox.Checked then
-		cdlist_text_files_zip    :=  True
-  else
-		cdlist_text_files_zip    :=  False;
-end;
-
 procedure TF_Setup.DeleteAfterFtpUploadCBClick(Sender: TObject);
 begin
 	DeleteAfterFtpUpload	:=	DeleteAfterFtpUploadCB.Checked;
@@ -657,35 +604,6 @@ end;
 procedure TF_Setup.CB_TXT_EncodingChange(Sender: TObject);
 begin
 	mp3list_text_file_encoding	:=	CB_TXT_Encoding.ItemIndex;
-end;
-
-{--- CDList : Delete TXT files after zip --------------------------------------}
-procedure TF_Setup.CDList_CLear_TXT_files_after_zip_CBClick(
-	Sender: TObject);
-begin
-	if CDList_CLear_TXT_files_after_zip_CB.Checked then
-		cdlist_text_files_delete_after_zip    :=  True
-	else
-		cdlist_text_files_delete_after_zip    :=  False;
-end;
-
-{--- CDList : zip html files --------------------------------------------------}
-procedure TF_Setup.CDList_ZIP_html_CheckBoxClick(Sender: TObject);
-begin
-  if CDList_ZIP_html_CheckBox.Checked then
-    cdlist_html_files_zip    :=  True
-  else
-    cdlist_html_files_zip    :=  False;
-end;
-
-{--- MP3List : Delete HTML files after zip ------------------------------------}
-procedure TF_Setup.CDList_CLear_HTML_files_after_zip_CBClick(
-	Sender: TObject);
-begin
-	if CDList_CLear_HTML_files_after_zip_CB.Checked then
-		cdlist_html_files_delete_after_zip    :=  True
-	else
-		cdlist_html_files_delete_after_zip    :=  False;
 end;
 
 procedure TF_Setup.Lab_OutputFormat_HelpClick(Sender: TObject);

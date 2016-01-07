@@ -29,8 +29,6 @@ interface
 
 	procedure	HTML_Multi_Index_Seite(AHtmlOutputFile :	String);
 
-	procedure	CDList_HTML_Main_Table_Output(AOutputStrings	:	TStringList);
-
 	procedure create_html_output(AHtmlTemplateFile,
 															 AHtmlOutputFile,
 															 ALetter           :	String;
@@ -80,52 +78,6 @@ begin
 				count[i1]	:=	count[i1] + 1;
 		end;
 	end;
-end;
-
-{--- HTML - Body für CDList erzeugen. ----------------------------------------}
-procedure	CDList_HTML_Main_Table_Output(AOutputStrings	:	TStringList);
-var
-	InFile    :	TextFile;
-	ln        : String;
-	linecount : Integer;
-	i1        : Integer;
-begin
-	{Einzelne Seite ausgeben}
-	AssignFile(InFile, F_Main.CdListSourceFileCB.Items[F_Main.CdListSourceFileCB.ItemIndex]);
-	Reset(InFile);
-
-	{zeilenweise lesen und zuweisen}
-	linecount :=  0;
-	AOutputStrings.Add('<table align="center" border="0" cellspacing="2" cellpadding="2">');
-
-	While not Eof(InFile) do
-	begin
-		Readln(InFile, ln);
-		separate_string_by_tab(ln);
-		AOutputStrings.Add('<tr>');
-
-		{First line bold}
-		if linecount= 0  then
-			AOutputStrings.Add('<td><b>Number</b></td>')
-		else
-			AOutputStrings.Add('<td>' + IntToStr(linecount) + '</td>');
-
-		for i1 := 0 to F_Main.CDListe_StringGrid.ColCount - 1 do
-		begin
-		if linecount = 0 then
-			AOutputStrings.Add('<td><b>'  + cdlist_tab_values[i1]  + '</b></td>')
-		else
-			AOutputStrings.Add('<td>'     + cdlist_tab_values[i1]  + '</td>');
-		end;
-
-		AOutputStrings.Add('</tr>');
-		linecount :=  linecount + 1;
-		F_Main.CdListProgressBar.Position  :=  linecount;
-
-	end;
-	AOutputStrings.Add('</table>');
-
-	CloseFile(InFile);
 end;
 
 {--- create html output and replace keywords ----------------------------------}
@@ -211,7 +163,7 @@ begin
 			{replace cdlist : total_cd_counter}
 			else if AnsiStrPos(PChar(ln), '{#cdlist:total_cd_counter}') <> nil then
 			begin
-				ln	:=	StringReplace(ln, '{#cdlist:total_cd_counter}', IntToStr(cdlist_result_count), []);
+//				ln	:=	StringReplace(ln, '{#cdlist:total_cd_counter}', IntToStr(cdlist_result_count), []);
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(ln))
@@ -228,7 +180,7 @@ begin
 					writeln (OutFile, seperate_string_in_parts(ln, '{#cdlist:result_table}', 'start'));
 
 				{write result table in a stringlist and print it}
-				CDList_HTML_Main_Table_Output(cdlist_table);
+//				CDList_HTML_Main_Table_Output(cdlist_table);
 				for i := 0 to cdlist_table.Count - 1 do
 				begin
 					if TplIsUnicode then

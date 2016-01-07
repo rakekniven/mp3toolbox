@@ -532,6 +532,10 @@ object F_Setup: TF_Setup
       Caption = 'Album-Liste'
       ImageIndex = 3
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object CDList_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -553,7 +557,6 @@ object F_Setup: TF_Setup
           Margins.Bottom = 4
           Caption = 'ZIP die Textdateien'
           TabOrder = 0
-          OnClick = CDList_ZIP_txt_CheckBoxClick
         end
         object CDList_CLear_TXT_files_after_zip_CB: TCheckBox
           Left = 10
@@ -566,7 +569,6 @@ object F_Setup: TF_Setup
           Margins.Bottom = 4
           Caption = 'L'#246'sche Textdateien nach ZIPPEN'
           TabOrder = 1
-          OnClick = CDList_CLear_TXT_files_after_zip_CBClick
         end
         object CDList_ZIP_html_CheckBox: TCheckBox
           Left = 10
@@ -579,7 +581,6 @@ object F_Setup: TF_Setup
           Margins.Bottom = 4
           Caption = 'ZIP die HTML-Dateien'
           TabOrder = 2
-          OnClick = CDList_ZIP_html_CheckBoxClick
         end
         object CDList_CLear_HTML_files_after_zip_CB: TCheckBox
           Left = 10
@@ -592,13 +593,16 @@ object F_Setup: TF_Setup
           Margins.Bottom = 4
           Caption = 'L'#246'sche HTML-Dateien nach ZIPPEN'
           TabOrder = 3
-          OnClick = CDList_CLear_HTML_files_after_zip_CBClick
         end
       end
     end
     object FtpTS: TTabSheet
       Caption = '??FTP'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox2: TGroupBox
         Left = 10
         Top = 10
