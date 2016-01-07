@@ -5,7 +5,7 @@ Msg=GB
 [Main]
  1 = &Close
  2 = mp3toolbox version ???
- 3 = Drive-archive
+ 3 = Folder archive
  4 = CD-Archive
  5 = CD-List
  6 = Directorys
@@ -93,6 +93,11 @@ Msg=GB
 88 = Misc
 89 = Delete files after FTP upload
 90 = Update available
+91 = Error
+92 = Log
+93 = Name check
+94 = Scan your folders for MP3 files and create your websites
+95 = Import your iTunes library and create your websites
 
 [Setup]
  1 = General

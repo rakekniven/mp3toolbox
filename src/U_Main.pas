@@ -596,9 +596,12 @@ end;
 {--- assign captions and texts-------------------------------------------------}
 procedure TF_Main.init_text(Sender: TObject);
 begin
-	FolderScanTS.Caption                    :=  GetTxt( 1,  3, 'Laufwerks-archive');
+	FolderScanTS.Caption                    :=  GetTxt( 1,  3, 'Ordner-Archive');
 	ITunesImportTS.Caption                  :=  GetTxt( 1, 58, 'iTunes Import');
 	CdListTS.Caption                      	:=  GetTxt( 1,  5, 'CD-Liste');
+	ErrorTS.Caption                      		:=  GetTxt( 1, 91, 'Error');
+	LogTS.Caption                           :=  GetTxt( 1, 92, 'Log');
+	NameCheckTS.Caption                     :=  GetTxt( 1, 93, 'Name check');
 	File1.Caption                           :=  GetTxt( 1, 14, 'Datei');
 	Help1.Caption                           :=  GetTxt( 1, 15, 'Hilfe');
 	Exit1.Caption                           :=  GetTxt( 1, 16, 'Beenden');
@@ -639,6 +642,9 @@ begin
 	ITunesImportFoundCntLab1.Caption				:=  GetTxt( 1, 59, 'Items found');
 	ITunesImportHyperlinkLab.Caption				:=	GetTxt( 1, 76, 'How to get these XML files?');
 	CheckforUpdate1.Caption									:=  GetTxt( 1, 84, 'Scan time');
+	MainSelectionBtn1.Caption								:=  GetTxt( 1, 94, 'Scan your folders for MP3 files and create your websites');
+	MainSelectionBtn2.Caption								:=  GetTxt( 1, 95, 'Import your iTunes library and create your websites');
+
 	{CDList}
 	CdListOpenFileLab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
 	CdListHtmlOutputButton.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');

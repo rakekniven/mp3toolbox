@@ -5,7 +5,7 @@ Msg=D
 [Main]
  1 = &Beenden
  2 = mp3toolbox version ???
- 3 = Laufwerks-archive
+ 3 = Ordner-Archive
  4 = CD-Archive
  5 = CD-Liste
  6 = Verzeichnisse
@@ -93,6 +93,11 @@ Msg=D
 88 = Verschiedenes
 89 = Dateien nach dem Hochladen auf FTP-Server löschen
 90 = Aktualisierung verfügbar
+91 = Fehler
+92 = Log
+93 = Name Check
+94 = Durchsuche Deine Ordner nach MP3-Dateien und erstelle die Webseiten
+95 = Importiere Deine iTunes-Bibliothek und erstelle die Webseiten
 
 [Setup]
  1 = Allgemein
