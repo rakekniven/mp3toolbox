@@ -385,12 +385,12 @@ begin
 	if Pacman_CheckBox.Checked  =  True then
 	begin
 		pacman_adjustment_visible    :=  True;
-		F_Main.Pacman_Panel.Visible  :=  True
+		F_Main.FolderScanPacmanPanel.Visible  :=  True
 	end
 	else
 	begin
 		pacman_adjustment_visible    :=  False;
-		F_Main.Pacman_Panel.Visible  :=  False;
+		F_Main.FolderScanPacmanPanel.Visible  :=  False;
 	end;
 end;
 

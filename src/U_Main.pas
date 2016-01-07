@@ -25,7 +25,7 @@ uses
 	Windows, SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
 	Dialogs, StdCtrls, Buttons, ComCtrls, Menus, IniFiles, ExtCtrls,
 	Grids, Mp3FileUtils, fldbrowsUnicode, xmldom, XMLIntf, msxmldom, XMLDoc,
-  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
+	IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
 	IdExplicitTLSClientServerBase,
 	IdFTP,
 	U_FTP,
@@ -36,9 +36,9 @@ uses
 type
 	TF_Main = class(TForm)
 		PageControl1: TPageControl;
-		TabSheet1: TTabSheet;
-		TabSheet3: TTabSheet;
-		Multi_Dir_GroupBox: TGroupBox;
+		FolderScanTS: TTabSheet;
+		CdListTS: TTabSheet;
+    FolderScanMultiDirGroupBox: TGroupBox;
 		Multi_Dir_ListBox: TListBox;
 		Load_From_Button: TButton;
 		Save_To_Button: TButton;
@@ -54,32 +54,32 @@ type
 		Own_Filter_CheckBox: TCheckBox;
 		Sel_Dir_Btn: TBitBtn;
 		Output_with_filesize_CB: TCheckBox;
-		TXT_Output_Btn: TBitBtn;
-		HTML_OutputButton: TBitBtn;
-		Go_Btn: TBitBtn;
-    MP3FilesListSearchTimeLab2: TLabel;
-    MP3FilesListDirCntLab2: TLabel;
-    MP3FilesListResultLab2: TLabel;
-		Pacman_Btn: TSpeedButton;
-		Search_ProgressBar: TProgressBar;
+		FolderScanTxtOutputBtn: TBitBtn;
+		FolderScanHtmlOutputBtn: TBitBtn;
+		FolderScanGoBtn: TBitBtn;
+		FolderScanListSearchTimeLab2: TLabel;
+		FolderScanListDirCntLab2: TLabel;
+		FolderScanListResultLab2: TLabel;
+		FolderScanPacmanBtn: TSpeedButton;
+		FolderScanSearchProgressBar: TProgressBar;
 		MainMenu1: TMainMenu;
 		File1: TMenuItem;
 		Help1: TMenuItem;
 		Setup1: TMenuItem;
 		Exit1: TMenuItem;
 		CDListe_StringGrid: TStringGrid;
-		Pacman_Panel: TPanel;
-		Pacman_Speed_Edit: TEdit;
-		Start_Pacman_Btn: TButton;
-		Close_Pacman_Btn: TBitBtn;
-		CDList_ProgressBar: TProgressBar;
-		HTML_OutputButton3: TBitBtn;
-		CDLIst_Choose_GB: TGroupBox;
-		Choose_CDList_Source_File_Btn: TSpeedButton;
-		CD_List_Open_File_Lab: TLabel;
-		Go_Btn3: TBitBtn;
-		CDList_Source_File_CB: TComboBox;
-		MP3List_PopupMenu: TPopupMenu;
+		FolderScanPacmanPanel: TPanel;
+		FolderScanPacmanSpeedEdit: TEdit;
+		FolderScanPacmanStartBtn: TButton;
+		FolderScanPacmanCloseBtn: TBitBtn;
+		CdListProgressBar: TProgressBar;
+		CdListHtmlOutputButton: TBitBtn;
+		CdListChooseGB: TGroupBox;
+		CdListSourceFileChooseBtn: TSpeedButton;
+		CdListOpenFileLab: TLabel;
+		CdListGoBtn: TBitBtn;
+		CdListSourceFileCB: TComboBox;
+		FolderScanPopupMenu: TPopupMenu;
 		checkfilenames1: TMenuItem;
 		checkfilenamesforallowedlength1: TMenuItem;
 		Joliet601: TMenuItem;
@@ -87,68 +87,69 @@ type
 		ISO9660Level2311: TMenuItem;
 		Romeo1281: TMenuItem;
 		Pacman_Move_Timer: TTimer;
-		CDList_Popup: TPopupMenu;
+		CdListPopup: TPopupMenu;
 		Dateibearbeiten1: TMenuItem;
 		DateiausListeentfernen1: TMenuItem;
 		Char_Count_Lab: TLabel;
 		Char_Count_Lab2: TLabel;
-    SaveDialog_File: TSaveDialog;
+		SaveDialog_File: TSaveDialog;
 		checkfilenamesfornoof1: TMenuItem;
 		AboutMP3Toolbox1: TMenuItem;
 		Result_File_SpeedButton: TSpeedButton;
-		CDList_Template_Label: TLabel;
+		CdListTemplateLab: TLabel;
 		Result_File_ComboBox: TComboBox;
 		Template_OpenDialog: TOpenDialog;
-		CDList_Template_ComboBox: TComboBox;
+		CdListTemplateCB: TComboBox;
 		Result_File_Label: TLabel;
-		CDList_Template_SpeedButton: TSpeedButton;
+		CdListTemplateSpeedBtn: TSpeedButton;
 		Result_File_SaveDialog: TSaveDialog;
-    OpenDialog_FileSelect: TOpenDialog;
-		CDList_Result_Label: TLabel;
-		TabSheet4: TTabSheet;
+		OpenDialog_FileSelect: TOpenDialog;
+		CdListResultLab: TLabel;
+		ErrorTS: TTabSheet;
 		ListBox_Error: TListBox;
-    MP3FilesListResultLab1: TLabel;
-    MP3FilesListDirCntLab1: TLabel;
-    MP3FilesListSearchTimeLab1: TLabel;
-		Label4: TLabel;
-		Label5: TLabel;
-		Lab_Scan_Result: TLabel;
-		Lab_Scan_Time: TLabel;
+		FolderScanListResultLab1: TLabel;
+		FolderScanListDirCntLab1: TLabel;
+		FolderScanListSearchTimeLab1: TLabel;
+		FolderScanScanResult1: TLabel;
+		FolderScanScanTimeLab1: TLabel;
+		FolderScanScanResult2: TLabel;
+		FolderScanScanTimeLab2: TLabel;
 		Goo1: TMenuItem;
 		WebsiteofAuthor1: TMenuItem;
-    TabSheet2: TTabSheet;
+		ITunesImportTS: TTabSheet;
 		XMLDocumentiTunesImport: TXMLDocument;
-		Label7: TLabel;
-    Go_Btn2: TBitBtn;
-    HTML_OutputButton2: TBitBtn;
-    NameCheck_ListBox: TListBox;
-		MP3_ListBox: TListBox;
-    Lab_Scan_Time3: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Lab_Scan_Time4: TLabel;
-    CB_XML_File: TComboBox;
-    Btn_XML_File_Select: TSpeedButton;
-    Speichernunter1: TMenuItem;
-    SearchResultLab: TLabel;
-    Label12: TLabel;
+		ITunesImportXmlFileLab: TLabel;
+		ITunesImportGoBtn: TBitBtn;
+		ITunesImportHtmlOutputBtn: TBitBtn;
+		ITunesImportScanTime1: TLabel;
+		ITunesImportFoundCntLab2: TLabel;
+		ITunesImportScanTime2: TLabel;
+		ITunesImportXmlFileCB: TComboBox;
+		ITunesImportXmlFileSelectBtn: TSpeedButton;
+		Speichernunter1: TMenuItem;
+		ITunesImportFoundCntLab1: TLabel;
 		FtpUpload: TIdFTP;
-    Extra1: TMenuItem;
-    UploadtoFTP1: TMenuItem;
+		Extra1: TMenuItem;
+		UploadtoFTP1: TMenuItem;
 		GenreTS: TTabSheet;
-    Genre_CheckListBox: TCheckListBox;
-    Showfoundgenres1: TMenuItem;
-    GenreLab: TLabel;
-    Hyperlink_Label: TLabel;
+		Genre_CheckListBox: TCheckListBox;
+		Showfoundgenres1: TMenuItem;
+		GenreLab: TLabel;
+		ITunesImportHyperlinkLab: TLabel;
 		CheckforUpdate1: TMenuItem;
-    XMLDocumentUpdate: TXMLDocument;
-    StatusBar: TStatusBar;
-    LogListBox: TListBox;
+		XMLDocumentUpdate: TXMLDocument;
+		StatusBar: TStatusBar;
+		MainSelectionPanel1: TPanel;
+		PageControl2: TPageControl;
+		LogTS: TTabSheet;
+		LogListBox: TListBox;
+		SearchResultTS: TTabSheet;
+		MP3_ListBox: TListBox;
+		NameCheckTS: TTabSheet;
+		NameCheck_ListBox: TListBox;
+		MainSelectionPanel2: TPanel;
+		MainSelectionBtn1: TButton;
+		MainSelectionBtn2: TButton;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -163,32 +164,32 @@ type
 		procedure filter_ComboBoxChange(Sender: TObject);
 		procedure Multi_Dir_ListBoxMouseUp(Sender: TObject;
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-		procedure Go_BtnClick(Sender: TObject);
+		procedure FolderScanGoBtnClick(Sender: TObject);
 		procedure Subdir_CheckBoxClick(Sender: TObject);
 		procedure Output_with_path_CBClick(Sender: TObject);
 		procedure Output_with_filesize_CBClick(Sender: TObject);
-		procedure TXT_Output_BtnClick(Sender: TObject);
+		procedure FolderScanTxtOutputBtnClick(Sender: TObject);
 		procedure Setup1Click(Sender: TObject);
-		procedure HTML_OutputButtonClick(Sender: TObject);
+		procedure FolderScanHtmlOutputBtnClick(Sender: TObject);
 		procedure checkfilenames1Click(Sender: TObject);
 		procedure Joliet601Click(Sender: TObject);
 		procedure ISO9660Level1121Click(Sender: TObject);
 		procedure ISO9660Level2311Click(Sender: TObject);
 		procedure Romeo1281Click(Sender: TObject);
-		procedure MP3List_PopupMenuPopup(Sender: TObject);
+		procedure FolderScanPopupMenuPopup(Sender: TObject);
 		procedure MP3_ListBoxClick(Sender: TObject);
-		procedure Start_Pacman_BtnClick(Sender: TObject);
-		procedure Close_Pacman_BtnClick(Sender: TObject);
-		procedure Pacman_Speed_EditChange(Sender: TObject);
+		procedure FolderScanPacmanStartBtnClick(Sender: TObject);
+		procedure FolderScanPacmanCloseBtnClick(Sender: TObject);
+		procedure FolderScanPacmanSpeedEditChange(Sender: TObject);
 		procedure Pacman_Move_TimerTimer(Sender: TObject);
-		procedure TabSheet3Show(Sender: TObject);
-		procedure Go_Btn3Click(Sender: TObject);
-		procedure Go_Btn3MouseDown(Sender: TObject; Button: TMouseButton;
+		procedure CdListTSShow(Sender: TObject);
+		procedure CdListGoBtnClick(Sender: TObject);
+		procedure CdListGoBtnMouseDown(Sender: TObject; Button: TMouseButton;
 			Shift: TShiftState; X, Y: Integer);
-		procedure Choose_CDList_Source_File_BtnClick(Sender: TObject);
+		procedure CdListSourceFileChooseBtnClick(Sender: TObject);
 		procedure CDList_Close_BtnClick(Sender: TObject);
 		procedure FormResize(Sender: TObject);
-		procedure HTML_OutputButton3Click(Sender: TObject);
+		procedure CdListHtmlOutputButtonClick(Sender: TObject);
 		procedure Dateibearbeiten1Click(Sender: TObject);
 		procedure DateiausListeentfernen1Click(Sender: TObject);
 		procedure init_text(Sender:TObject);
@@ -202,10 +203,10 @@ type
 		procedure NameCheck_ListBoxMouseUp(Sender: TObject;
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 		procedure Result_File_SpeedButtonClick(Sender: TObject);
-		procedure CDList_Template_SpeedButtonClick(Sender: TObject);
+		procedure CdListTemplateSpeedBtnClick(Sender: TObject);
 		procedure Goo1Click(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
-		procedure Go_Btn2Click(Sender: TObject);
+		procedure ITunesImportGoBtnClick(Sender: TObject);
 		function SearchAndReplace(s : String): string;
 		function ReplaceVariablesInResult(AString,
 																			AArtist,
@@ -216,21 +217,23 @@ type
 																			AYear,
 																			ADiscNo,
 																			ADiscCnt  : String) : String;
-		procedure Btn_XML_File_SelectClick(Sender: TObject);
+		procedure ITunesImportXmlFileSelectBtnClick(Sender: TObject);
 		procedure Speichernunter1Click(Sender: TObject);
 		function UploadToFtp : Boolean;
 		function FtpTestConnection (var error : String) : Boolean;
 		procedure DeleteFilesAfterFtpUpload;
-		procedure MP3FilesListResultLab1Click(Sender: TObject);
+		procedure FolderScanListResultLab1Click(Sender: TObject);
 		procedure UploadtoFTP1Click(Sender: TObject);
 		procedure Showfoundgenres1Click(Sender: TObject);
-		procedure Hyperlink_LabelClick(Sender: TObject);
+		procedure ITunesImportHyperlinkLabClick(Sender: TObject);
 		procedure CheckForUpdates(AQuiet	:	Boolean);
 		procedure CheckforUpdate1Click(Sender: TObject);
 		procedure StatusBarClick(Sender: TObject);
 		procedure AddLogMessage(AMessage : String);
-		procedure LogListBoxClick(Sender: TObject);
-		procedure CB_XML_FileChange(Sender: TObject);
+		procedure ITunesImportXmlFileCBChange(Sender: TObject);
+		procedure MainSelectionBtn1Click(Sender: TObject);
+		procedure MainSelectionBtn2Click(Sender: TObject);
+		procedure PageControl2Change(Sender: TObject);
 
 	private
 		cnt: Integer;
@@ -354,11 +357,13 @@ procedure TF_Main.FormCreate(Sender: TObject);
 var
 	i :Integer;
 begin
-
-	TabSheet3.TabVisible	:=	False;
-	TabSheet4.TabVisible	:=	False;
-	GenreTS.TabVisible		:=	False;
-	PageControl1.ActivePage	:=	TabSheet1;
+	LogTS.TabVisible	:=	False;
+	NameCheckTS.TabVisible	:=	False;
+	CdListTS.TabVisible	:=	False;
+//	TabSheet3.TabVisible	:=	False;
+//	TabSheet4.TabVisible	:=	False;
+//	GenreTS.TabVisible		:=	False;
+//	PageControl1.ActivePage	:=	TabSheet1;
 
 	init_ok :=  True;
 	GetDir(0, act_exec_directory);
@@ -493,8 +498,8 @@ begin
 
   {Pacman}
   if pacman_adjustment_visible  =  True then
-    Pacman_Panel.Visible  :=  True;
-	Pacman_Speed_Edit.Text			:=  IntToStr(pacman_speed);
+		FolderScanPacmanPanel.Visible  :=  True;
+	FolderScanPacmanSpeedEdit.Text			:=  IntToStr(pacman_speed);
   Pacman_Move_Timer.Interval  :=  pacman_speed;
 
 
@@ -503,16 +508,16 @@ begin
 	init_text(Sender);
 
 	{Combobox neu füllen}
-	CB_XML_File.Clear;
+	ITunesImportXmlFileCB.Clear;
 	for i := 0 to 9 do
 	begin
 		if FileExists(xmllist_last_used_files[i]) then
 		begin
-			CB_XML_File.Items.Add(xmllist_last_used_files[i]);
-			Go_Btn2.Enabled :=  True;
+			ITunesImportXmlFileCB.Items.Add(xmllist_last_used_files[i]);
+			ITunesImportGoBtn.Enabled :=  True;
 		end;
 	end;
-	CB_XML_File.ItemIndex	:=	0;
+	ITunesImportXmlFileCB.ItemIndex	:=	0;
 
 end;
 
@@ -521,11 +526,14 @@ procedure TF_Main.FormResize(Sender: TObject);
 var
   i : Integer;
 begin
+	MainSelectionPanel1.Align	:=	alClient;
+	MainSelectionPanel2.Left	:=	(MainSelectionPanel1.Width - MainSelectionPanel2.Width) div 2;
+	MainSelectionPanel2.Top		:=	(MainSelectionPanel1.Height - MainSelectionPanel2.Height) div 2;
 
 	for i := 0 to CDListe_StringGrid.ColCount - 1 do
-  begin
+	begin
 		CDListe_StringGrid.ColWidths[i] :=  (CDListe_StringGrid.ClientWidth - 19 ) div CDListe_StringGrid.ColCount;
-  end;
+	end;
 end;
 
 {--- Menu : Show Setup Form ---------------------------------------------------}
@@ -568,11 +576,11 @@ begin
 		F_Setup.ShowModal;
 	end;
 
-	MP3FilesListResultLab2.Caption	:=	'...';
-	MP3FilesListDirCntLab1.Caption	:=	'...';
-	MP3FilesListSearchTimeLab2.Caption	:=	'...';
-	Lab_Scan_Result.Caption	:=	'...';
-	Lab_Scan_Time.Caption	:=	'...';
+	FolderScanListResultLab2.Caption	:=	'...';
+	FolderScanListDirCntLab2.Caption	:=	'...';
+	FolderScanScanTimeLab2.Caption		:=	'...';
+	FolderScanScanResult2.Caption			:=	'...';
+	FolderScanScanTimeLab2.Caption		:=	'...';
 
 	//66666
 	CheckForUpdates(True);;
@@ -588,53 +596,53 @@ end;
 {--- assign captions and texts-------------------------------------------------}
 procedure TF_Main.init_text(Sender: TObject);
 begin
-	TabSheet1.Caption                      :=  GetTxt( 1,  3, 'Laufwerks-archive');
-	TabSheet2.Caption                      :=  GetTxt( 1, 58, 'iTunes Import');
-	TabSheet3.Caption                      :=  GetTxt( 1,  5, 'CD-Liste');
-	File1.Caption                          :=  GetTxt( 1, 14, 'Datei');
-	Help1.Caption                          :=  GetTxt( 1, 15, 'Hilfe');
-	Exit1.Caption                          :=  GetTxt( 1, 16, 'Beenden');
-	Setup1.Caption                         :=  GetTxt( 1, 39, 'Einstellungen');
-	Goo1.Caption                           :=  GetTxt( 1, 40, 'Website at Google Code');
-	WebsiteofAuthor1.Caption               :=  GetTxt( 1, 41, 'Website of Author');
-	AboutMP3Toolbox1.Caption               :=  GetTxt( 1, 42, 'About');
-	SearchResultLab.Caption                :=  GetTxt( 1, 60, 'Search results');
-	Extra1.Caption                				 :=  GetTxt( 1, 61, 'Extra');
-	UploadtoFTP1.Caption                	 :=  GetTxt( 1, 62, 'Upload via FTP');
-	GenreTS.Caption			                	 :=  GetTxt( 1, 67, 'Genre');
-	GenreLab.Caption			                 :=  GetTxt( 1, 68, 'Found genres');
-	Showfoundgenres1.Caption			         :=  GetTxt( 1, 69, 'Show found genres');
-	Multi_Dir_GroupBox.Caption             	:=  GetTxt( 1,  6, 'Verzeichnisse ');
+	FolderScanTS.Caption                    :=  GetTxt( 1,  3, 'Laufwerks-archive');
+	ITunesImportTS.Caption                  :=  GetTxt( 1, 58, 'iTunes Import');
+	CdListTS.Caption                      	:=  GetTxt( 1,  5, 'CD-Liste');
+	File1.Caption                           :=  GetTxt( 1, 14, 'Datei');
+	Help1.Caption                           :=  GetTxt( 1, 15, 'Hilfe');
+	Exit1.Caption                           :=  GetTxt( 1, 16, 'Beenden');
+	Setup1.Caption                          :=  GetTxt( 1, 39, 'Einstellungen');
+	Goo1.Caption                            :=  GetTxt( 1, 40, 'Website at Google Code');
+	WebsiteofAuthor1.Caption                :=  GetTxt( 1, 41, 'Website of Author');
+	AboutMP3Toolbox1.Caption                :=  GetTxt( 1, 42, 'About');
+	SearchResultTS.Caption                  :=  GetTxt( 1, 60, 'Search results');
+	Extra1.Caption                				  :=  GetTxt( 1, 61, 'Extra');
+	UploadtoFTP1.Caption                	  :=  GetTxt( 1, 62, 'Upload via FTP');
+	GenreTS.Caption			                	  :=  GetTxt( 1, 67, 'Genre');
+	GenreLab.Caption			                  :=  GetTxt( 1, 68, 'Found genres');
+	Showfoundgenres1.Caption			          :=  GetTxt( 1, 69, 'Show found genres');
+	FolderScanMultiDirGroupBox.Caption      :=  GetTxt( 1,  6, 'Verzeichnisse ');
 	Output_with_filesize_CB.Caption        	:=  GetTxt( 1,  7, 'Ausgabe mit Dateigroesse');
 	Output_with_path_CB.Caption            	:=  GetTxt( 1,  8, 'Ausgabe mit Pfad');
 	Subdir_CheckBox.Caption                	:=  GetTxt( 1,  9, 'Unterverz. durchsuchen');
 	Sel_Dir_Btn.Caption                    	:=  GetTxt( 1, 10, 'Pfad auswaehlen');
 	Own_Filter_CheckBox.Caption            	:=  GetTxt( 1, 11, 'eigener Filter');
-	TXT_Output_Btn.Caption                 	:=  GetTxt( 1, 12, 'Textdatei erzeugen');
-	HTML_OutputButton.Caption              	:=  GetTxt( 1, 13, 'Webseite erzeugen');
-	HTML_OutputButton2.Caption             	:=  GetTxt( 1, 13, 'Webseite erzeugen');
+	FolderScanTxtOutputBtn.Caption         	:=  GetTxt( 1, 12, 'Textdatei erzeugen');
+	FolderScanHtmlOutputBtn.Caption        	:=  GetTxt( 1, 13, 'Webseite erzeugen');
+	ITunesImportHtmlOutputBtn.Caption      	:=  GetTxt( 1, 13, 'Webseite erzeugen');
 	Load_From_Button.Caption               	:=  GetTxt( 1, 43, 'Load directories from config');
 	Save_To_Button.Caption                 	:=  GetTxt( 1, 44, 'Save directories');
 	Sel_All_Button.Caption                 	:=  GetTxt( 1, 45, 'Select all');
 	Sel_None_Button.Caption                	:=  GetTxt( 1, 46, 'Select none');
 	Clear_Sel_Button.Caption               	:=  GetTxt( 1, 47, 'Clear selected');
 	Clear_All_Button.Caption               	:=  GetTxt( 1, 48, 'Clear all');
-	Go_Btn.Caption                         	:=  GetTxt( 1, 49, 'Go !');
-	Go_Btn2.Caption                        	:=  GetTxt( 1, 49, 'Go !');
-	MP3FilesListResultLab1.Caption         	:=  GetTxt( 1, 50, 'Files found');
-	MP3FilesListDirCntLab1.Caption                         	:=  GetTxt( 1, 51, 'Directories searched');
-	MP3FilesListSearchTimeLab1.Caption                         	:=  GetTxt( 1, 52, 'Search time');
-	Label4.Caption                         	:=  GetTxt( 1, 53, 'Tags scanned');
-	Label5.Caption                         	:=  GetTxt( 1, 54, 'Scan time');
-	Lab_Scan_Time3.Caption                 	:=  GetTxt( 1, 54, 'Scan time');
-	Label7.Caption							           	:=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
-	Label12.Caption              						:=  GetTxt( 1, 59, 'Items found');
-	Hyperlink_Label.Caption									:=	GetTxt( 1, 76, 'How to get these XML files?');
+	FolderScanGoBtn.Caption                	:=  GetTxt( 1, 49, 'Go !');
+	ITunesImportGoBtn.Caption              	:=  GetTxt( 1, 49, 'Go !');
+	FolderScanListResultLab1.Caption        :=  GetTxt( 1, 50, 'Files found');
+	FolderScanListDirCntLab1.Caption        :=  GetTxt( 1, 51, 'Directories searched');
+	FolderScanListSearchTimeLab1.Caption    :=  GetTxt( 1, 52, 'Search time');
+	FolderScanScanResult1.Caption         	:=  GetTxt( 1, 53, 'Tags scanned');
+	FolderScanScanTimeLab1.Caption        	:=  GetTxt( 1, 54, 'Scan time');
+	ITunesImportScanTime1.Caption          	:=  GetTxt( 1, 54, 'Scan time');
+	ITunesImportXmlFileLab.Caption					:=  GetTxt( 1, 57, 'XML-Datei zum Verarbeiten');
+	ITunesImportFoundCntLab1.Caption				:=  GetTxt( 1, 59, 'Items found');
+	ITunesImportHyperlinkLab.Caption				:=	GetTxt( 1, 76, 'How to get these XML files?');
 	CheckforUpdate1.Caption									:=  GetTxt( 1, 84, 'Scan time');
 	{CDList}
-	CD_List_Open_File_Lab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
-	HTML_OutputButton3.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
-	CDList_Template_Label.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
+	CdListOpenFileLab.Caption          :=  GetTxt( 1, 27, 'Welche Datei soll eingelesen werden :');
+	CdListHtmlOutputButton.Caption             :=  GetTxt( 1, 29, 'Webseite erzeugen');
+	CdListTemplateLab.Caption          :=  GetTxt( 1, 24, 'Vorlage :');
 	Result_File_Label.Caption              :=  GetTxt( 1, 28, 'Ausgabedatei :');
 
 end;
@@ -686,9 +694,9 @@ begin
 end;
 
 {--- MP3List : Load values from inifile ---------------------------------------}
-procedure TF_Main.MP3FilesListResultLab1Click(Sender: TObject);
+procedure TF_Main.FolderScanListResultLab1Click(Sender: TObject);
 begin
-UploadToFtp;
+	UploadToFtp;
 end;
 
 procedure TF_Main.Load_From_ButtonClick(Sender: TObject);
@@ -745,9 +753,9 @@ begin
 
 	{set Go-Button}
   if Multi_Dir_ListBox.SelCount > 0 then
-	 	Go_Btn.Enabled	:=	True
+		FolderScanGoBtn.Enabled	:=	True
   else
-	 	Go_Btn.Enabled	:=	False;
+		FolderScanGoBtn.Enabled	:=	False;
 end;
 
 {--- MP3List : Select no pathentries in listbox -------------------------------}
@@ -759,7 +767,7 @@ begin
 		for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
     	Multi_Dir_ListBox.Selected[i]	:=	False;
 
-  Go_Btn.Enabled  :=  False;
+	FolderScanGoBtn.Enabled  :=  False;
 end;
 
 {--- MP3List : Remove selected pathentries in listbox -------------------------}
@@ -776,7 +784,7 @@ end;
 procedure TF_Main.Clear_All_ButtonClick(Sender: TObject);
 begin
 	Multi_Dir_ListBox.Clear;
-	Go_Btn.Enabled  :=  False;			//	Erst wenn Pfad gewählt wurde.
+	FolderScanGoBtn.Enabled  :=  False;			//	Erst wenn Pfad gewählt wurde.
 end;
 
 {--- MP3List : if own filter should be used -----------------------------------}
@@ -810,27 +818,27 @@ procedure TF_Main.Multi_Dir_ListBoxMouseUp(Sender: TObject;
 begin
 	{set Go-Button}
   if Multi_Dir_ListBox.SelCount > 0 then
-	 	Go_Btn.Enabled	:=	True
+		FolderScanGoBtn.Enabled	:=	True
   else
-	 	Go_Btn.Enabled	:=	False;
+		FolderScanGoBtn.Enabled	:=	False;
 end;
 
 
 {--- MP3List : search selected pathes and fill listbox ------------------------}
-procedure TF_Main.Go_BtnClick(Sender: TObject);
+procedure TF_Main.FolderScanGoBtnClick(Sender: TObject);
 var
 	Files							:	TStringList;                       //  Stringliste
 	i									:	Integer;
 	gauge_step				:	Integer;
 	ResultString			:	String;
 begin
-	MP3FilesListResultLab2.Caption	:=	'...';
-	MP3FilesListDirCntLab1.Caption	:=	'...';
-	MP3FilesListSearchTimeLab2.Caption	:=	'...';
-	Lab_Scan_Result.Caption	:=	'...';
-	Lab_Scan_Time.Caption	:=	'...';
+	FolderScanListResultLab2.Caption	:=	'...';
+	FolderScanListDirCntLab2.Caption	:=	'...';
+	FolderScanListSearchTimeLab2.Caption	:=	'...';
+	FolderScanScanResult2.Caption	:=	'...';
+	FolderScanScanTimeLab2.Caption	:=	'...';
 
-	MP3_ListBox.BringToFront;
+//	MP3_ListBox.BringToFront;
 	NameCheck_ListBox.Clear;
 
 	{When Search is canceled.}
@@ -843,16 +851,16 @@ begin
 	begin
 		search_status :=  True;
 
-		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
-		Go_Btn.Caption  :=  GetTxt( 1, 55, 'Stop');
+		FolderScanGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		FolderScanGoBtn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
 		{Startzeit der suche}
 		start_search_time := Time;
 
 
 		{Pacman aktivieren und starten}
-		Pacman_Btn.Visible        :=  True;
-		Pacman_Btn.Repaint;
+		FolderScanPacmanBtn.Visible        :=  True;
+		FolderScanPacmanBtn.Repaint;
 		pacman_direction          :=  True;
 		Pacman_Move_Timer.Enabled :=  True;
 
@@ -884,27 +892,27 @@ begin
 									search_subdir,
 									output_with_filesize,
 									search_filter_expression );
-				Search_ProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
+				FolderScanSearchProgressBar.Position	:=	(100 div Multi_Dir_ListBox.SelCount) * gauge_step;
 			end;
 		end;
 
 
 		{Pacman anhalten}
 		Pacman_Move_Timer.Enabled :=  False;
-		Pacman_Btn.Visible        :=  False;
+		FolderScanPacmanBtn.Visible        :=  False;
 
 		{fill progressbar up}
-		Search_ProgressBar.Position :=	100;
+		FolderScanSearchProgressBar.Position :=	100;
 
 		{Ende der Suchzeit}
 		end_search_time           :=  Time;
 
 		{Anzahl durchgesuchter Verzeichnisse anzeigen.}
-		MP3FilesListDirCntLab1.Caption	  :=	IntToStr(searched_dir_count);
+		FolderScanListDirCntLab2.Caption	  :=	IntToStr(searched_dir_count);
 
 
 		{Anzeige der Suchzeit.}
-		MP3FilesListSearchTimeLab2.Caption		:=	TimeToStr(end_search_time - start_search_time);
+		FolderScanListSearchTimeLab2.Caption		:=	TimeToStr(end_search_time - start_search_time);
 
 		{Stringliste sortieren}
 		Files.Sort;
@@ -917,16 +925,16 @@ begin
 				MP3_ListBox.Items.Add(Files[i]);
 		end;
 *)
-		Search_ProgressBar.Position	:=	0;
+		FolderScanSearchProgressBar.Position	:=	0;
 		ListBox_Error.Clear;
-		TabSheet4.TabVisible	:=	False;
+		ErrorTS.TabVisible	:=	False;
 
 		{Startzeit des scans}
 		start_scan_time := Time;
 
 		{Pacman aktivieren und starten}
-    Pacman_Btn.Visible        :=  True;
-		Pacman_Btn.Repaint;
+    FolderScanPacmanBtn.Visible        :=  True;
+		FolderScanPacmanBtn.Repaint;
 		pacman_direction          :=  True;
 		Pacman_Move_Timer.Enabled :=  True;
 
@@ -987,29 +995,29 @@ begin
 					//ListBox_Error.Items.Add('!!! Comment found: ' + Files[i]);
 
 
-				Search_ProgressBar.Position	:=	Round((100 * (i + 1)) div (Files.Count));
+				FolderScanSearchProgressBar.Position	:=	Round((100 * (i + 1)) div (Files.Count));
 				Application.ProcessMessages;
 			end;
 
-			Lab_Scan_Result.Caption	:=	IntToStr(i + 1);
+			FolderScanScanResult2.Caption	:=	IntToStr(i + 1);
 
-			if not TabSheet4.TabVisible then
+			if not ErrorTS.TabVisible then
 			begin
 				if ListBox_Error.Count > 0 then
-					TabSheet4.TabVisible	:=	True;
+					ErrorTS.TabVisible	:=	True;
 			end;
 		end;
-		Search_ProgressBar.Position	:=	100;
+		FolderScanSearchProgressBar.Position	:=	100;
 
 		{Ende der Suchzeit}
 		end_scan_time           :=  Time;
 
 		{Pacman anhalten}
 		Pacman_Move_Timer.Enabled :=  False;
-		Pacman_Btn.Visible        :=  False;
+		FolderScanPacmanBtn.Visible        :=  False;
 
 		{Anzeige der Suchzeit.}
-		Lab_Scan_Time.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+		FolderScanScanTimeLab2.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
 
 		total_work_duration	:=  (end_scan_time - start_scan_time) +
 														(end_search_time - start_search_time);
@@ -1018,24 +1026,24 @@ begin
 		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
-		MP3FilesListResultLab2.Caption		  :=	IntToStr(mp3list_result_count);
+		FolderScanListResultLab2.Caption		  :=	IntToStr(mp3list_result_count);
 
 		{If result are present then allow output}
-		TXT_Output_Btn.Enabled		:=	MP3_ListBox.Items.Count > 0;
-		HTML_OutputButton.Enabled :=	MP3_ListBox.Items.Count > 0;
+		FolderScanTxtOutputBtn.Enabled		:=	MP3_ListBox.Items.Count > 0;
+		FolderScanHtmlOutputBtn.Enabled :=	MP3_ListBox.Items.Count > 0;
 
     {Speicher freigeben}
     Files.Free;
 
 		{Button zurücksetzen}
-		Go_Btn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
-		Go_Btn.Caption  :=  GetTxt( 1, 49, 'Go !');
+		FolderScanGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		FolderScanGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
 		cancel_search	:=	False;
 		search_status :=  False;
 
 		{clear progressbar}
-    Search_ProgressBar.Position :=	0;
+    FolderScanSearchProgressBar.Position :=	0;
   end;
 end;
 
@@ -1067,15 +1075,15 @@ begin
 end;
 
 {--- MP3List : write mp3list as an textfile -----------------------------------}
-procedure TF_Main.TXT_Output_BtnClick(Sender: TObject);
+procedure TF_Main.FolderScanTxtOutputBtnClick(Sender: TObject);
 var
 	i	:	Integer;
 	s	:	TStrings;
 begin
 	S	:=	TStringList.Create();
-	Search_ProgressBar.Min     	:=	0;
-	Search_ProgressBar.Position :=	0;
-	Search_ProgressBar.Max      :=  MP3_ListBox.Items.Count;
+	FolderScanSearchProgressBar.Min     	:=	0;
+	FolderScanSearchProgressBar.Position :=	0;
+	FolderScanSearchProgressBar.Max      :=  MP3_ListBox.Items.Count;
 
 	//	Add result to StringList
 	for I := 0 to MP3_ListBox.Items.Count - 1 do
@@ -1091,7 +1099,7 @@ begin
 	// Add full path to upload list
 	FtpUploadList.Add(SlashSep(text_files_output_path, mp3list_text_output_file));
 
-	F_Main.Search_ProgressBar.Position	:=	0;
+	F_Main.FolderScanSearchProgressBar.Position	:=	0;
 
 	if mp3list_text_files_zip then
 	begin
@@ -1134,7 +1142,7 @@ begin
 															SW_SHOW);
 end;
 
-procedure TF_Main.Hyperlink_LabelClick(Sender: TObject);
+procedure TF_Main.ITunesImportHyperlinkLabClick(Sender: TObject);
 begin
 	lib1.Start_External_Program(self.WindowHandle,
 															'open',
@@ -1156,7 +1164,7 @@ end;
 
 
 {--- MP3List : write mp3list as an website ------------------------------------}
-procedure TF_Main.HTML_OutputButtonClick(Sender: TObject);
+procedure TF_Main.FolderScanHtmlOutputBtnClick(Sender: TObject);
 var
 	i		          :	Integer;
 	i2	          :	Integer;
@@ -1190,7 +1198,7 @@ begin
 												SlashSep(html_files_output_path, mp3list_html_output_file)));
 *)
 			if mp3list_html_files_delete_after_zip then
-      begin
+			begin
         if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
           ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
       end;
@@ -1224,16 +1232,16 @@ begin
         end;
       end;
 
-      {add to letter stringlist or number stringlist}
+			{add to letter stringlist or number stringlist}
       if letter_found then
         mp3list_Character_stringlists[i2].Add(MP3_ListBox.Items[i])
       else
         mp3list_Character_stringlists[26].Add(MP3_ListBox.Items[i])
     end;
 
-    Search_ProgressBar.Min     	:=	0;
-		Search_ProgressBar.Position :=	0;
-    Search_ProgressBar.Max      :=  Length(dir) - 1;
+		FolderScanSearchProgressBar.Min     	:=	0;
+		FolderScanSearchProgressBar.Position :=	0;
+    FolderScanSearchProgressBar.Max      :=  Length(dir) - 1;
 
 		FtpUploadList.Clear;	//	Fresh list
 
@@ -1248,10 +1256,10 @@ begin
 			// Add full path to upload list
 			FtpUploadList.Add(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)));
 
-      Search_ProgressBar.Position :=	i;
+			FolderScanSearchProgressBar.Position :=	i;
 	  end;
 
-    Search_ProgressBar.Position     	:=	0;
+		FolderScanSearchProgressBar.Position     	:=	0;
 
     {zip files}
     if mp3list_html_files_zip then
@@ -1261,7 +1269,7 @@ begin
       begin
         if FileExists(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
           files_to_zip  :=  files_to_zip + SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)) + ' ';
-        Search_ProgressBar.Position :=	i;
+        FolderScanSearchProgressBar.Position :=	i;
       end;
 			{zip files}
       { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
@@ -1284,7 +1292,7 @@ begin
       end;
     end;
 
-    Search_ProgressBar.Position     	:=	0;
+    FolderScanSearchProgressBar.Position     	:=	0;
 
 	end;
 
@@ -1304,22 +1312,20 @@ procedure TF_Main.checkfilenames1Click(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  NameCheck_ListBox.Clear;
+	NameCheckTS.TabVisible	:=	False;
 
 	if MP3_ListBox.Items.Count > 0 then
-  	for i := 0 to MP3_ListBox.Items.Count - 1 do
-      if check_filename(MP3_ListBox.Items[i]) then
-      	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
+		for i := 0 to MP3_ListBox.Items.Count - 1 do
+			if check_filename(MP3_ListBox.Items[i]) then
+				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
-  if NameCheck_ListBox.Items.Count > 0 then
-		NameCheck_ListBox.BringToFront
-  else
-		MP3_ListBox.BringToFront;
+	if NameCheck_ListBox.Items.Count > 0 then
+		NameCheckTS.TabVisible	:=	True
 
 end;
 
 {--- MP3List : PopUp - Set visible properties ---------------------------------}
-procedure TF_Main.MP3List_PopupMenuPopup(Sender: TObject);
+procedure TF_Main.FolderScanPopupMenuPopup(Sender: TObject);
 begin
 	if MP3_ListBox.Items.Count > 0 then
   begin
@@ -1338,17 +1344,15 @@ procedure TF_Main.Joliet601Click(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  NameCheck_ListBox.Clear;
-  
+	NameCheckTS.TabVisible	:=	False;
+
 	if MP3_ListBox.Items.Count > 0 then
   	for i := 0 to MP3_ListBox.Items.Count - 1 do
       if check_filename_for_length(MP3_ListBox.Items[i], 64) then
 				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
   if NameCheck_ListBox.Items.Count > 0 then
-	  NameCheck_ListBox.BringToFront
-  else
-	  MP3_ListBox.BringToFront;
+		NameCheckTS.TabVisible	:=	True;
 
 end;
 
@@ -1357,17 +1361,15 @@ procedure TF_Main.ISO9660Level1121Click(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  NameCheck_ListBox.Clear;
+	NameCheckTS.TabVisible	:=	False;
 
 	if MP3_ListBox.Items.Count > 0 then
-  	for i := 0 to MP3_ListBox.Items.Count - 1 do
-      if check_filename_for_length(MP3_ListBox.Items[i], 12) then
-      	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
+		for i := 0 to MP3_ListBox.Items.Count - 1 do
+			if check_filename_for_length(MP3_ListBox.Items[i], 12) then
+				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
-  if NameCheck_ListBox.Items.Count > 0 then
-		NameCheck_ListBox.BringToFront
-  else
-	  MP3_ListBox.BringToFront;
+	if NameCheck_ListBox.Items.Count > 0 then
+		NameCheckTS.TabVisible	:=	True;
 
 end;
 
@@ -1376,17 +1378,15 @@ procedure TF_Main.ISO9660Level2311Click(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  NameCheck_ListBox.Clear;
+	NameCheckTS.TabVisible	:=	False;
 
 	if MP3_ListBox.Items.Count > 0 then
-  	for i := 0 to MP3_ListBox.Items.Count - 1 do
-      if check_filename_for_length(MP3_ListBox.Items[i], 31) then
-      	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
+		for i := 0 to MP3_ListBox.Items.Count - 1 do
+			if check_filename_for_length(MP3_ListBox.Items[i], 31) then
+				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
-  if NameCheck_ListBox.Items.Count > 0 then
-	  NameCheck_ListBox.BringToFront
-	else
-	  MP3_ListBox.BringToFront;
+	if NameCheck_ListBox.Items.Count > 0 then
+		NameCheckTS.TabVisible	:=	True;
 
 end;
 
@@ -1395,17 +1395,16 @@ procedure TF_Main.Romeo1281Click(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  NameCheck_ListBox.Clear;
+	NameCheckTS.TabVisible	:=	False;
 
 	if MP3_ListBox.Items.Count > 0 then
 		for i := 0 to MP3_ListBox.Items.Count - 1 do
-      if check_filename_for_length(MP3_ListBox.Items[i], 128) then
-      	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
+			if check_filename_for_length(MP3_ListBox.Items[i], 128) then
+				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
-  if NameCheck_ListBox.Items.Count > 0 then
-	  NameCheck_ListBox.BringToFront
-  else
-		MP3_ListBox.BringToFront;
+	if NameCheck_ListBox.Items.Count > 0 then
+		NameCheckTS.TabVisible	:=	True;
+
 end;
 
 {--- MP3List : Bring MP3List to front if clicked ------------------------------}
@@ -1415,29 +1414,31 @@ begin
 end;
 
 {--- MP3List : start moving the PACMAN ----------------------------------------}
-procedure TF_Main.Start_Pacman_BtnClick(Sender: TObject);
+procedure TF_Main.FolderScanPacmanStartBtnClick(Sender: TObject);
 begin
   {Pacman aktivieren und starten}
-  Pacman_Btn.Visible        :=  True;
+	FolderScanPacmanStartBtn.Visible        :=  True;
   Pacman_Move_Timer.Enabled :=  True;
   pacman_direction          :=  True;
-  Pacman_Speed_Edit.Text    :=  IntToStr(Pacman_Move_Timer.Interval);
+	FolderScanPacmanSpeedEdit.Text    :=  IntToStr(Pacman_Move_Timer.Interval);
 end;
 
 procedure TF_Main.StatusBarClick(Sender: TObject);
 begin
+	LogTS.TabVisible	:=	True;
+	PageControl2.ActivePage	:=	LogTS;
 	// Show log history
-	LogListBox.Visible	:=	True;
-	LogListBox.BringToFront;
+//	LogListBox.Visible	:=	True;
+//	LogListBox.BringToFront;
 end;
 
 {--- MP3List : Close PACMAN setuppanel ----------------------------------------}
-procedure TF_Main.Close_Pacman_BtnClick(Sender: TObject);
+procedure TF_Main.FolderScanPacmanCloseBtnClick(Sender: TObject);
 begin
   {Pacman deaktivieren und ausblenden}
-  Pacman_Btn.Visible        :=  False;
+	FolderScanPacmanBtn.Visible        :=  False;
   Pacman_Move_Timer.Enabled :=  False;
-	Pacman_Panel.Visible			:=	False;
+	FolderScanPacmanPanel.Visible			:=	False;
 
   {Pfade speichern}
 	Ini := TIniFile.Create(ini_file_name);
@@ -1446,30 +1447,35 @@ begin
 end;
 
 {--- MP3List : Set EDIT value to timerinterval --------------------------------}
-procedure TF_Main.Pacman_Speed_EditChange(Sender: TObject);
+procedure TF_Main.FolderScanPacmanSpeedEditChange(Sender: TObject);
 begin
-  Pacman_Move_Timer.Interval  :=  StrToInt(Pacman_Speed_Edit.Text);
+	Pacman_Move_Timer.Interval  :=  StrToInt(FolderScanPacmanSpeedEdit.Text);
 end;
 
+
+procedure TF_Main.PageControl2Change(Sender: TObject);
+begin
+
+end;
 
 {--- MP3List : timner to start moving the PACMAN ------------------------------}
 procedure TF_Main.Pacman_Move_TimerTimer(Sender: TObject);
 begin
   if pacman_direction = True then
   begin
-    Pacman_Btn.Glyph.LoadFromResourceName(HInstance,'eater-r');
-    if Pacman_Btn.Left > TabSheet1.ClientWidth - 45 then
+		FolderScanPacmanBtn.Glyph.LoadFromResourceName(HInstance,'eater-r');
+		if FolderScanPacmanBtn.Left > FolderScanTS.ClientWidth - 45 then
       pacman_direction  :=  False;
-		Pacman_Btn.Left :=  Pacman_Btn.Left + 8 ;
-    Pacman_Btn.Repaint;
+		FolderScanPacmanBtn.Left :=  FolderScanPacmanBtn.Left + 8 ;
+		FolderScanPacmanBtn.Repaint;
   end
   else
   begin
-    Pacman_Btn.Glyph.LoadFromResourceName(HInstance,'eater-l');
-		if Pacman_Btn.Left < Search_ProgressBar.Left then
+		FolderScanPacmanBtn.Glyph.LoadFromResourceName(HInstance,'eater-l');
+		if FolderScanPacmanBtn.Left < FolderScanSearchProgressBar.Left then
 			pacman_direction  :=  True;
-    Pacman_Btn.Left :=  Pacman_Btn.Left - 8 ;
-    Pacman_Btn.Repaint;
+		FolderScanPacmanBtn.Left :=  FolderScanPacmanBtn.Left - 8 ;
+		FolderScanPacmanBtn.Repaint;
 	end;
 end;
 
@@ -1481,39 +1487,39 @@ end;
 {               XXXX    XXX     XXXX    X    XXXX      X                       }
 
 {--- CDList : Show Tabshhet ---------------------------------------------------}
-procedure TF_Main.TabSheet3Show(Sender: TObject);
+procedure TF_Main.CdListTSShow(Sender: TObject);
 var
 	i	:	Integer;
 begin
 	{Combobox neu füllen}
-	CDList_Source_File_CB.Clear;
+	CdListSourceFileCB.Clear;
 	for i := 0 to 9 do
 	begin
 		if FileExists(cdlist_last_used_pathes[i]) then
 		begin
-			CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
-			Go_Btn3.Enabled :=  True;
+			CdListSourceFileCB.Items.Add(cdlist_last_used_pathes[i]);
+			CdListGoBtn.Enabled :=  True;
 		end;
 	end;
-	CDList_Source_File_CB.ItemIndex	:=	0;
+	CdListSourceFileCB.ItemIndex	:=	0;
 
   Result_File_ComboBox.Clear;
   for i := 0 to 9 do
     Result_File_ComboBox.Items.Add(cdlist_last_used_export_files[i]);
   Result_File_ComboBox.ItemIndex	:=	0;
 
-  CDList_Template_ComboBox.Clear;
+  CdListTemplateCB.Clear;
   for i := 0 to 9 do
   begin
     if FileExists(cdlist_last_used_template_files[i]) then
-      CDList_Template_ComboBox.Items.Add(cdlist_last_used_template_files[i]);
+      CdListTemplateCB.Items.Add(cdlist_last_used_template_files[i]);
 	end;
-  CDList_Template_ComboBox.ItemIndex	:=	0;
+  CdListTemplateCB.ItemIndex	:=	0;
 
 end;
 
 {--- CDList : Start to read in the textfile -----------------------------------}
-procedure TF_Main.Go_Btn3Click(Sender: TObject);
+procedure TF_Main.CdListGoBtnClick(Sender: TObject);
 var
 	F         : TextFile;
 	ln        : String;
@@ -1526,19 +1532,19 @@ begin
 	start_search_time :=  Time;
 
 	{ - Begin : Get number of tabs and adjust StringGrid - }
-	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	AssignFile(F, CdListSourceFileCB.Items[CdListSourceFileCB.ItemIndex]);
 	Reset(F);
 	Readln(F, ln);
 
 	CDListe_StringGrid.ColCount :=  separate_string_to_get_tabcount(ln);
 
-	F_Main.FormResize(Go_Btn3);
+	F_Main.FormResize(CdListGoBtn);
 
 	CloseFile(F);
 	{ - End : Get number of tabs and adjust StringGrid - }
 
   { - Begin : Fill lines - }
-	AssignFile(F, CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex]);
+	AssignFile(F, CdListSourceFileCB.Items[CdListSourceFileCB.ItemIndex]);
   Reset(F);
 
   {zeilenweise lesen und zuweisen}
@@ -1568,28 +1574,28 @@ begin
     cdlist_result_count :=  cdlist_result_count - 1;
 
   {Anzahl gefundener Treffer anzeigen.}
-  CDList_Result_Label.Color			  :=  clBlack;
-  CDList_Result_Label.Caption		  :=	IntToStr(cdlist_result_count) + ' Titel gefunden ';
+  CdListResultLab.Color			  :=  clBlack;
+  CdListResultLab.Caption		  :=	IntToStr(cdlist_result_count) + ' Titel gefunden ';
 
   {Ende der Suche}
   end_search_time :=  Time;
 
   {Buttons einstellen}
   if cdlist_result_count > 0 then
-    HTML_OutputButton3.Enabled  :=  True;
+    CdListHtmlOutputButton.Enabled  :=  True;
 end;
 
 {--- CDList : When Go3-Btn is clicked (Mouse down) ----------------------------}
-procedure TF_Main.Go_Btn3MouseDown(Sender: TObject; Button: TMouseButton;
+procedure TF_Main.CdListGoBtnMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  CDList_ProgressBar.Position   :=  0;
-	CDList_Result_Label.Color			:=	clBtnFace;
-	CDList_Result_Label.Caption		:=	'...';
+  CdListProgressBar.Position   :=  0;
+	CdListResultLab.Color			:=	clBtnFace;
+	CdListResultLab.Caption		:=	'...';
 end;
 
 {--- CDList : Choose textfile with cds ----------------------------------------}
-procedure TF_Main.Choose_CDList_Source_File_BtnClick(Sender: TObject);
+procedure TF_Main.CdListSourceFileChooseBtnClick(Sender: TObject);
 var
 	i	:	Integer;
 begin
@@ -1600,7 +1606,7 @@ begin
 	begin
 		if FileExists(OpenDialog_FileSelect.FileName) then
     begin
-			Go_Btn3.Enabled :=  True;
+			CdListGoBtn.Enabled :=  True;
 			{neuen Pfad merken und einordnen}
 			move_memory_combos(cdlist_last_used_pathes, OpenDialog_FileSelect.FileName);
 
@@ -1613,23 +1619,23 @@ begin
 			Ini.Free;
 
 			{Combobox neu füllen}
-			CDList_Source_File_CB.Clear;
+			CdListSourceFileCB.Clear;
 			for i := 0 to 9 do
 			begin
 				if FileExists(cdlist_last_used_pathes[i]) then
-					CDList_Source_File_CB.Items.Add(cdlist_last_used_pathes[i]);
+					CdListSourceFileCB.Items.Add(cdlist_last_used_pathes[i]);
 			end;
-			CDList_Source_File_CB.ItemIndex	:=	0;
+			CdListSourceFileCB.ItemIndex	:=	0;
     end
   end
   else
   begin
-    CDList_Source_File_CB.Text  	:=  '';
+    CdListSourceFileCB.Text  	:=  '';
   end;
 end;
 
 
-procedure TF_Main.Go_Btn2Click(Sender: TObject);
+procedure TF_Main.ITunesImportGoBtnClick(Sender: TObject);
 var
 	i,
 	i2,
@@ -1653,9 +1659,10 @@ var
 	DiscNo: string;
 	DiscCnt: string;
 begin
-	Label13.Caption	:=	'...';
-	Lab_Scan_Time4.Caption	:=	'...';
-
+	ITunesImportFoundCntLab2.Caption	:=	'...';
+	ITunesImportScanTime2.Caption	:=	'...';
+	ListBox_Error.Clear;
+
 	{When Search is canceled.}
 	if search_status  = True then
 	begin
@@ -1666,12 +1673,12 @@ begin
 	begin
 		search_status :=  True;
 
-		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrstop');
-		Go_Btn2.Caption  :=  GetTxt( 1, 55, 'Stop');
+		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrstop');
+		ITunesImportGoBtn.Caption  :=  GetTxt( 1, 55, 'Stop');
 
-		if not FileExists(CB_XML_File.Text) then
+		if not FileExists(ITunesImportXmlFileCB.Text) then
 		begin
-			if MessageDlg('File  "' + CB_XML_File.Text + '" not found.',
+			if MessageDlg('File  "' + ITunesImportXmlFileCB.Text + '" not found.',
 								mtWarning,[mbYes, mbNo], 0) = mrYes then
 			begin
 			end;
@@ -1685,7 +1692,7 @@ begin
 		//	http://code.google.com/p/mp3toolbox/issues/detail?id=34
 
 		AddLogMessage('Preloading XML file');
-		AssignFile(F, CB_XML_File.Text);
+		AssignFile(F, ITunesImportXmlFileCB.Text);
 		Reset(F);
 		cnt	:=	0;
 		While not Eof(F) do
@@ -1863,7 +1870,7 @@ begin
 			end_scan_time           :=  Time;
 
 			{Anzeige der Suchzeit.}
-			Lab_Scan_Time4.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
+			ITunesImportFoundCntLab2.Caption		:=	TimeToStr(end_scan_time - start_scan_time);
 
 			total_work_duration	:=  (end_scan_time - start_scan_time) +
 															(end_search_time - start_search_time);
@@ -1872,19 +1879,19 @@ begin
 			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
 			MP3_ListBox.Sorted	:=	True;
-			Label13.Caption	:=	IntToStr(mp3list_result_count);
+			ITunesImportFoundCntLab2.Caption	:=	IntToStr(mp3list_result_count);
 
-			if not TabSheet4.TabVisible then
+			if not ErrorTS.TabVisible then
 			begin
 				if ListBox_Error.Count > 0 then
-					TabSheet4.TabVisible	:=	True;
+					ErrorTS.TabVisible	:=	True;
 			end;
 
 		end;
 
 		{Button zurücksetzen}
-		Go_Btn2.Glyph.LoadFromResourceName(HInstance,'vcrplay');
-		Go_Btn2.Caption  :=  GetTxt( 1, 49, 'Go !');
+		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
+		ITunesImportGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
 		cancel_search	:=	False;
 		search_status :=  False;
@@ -1896,20 +1903,20 @@ begin
 
 	end;
 
-	HTML_OutputButton2.Enabled :=	MP3_ListBox.Items.Count > 0;
+	ITunesImportHtmlOutputBtn.Enabled :=	MP3_ListBox.Items.Count > 0;
 end;
 
-procedure TF_Main.Btn_XML_File_SelectClick(Sender: TObject);
+procedure TF_Main.ITunesImportXmlFileSelectBtnClick(Sender: TObject);
 var
 	i	:	Integer;
 	INI	:	TIniFile;
 begin
 	if OpenDialog_FileSelect.Execute = True then
 	begin
-		CB_XML_File.Items.Add(OpenDialog_FileSelect.FileName);
-		CB_XML_File.Text	:=	OpenDialog_FileSelect.FileName;
+		ITunesImportXmlFileCB.Items.Add(OpenDialog_FileSelect.FileName);
+		ITunesImportXmlFileCB.Text	:=	OpenDialog_FileSelect.FileName;
 
-		Go_Btn2.Enabled :=  True;
+		ITunesImportGoBtn.Enabled :=  True;
 
 		{neuen Pfad merken und einordnen}
 		move_memory_combos(xmllist_last_used_files, OpenDialog_FileSelect.FileName);
@@ -1923,20 +1930,38 @@ begin
 		Ini.Free;
 
 		{Combobox neu füllen}
-		CB_XML_File.Clear;
+		ITunesImportXmlFileCB.Clear;
 		for i := 0 to 9 do
 		begin
 			if FileExists(xmllist_last_used_files[i]) then
-				CB_XML_File.Items.Add(xmllist_last_used_files[i]);
+				ITunesImportXmlFileCB.Items.Add(xmllist_last_used_files[i]);
 		end;
-		CB_XML_File.ItemIndex	:=	0;
+		ITunesImportXmlFileCB.ItemIndex	:=	0;
 	end;
 end;
 
-{--- CDList : Close Form ------------------------------------------------------}
-procedure TF_Main.CB_XML_FileChange(Sender: TObject);
+procedure TF_Main.MainSelectionBtn1Click(Sender: TObject);
 begin
-	Go_Btn2.Enabled	:=	CB_XML_File.Text <> '';
+	MainSelectionPanel1.Visible	:=	False;
+	FolderScanTS.TabVisible	:=	True;
+	ITunesImportTS.TabVisible	:=	False;
+	ErrorTS.TabVisible	:=	False;
+	GenreTS.TabVisible	:=	False;
+end;
+
+procedure TF_Main.MainSelectionBtn2Click(Sender: TObject);
+begin
+	MainSelectionPanel1.Visible	:=	False;
+	ITunesImportTS.TabVisible	:=	True;
+	FolderScanTS.TabVisible	:=	False;
+	ErrorTS.TabVisible	:=	False;
+	GenreTS.TabVisible	:=	False;
+end;
+
+{--- CDList : Close Form ------------------------------------------------------}
+procedure TF_Main.ITunesImportXmlFileCBChange(Sender: TObject);
+begin
+	ITunesImportGoBtn.Enabled	:=	ITunesImportXmlFileCB.Text <> '';
 end;
 
 procedure TF_Main.CDList_Close_BtnClick(Sender: TObject);
@@ -1945,14 +1970,14 @@ begin
 end;
 
 {--- CDList : create website --------------------------------------------------}
-procedure TF_Main.HTML_OutputButton3Click(Sender: TObject);
+procedure TF_Main.CdListHtmlOutputButtonClick(Sender: TObject);
 begin
 	{Progressbar maximum einstellen}
-  CDList_ProgressBar.Max  :=  cdlist_result_count;
+  CdListProgressBar.Max  :=  cdlist_result_count;
 
 	{Seite erstellen}
 //  create_html_output(cdlist_template_file_dir_and_name,
-	create_html_output(CDList_Template_ComboBox.Items[CDList_Template_ComboBox.ItemIndex],
+	create_html_output(CdListTemplateCB.Items[CdListTemplateCB.ItemIndex],
 //  									 SlashSep(html_files_output_path, cdlist_html_output_file),
   									 Result_File_ComboBox.Items[Result_File_ComboBox.ItemIndex],
                      '',
@@ -1980,7 +2005,7 @@ begin
   end;
 
 	{clear progressbar}
-  CDList_ProgressBar.Position  :=  0;
+  CdListProgressBar.Position  :=  0;
 end;
 
 {--- CDList : PopUp - Edit selected file --------------------------------------}
@@ -2004,7 +2029,7 @@ begin
 	{check for filename in array and overwrite it with nothing}
 	for i := 0 to Length(cdlist_last_used_pathes) - 1 do
   begin
-    if cdlist_last_used_pathes[i] = CDList_Source_File_CB.Items[CDList_Source_File_CB.ItemIndex] then
+    if cdlist_last_used_pathes[i] = CdListSourceFileCB.Items[CdListSourceFileCB.ItemIndex] then
     begin
     	cdlist_last_used_pathes[i]	:=	'';
 
@@ -2021,7 +2046,7 @@ begin
   Ini.Free;
 
   {Refill listbox}
-  TabSheet3Show(DateiausListeentfernen1);
+	CdListTSShow(DateiausListeentfernen1);
 end;
 
 
@@ -2049,7 +2074,7 @@ procedure TF_Main.checkfilenamesfornoof1Click(Sender: TObject);
 var
 	i	:	Integer;
 begin
-  NameCheck_ListBox.Clear;
+	NameCheckTS.TabVisible	:=	False;
 
 	if MP3_ListBox.Items.Count > 0 then
   	for i := 0 to MP3_ListBox.Items.Count - 1 do
@@ -2057,9 +2082,8 @@ begin
       	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
   if NameCheck_ListBox.Items.Count > 0 then
-	  NameCheck_ListBox.BringToFront
-  else
-	  MP3_ListBox.BringToFront;
+		NameCheckTS.TabVisible	:=	True;
+
 end;
 
 procedure TF_Main.AboutMP3Toolbox1Click(Sender: TObject);
@@ -2074,7 +2098,7 @@ begin
 		Char_Count_Lab.Caption  :=  IntToStr(Length(NameCheck_ListBox.Items[NameCheck_ListBox.ItemIndex]));
 end;
 
-procedure TF_Main.CDList_Template_SpeedButtonClick(Sender: TObject);
+procedure TF_Main.CdListTemplateSpeedBtnClick(Sender: TObject);
 var
 	i	:	Integer;
 begin
@@ -2098,17 +2122,17 @@ begin
       Ini.Free;
 
       {Combobox neu füllen}
-      CDList_Template_ComboBox.Clear;
+      CdListTemplateCB.Clear;
       for i := 0 to 9 do
       begin
         if FileExists(cdlist_last_used_template_files[i]) then
-          CDList_Template_ComboBox.Items.Add(cdlist_last_used_template_files[i]);
+          CdListTemplateCB.Items.Add(cdlist_last_used_template_files[i]);
       end;
-      CDList_Template_ComboBox.ItemIndex	:=	0;
+      CdListTemplateCB.ItemIndex	:=	0;
     end
   end
   else
-    CDList_Template_ComboBox.Text  	:=  '';
+    CdListTemplateCB.Text  	:=  '';
 end;
 
 procedure TF_Main.Result_File_SpeedButtonClick(Sender: TObject);
@@ -2201,9 +2225,10 @@ begin
 	begin
 		FtpUpload.ChangeDir(FtpConnection.RemoteDir);
 		for i := 0 to FtpUploadList.Count - 1 do
-
+		begin
 			FtpUpload.Put(FtpUploadList[i], get_filename_from_complete_string(FtpUploadList[i], '\'), False);
-
+			AddLogMessage('Uploaded file ' + IntToStr(i + 1) + ' of ' + IntToStr(FtpUploadList.Count));
+		end;
 		Result	:=	True;
 	end
 	else
@@ -2341,11 +2366,6 @@ begin
 		if not AQuiet then
 			ShowMessage(GetTxt(1, 85, 'Up-to-date check failed. Could not connect to server.'));
 	end;
-end;
-
-procedure TF_Main.LogListBoxClick(Sender: TObject);
-begin
-	LoglistBox.Visible	:=	False;
 end;
 
 procedure TF_Main.AddLogMessage(AMessage : String);

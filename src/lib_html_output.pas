@@ -91,7 +91,7 @@ var
 	i1        : Integer;
 begin
 	{Einzelne Seite ausgeben}
-	AssignFile(InFile, F_Main.CDList_Source_File_CB.Items[F_Main.CDList_Source_File_CB.ItemIndex]);
+	AssignFile(InFile, F_Main.CdListSourceFileCB.Items[F_Main.CdListSourceFileCB.ItemIndex]);
 	Reset(InFile);
 
 	{zeilenweise lesen und zuweisen}
@@ -120,7 +120,7 @@ begin
 
 		AOutputStrings.Add('</tr>');
 		linecount :=  linecount + 1;
-		F_Main.CDList_ProgressBar.Position  :=  linecount;
+		F_Main.CdListProgressBar.Position  :=  linecount;
 
 	end;
 	AOutputStrings.Add('</table>');
@@ -292,11 +292,11 @@ begin
 					else
 						writeln (OutFile, F_Main.MP3_ListBox.Items[i] + '<br />');
 
-					F_Main.Search_ProgressBar.Position	:= ((i + 1) * 100) div F_Main.MP3_ListBox.Items.Count;
+					F_Main.FolderScanSearchProgressBar.Position	:= ((i + 1) * 100) div F_Main.MP3_ListBox.Items.Count;
 				end;
 				{fill up gauge}
-				F_Main.Search_ProgressBar.Position	:=	100;
-				F_Main.Search_ProgressBar.Position	:=	0;
+				F_Main.FolderScanSearchProgressBar.Position	:=	100;
+				F_Main.FolderScanSearchProgressBar.Position	:=	0;
 
 				if TplIsUnicode then
 					writeln (OutFile, AnsiToUTF8(seperate_string_in_parts(ln, '{#mp3list:result_list}', 'end')))

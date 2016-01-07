@@ -22,13 +22,6 @@ object F_Main: TF_Main
     740)
   PixelsPerInch = 96
   TextHeight = 16
-  object SearchResultLab: TLabel
-    Left = 8
-    Top = 401
-    Width = 95
-    Height = 16
-    Caption = 'SearchResultLab'
-  end
   object PageControl1: TPageControl
     Left = 0
     Top = 3
@@ -38,10 +31,10 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = TabSheet2
+    ActivePage = FolderScanTS
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
-    object TabSheet1: TTabSheet
+    object FolderScanTS: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -50,7 +43,7 @@ object F_Main: TF_Main
       DesignSize = (
         782
         362)
-      object Pacman_Btn: TSpeedButton
+      object FolderScanPacmanBtn: TSpeedButton
         Left = 571
         Top = 267
         Width = 47
@@ -218,7 +211,7 @@ object F_Main: TF_Main
         Transparent = False
         Visible = False
       end
-      object MP3FilesListDirCntLab2: TLabel
+      object FolderScanListDirCntLab2: TLabel
         Left = 696
         Top = 188
         Width = 64
@@ -239,7 +232,7 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
       end
-      object MP3FilesListResultLab2: TLabel
+      object FolderScanListResultLab2: TLabel
         Left = 696
         Top = 168
         Width = 64
@@ -287,7 +280,7 @@ object F_Main: TF_Main
         Caption = 'Characters'
         Visible = False
       end
-      object MP3FilesListResultLab1: TLabel
+      object FolderScanListResultLab1: TLabel
         Left = 569
         Top = 168
         Width = 119
@@ -309,10 +302,10 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        OnClick = MP3FilesListResultLab1Click
+        OnClick = FolderScanListResultLab1Click
         ExplicitLeft = 571
       end
-      object MP3FilesListDirCntLab1: TLabel
+      object FolderScanListDirCntLab1: TLabel
         Left = 569
         Top = 188
         Width = 119
@@ -336,7 +329,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object MP3FilesListSearchTimeLab1: TLabel
+      object FolderScanListSearchTimeLab1: TLabel
         Left = 569
         Top = 208
         Width = 119
@@ -360,7 +353,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object Label4: TLabel
+      object FolderScanScanResult1: TLabel
         Left = 569
         Top = 228
         Width = 119
@@ -384,7 +377,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object Label5: TLabel
+      object FolderScanScanTimeLab1: TLabel
         Left = 569
         Top = 248
         Width = 119
@@ -408,7 +401,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 571
       end
-      object Lab_Scan_Result: TLabel
+      object FolderScanScanResult2: TLabel
         Left = 696
         Top = 228
         Width = 64
@@ -430,7 +423,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object Lab_Scan_Time: TLabel
+      object FolderScanScanTimeLab2: TLabel
         Left = 696
         Top = 248
         Width = 64
@@ -452,7 +445,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object MP3FilesListSearchTimeLab2: TLabel
+      object FolderScanListSearchTimeLab2: TLabel
         Left = 696
         Top = 207
         Width = 64
@@ -474,7 +467,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object Multi_Dir_GroupBox: TGroupBox
+      object FolderScanMultiDirGroupBox: TGroupBox
         Left = 0
         Top = 5
         Width = 535
@@ -794,7 +787,7 @@ object F_Main: TF_Main
           OnClick = Output_with_filesize_CBClick
         end
       end
-      object TXT_Output_Btn: TBitBtn
+      object FolderScanTxtOutputBtn: TBitBtn
         Left = 569
         Top = 92
         Width = 185
@@ -821,9 +814,9 @@ object F_Main: TF_Main
         Margin = 10
         ParentFont = False
         TabOrder = 0
-        OnClick = TXT_Output_BtnClick
+        OnClick = FolderScanTxtOutputBtnClick
       end
-      object HTML_OutputButton: TBitBtn
+      object FolderScanHtmlOutputBtn: TBitBtn
         Left = 569
         Top = 53
         Width = 185
@@ -871,9 +864,9 @@ object F_Main: TF_Main
         Margin = 10
         ParentFont = False
         TabOrder = 1
-        OnClick = HTML_OutputButtonClick
+        OnClick = FolderScanHtmlOutputBtnClick
       end
-      object Go_Btn: TBitBtn
+      object FolderScanGoBtn: TBitBtn
         Left = 571
         Top = 14
         Width = 185
@@ -908,9 +901,9 @@ object F_Main: TF_Main
         NumGlyphs = 2
         ParentFont = False
         TabOrder = 2
-        OnClick = Go_BtnClick
+        OnClick = FolderScanGoBtnClick
       end
-      object Pacman_Panel: TPanel
+      object FolderScanPacmanPanel: TPanel
         Left = 569
         Top = 209
         Width = 187
@@ -921,7 +914,7 @@ object F_Main: TF_Main
         Margins.Bottom = 4
         TabOrder = 4
         Visible = False
-        object Pacman_Speed_Edit: TEdit
+        object FolderScanPacmanSpeedEdit: TEdit
           Left = 10
           Top = 11
           Width = 50
@@ -931,9 +924,9 @@ object F_Main: TF_Main
           Margins.Right = 4
           Margins.Bottom = 4
           TabOrder = 0
-          OnChange = Pacman_Speed_EditChange
+          OnChange = FolderScanPacmanSpeedEditChange
         end
-        object Start_Pacman_Btn: TButton
+        object FolderScanPacmanStartBtn: TButton
           Left = 69
           Top = 15
           Width = 31
@@ -951,9 +944,9 @@ object F_Main: TF_Main
           Font.Style = []
           ParentFont = False
           TabOrder = 1
-          OnClick = Start_Pacman_BtnClick
+          OnClick = FolderScanPacmanStartBtnClick
         end
-        object Close_Pacman_Btn: TBitBtn
+        object FolderScanPacmanCloseBtn: TBitBtn
           Left = 108
           Top = 15
           Width = 51
@@ -971,10 +964,10 @@ object F_Main: TF_Main
           Font.Style = []
           ParentFont = False
           TabOrder = 2
-          OnClick = Close_Pacman_BtnClick
+          OnClick = FolderScanPacmanCloseBtnClick
         end
       end
-      object Search_ProgressBar: TProgressBar
+      object FolderScanSearchProgressBar: TProgressBar
         Left = 569
         Top = 130
         Width = 185
@@ -988,18 +981,18 @@ object F_Main: TF_Main
         TabOrder = 5
       end
     end
-    object TabSheet3: TTabSheet
+    object CdListTS: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = 'cdlist'
+      Caption = '?!cdlist'
       ImageIndex = 2
-      OnShow = TabSheet3Show
+      OnShow = CdListTSShow
       DesignSize = (
         782
         362)
-      object CDList_Result_Label: TLabel
+      object CdListResultLab: TLabel
         Left = 609
         Top = 142
         Width = 151
@@ -1024,7 +1017,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 611
       end
-      object CDList_ProgressBar: TProgressBar
+      object CdListProgressBar: TProgressBar
         Left = 609
         Top = 90
         Width = 151
@@ -1061,7 +1054,7 @@ object F_Main: TF_Main
         ParentFont = False
         TabOrder = 0
       end
-      object HTML_OutputButton3: TBitBtn
+      object CdListHtmlOutputButton: TBitBtn
         Left = 609
         Top = 34
         Width = 151
@@ -1102,9 +1095,9 @@ object F_Main: TF_Main
           5858585858585858585858585858585858000000000000000000}
         Margin = 10
         TabOrder = 1
-        OnClick = HTML_OutputButton3Click
+        OnClick = CdListHtmlOutputButtonClick
       end
-      object CDLIst_Choose_GB: TGroupBox
+      object CdListChooseGB: TGroupBox
         Left = 0
         Top = 9
         Width = 593
@@ -1118,7 +1111,7 @@ object F_Main: TF_Main
         DesignSize = (
           593
           179)
-        object Choose_CDList_Source_File_Btn: TSpeedButton
+        object CdListSourceFileChooseBtn: TSpeedButton
           Left = 415
           Top = 25
           Width = 50
@@ -1163,7 +1156,7 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
-          OnClick = Choose_CDList_Source_File_BtnClick
+          OnClick = CdListSourceFileChooseBtnClick
           ExplicitLeft = 417
         end
         object Result_File_SpeedButton: TSpeedButton
@@ -1214,7 +1207,7 @@ object F_Main: TF_Main
           OnClick = Result_File_SpeedButtonClick
           ExplicitLeft = 417
         end
-        object CDList_Template_SpeedButton: TSpeedButton
+        object CdListTemplateSpeedBtn: TSpeedButton
           Left = 415
           Top = 81
           Width = 50
@@ -1259,10 +1252,10 @@ object F_Main: TF_Main
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000}
-          OnClick = CDList_Template_SpeedButtonClick
+          OnClick = CdListTemplateSpeedBtnClick
           ExplicitLeft = 417
         end
-        object CD_List_Open_File_Lab: TLabel
+        object CdListOpenFileLab: TLabel
           Left = 10
           Top = 4
           Width = 124
@@ -1273,7 +1266,7 @@ object F_Main: TF_Main
           Margins.Bottom = 4
           Caption = 'Which file to read in :'
         end
-        object CDList_Template_Label: TLabel
+        object CdListTemplateLab: TLabel
           Left = 10
           Top = 59
           Width = 63
@@ -1295,7 +1288,7 @@ object F_Main: TF_Main
           Margins.Bottom = 4
           Caption = 'Result file :'
         end
-        object CDList_Source_File_CB: TComboBox
+        object CdListSourceFileCB: TComboBox
           Left = 10
           Top = 25
           Width = 397
@@ -1314,10 +1307,10 @@ object F_Main: TF_Main
           Font.Pitch = fpVariable
           Font.Style = []
           ParentFont = False
-          PopupMenu = CDList_Popup
+          PopupMenu = CdListPopup
           TabOrder = 1
         end
-        object Go_Btn3: TBitBtn
+        object CdListGoBtn: TBitBtn
           Left = 473
           Top = 25
           Width = 110
@@ -1344,10 +1337,10 @@ object F_Main: TF_Main
             00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
           NumGlyphs = 2
           TabOrder = 0
-          OnClick = Go_Btn3Click
-          OnMouseDown = Go_Btn3MouseDown
+          OnClick = CdListGoBtnClick
+          OnMouseDown = CdListGoBtnMouseDown
         end
-        object CDList_Template_ComboBox: TComboBox
+        object CdListTemplateCB: TComboBox
           Left = 10
           Top = 81
           Width = 397
@@ -1391,32 +1384,20 @@ object F_Main: TF_Main
         end
       end
     end
-    object TabSheet4: TTabSheet
-      Caption = 'Error'
-      ImageIndex = 3
-      object ListBox_Error: TListBox
-        Left = 0
-        Top = 0
-        Width = 782
-        Height = 362
-        Align = alClient
-        TabOrder = 0
-      end
-    end
-    object TabSheet2: TTabSheet
+    object ITunesImportTS: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
       DesignSize = (
         782
         362)
-      object Label7: TLabel
+      object ITunesImportXmlFileLab: TLabel
         Left = 19
         Top = 12
         Width = 92
         Height = 16
         Caption = '??Which xml file'
       end
-      object Lab_Scan_Time3: TLabel
+      object ITunesImportScanTime1: TLabel
         Left = 569
         Top = 188
         Width = 59
@@ -1438,82 +1419,7 @@ object F_Main: TF_Main
         ParentFont = False
         Layout = tlCenter
       end
-      object Label9: TLabel
-        Left = 569
-        Top = 300
-        Width = 119
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '??Tags scanned'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 571
-      end
-      object Label10: TLabel
-        Left = 569
-        Top = 280
-        Width = 119
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '??Search time'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 571
-      end
-      object Label11: TLabel
-        Left = 569
-        Top = 260
-        Width = 119
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '??Directories searched'
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 571
-      end
-      object Label12: TLabel
+      object ITunesImportFoundCntLab1: TLabel
         Left = 569
         Top = 167
         Width = 82
@@ -1531,9 +1437,9 @@ object F_Main: TF_Main
         Font.Style = []
         ParentFont = False
       end
-      object Label13: TLabel
+      object ITunesImportFoundCntLab2: TLabel
         Left = 696
-        Top = 168
+        Top = 164
         Width = 64
         Height = 16
         Margins.Left = 4
@@ -1553,78 +1459,8 @@ object F_Main: TF_Main
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 698
       end
-      object Label14: TLabel
-        Left = 696
-        Top = 260
-        Width = 64
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '00000'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 698
-      end
-      object Label15: TLabel
-        Left = 696
-        Top = 279
-        Width = 64
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '00:00:00'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 698
-      end
-      object Label16: TLabel
-        Left = 696
-        Top = 300
-        Width = 64
-        Height = 16
-        Margins.Left = 4
-        Margins.Top = 4
-        Margins.Right = 4
-        Margins.Bottom = 4
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = '000000'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        ParentFont = False
-        Layout = tlCenter
-        Visible = False
-        ExplicitLeft = 698
-      end
-      object Lab_Scan_Time4: TLabel
+      object ITunesImportScanTime2: TLabel
         Left = 696
         Top = 188
         Width = 64
@@ -1646,7 +1482,7 @@ object F_Main: TF_Main
         Layout = tlCenter
         ExplicitLeft = 698
       end
-      object Btn_XML_File_Select: TSpeedButton
+      object ITunesImportXmlFileSelectBtn: TSpeedButton
         Left = 400
         Top = 34
         Width = 41
@@ -1664,9 +1500,9 @@ object F_Main: TF_Main
           33000BB0B7B7B7B033000FBB0000000033000BFB0B0B0B0333000FBFBFBFB003
           33000BFBFBF00033330030BFBF03333333003800008333333300333333333333
           33003333333333333300}
-        OnClick = Btn_XML_File_SelectClick
+        OnClick = ITunesImportXmlFileSelectBtnClick
       end
-      object Hyperlink_Label: TLabel
+      object ITunesImportHyperlinkLab: TLabel
         Left = 19
         Top = 75
         Width = 175
@@ -1683,9 +1519,9 @@ object F_Main: TF_Main
         Font.Style = [fsUnderline]
         ParentColor = False
         ParentFont = False
-        OnClick = Hyperlink_LabelClick
+        OnClick = ITunesImportHyperlinkLabClick
       end
-      object Go_Btn2: TBitBtn
+      object ITunesImportGoBtn: TBitBtn
         Left = 569
         Top = 30
         Width = 185
@@ -1720,9 +1556,9 @@ object F_Main: TF_Main
         NumGlyphs = 2
         ParentFont = False
         TabOrder = 0
-        OnClick = Go_Btn2Click
+        OnClick = ITunesImportGoBtnClick
       end
-      object HTML_OutputButton2: TBitBtn
+      object ITunesImportHtmlOutputBtn: TBitBtn
         Left = 569
         Top = 69
         Width = 185
@@ -1770,16 +1606,108 @@ object F_Main: TF_Main
         Margin = 10
         ParentFont = False
         TabOrder = 1
-        OnClick = HTML_OutputButtonClick
+        OnClick = FolderScanHtmlOutputBtnClick
       end
-      object CB_XML_File: TComboBox
+      object ITunesImportXmlFileCB: TComboBox
         Left = 19
         Top = 34
         Width = 374
         Height = 24
         TabOrder = 2
         Text = 't:\Zuletzt hinzugef'#252'gt.xml'
-        OnChange = CB_XML_FileChange
+        OnChange = ITunesImportXmlFileCBChange
+      end
+    end
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Top = 721
+    Width = 790
+    Height = 19
+    Panels = <
+      item
+        Width = 50
+      end>
+    OnClick = StatusBarClick
+  end
+  object PageControl2: TPageControl
+    Left = 0
+    Top = 398
+    Width = 790
+    Height = 323
+    ActivePage = SearchResultTS
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 3
+    OnChange = PageControl2Change
+    object SearchResultTS: TTabSheet
+      Caption = '?!SearchResult'
+      ImageIndex = 1
+      object MP3_ListBox: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 292
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Align = alClient
+        ExtendedSelect = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 15
+        Font.Name = 'arial'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ItemHeight = 15
+        MultiSelect = True
+        ParentFont = False
+        PopupMenu = FolderScanPopupMenu
+        TabOrder = 0
+        OnClick = MP3_ListBoxClick
+        OnMouseUp = MP3_ListBoxMouseUp
+      end
+    end
+    object LogTS: TTabSheet
+      Caption = '?!Log'
+      object LogListBox: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 292
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Align = alClient
+        ExtendedSelect = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 15
+        Font.Name = 'arial'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ItemHeight = 15
+        MultiSelect = True
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object NameCheckTS: TTabSheet
+      Caption = '?!NameCheckTS'
+      ImageIndex = 2
+      object NameCheck_ListBox: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 292
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Align = alClient
+        TabOrder = 0
+        OnMouseUp = NameCheck_ListBoxMouseUp
       end
     end
     object GenreTS: TTabSheet
@@ -1800,79 +1728,51 @@ object F_Main: TF_Main
         TabOrder = 0
       end
     end
+    object ErrorTS: TTabSheet
+      Caption = '?!Error'
+      ImageIndex = 3
+      object ListBox_Error: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 292
+        Align = alClient
+        TabOrder = 0
+      end
+    end
   end
-  object NameCheck_ListBox: TListBox
-    Left = 7
-    Top = 448
-    Width = 732
-    Height = 271
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 1
-    OnMouseUp = NameCheck_ListBoxMouseUp
-  end
-  object MP3_ListBox: TListBox
-    Left = 0
-    Top = 424
-    Width = 789
-    Height = 297
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    ExtendedSelect = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = 15
-    Font.Name = 'arial'
-    Font.Pitch = fpVariable
-    Font.Style = []
-    ItemHeight = 15
-    MultiSelect = True
-    ParentFont = False
-    PopupMenu = MP3List_PopupMenu
+  object MainSelectionPanel1: TPanel
+    Left = 771
+    Top = 136
+    Width = 573
+    Height = 361
     TabOrder = 2
-    OnClick = MP3_ListBoxClick
-    OnMouseUp = MP3_ListBoxMouseUp
-  end
-  object StatusBar: TStatusBar
-    Left = 0
-    Top = 721
-    Width = 790
-    Height = 19
-    Panels = <
-      item
-        Width = 50
-      end>
-    OnClick = StatusBarClick
-  end
-  object LogListBox: TListBox
-    Left = 1
-    Top = 424
-    Width = 789
-    Height = 297
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    ExtendedSelect = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = 15
-    Font.Name = 'arial'
-    Font.Pitch = fpVariable
-    Font.Style = []
-    ItemHeight = 15
-    MultiSelect = True
-    ParentFont = False
-    TabOrder = 4
-    Visible = False
-    OnClick = LogListBoxClick
+    object MainSelectionPanel2: TPanel
+      Left = 91
+      Top = 69
+      Width = 406
+      Height = 223
+      BevelOuter = bvNone
+      TabOrder = 0
+      object MainSelectionBtn1: TButton
+        Left = 0
+        Top = 0
+        Width = 406
+        Height = 108
+        Caption = '?!Scan your folders for MP3 files and create your websites'
+        TabOrder = 0
+        OnClick = MainSelectionBtn1Click
+      end
+      object MainSelectionBtn2: TButton
+        Left = 0
+        Top = 115
+        Width = 406
+        Height = 108
+        Caption = '?!Import your iTunes library and create your websites'
+        TabOrder = 1
+        OnClick = MainSelectionBtn2Click
+      end
+    end
   end
   object MainMenu1: TMainMenu
     Left = 328
@@ -1983,8 +1883,8 @@ object F_Main: TF_Main
       end
     end
   end
-  object MP3List_PopupMenu: TPopupMenu
-    OnPopup = MP3List_PopupMenuPopup
+  object FolderScanPopupMenu: TPopupMenu
+    OnPopup = FolderScanPopupMenuPopup
     Left = 362
     Top = 17
     object checkfilenames1: TMenuItem
@@ -2025,7 +1925,7 @@ object F_Main: TF_Main
     Left = 328
     Top = 48
   end
-  object CDList_Popup: TPopupMenu
+  object CdListPopup: TPopupMenu
     Left = 400
     Top = 16
     object Dateibearbeiten1: TMenuItem
@@ -2047,23 +1947,23 @@ object F_Main: TF_Main
   end
   object Template_OpenDialog: TOpenDialog
     FilterIndex = 0
-    Left = 480
-    Top = 96
+    Left = 544
+    Top = 16
   end
   object Result_File_SaveDialog: TSaveDialog
     FilterIndex = 0
     Title = 'Speichern'
-    Left = 480
-    Top = 144
+    Left = 616
+    Top = 16
   end
   object OpenDialog_FileSelect: TOpenDialog
     FilterIndex = 0
     Left = 480
-    Top = 48
+    Top = 16
   end
   object XMLDocumentiTunesImport: TXMLDocument
-    Left = 336
-    Top = 296
+    Left = 752
+    Top = 16
     DOMVendorDesc = 'MSXML'
   end
   object FtpUpload: TIdFTP
@@ -2073,12 +1973,12 @@ object F_Main: TF_Main
     NATKeepAlive.IntervalMS = 0
     ProxySettings.ProxyType = fpcmNone
     ProxySettings.Port = 0
-    Left = 496
-    Top = 296
+    Left = 664
+    Top = 16
   end
   object XMLDocumentUpdate: TXMLDocument
-    Left = 216
-    Top = 296
+    Left = 712
+    Top = 16
     DOMVendorDesc = 'MSXML'
   end
 end
