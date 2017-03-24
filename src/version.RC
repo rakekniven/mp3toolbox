@@ -12,7 +12,7 @@ FILETYPE VFT_APP
    VALUE "CompanyName", "Mark Ziegler\000"
    VALUE "FileDescription", "Create listings of your mp3 music collection\000"
    VALUE "FileVersion", "1.1.24.0\000"
-   VALUE "InternalName", "$Revision$ D2010\000"
+   VALUE "InternalName", "$Revision$ XE5\000"
    VALUE "LegalCopyright", "Mark Ziegler\000"
    VALUE "LegalTrademarks", "\000"
    VALUE "OriginalFilename", "MP3Toolbox\000"
