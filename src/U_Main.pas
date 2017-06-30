@@ -1464,6 +1464,8 @@ begin
 		//	http://code.google.com/p/mp3toolbox/issues/detail?id=34
 
 		AddLogMessage('Preloading XML file');
+		Application.ProcessMessages;
+
 		AssignFile(F, ITunesImportXmlFileCB.Text);
 		Reset(F);
 		cnt	:=	0;
@@ -1479,6 +1481,8 @@ begin
 		XMLDocumentiTunesImport.Active	:=	True;
 
 		AddLogMessage('Processing XML content');
+		Application.ProcessMessages;
+
 		for i := 0 to XMLDocumentiTunesImport.DocumentElement.ChildNodes.Count - 1 do
 		begin
 			Application.ProcessMessages;
