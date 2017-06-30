@@ -1,4 +1,4 @@
-object F_Main: TF_Main
+﻿object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
@@ -1213,6 +1213,29 @@ object F_Main: TF_Main
         TabOrder = 2
         Text = 't:\Zuletzt hinzugef'#252'gt.xml'
         OnChange = ITunesImportXmlFileCBChange
+      end
+      object FtpUploadBitBtn: TBitBtn
+        Left = 569
+        Top = 108
+        Width = 185
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Anchors = [akTop, akRight]
+        Caption = '??Upload via FTP'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 15
+        Font.Name = 'arial'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        Margin = 10
+        ParentFont = False
+        TabOrder = 3
+        Visible = False
+        OnClick = FtpUploadBitBtnClick
       end
     end
   end

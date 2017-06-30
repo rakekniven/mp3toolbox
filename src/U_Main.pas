@@ -1,4 +1,4 @@
-(*
+ï»¿(*
 one line to give the program's name and an idea of what it does.
 Copyright (C) yyyy  name of author
 
@@ -131,6 +131,7 @@ type
 		MainSelectionPanel2: TPanel;
 		MainSelectionBtn1: TButton;
 		MainSelectionBtn2: TButton;
+		FtpUploadBitBtn: TBitBtn;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -204,6 +205,7 @@ type
 		procedure MainSelectionBtn1Click(Sender: TObject);
 		procedure MainSelectionBtn2Click(Sender: TObject);
 		procedure PageControl2Change(Sender: TObject);
+		procedure FtpUploadBitBtnClick(Sender: TObject);
 
 	private
 		cnt: Integer;
@@ -243,13 +245,13 @@ var
 	text_files_output_path			        :	String;							//	Pfad wo Text-Dateien gesichert werden sollen.
 	html_files_output_path			        :	String;							//	Pfad wo HTML-Dateien gesichert werden sollen.
 
-	{Variablen für MP3Liste}
+	{Variablen fï¿½r MP3Liste}
 	mp3list_html_multi_output		        :	Integer;            //  0 = single page ; 1 = one page for everey character
 	mp3list_html_output_file		        :	String;             //  Name der HTML-Ausgabedatei
 	mp3list_text_output_file            : String;             //  Name der Text-Ausgabedatei
 	mp3list_single_template_file			  : String;             //  path and name of the template file
 	mp3list_multi_template_file					: String;             //  path and name of the multi template file
-	mp3list_result_count								:	Integer;            //	Zähler für Suchergebnis
+	mp3list_result_count								:	Integer;            //	Zï¿½hler fï¿½r Suchergebnis
 	mp3list_html_file_name              : String;
 	mp3list_html_file_ending            : String;
 	mp3list_html_output_format          : String;
@@ -264,7 +266,7 @@ var
 	InsertSortingZero										: Boolean;
 	DeleteAfterFtpUpload								: Boolean;
 
-	{Variablen für CD-Archive}
+	{Variablen fï¿½r CD-Archive}
 	cdarchive_path_to_read_in		        : String;
 	cdarchive_path_to_act_archive	      : String;
 	cdarchive_last_used_pathes          :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
@@ -441,7 +443,7 @@ begin
 	Set_Language(gui_language);
 	init_text(Sender);
 
-	{Combobox neu füllen}
+	{Combobox neu fï¿½llen}
 	ITunesImportXmlFileCB.Clear;
 	for i := 0 to 9 do
 	begin
@@ -597,7 +599,7 @@ var
 	fb      : TFolderBrowser;
 begin
 	fb := TFolderBrowser.Create(Application.Handle, 'Select a folder to search');
-	{Dialog für Verzeichnisauswahl starten}
+	{Dialog fï¿½r Verzeichnisauswahl starten}
 
 	if(fb <> nil) then
 	begin
@@ -613,7 +615,7 @@ begin
 
 	if sOutDir	<>	'' then
   begin
-    {Nur wenn Ordner ausgewählt wurde.}
+    {Nur wenn Ordner ausgewï¿½hlt wurde.}
 	 	Multi_Dir_ListBox.Items.Add(sOutDir);
   end;
 end;
@@ -709,7 +711,7 @@ end;
 procedure TF_Main.Clear_All_ButtonClick(Sender: TObject);
 begin
 	Multi_Dir_ListBox.Clear;
-	FolderScanGoBtn.Enabled  :=  False;			//	Erst wenn Pfad gewählt wurde.
+	FolderScanGoBtn.Enabled  :=  False;			//	Erst wenn Pfad gewï¿½hlt wurde.
 end;
 
 {--- MP3List : if own filter should be used -----------------------------------}
@@ -790,20 +792,20 @@ begin
 		Pacman_Move_Timer.Enabled :=  True;
 
 
-		{Liste löschen}
+		{Liste lï¿½schen}
 		MP3_ListBox.items.Clear;
 
 		{Wenn eigener Filter angewaehlt wurde}
 		if Own_Filter_CheckBox.Checked	=	True then
 			search_filter_expression	:=	Filter_Edit.Text;
 
-		searched_dir_count	:=	0;           // Verzeichniszähler
-		gauge_step					:=	0;           // Zähler für Gauge-Fortschrittsanzeige
+		searched_dir_count	:=	0;           // Verzeichniszï¿½hler
+		gauge_step					:=	0;           // Zï¿½hler fï¿½r Gauge-Fortschrittsanzeige
 
 		{Stringliste initialisieren}
 		Files							:=	TStringList.Create;
 
-		{Schleife für Abarbeiten der Verzeichnisauswahl}
+		{Schleife fï¿½r Abarbeiten der Verzeichnisauswahl}
 		for i := 0 to (Multi_Dir_ListBox.Items.Count - 1) do
 		begin
 			if Multi_Dir_ListBox.Selected[i] then
@@ -947,7 +949,7 @@ begin
 		total_work_duration	:=  (StopWatchScanTimeEnd - StopWatchScanTimeStart) +
 														(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
-		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
+		{total counter (wird fï¿½r ausgabenschleife benï¿½tigt TXT und HTML}
 		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
     {Anzahl gefundener Treffer anzeigen.}
@@ -960,7 +962,7 @@ begin
     {Speicher freigeben}
     Files.Free;
 
-		{Button zurücksetzen}
+		{Button zurï¿½cksetzen}
 		FolderScanGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
 		FolderScanGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
@@ -1125,7 +1127,7 @@ begin
 			if mp3list_html_files_delete_after_zip then
 			begin
         if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
-          ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
+          ShowMessage(GetTxt(1, 17, 'Kann Datei nicht lï¿½schen') + SlashSep(html_files_output_path, mp3list_html_output_file));
       end;
     end;
   end;
@@ -1212,7 +1214,7 @@ begin
         if mp3list_html_files_delete_after_zip then
         begin
           if not DeleteFile(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
-            ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
+            ShowMessage(GetTxt(1, 17, 'Kann Datei nicht lï¿½schen') + SlashSep(html_files_output_path, mp3list_html_output_file));
         end;
       end;
     end;
@@ -1229,6 +1231,11 @@ begin
 															html_files_output_path,
 															'',
 															SW_SHOW);
+
+	if FtpConnection.Hostname <> '' then
+	begin
+		FtpUploadBitBtn.Visible	:=	True;
+	end;
 
 end;
 
@@ -1629,8 +1636,8 @@ begin
 
 					if (TrackType = 'URL') then
 						ListBox_Error.Items.Add(ResultString + ' (Tracktype: URL)')
-					else if (genre = 'Hörbuch') then
-						ListBox_Error.Items.Add(ResultString + ' (Genre: Hörbuch)')
+					else if (genre = 'Hï¿½rbuch') then
+						ListBox_Error.Items.Add(ResultString + ' (Genre: Hï¿½rbuch)')
 					else if (genre = 'Kinderlieder') then
 						ListBox_Error.Items.Add(ResultString + ' (Genre: Kinderlieder)')
 					else if HasVideo then
@@ -1651,7 +1658,7 @@ begin
 			total_work_duration	:=  (StopWatchScanTimeEnd - StopWatchScanTimeStart) +
 															(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
-			{total counter (wird für ausgabenschleife benötigt TXT und HTML}
+			{total counter (wird fï¿½r ausgabenschleife benï¿½tigt TXT und HTML}
 			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
 			MP3_ListBox.Sorted	:=	True;
@@ -1665,7 +1672,7 @@ begin
 
 		end;
 
-		{Button zurücksetzen}
+		{Button zurï¿½cksetzen}
 		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
 		ITunesImportGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
@@ -1709,7 +1716,7 @@ begin
 
 		Ini.Free;
 
-		{Combobox neu füllen}
+		{Combobox neu fï¿½llen}
 		ITunesImportXmlFileCB.Clear;
 		for i := 0 to 9 do
 		begin
@@ -1893,6 +1900,11 @@ begin
 	else
 		Result	:=	False;
 
+end;
+
+procedure TF_Main.FtpUploadBitBtnClick(Sender: TObject);
+begin
+	UploadtoFTP1Click(FtpUploadBitBtn);
 end;
 
 procedure TF_Main.DeleteFilesAfterFtpUpload;
