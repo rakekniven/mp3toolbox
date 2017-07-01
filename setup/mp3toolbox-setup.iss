@@ -10,12 +10,12 @@ Name: es; MessagesFile: compiler:Languages\Spanish.isl
 [Setup]
 AppCopyright=Mark Ziegler
 AppName=MP3Toolbox
-AppVersion=1.1.24
+AppVersion=1.1.25
 ;AppVerName=1.1.24
 DefaultDirName={pf}\MP3Toolbox
 DefaultGroupName=MP3Toolbox
 
-VersionInfoVersion=1.1.24
+VersionInfoVersion=1.1.25
 VersionInfoCompany=Mark Ziegler
 VersionInfoCopyright=Mark Ziegler
 VersionInfoDescription=MP3Toolbox
@@ -32,11 +32,11 @@ DisableStartupPrompt=true
 ShowUndisplayableLanguages=true
 UninstallDisplayIcon={app}\mp3toolbox.exe
 CreateAppDir=true
-OutputBaseFilename=MP3ToolboxSetup-1.1.24
+OutputBaseFilename=MP3ToolboxSetup-1.1.25
 UninstallFilesDir={pf}\MP3Toolbox Uninstall
 ;WizardImageFile=..\..\..\misc\trunk\setup\Inno Setup\Bilder\WizModernImage-IS-weinig.bmp
 ;WizardSmallImageFile=..\..\..\misc\trunk\setup\Inno Setup\Bilder\WizModernSmallImage-IS-weinig.bmp
-AppVerName=1.1.24
+AppVerName=1.1.25
 
 [Icons]
 Name: {group}\MP3Toolbox; Filename: {app}\mp3toolbox.exe; WorkingDir: {app}; IconIndex: 0
