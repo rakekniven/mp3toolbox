@@ -1,4 +1,4 @@
-﻿object About_F: TAbout_F
+object About_F: TAbout_F
   Left = 282
   Top = 224
   Width = 478
@@ -42,9 +42,9 @@
   object Label1: TLabel
     Left = 90
     Top = 35
-    Width = 300
+    Width = 165
     Height = 22
-    Caption = 'MP3Toolbox x.x.x (Kylix Project)'
+    Caption = 'MP3Toolbox x.x.x'
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = -19
@@ -69,7 +69,7 @@
       object Hyperlink_Label: TLabel
         Left = 2
         Top = 166
-        Width = 144
+        Width = 143
         Height = 16
         Cursor = crHandPoint
         Anchors = [akLeft, akBottom]
