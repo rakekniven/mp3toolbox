@@ -130,8 +130,8 @@ type
 		NameCheck_ListBox: TListBox;
 		MainSelectionPanel2: TPanel;
 		FtpUploadBitBtn: TBitBtn;
-    MainSelectionBtn1: TSpeedButton;
-    MainSelectionBtn2: TSpeedButton;
+		MainSelectionBtn1: TSpeedButton;
+		MainSelectionBtn2: TSpeedButton;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -170,7 +170,6 @@ type
 		procedure FormActivate(Sender: TObject);
 		procedure MP3_ListBoxMouseUp(Sender: TObject; Button: TMouseButton;
 			Shift: TShiftState; X, Y: Integer);
-		procedure CD_Archive_Close_BtnClick(Sender: TObject);
 		procedure checkfilenamesfornoof1Click(Sender: TObject);
 		procedure AboutMP3Toolbox1Click(Sender: TObject);
 		procedure NameCheck_ListBoxMouseUp(Sender: TObject;
@@ -204,8 +203,8 @@ type
 		procedure ITunesImportXmlFileCBChange(Sender: TObject);
 		procedure PageControl2Change(Sender: TObject);
 		procedure FtpUploadBitBtnClick(Sender: TObject);
-    procedure h(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+		procedure MainSelectionBtn1Click(Sender: TObject);
+		procedure MainSelectionBtn2Click(Sender: TObject);
 
 	private
 		cnt: Integer;
@@ -245,13 +244,13 @@ var
 	text_files_output_path			        :	String;							//	Pfad wo Text-Dateien gesichert werden sollen.
 	html_files_output_path			        :	String;							//	Pfad wo HTML-Dateien gesichert werden sollen.
 
-	{Variablen f�r MP3Liste}
+	{Variables for MP3 list}
 	mp3list_html_multi_output		        :	Integer;            //  0 = single page ; 1 = one page for everey character
 	mp3list_html_output_file		        :	String;             //  Name der HTML-Ausgabedatei
 	mp3list_text_output_file            : String;             //  Name der Text-Ausgabedatei
 	mp3list_single_template_file			  : String;             //  path and name of the template file
 	mp3list_multi_template_file					: String;             //  path and name of the multi template file
-	mp3list_result_count								:	Integer;            //	Z�hler f�r Suchergebnis
+	mp3list_result_count								:	Integer;            //	Counter for search result
 	mp3list_html_file_name              : String;
 	mp3list_html_file_ending            : String;
 	mp3list_html_output_format          : String;
@@ -266,11 +265,6 @@ var
 	InsertSortingZero										: Boolean;
 	DeleteAfterFtpUpload								: Boolean;
 	OpenWinExplorerAfterCreateSites			: Boolean;
-
-	{Variablen f�r CD-Archive}
-	cdarchive_path_to_read_in		        : String;
-	cdarchive_path_to_act_archive	      : String;
-	cdarchive_last_used_pathes          :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
 
 	FtpConnection	:	TFtpConnection;
 	FtpUploadList	:	TStringList;
@@ -313,10 +307,6 @@ begin
 
 	LogTS.TabVisible	:=	False;
 	NameCheckTS.TabVisible	:=	False;
-//	TabSheet3.TabVisible	:=	False;
-//	TabSheet4.TabVisible	:=	False;
-//	GenreTS.TabVisible		:=	False;
-//	PageControl1.ActivePage	:=	TabSheet1;
 
 	init_ok :=  True;
 	GetDir(0, act_exec_directory);
@@ -390,12 +380,6 @@ begin
 	mp3list_html_files_delete_after_zip :=	Ini.ReadBool   ('MP3LIST',   'html_files_delete_after_zip',  False);
 	mp3list_text_file_encoding           :=	Ini.ReadInteger('MP3LIST',   'text_file_encoding',    0);
 
-	cdarchive_path_to_read_in		        :=  Ini.ReadString ('CDARCHIV',  'SINGLEDISKPATH',  'C:\');
-	for i := 0 to 9 do
-		cdarchive_last_used_pathes[i]	    :=  Ini.ReadString ('CDARCHIV',  'SourcePath'+IntToStr(i), '');
-
-	cdarchive_path_to_act_archive       :=	cdarchive_last_used_pathes[0];
-
 	for i := 0 to 9 do
 		xmllist_last_used_files[i]	      :=  Ini.ReadString ('XMLLIST',   'File'+IntToStr(i), '');
 
@@ -440,14 +424,14 @@ begin
   if pacman_adjustment_visible  =  True then
 		FolderScanPacmanPanel.Visible  :=  True;
 	FolderScanPacmanSpeedEdit.Text			:=  IntToStr(pacman_speed);
-  Pacman_Move_Timer.Interval  :=  pacman_speed;
+	Pacman_Move_Timer.Interval  :=  pacman_speed;
 
 
   {Sprache}
 	Set_Language(gui_language);
 	init_text(Sender);
 
-	{Combobox neu f�llen}
+	{Re-fill Combobox}
 	ITunesImportXmlFileCB.Clear;
 	for i := 0 to 9 do
 	begin
@@ -480,7 +464,7 @@ begin
 	GenreTS.TabVisible	:=	True;
 end;
 
-procedure TF_Main.h(Sender: TObject);
+procedure TF_Main.MainSelectionBtn1Click(Sender: TObject);
 begin
 	MainSelectionPanel1.Visible	:=	False;
 	ITunesImportTS.TabVisible	:=	True;
@@ -489,7 +473,7 @@ begin
 	GenreTS.TabVisible	:=	False;
 end;
 
-procedure TF_Main.SpeedButton1Click(Sender: TObject);
+procedure TF_Main.MainSelectionBtn2Click(Sender: TObject);
 begin
 	MainSelectionPanel1.Visible	:=	False;
 	FolderScanTS.TabVisible	:=	True;
@@ -597,19 +581,11 @@ begin
 	FtpUploadBitBtn.Caption                 :=  GetTxt( 1, 62, 'Upload via FTP');
 end;
 
-{           X   X    XXX    XXXX      X       X    XXXX    XXXXX               }
-{           XX XX    X  X       X     X       X    X         X                 }
-{           X X X    XXX    XXXX      X       X    XXXX      X                 }
-{           X   X    X          X     X       X       X      X                 }
-{           X   X    X      XXXX      XXXX    X    XXXX      X                 }
-
-{--- MP3List : Formular schliessen --------------------------------------------}
 procedure TF_Main.Close_Btn1Click(Sender: TObject);
 begin
 	Close;
 end;
 
-{--- MP3List : Menu - Formular schliessen -------------------------------------}
 procedure TF_Main.Exit1Click(Sender: TObject);
 begin
   Close;
@@ -621,8 +597,8 @@ var
 	sOutDir : String;
 	fb      : TFolderBrowser;
 begin
+	{Start dialog to select directory}
 	fb := TFolderBrowser.Create(Application.Handle, 'Select a folder to search');
-	{Dialog f�r Verzeichnisauswahl starten}
 
 	if(fb <> nil) then
 	begin
@@ -636,11 +612,10 @@ begin
 
 	fb.Free;
 
-	if sOutDir	<>	'' then
-  begin
-    {Nur wenn Ordner ausgew�hlt wurde.}
-	 	Multi_Dir_ListBox.Items.Add(sOutDir);
-  end;
+	if sOutDir	<>	'' then		{Only if folder has been selected}
+	begin
+		Multi_Dir_ListBox.Items.Add(sOutDir);
+	end;
 end;
 
 {--- MP3List : Load values from inifile ---------------------------------------}
@@ -684,7 +659,7 @@ begin
     begin
       if i < Multi_Dir_ListBox.Items.Count then
         Ini.WriteString('VERZEICHNISSE', 'dir' + IntToStr(i), Multi_Dir_ListBox.Items[i])
-      else
+			else
         Ini.WriteString('VERZEICHNISSE', 'dir' + IntToStr(i), '')
     end;
   finally
@@ -734,7 +709,7 @@ end;
 procedure TF_Main.Clear_All_ButtonClick(Sender: TObject);
 begin
 	Multi_Dir_ListBox.Clear;
-	FolderScanGoBtn.Enabled  :=  False;			//	Erst wenn Pfad gew�hlt wurde.
+	FolderScanGoBtn.Enabled  :=  False;			//	Erst wenn Pfad gewählt wurde.
 end;
 
 {--- MP3List : if own filter should be used -----------------------------------}
@@ -815,20 +790,20 @@ begin
 		Pacman_Move_Timer.Enabled :=  True;
 
 
-		{Liste l�schen}
+		{Delete list}
 		MP3_ListBox.items.Clear;
 
 		{Wenn eigener Filter angewaehlt wurde}
 		if Own_Filter_CheckBox.Checked	=	True then
 			search_filter_expression	:=	Filter_Edit.Text;
 
-		searched_dir_count	:=	0;           // Verzeichnisz�hler
-		gauge_step					:=	0;           // Z�hler f�r Gauge-Fortschrittsanzeige
+		searched_dir_count	:=	0;           // Directory counter
+		gauge_step					:=	0;           // Counter for gauge progress
 
 		{Stringliste initialisieren}
 		Files							:=	TStringList.Create;
 
-		{Schleife f�r Abarbeiten der Verzeichnisauswahl}
+		{Schleife für Abarbeiten der Verzeichnisauswahl}
 		for i := 0 to (Multi_Dir_ListBox.Items.Count - 1) do
 		begin
 			if Multi_Dir_ListBox.Selected[i] then
@@ -975,7 +950,7 @@ begin
 		{total counter (wird f�r ausgabenschleife ben�tigt TXT und HTML}
 		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
-    {Anzahl gefundener Treffer anzeigen.}
+		{Anzahl gefundener Treffer anzeigen.}
 		FolderScanListResultLab2.Caption		  :=	IntToStr(mp3list_result_count);
 
 		{If result are present then allow output}
@@ -1239,7 +1214,7 @@ begin
           if not DeleteFile(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
             ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
         end;
-      end;
+			end;
     end;
 
     FolderScanSearchProgressBar.Position     	:=	0;
@@ -1759,23 +1734,10 @@ begin
 end;
 
 procedure TF_Main.MP3_ListBoxMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+	Shift: TShiftState; X, Y: Integer);
 begin
-  if  MP3_ListBox.ItemIndex >= 0 then
-    Char_Count_Lab.Caption  :=  IntToStr(Length(MP3_ListBox.Items[MP3_ListBox.ItemIndex]));
-end;
-
-
-
-{        XXXXX   XXXX    XXX   X   X   XXX  X   X  XXXXX                       }
-{        X   X   X   X  X   X  X   X    X   X   X  X                           }
-{        XXXXX   XXXX   X      XXXXX    X   X   X  XXXX                        }
-{        X   X   X X    X   X  X   X    X    X X   X                           }
-{        X   X   X  XX   XXX   X   X   XXX    X    XXXXX                       }
-
-procedure TF_Main.CD_Archive_Close_BtnClick(Sender: TObject);
-begin
-	Close;
+	if  MP3_ListBox.ItemIndex >= 0 then
+		Char_Count_Lab.Caption  :=  IntToStr(Length(MP3_ListBox.Items[MP3_ListBox.ItemIndex]));
 end;
 
 procedure TF_Main.checkfilenamesfornoof1Click(Sender: TObject);
@@ -1785,13 +1747,12 @@ begin
 	NameCheckTS.TabVisible	:=	False;
 
 	if MP3_ListBox.Items.Count > 0 then
-  	for i := 0 to MP3_ListBox.Items.Count - 1 do
-      if get_no_of_chars(MP3_ListBox.Items[i], '-') > 3 then
-      	NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
+		for i := 0 to MP3_ListBox.Items.Count - 1 do
+			if get_no_of_chars(MP3_ListBox.Items[i], '-') > 3 then
+				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
-  if NameCheck_ListBox.Items.Count > 0 then
+	if NameCheck_ListBox.Items.Count > 0 then
 		NameCheckTS.TabVisible	:=	True;
-
 end;
 
 procedure TF_Main.AboutMP3Toolbox1Click(Sender: TObject);

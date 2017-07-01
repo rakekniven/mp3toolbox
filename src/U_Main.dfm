@@ -1,4 +1,4 @@
-﻿object F_Main: TF_Main
+object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
@@ -984,6 +984,10 @@
     object ITunesImportTS: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1290,6 +1294,10 @@
     end
     object LogTS: TTabSheet
       Caption = '?!Log'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object LogListBox: TListBox
         Left = 0
         Top = 0
@@ -1316,6 +1324,10 @@
     object NameCheckTS: TTabSheet
       Caption = '?!NameCheckTS'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object NameCheck_ListBox: TListBox
         Left = 0
         Top = 0
@@ -1333,6 +1345,10 @@
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1351,6 +1367,10 @@
     object ErrorTS: TTabSheet
       Caption = '?!Error'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1768,7 +1788,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Margin = 8
-        OnClick = h
+        OnClick = MainSelectionBtn1Click
       end
       object MainSelectionBtn2: TSpeedButton
         Left = 0
@@ -2146,7 +2166,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Margin = 8
-        OnClick = SpeedButton1Click
+        OnClick = MainSelectionBtn2Click
       end
     end
   end
