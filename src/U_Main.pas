@@ -129,9 +129,9 @@ type
 		NameCheckTS: TTabSheet;
 		NameCheck_ListBox: TListBox;
 		MainSelectionPanel2: TPanel;
-		MainSelectionBtn1: TButton;
-		MainSelectionBtn2: TButton;
 		FtpUploadBitBtn: TBitBtn;
+    MainSelectionBtn1: TSpeedButton;
+    MainSelectionBtn2: TSpeedButton;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -202,10 +202,10 @@ type
 		procedure StatusBarClick(Sender: TObject);
 		procedure AddLogMessage(AMessage : String);
 		procedure ITunesImportXmlFileCBChange(Sender: TObject);
-		procedure MainSelectionBtn1Click(Sender: TObject);
-		procedure MainSelectionBtn2Click(Sender: TObject);
 		procedure PageControl2Change(Sender: TObject);
 		procedure FtpUploadBitBtnClick(Sender: TObject);
+    procedure h(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
 
 	private
 		cnt: Integer;
@@ -476,6 +476,24 @@ end;
 procedure TF_Main.Showfoundgenres1Click(Sender: TObject);
 begin
 	GenreTS.TabVisible	:=	True;
+end;
+
+procedure TF_Main.h(Sender: TObject);
+begin
+	MainSelectionPanel1.Visible	:=	False;
+	ITunesImportTS.TabVisible	:=	True;
+	FolderScanTS.TabVisible	:=	False;
+	ErrorTS.TabVisible	:=	False;
+	GenreTS.TabVisible	:=	False;
+end;
+
+procedure TF_Main.SpeedButton1Click(Sender: TObject);
+begin
+	MainSelectionPanel1.Visible	:=	False;
+	FolderScanTS.TabVisible	:=	True;
+	ITunesImportTS.TabVisible	:=	False;
+	ErrorTS.TabVisible	:=	False;
+	GenreTS.TabVisible	:=	False;
 end;
 
 procedure TF_Main.Speichernunter1Click(Sender: TObject);
@@ -1731,24 +1749,6 @@ begin
 		end;
 		ITunesImportXmlFileCB.ItemIndex	:=	0;
 	end;
-end;
-
-procedure TF_Main.MainSelectionBtn1Click(Sender: TObject);
-begin
-	MainSelectionPanel1.Visible	:=	False;
-	ITunesImportTS.TabVisible	:=	True;
-	FolderScanTS.TabVisible	:=	False;
-	ErrorTS.TabVisible	:=	False;
-	GenreTS.TabVisible	:=	False;
-end;
-
-procedure TF_Main.MainSelectionBtn2Click(Sender: TObject);
-begin
-	MainSelectionPanel1.Visible	:=	False;
-	FolderScanTS.TabVisible	:=	True;
-	ITunesImportTS.TabVisible	:=	False;
-	ErrorTS.TabVisible	:=	False;
-	GenreTS.TabVisible	:=	False;
 end;
 
 procedure TF_Main.ITunesImportXmlFileCBChange(Sender: TObject);
