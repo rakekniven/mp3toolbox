@@ -1,4 +1,4 @@
-object About_F: TAbout_F
+﻿object About_F: TAbout_F
   Left = 282
   Top = 224
   Width = 478
@@ -16,8 +16,8 @@ object About_F: TAbout_F
   Position = poMainFormCenter
   OnShow = FormShow
   DesignSize = (
-    470
-    372)
+    462
+    368)
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
@@ -67,7 +67,7 @@ object About_F: TAbout_F
         416
         195)
       object Hyperlink_Label: TLabel
-        Left = 42
+        Left = 2
         Top = 166
         Width = 144
         Height = 16
@@ -87,11 +87,11 @@ object About_F: TAbout_F
         OnMouseMove = Hyperlink_LabelMouseMove
       end
       object About_Memo: TMemo
-        Left = 42
-        Top = 7
-        Width = 292
+        Left = 0
+        Top = 0
+        Width = 416
         Height = 146
-        Anchors = [akLeft, akTop, akRight, akBottom]
+        Align = alTop
         Color = clBtnFace
         Lines.Strings = (
           'MP3Toolbox is a little helper to get a list of all mp3s on your '
@@ -105,7 +105,13 @@ object About_F: TAbout_F
           ''
           'Mark Ziegler '
           ''
-          '2002-2003')
+          '2002-2017'
+          ''
+          'iTunes is registered trademark of Apple Inc.'
+          'Same for iTunes logo.'
+          ''
+          'ID3 icon is trademark of id3.org For details see http://id3.org/')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
@@ -892,8 +898,6 @@ object About_F: TAbout_F
     Height = 22
     Anchors = [akRight, akBottom]
     Caption = 'Close'
-    DoubleBuffered = True
-    ParentDoubleBuffered = False
     TabOrder = 0
     OnClick = Close_BitBtnClick
   end
