@@ -572,8 +572,8 @@ begin
 	ITunesImportFoundCntLab1.Caption				:=  GetTxt( 1, 59, 'Items found');
 	ITunesImportHyperlinkLab.Caption				:=	GetTxt( 1, 76, 'How to get these XML files?');
 	CheckforUpdate1.Caption									:=  GetTxt( 1, 84, 'Scan time');
-	MainSelectionBtn1.Caption								:=  GetTxt( 1, 94, 'Scan your folders for MP3 files and create your websites');
-	MainSelectionBtn2.Caption								:=  GetTxt( 1, 95, 'Import your iTunes library and create your websites');
+	MainSelectionBtn1.Caption								:=  GetTxt( 1, 95, 'Import your iTunes library and create your websites');
+	MainSelectionBtn2.Caption								:=  GetTxt( 1, 94, 'Scan your folders for MP3 files and create your websites');
 	FtpUploadBitBtn.Caption                 :=  GetTxt( 1, 62, 'Upload via FTP');
 end;
 
@@ -1736,8 +1736,8 @@ end;
 procedure TF_Main.MainSelectionBtn1Click(Sender: TObject);
 begin
 	MainSelectionPanel1.Visible	:=	False;
-	FolderScanTS.TabVisible	:=	True;
-	ITunesImportTS.TabVisible	:=	False;
+	ITunesImportTS.TabVisible	:=	True;
+	FolderScanTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
 end;
@@ -1745,8 +1745,8 @@ end;
 procedure TF_Main.MainSelectionBtn2Click(Sender: TObject);
 begin
 	MainSelectionPanel1.Visible	:=	False;
-	ITunesImportTS.TabVisible	:=	True;
-	FolderScanTS.TabVisible	:=	False;
+	FolderScanTS.TabVisible	:=	True;
+	ITunesImportTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
 end;
