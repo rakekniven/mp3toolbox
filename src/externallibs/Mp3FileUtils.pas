@@ -219,7 +219,7 @@ unit Mp3FileUtils;
 interface
 
 uses
-  SysUtils, Classes, Windows, Contnrs, dialogs, U_CharCode
+	System.Types, SysUtils, Classes, Windows, Contnrs, dialogs, U_CharCode
   {$IFDEF USE_TNT_COMPOS}, TntSysUtils, TntClasses{$ENDIF}, Id3v2Frames;
 
 type
@@ -725,10 +725,10 @@ const
      ('IS:off, MS:off','IS:on, MS:off','IS:off, MS:on','IS:on, MS:on'));
   emphasis_values: array[0..3] of string = ('None', '50/15ms','reserved','CCIT J.17');
 
-  {$Message Hint 'You should change the default rating description for your projects'}
+//	{$Message Hint 'You should change the default rating description for your projects'}
 var
-  DefaultRatingDescription: AnsiString = 'Mp3ileUtils, www.gausi.de';
-  // Changig this should be done e.g. in MainFormCreate or in the initialization-part
+	DefaultRatingDescription: AnsiString = 'Mp3ileUtils, www.gausi.de';
+	// Changig this should be done e.g. in MainFormCreate or in the initialization-part
   // It should be like "<Name of the program>, <URL to your webpage>"
 
 

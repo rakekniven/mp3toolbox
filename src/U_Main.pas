@@ -309,6 +309,8 @@ procedure TF_Main.FormCreate(Sender: TObject);
 var
 	i :Integer;
 begin
+	Mp3FileUtils.DefaultRatingDescription := 'MP3Toolbox, www.rakekniven.de';
+
 	LogTS.TabVisible	:=	False;
 	NameCheckTS.TabVisible	:=	False;
 //	TabSheet3.TabVisible	:=	False;

@@ -1786,7 +1786,7 @@ begin
     if fParsable then
     begin
         i := 0;
-        result := 0; // undef.
+//        result := 0; // undef.
 
         //get length of user-mail
         While (i < length(fData)) and (fData[i] <> 0) do
