@@ -64,7 +64,7 @@ Msg=GB
 59 = Items found
 60 = Search results
 61 = Extra
-62 = Upload using FTP
+62 = Upload via FTP
 63 = Upload ok
 64 = Upload failed
 65 = Nothing to upload. Queue is empty
@@ -98,6 +98,7 @@ Msg=GB
 93 = Name check
 94 = Scan your folders for MP3 files and create your websites
 95 = Import your iTunes library and create your websites
+96 = Open Windows Explorer after creating websites
 
 [Setup]
  1 = General

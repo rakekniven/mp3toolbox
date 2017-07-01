@@ -64,9 +64,9 @@ Msg=D
 59 = Einträge gefunden
 60 = Suchergebnisse
 61 = Extra
-62 = Mit FTP hochladen
-63 = Upload erfolgreich
-64 = Upload fehlgeschlagen
+62 = Via FTP hochladen
+63 = Hochladen erfolgreich
+64 = Hochladen fehlgeschlagen
 65 = Es gibt nichts zum Hochladen. Die Warteschlange ist leer.
 66 = Es sind keine Einstellungen für FTP vorhanden. Prüfen Sie diese.
 67 = Genre
@@ -98,6 +98,7 @@ Msg=D
 93 = Name Check
 94 = Durchsuche Deine Ordner nach MP3-Dateien und erstelle die Webseiten
 95 = Importiere Deine iTunes-Bibliothek und erstelle die Webseiten
+96 = Nach dem Erstellen der Internetseiten ein Windows Explorer-Fenster öffnen
 
 [Setup]
  1 = Allgemein

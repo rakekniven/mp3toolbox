@@ -265,6 +265,7 @@ var
 	xmllist_last_used_files             :	array[0..9]		of String;	//	die letzten 10 Pfade werden gemerkt
 	InsertSortingZero										: Boolean;
 	DeleteAfterFtpUpload								: Boolean;
+	OpenWinExplorerAfterCreateSites			: Boolean;
 
 	{Variablen f�r CD-Archive}
 	cdarchive_path_to_read_in		        : String;
@@ -363,6 +364,7 @@ begin
 	pacman_speed											  :=	Ini.ReadInteger('GENERAL',   'pacmanspeed',     100);
 	InsertSortingZero										:=	Ini.ReadBool	 ('GENERAL',   'InsertSortingZero',				True);
 	DeleteAfterFtpUpload								:=	Ini.ReadBool	 ('GENERAL',   'DeleteAfterFtpUpload',		True);
+	OpenWinExplorerAfterCreateSites			:=	Ini.ReadBool	 ('GENERAL',   'OpenWinExplorerAfterCreateSites',	False);
 
 	// Read all search & replace pairs from INI
 	i	:=	0;
@@ -572,6 +574,7 @@ begin
 	CheckforUpdate1.Caption									:=  GetTxt( 1, 84, 'Scan time');
 	MainSelectionBtn1.Caption								:=  GetTxt( 1, 94, 'Scan your folders for MP3 files and create your websites');
 	MainSelectionBtn2.Caption								:=  GetTxt( 1, 95, 'Import your iTunes library and create your websites');
+	FtpUploadBitBtn.Caption                 :=  GetTxt( 1, 62, 'Upload via FTP');
 end;
 
 {           X   X    XXX    XXXX      X       X    XXXX    XXXXX               }
@@ -1214,7 +1217,7 @@ begin
         if mp3list_html_files_delete_after_zip then
         begin
           if not DeleteFile(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
-            ShowMessage(GetTxt(1, 17, 'Kann Datei nicht l�schen') + SlashSep(html_files_output_path, mp3list_html_output_file));
+            ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
         end;
       end;
     end;
@@ -1225,12 +1228,15 @@ begin
 
 	AddLogMessage('Websites created');
 
-	lib1.Start_External_Program(self.WindowHandle,
-															'open',
-															'explorer',
-															html_files_output_path,
-															'',
-															SW_SHOW);
+	if OpenWinExplorerAfterCreateSites then
+	begin
+		lib1.Start_External_Program(self.WindowHandle,
+																'open',
+																'explorer',
+																html_files_output_path,
+																'',
+																SW_SHOW);
+	end;
 
 	if FtpConnection.Hostname <> '' then
 	begin

@@ -1,4 +1,4 @@
-object F_Setup: TF_Setup
+﻿object F_Setup: TF_Setup
   Left = 310
   Top = 343
   Width = 698
@@ -692,6 +692,19 @@ object F_Setup: TF_Setup
         Caption = '??Insert sorting zero'
         TabOrder = 0
         OnClick = InsertSortingZeroCBClick
+      end
+      object OpenWinExplorerAfterCreateSitesCB: TCheckBox
+        Left = 23
+        Top = 47
+        Width = 482
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = '??Open Windows Explorer after creating websites'
+        TabOrder = 1
+        OnClick = OpenWinExplorerAfterCreateSitesCBClick
       end
     end
     object Debug_Dev: TTabSheet

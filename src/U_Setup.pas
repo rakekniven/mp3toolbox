@@ -80,8 +80,9 @@ type
 		FtpTestConnectionBtn: TButton;
 		MiscTS: TTabSheet;
 		InsertSortingZeroCB: TCheckBox;
-    DeleteAfterFtpUploadCB: TCheckBox;
-    GroupBox2: TGroupBox;
+		DeleteAfterFtpUploadCB: TCheckBox;
+		GroupBox2: TGroupBox;
+		OpenWinExplorerAfterCreateSitesCB: TCheckBox;
 		procedure FormShow(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -115,6 +116,7 @@ type
 		procedure LabeledEdit4Change(Sender: TObject);
 		procedure InsertSortingZeroCBClick(Sender: TObject);
 		procedure DeleteAfterFtpUploadCBClick(Sender: TObject);
+		procedure OpenWinExplorerAfterCreateSitesCBClick(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -178,6 +180,7 @@ begin
 
 	InsertSortingZeroCB.Checked			:=	InsertSortingZero;
 	DeleteAfterFtpUploadCB.Checked	:=	DeleteAfterFtpUpload;
+	OpenWinExplorerAfterCreateSitesCB.Checked	:=	OpenWinExplorerAfterCreateSites;
 
 	{set values of editfields}
 	TXT_File_Output_Edit.Text	 						:=	text_files_output_path;
@@ -381,7 +384,7 @@ begin
 		Ini.WriteString ('GENERAL', 'htmldateien', 		            html_files_output_path);
 		Ini.WriteBool		('GENERAL', 'InsertSortingZero', 		      InsertSortingZero);
 		Ini.WriteBool		('GENERAL', 'DeleteAfterFtpUpload', 			DeleteAfterFtpUpload);
-
+		Ini.WriteBool		('GENERAL', 'OpenWinExplorerAfterCreateSites', 			OpenWinExplorerAfterCreateSites);
 
 		for i := 0 to mp3list_SearchAndReplace.Count - 1 do
 		begin
@@ -514,6 +517,7 @@ begin
 //	FtpTS.Caption																		:=	GetTxt( 2, 32, '');
 	FtpTestConnectionBtn.Caption										:=  GetTxt( 1, 72, 'Test connection');
 	InsertSortingZeroCB.Caption											:=  GetTxt( 1, 87, 'InsertSortingZero');
+	OpenWinExplorerAfterCreateSitesCB.Caption				:=  GetTxt( 1, 96, 'InsertSortingZero');
 	MiscTS.Caption																	:=	GetTXT( 1, 88, 'Misc');
 	DeleteAfterFtpUploadCB.Caption									:=	GetTXT( 1, 89, 'DeleteAfterFtpUpload');
 (*
@@ -555,6 +559,11 @@ begin
 		mp3list_text_files_zip    :=  True
   else
 		mp3list_text_files_zip    :=  False;
+end;
+
+procedure TF_Setup.OpenWinExplorerAfterCreateSitesCBClick(Sender: TObject);
+begin
+	OpenWinExplorerAfterCreateSites	:=	OpenWinExplorerAfterCreateSitesCB.Checked;
 end;
 
 {--- MP3List : zip html files -------------------------------------------------}
