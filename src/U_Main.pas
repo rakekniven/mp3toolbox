@@ -95,7 +95,7 @@ type
 		FolderScanScanTimeLab1: TLabel;
 		FolderScanScanResult2: TLabel;
 		FolderScanScanTimeLab2: TLabel;
-		Goo1: TMenuItem;
+    GitHubMenuEntry: TMenuItem;
 		WebsiteofAuthor1: TMenuItem;
 		ITunesImportTS: TTabSheet;
 		XMLDocumentiTunesImport: TXMLDocument;
@@ -174,7 +174,7 @@ type
 		procedure AboutMP3Toolbox1Click(Sender: TObject);
 		procedure NameCheck_ListBoxMouseUp(Sender: TObject;
 			Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-		procedure Goo1Click(Sender: TObject);
+		procedure GitHubMenuEntryClick(Sender: TObject);
 		procedure WebsiteofAuthor1Click(Sender: TObject);
 		procedure ITunesImportGoBtnClick(Sender: TObject);
 		function SearchAndReplace(s : String): string;
@@ -540,7 +540,7 @@ begin
 	Help1.Caption                           :=  GetTxt( 1, 15, 'Hilfe');
 	Exit1.Caption                           :=  GetTxt( 1, 16, 'Beenden');
 	Setup1.Caption                          :=  GetTxt( 1, 39, 'Einstellungen');
-	Goo1.Caption                            :=  GetTxt( 1, 40, 'Website at Google Code');
+	GitHubMenuEntry.Caption                 :=  GetTxt( 1, 40, 'Website at GitHub');
 	WebsiteofAuthor1.Caption                :=  GetTxt( 1, 41, 'Website of Author');
 	AboutMP3Toolbox1.Caption                :=  GetTxt( 1, 42, 'About');
 	SearchResultTS.Caption                  :=  GetTxt( 1, 60, 'Search results');
@@ -1057,7 +1057,7 @@ begin
 
 end;
 
-procedure TF_Main.Goo1Click(Sender: TObject);
+procedure TF_Main.GitHubMenuEntryClick(Sender: TObject);
 begin
 	lib1.Start_External_Program(self.WindowHandle,
 															'open',
@@ -1469,7 +1469,7 @@ begin
 		// Load XML File
 
 		// Ignoring second line > DTD
-		//	http://code.google.com/p/mp3toolbox/issues/detail?id=34
+		// https://github.com/rakekniven/mp3toolbox/issues/34
 
 		AddLogMessage('Preloading XML file');
 		Application.ProcessMessages;
@@ -1810,7 +1810,7 @@ begin
 
 	Result	:=	AString;
 
-	//	docs:	https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
+	//	docs:	https://github.com/rakekniven/mp3toolbox/wiki/List-of-variables-(template)
 end;
 
 function TF_Main.UploadToFtp : Boolean;

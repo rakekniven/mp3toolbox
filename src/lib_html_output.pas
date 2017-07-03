@@ -96,7 +96,7 @@ var
 	TplIsUnicode 										:	Boolean;
 begin
 
-	//	docs: https://code.google.com/p/mp3toolbox/wiki/ListOfVariables
+	//	docs: https://github.com/rakekniven/mp3toolbox/wiki/List-of-variables-(template)
 
 	{check if template is present}
 	if FileExists(AHtmlTemplateFile) then

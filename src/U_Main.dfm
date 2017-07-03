@@ -984,10 +984,6 @@ object F_Main: TF_Main
     object ITunesImportTS: TTabSheet
       Caption = '??iTunes import'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1294,10 +1290,6 @@ object F_Main: TF_Main
     end
     object LogTS: TTabSheet
       Caption = '?!Log'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object LogListBox: TListBox
         Left = 0
         Top = 0
@@ -1324,10 +1316,6 @@ object F_Main: TF_Main
     object NameCheckTS: TTabSheet
       Caption = '?!NameCheckTS'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object NameCheck_ListBox: TListBox
         Left = 0
         Top = 0
@@ -1345,10 +1333,6 @@ object F_Main: TF_Main
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1367,10 +1351,6 @@ object F_Main: TF_Main
     object ErrorTS: TTabSheet
       Caption = '?!Error'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -2203,9 +2183,9 @@ object F_Main: TF_Main
         Caption = '??Check for Update'
         OnClick = CheckforUpdate1Click
       end
-      object Goo1: TMenuItem
+      object GitHubMenuEntry: TMenuItem
         Caption = '??Website at Github'
-        OnClick = Goo1Click
+        OnClick = GitHubMenuEntryClick
       end
       object WebsiteofAuthor1: TMenuItem
         Caption = '??Website of Author'
