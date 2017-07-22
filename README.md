@@ -8,5 +8,5 @@ btw. The content is that counts. Not the style ;-)
 
 Project was started a loooong time ago. It was 2002 if I remember correctly.
 
-Code quality and style is not good IMHO. But it works and still using it :-)
+Code quality and style could be improved. But it works and some of you still using it :-)
 
