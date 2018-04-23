@@ -1255,7 +1255,7 @@ object F_Main: TF_Main
     Top = 398
     Width = 790
     Height = 323
-    ActivePage = SearchResultTS
+    ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 3
     OnChange = PageControl2Change
@@ -1352,6 +1352,18 @@ object F_Main: TF_Main
       Caption = '?!Error'
       ImageIndex = 3
       object ListBox_Error: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 292
+        Align = alClient
+        TabOrder = 0
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'TabSheet1'
+      ImageIndex = 5
+      object Memo1: TMemo
         Left = 0
         Top = 0
         Width = 782

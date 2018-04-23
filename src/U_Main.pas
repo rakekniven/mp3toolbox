@@ -132,6 +132,8 @@ type
 		FtpUploadBitBtn: TBitBtn;
 		MainSelectionBtn1: TSpeedButton;
 		MainSelectionBtn2: TSpeedButton;
+    TabSheet1: TTabSheet;
+    Memo1: TMemo;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -487,8 +489,6 @@ var
 	ToF	:TextFile;
   i: Integer;
 begin
-	//
-//  SaveDialog_File.InitialDir	:=	lib1.gGetTempDir;
 	if SaveDialog_File.Execute() then
 	begin
 		AssignFile(ToF, SaveDialog_File.FileName);
@@ -497,7 +497,6 @@ begin
 			writeln(ToF, MP3_ListBox.Items[i]);
 		CloseFile(ToF);
 	end;
-
 end;
 
 {--- OnShow -------------------------------------------------------------------}
@@ -517,7 +516,6 @@ begin
 	FolderScanScanResult2.Caption			:=	'...';
 	FolderScanScanTimeLab2.Caption		:=	'...';
 
-	//66666
 	CheckForUpdates(True);;
 end;
 
@@ -947,7 +945,7 @@ begin
 		total_work_duration	:=  (StopWatchScanTimeEnd - StopWatchScanTimeStart) +
 														(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
-		{total counter (wird f�r ausgabenschleife ben�tigt TXT und HTML}
+		{total counter (wird für ausgabenschleife benötigt TXT und HTML}
 		mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
 		{Anzahl gefundener Treffer anzeigen.}
@@ -960,7 +958,7 @@ begin
     {Speicher freigeben}
     Files.Free;
 
-		{Button zur�cksetzen}
+		{Button zurücksetzen}
 		FolderScanGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
 		FolderScanGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
@@ -1026,12 +1024,11 @@ begin
 
 	F_Main.FolderScanSearchProgressBar.Position	:=	0;
 
+(*
 	if mp3list_text_files_zip then
 	begin
 		{zip files}
 		{ syntax : zip name_of_zip_file file1_to_zip file2_to_zip file3_to_zip}
-(*
-66666
 				 system(PChar('zip -j' +
 											' ' +
 											SlashSep(text_files_output_path, mp3list_text_output_file) +
@@ -1043,8 +1040,8 @@ begin
 			if not DeleteFile(SlashSep(text_files_output_path, mp3list_text_output_file)) then
 				ShowMessage('Could not remove files after zipping them.');
 		end;
-*)
 	end;
+*)
 
 	S.Free;
 
@@ -1095,7 +1092,7 @@ var
 	i2	          :	Integer;
 	dir	          :	array[0..26]	of Char;	//  array fuer die Buchstaben
 	first_letter  : String;
-	files_to_zip  : String;
+//	files_to_zip  : String;
 	letter_found  : Boolean;
 begin
 	AddLogMessage('Start creating websites ...');
@@ -1109,25 +1106,25 @@ begin
                        0);
 
     {zip files}
+(*
     if mp3list_html_files_zip then
     begin
       {zip files}
       { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
-(*
-66666
+
 			Libc.system(PChar('zip -j' +
 												' ' +
 												SlashSep(html_files_output_path, mp3list_html_output_file) +
 												'.zip' +
 												' ' +
 												SlashSep(html_files_output_path, mp3list_html_output_file)));
-*)
 			if mp3list_html_files_delete_after_zip then
 			begin
         if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
-          ShowMessage(GetTxt(1, 17, 'Kann Datei nicht l�schen') + SlashSep(html_files_output_path, mp3list_html_output_file));
+          ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
       end;
     end;
+*)
   end;
 
  	{Wenn eine Seite fuer jeden Buchstaben erzeugt werden soll.}
@@ -1187,6 +1184,7 @@ begin
 		FolderScanSearchProgressBar.Position     	:=	0;
 
     {zip files}
+(*
     if mp3list_html_files_zip then
     begin
       files_to_zip  :=  '';
@@ -1198,15 +1196,13 @@ begin
       end;
 			{zip files}
       { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
-(*
-66666
+
 			Libc.system(PChar('zip -j' +
 												' ' +
 												SlashSep(html_files_output_path, mp3list_html_output_file) +
 												'.zip' +
 												' ' +
 												files_to_zip));
-*)
 			for i := 0 to Length(dir) - 1 do
 			begin
         if mp3list_html_files_delete_after_zip then
@@ -1216,6 +1212,7 @@ begin
         end;
 			end;
     end;
+*)
 
     FolderScanSearchProgressBar.Position     	:=	0;
 
@@ -1606,7 +1603,6 @@ begin
 
 						Genre_CheckListBox.Sorted	:=	True;
 
-
 					end;
 
 					ResultString	:=	mp3list_html_output_format;
@@ -1637,8 +1633,8 @@ begin
 
 					if (TrackType = 'URL') then
 						ListBox_Error.Items.Add(ResultString + ' (Tracktype: URL)')
-					else if (genre = 'H�rbuch') then
-						ListBox_Error.Items.Add(ResultString + ' (Genre: H�rbuch)')
+					else if (genre = 'Hörbuch') then
+						ListBox_Error.Items.Add(ResultString + ' (Genre: Hörbuch)')
 					else if (genre = 'Kinderlieder') then
 						ListBox_Error.Items.Add(ResultString + ' (Genre: Kinderlieder)')
 					else if HasVideo then
@@ -1646,7 +1642,13 @@ begin
 					else if podcast then
 						ListBox_Error.Items.Add(ResultString + ' (Is Podcast)')
 					else
+          begin
+            //  Dump Artist and title.
+            //  Maybe lowercase could be useful. Try n++ to compare
+            Memo1.Lines.Add (Artist + ' - ' + Title);
+
 						MP3_ListBox.Items.Add(ResultString);
+          end;
 
 				end;
 			end;
@@ -1659,7 +1661,7 @@ begin
 			total_work_duration	:=  (StopWatchScanTimeEnd - StopWatchScanTimeStart) +
 															(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
-			{total counter (wird f�r ausgabenschleife ben�tigt TXT und HTML}
+			{total counter (wird für ausgabenschleife benötigt TXT und HTML}
 			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
 
 			MP3_ListBox.Sorted	:=	True;
@@ -1673,7 +1675,7 @@ begin
 
 		end;
 
-		{Button zur�cksetzen}
+		{Button zurücksetzen}
 		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
 		ITunesImportGoBtn.Caption  :=  GetTxt( 1, 49, 'Go !');
 
@@ -1717,7 +1719,7 @@ begin
 
 		Ini.Free;
 
-		{Combobox neu f�llen}
+		{Combobox neu füllen}
 		ITunesImportXmlFileCB.Clear;
 		for i := 0 to 9 do
 		begin
