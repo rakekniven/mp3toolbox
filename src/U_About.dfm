@@ -63,6 +63,12 @@ object About_F: TAbout_F
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'About'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       DesignSize = (
         416
         195)
@@ -101,11 +107,9 @@ object About_F: TAbout_F
           ''
           'MP3Toolbox is a fun project and easy to use.'
           ''
-          'To learn more about kylix get the sources.'
-          ''
           'Mark Ziegler '
           ''
-          '2002-2017'
+          '2002-2018'
           ''
           'iTunes is registered trademark of Apple Inc.'
           'Same for iTunes logo.'
@@ -277,9 +281,8 @@ object About_F: TAbout_F
           'modification follow.'
           ' '
           #9#9'    GNU GENERAL PUBLIC LICENSE'
-          
-            '   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATI' +
-            'ON'
+          '   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND '
+          'MODIFICATION'
           ''
           
             '  0. This License applies to any program or other work which con' +
@@ -719,9 +722,8 @@ object About_F: TAbout_F
           ''
           #9#9#9'    NO WARRANTY'
           ''
-          
-            '  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS N' +
-            'O '
+          '  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS '
+          'NO '
           'WARRANTY'
           'FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  '
           'EXCEPT WHEN'
@@ -729,21 +731,20 @@ object About_F: TAbout_F
           'OTHER PARTIES'
           'PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, '
           'EITHER EXPRESSED'
-          
-            'OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIE' +
-            'S '
+          'OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED '
+          'WARRANTIES '
           'OF'
           'MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE '
           'ENTIRE RISK AS'
           'TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  '
           'SHOULD THE'
-          'PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY '
+          'PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL '
+          'NECESSARY '
           'SERVICING,'
           'REPAIR OR CORRECTION.'
           ''
-          
-            '  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO' +
-            ' '
+          '  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED '
+          'TO '
           'IN WRITING'
           'WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY '
           'AND/OR'
@@ -751,15 +752,15 @@ object About_F: TAbout_F
           'FOR DAMAGES,'
           'INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL '
           'DAMAGES ARISING'
-          
-            'OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NO' +
-            'T '
+          'OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT '
+          'NOT '
           'LIMITED'
           'TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES '
           'SUSTAINED BY'
           'YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE '
           'WITH ANY OTHER'
-          'PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED '
+          'PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN '
+          'ADVISED '
           'OF THE'
           'POSSIBILITY OF SUCH DAMAGES.'
           ''
@@ -839,7 +840,8 @@ object About_F: TAbout_F
           '    Gnomovision version 69, Copyright (C) 19yy name of author'
           
             '    Gnomovision comes with ABSOLUTELY NO WARRANTY; for details t' +
-            'ype `show w'#39'.'
+            'ype `show '
+          'w'#39'.'
           
             '    This is free software, and you are welcome to redistribute i' +
             't'
@@ -887,6 +889,7 @@ object About_F: TAbout_F
             'library.  If this is what you want to do, use the GNU Library Ge' +
             'neral'
           'Public License instead of this License.')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
