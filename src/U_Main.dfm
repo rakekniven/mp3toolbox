@@ -1,4 +1,4 @@
-﻿object F_Main: TF_Main
+object F_Main: TF_Main
   Left = 95
   Top = 128
   Caption = 'F_Main'
@@ -31,7 +31,7 @@
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = FolderScanTS
+    ActivePage = ITunesImportTS
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object FolderScanTS: TTabSheet
@@ -2270,6 +2270,7 @@
   end
   object FtpUpload: TIdFTP
     IPVersion = Id_IPv4
+    ConnectTimeout = 0
     NATKeepAlive.UseKeepAlive = False
     NATKeepAlive.IdleTimeMS = 0
     NATKeepAlive.IntervalMS = 0
