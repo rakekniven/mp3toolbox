@@ -31,7 +31,7 @@ object F_Main: TF_Main
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = ITunesImportTS
+    ActivePage = FolderScanTS
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object FolderScanTS: TTabSheet
@@ -1363,13 +1363,22 @@ object F_Main: TF_Main
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
       ImageIndex = 5
-      object Memo1: TMemo
+      object ListBox1: TListBox
         Left = 0
         Top = 0
         Width = 782
-        Height = 292
-        Align = alClient
+        Height = 137
+        Align = alTop
         TabOrder = 0
+      end
+      object ListBox2: TListBox
+        Left = 0
+        Top = 155
+        Width = 782
+        Height = 137
+        Align = alBottom
+        PopupMenu = PopupMenu1
+        TabOrder = 1
       end
     end
   end
@@ -2295,5 +2304,13 @@ object F_Main: TF_Main
     Left = 712
     Top = 16
     DOMVendorDesc = 'MSXML'
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 464
+    Top = 624
+    object Speichernunter2: TMenuItem
+      Caption = 'Speichern unter ...'
+      OnClick = Speichernunter2Click
+    end
   end
 end
