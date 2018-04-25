@@ -2207,7 +2207,7 @@ object F_Main: TF_Main
         OnClick = Showfoundgenres1Click
       end
       object Showduplicatefinder1: TMenuItem
-        Caption = 'Show duplicate finder'
+        Caption = '??Show duplicate finder'
         OnClick = Showduplicatefinder1Click
       end
     end

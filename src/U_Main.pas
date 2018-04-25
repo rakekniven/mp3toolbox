@@ -606,7 +606,8 @@ begin
 	MainSelectionBtn1.Caption								:=  GetTxt( 1, 95, 'Import your iTunes library and create your websites');
 	MainSelectionBtn2.Caption								:=  GetTxt( 1, 94, 'Scan your folders for MP3 files and create your websites');
 	FtpUploadBitBtn.Caption                 :=  GetTxt( 1, 62, 'Upload via FTP');
-	DupFinderTS.Caption			                :=  GetTxt( 1,999, 'DupFinder');
+	DupFinderTS.Caption			                :=  GetTxt( 1, 97, 'DupFinder');
+	Showduplicatefinder1.Caption            :=  GetTxt( 1, 98, 'Show duplicate finder');
 end;
 
 procedure TF_Main.Close_Btn1Click(Sender: TObject);
