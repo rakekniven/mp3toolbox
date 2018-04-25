@@ -132,11 +132,13 @@ type
 		FtpUploadBitBtn: TBitBtn;
 		MainSelectionBtn1: TSpeedButton;
 		MainSelectionBtn2: TSpeedButton;
-    TabSheet1: TTabSheet;
-    ListBox1: TListBox;
-    ListBox2: TListBox;
-    PopupMenu1: TPopupMenu;
-    Speichernunter2: TMenuItem;
+		DupFinderTS: TTabSheet;
+		ListBox1: TListBox;
+		ListBox2: TListBox;
+		PopupMenu1: TPopupMenu;
+		Speichernunter2: TMenuItem;
+		Splitter1: TSplitter;
+		Showduplicatefinder1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
 		procedure Exit1Click(Sender: TObject);
@@ -210,7 +212,8 @@ type
 		procedure FtpUploadBitBtnClick(Sender: TObject);
 		procedure MainSelectionBtn1Click(Sender: TObject);
 		procedure MainSelectionBtn2Click(Sender: TObject);
-    procedure Speichernunter2Click(Sender: TObject);
+		procedure Speichernunter2Click(Sender: TObject);
+		procedure Showduplicatefinder1Click(Sender: TObject);
 
 	private
 		cnt: Integer;
@@ -465,6 +468,11 @@ begin
 	F_Setup.Show;
 end;
 
+procedure TF_Main.Showduplicatefinder1Click(Sender: TObject);
+begin
+	DupFinderTS.TabVisible	:=	True;
+end;
+
 procedure TF_Main.Showfoundgenres1Click(Sender: TObject);
 begin
 	GenreTS.TabVisible	:=	True;
@@ -477,6 +485,7 @@ begin
 	FolderScanTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
+	DupFinderTS.TabVisible	:=	False;
 end;
 
 procedure TF_Main.MainSelectionBtn2Click(Sender: TObject);
@@ -486,6 +495,7 @@ begin
 	ITunesImportTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
+	DupFinderTS.TabVisible	:=	False;
 end;
 
 procedure TF_Main.Speichernunter1Click(Sender: TObject);
@@ -596,6 +606,7 @@ begin
 	MainSelectionBtn1.Caption								:=  GetTxt( 1, 95, 'Import your iTunes library and create your websites');
 	MainSelectionBtn2.Caption								:=  GetTxt( 1, 94, 'Scan your folders for MP3 files and create your websites');
 	FtpUploadBitBtn.Caption                 :=  GetTxt( 1, 62, 'Upload via FTP');
+	DupFinderTS.Caption			                :=  GetTxt( 1,999, 'DupFinder');
 end;
 
 procedure TF_Main.Close_Btn1Click(Sender: TObject);
@@ -773,9 +784,6 @@ var
 	i									:	Integer;
 	gauge_step				:	Integer;
 	ResultString			:	String;
-  iDupFile: Integer;
-  DupName: string;
-  DupFound: Boolean;
 begin
 	FolderScanListResultLab2.Caption	:=	'...';
 	FolderScanListDirCntLab2.Caption	:=	'...';
@@ -934,30 +942,6 @@ begin
 
 					MP3_ListBox.Items.Add(ResultString);
 
-
-            //  Dump Artist and title.
-            //  Maybe lowercase could be useful.
-
-            //  Create name
-            DupName := Lowercase(ID3v2Tag.Artist + ' - ' + ID3v2Tag.Title);
-            DupFound  :=  False;  //  Reset
-
-            //  Search results for already searcg files
-            for iDupFile := 0 to ListBox1.Items.Count - 1 do
-            begin
-              if ListBox1.Items[iDupFile] = DupName then
-              begin
-                DupFound  :=  True;
-                break;
-              end;
-            end;
-            //  Add file to list
-            ListBox1.Items.Add(DupName);
-
-            //  Add dup file to list
-            if DupFound then
-              ListBox2.Items.Add (DupName + ' (' + Files[i] + ')');
-            // END
 				end;
 
 				// Debug for mark: Check if comment is present
@@ -1480,13 +1464,13 @@ var
 	F: TextFile;
 	DiscNo: string;
 	DiscCnt: string;
-  Location: string;
-  DupName: string;
-  DupFound: Boolean;
-  iDupFile: Integer;
-  DupListAll: TStringList;
-  DupCompareList: TStringList;
-  DupCompareList2: TStringList;
+	Location: string;
+	DupFound: Boolean;
+	iFileList: Integer;
+	iDupList: Integer;
+	DupListAll: TStringList;
+	DupCompareList: TStringList;
+	DupCompareListPath: TStringList;
 begin
 	ITunesImportFoundCntLab2.Caption	:=	'...';
 	ITunesImportScanTime2.Caption	:=	'...';
@@ -1542,9 +1526,9 @@ begin
 		AddLogMessage('Processing XML content');
 		Application.ProcessMessages;
 
-    DupCompareList  :=  TStringList.Create;
-    DupCompareList2  :=  TStringList.Create;
-    DupListAll  :=  TStringList.Create;
+		DupCompareList  :=  TStringList.Create;
+		DupCompareListPath  :=  TStringList.Create;
+		DupListAll  :=  TStringList.Create;
 
 		for i := 0 to XMLDocumentiTunesImport.DocumentElement.ChildNodes.Count - 1 do
 		begin
@@ -1707,37 +1691,14 @@ begin
 
 						MP3_ListBox.Items.Add(ResultString);
 
-            //  Dump Artist and title.
+						//  Dump Artist and title.
+						DupCompareList.Add(Lowercase(Artist + ' - ' + Title));  //  Add name
+						DupCompareListPath.Add(Location); //  Add path
 
-            //  Create name
-            DupName := Lowercase(Artist + ' - ' + Title);
-            DupFound  :=  False;  //  Reset
-
-            //  Search results for already searcg files
-            for iDupFile := 0 to DupCompareList.Count - 1 do
-            begin
-              if DupCompareList[iDupFile] = DupName then
-              begin
-                DupFound  :=  True;
-                break;
-              end;
-            end;
-
-            //  Add file to list
-            DupCompareList.Add(DupName);
-            DupCompareList2.Add (DupName + ' (' + Location + ')');
-
-            //  Add dup file to list
-            if DupFound then
-            begin
-              DupListAll.Add (DupName + ' (' + Location + ')');
-            end;
-            // END
-
-          end;
-
+					end;
 				end;
 			end;
+
 			{Ende der Suchzeit}
 			StopWatchScanTimeEnd           :=  Time;
 
@@ -1762,15 +1723,49 @@ begin
 
 		end;
 
-    DupCompareList.Sorted :=  True;
-    DupListAll.Sorted :=  True;
+    //  Search results for already search files
+    for iFileList := 0 to DupCompareList.Count - 1 do
+    begin
+      DupFound  := False;
 
-    ListBox1.Items.Text :=  (DupCompareList.Text );
-    ListBox2.Items.Text :=  (DupListAll.Text);
+      for iDupList := 0 to DupCompareList.Count - 1 do
+      begin
+        if iFileList <> iDupList then
+        begin
+          if DupCompareList[iFileList] <> '' then
+          begin
+
+            if DupCompareList[iFileList] = DupCompareList[iDupList] then
+            begin
+
+              if not DupFound then
+              begin
+                DupListAll.Add (DupCompareList[iFileList] + ' (' + DupCompareListPath[iFileList] + ')');
+                DupFound  := True;
+              end;
+
+              DupListAll.Add (DupCompareList[iDupList] + ' (' + DupCompareListPath[iDupList] + ')');
+
+              DupCompareList[iDupList] := '';
+
+            end;
+
+          end;
+
+        end;
+
+      end;
+
+    end;
+
+		ListBox1.Items.Text :=  (DupCompareList.Text );
+		ListBox1.Sorted :=	True;
+		ListBox2.Items.Text :=  (DupListAll.Text);
 		ListBox2.Sorted :=	True;
 
-    DupCompareList.Free;
-    DupListAll.Free;
+		DupCompareList.Free;
+		DupCompareListPath.Free;
+		DupListAll.Free;
 
 		{Button zurücksetzen}
 		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');

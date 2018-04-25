@@ -1360,25 +1360,34 @@ object F_Main: TF_Main
         TabOrder = 0
       end
     end
-    object TabSheet1: TTabSheet
-      Caption = 'TabSheet1'
+    object DupFinderTS: TTabSheet
+      Caption = 'DupFinder'
       ImageIndex = 5
+      object Splitter1: TSplitter
+        Left = 0
+        Top = 137
+        Width = 782
+        Height = 12
+        Align = alNone
+      end
       object ListBox1: TListBox
         Left = 0
         Top = 0
         Width = 782
-        Height = 137
+        Height = 145
         Align = alTop
         TabOrder = 0
       end
       object ListBox2: TListBox
         Left = 0
-        Top = 155
+        Top = 145
         Width = 782
-        Height = 137
-        Align = alBottom
+        Height = 147
+        Align = alClient
         PopupMenu = PopupMenu1
         TabOrder = 1
+        ExplicitTop = 120
+        ExplicitHeight = 172
       end
     end
   end
@@ -2196,6 +2205,10 @@ object F_Main: TF_Main
       object Showfoundgenres1: TMenuItem
         Caption = '??Show found genres'
         OnClick = Showfoundgenres1Click
+      end
+      object Showduplicatefinder1: TMenuItem
+        Caption = 'Show duplicate finder'
+        OnClick = Showduplicatefinder1Click
       end
     end
     object Help1: TMenuItem
