@@ -1,4 +1,4 @@
-﻿object F_Setup: TF_Setup
+object F_Setup: TF_Setup
   Left = 310
   Top = 343
   Width = 698
@@ -28,7 +28,7 @@
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = Allgemein
+    ActivePage = MiscTS
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4
@@ -532,10 +532,6 @@
       Caption = 'Album-Liste'
       ImageIndex = 3
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object CDList_Template_GB: TGroupBox
         Left = 10
         Top = 10
@@ -599,10 +595,6 @@
     object FtpTS: TTabSheet
       Caption = '??FTP'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox2: TGroupBox
         Left = 10
         Top = 10
@@ -705,6 +697,19 @@
         Caption = '??Open Windows Explorer after creating websites'
         TabOrder = 1
         OnClick = OpenWinExplorerAfterCreateSitesCBClick
+      end
+      object SearchForDuplicatesByArtistAndTracknameCB: TCheckBox
+        Left = 23
+        Top = 72
+        Width = 482
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = '??Search for duplicates by Artist and Track name'
+        TabOrder = 2
+        OnClick = SearchForDuplicatesByArtistAndTracknameCBClick
       end
     end
     object Debug_Dev: TTabSheet

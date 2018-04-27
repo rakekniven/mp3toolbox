@@ -95,7 +95,7 @@ type
 		FolderScanScanTimeLab1: TLabel;
 		FolderScanScanResult2: TLabel;
 		FolderScanScanTimeLab2: TLabel;
-    GitHubMenuEntry: TMenuItem;
+		GitHubMenuEntry: TMenuItem;
 		WebsiteofAuthor1: TMenuItem;
 		ITunesImportTS: TTabSheet;
 		XMLDocumentiTunesImport: TXMLDocument;
@@ -133,11 +133,9 @@ type
 		MainSelectionBtn1: TSpeedButton;
 		MainSelectionBtn2: TSpeedButton;
 		DupFinderTS: TTabSheet;
-		ListBox1: TListBox;
 		ListBox2: TListBox;
 		PopupMenu1: TPopupMenu;
 		Speichernunter2: TMenuItem;
-		Splitter1: TSplitter;
 		Showduplicatefinder1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
@@ -274,6 +272,7 @@ var
 	InsertSortingZero										: Boolean;
 	DeleteAfterFtpUpload								: Boolean;
 	OpenWinExplorerAfterCreateSites			: Boolean;
+	SearchForDuplicatesByArtistAndTrackname : Boolean;
 
 	FtpConnection	:	TFtpConnection;
 	FtpUploadList	:	TStringList;
@@ -307,7 +306,8 @@ var
 
 	search_status								        :	Boolean;              //  Suchstatus
 
-{--- Formular erzeugen --------------------------------------------------------}
+
+{--- Formular erzeugen --------------------------------------------------------}
 procedure TF_Main.FormCreate(Sender: TObject);
 var
 	i :Integer;
@@ -366,7 +366,7 @@ begin
 	InsertSortingZero										:=	Ini.ReadBool	 ('GENERAL',   'InsertSortingZero',				True);
 	DeleteAfterFtpUpload								:=	Ini.ReadBool	 ('GENERAL',   'DeleteAfterFtpUpload',		True);
 	OpenWinExplorerAfterCreateSites			:=	Ini.ReadBool	 ('GENERAL',   'OpenWinExplorerAfterCreateSites',	False);
-
+	SearchForDuplicatesByArtistAndTrackname :=	Ini.ReadBool	 ('GENERAL',   'SearchForDuplicatesByArtistAndTrackname',	False);
 	// Read all search & replace pairs from INI
 	i	:=	0;
 	while Ini.ReadString ('GENERAL', 'SeachAndReplace' + IntToStr(i), '') <> '' do
@@ -415,28 +415,28 @@ begin
 
 
 // 66666
-  output_with_pathes    :=  True;
-  output_with_filesize  :=  False;
-  cancel_search     	  :=	False;
+	output_with_pathes    :=  True;
+	output_with_filesize  :=  False;
+	cancel_search     	  :=	False;
 
-  {Searchstatus : False = not activ }
+	{Searchstatus : False = not activ }
 	{               True  = activ     }
-  search_status         :=  False;
+	search_status         :=  False;
 
 	{fill subdir variable}
-  if Subdir_CheckBox.Checked = True then
-  	search_subdir		:=	True
-  else
-  	search_subdir		:=	False;
+	if Subdir_CheckBox.Checked = True then
+		search_subdir		:=	True
+	else
+		search_subdir		:=	False;
 
-  {Pacman}
-  if pacman_adjustment_visible  =  True then
+	{Pacman}
+	if pacman_adjustment_visible  =  True then
 		FolderScanPacmanPanel.Visible  :=  True;
 	FolderScanPacmanSpeedEdit.Text			:=  IntToStr(pacman_speed);
 	Pacman_Move_Timer.Interval  :=  pacman_speed;
 
 
-  {Sprache}
+	{Sprache}
 	Set_Language(gui_language);
 	init_text(Sender);
 
@@ -460,7 +460,8 @@ begin
 	MainSelectionPanel1.Align	:=	alClient;
 	MainSelectionPanel2.Left	:=	(MainSelectionPanel1.Width - MainSelectionPanel2.Width) div 2;
 	MainSelectionPanel2.Top		:=	(MainSelectionPanel1.Height - MainSelectionPanel2.Height) div 2;
-end;
+
+end;
 
 {--- Menu : Show Setup Form ---------------------------------------------------}
 procedure TF_Main.Setup1Click(Sender: TObject);
@@ -485,7 +486,7 @@ begin
 	FolderScanTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
-	DupFinderTS.TabVisible	:=	False;
+	DupFinderTS.TabVisible  :=  SearchForDuplicatesByArtistAndTrackname;
 end;
 
 procedure TF_Main.MainSelectionBtn2Click(Sender: TObject);
@@ -495,13 +496,13 @@ begin
 	ITunesImportTS.TabVisible	:=	False;
 	ErrorTS.TabVisible	:=	False;
 	GenreTS.TabVisible	:=	False;
-	DupFinderTS.TabVisible	:=	False;
+	DupFinderTS.TabVisible  :=  SearchForDuplicatesByArtistAndTrackname;
 end;
 
 procedure TF_Main.Speichernunter1Click(Sender: TObject);
 var
 	ToF	:TextFile;
-  i: Integer;
+	i: Integer;
 begin
 	if SaveDialog_File.Execute() then
 	begin
@@ -516,7 +517,7 @@ end;
 procedure TF_Main.Speichernunter2Click(Sender: TObject);
 var
 	ToF	:TextFile;
-  i: Integer;
+	i: Integer;
 begin
 	if SaveDialog_File.Execute() then
 	begin
@@ -551,7 +552,7 @@ end;
 {--- OnActivate ---------------------------------------------------------------}
 procedure TF_Main.FormActivate(Sender: TObject);
 begin
-  Set_Language(gui_language);
+	Set_Language(gui_language);
 	init_text(Sender);
 end;
 
@@ -617,7 +618,7 @@ end;
 
 procedure TF_Main.Exit1Click(Sender: TObject);
 begin
-  Close;
+	Close;
 end;
 
 {--- MP3List : Select new path to search --------------------------------------}
@@ -656,19 +657,19 @@ end;
 procedure TF_Main.Load_From_ButtonClick(Sender: TObject);
 var
 	i		:	Integer;
-  s   : string;
+	s   : string;
 begin
-  Multi_Dir_ListBox.Clear;
+	Multi_Dir_ListBox.Clear;
 	Ini := TIniFile.Create(ini_file_name);
 
-  //	Verzeichnisse einlesen
-  s :=  '';
-  for	i :=	0	to 9 do
-  begin
-  	s :=  Ini.ReadString('VERZEICHNISSE', 'dir' + IntToStr(i), '');
-   	if s <> '' then
-	    Multi_Dir_ListBox.Items.Add(s);
-  end;
+	//	Verzeichnisse einlesen
+	s :=  '';
+	for	i :=	0	to 9 do
+	begin
+		s :=  Ini.ReadString('VERZEICHNISSE', 'dir' + IntToStr(i), '');
+		if s <> '' then
+			Multi_Dir_ListBox.Items.Add(s);
+	end;
 
 	Ini.Free;
 end;
@@ -678,22 +679,22 @@ procedure TF_Main.Save_To_ButtonClick(Sender: TObject);
 var
 	i		:	Integer;
 begin
-  {save directory from Listbox}
-  Ini := TIniFile.Create(ini_file_name);
-  try
-    {Items der Listbox den Variablen zuweisen}
+	{save directory from Listbox}
+	Ini := TIniFile.Create(ini_file_name);
+	try
+		{Items der Listbox den Variablen zuweisen}
 //    for i:= 0  to (Multi_Dir_ListBox.Items.Count - 1) do
 //      Ini.WriteString('VERZEICHNISSE', 'dir' + IntToStr(i), Multi_Dir_ListBox.Items[i]);
-    for i:= 0  to 9 do
-    begin
-      if i < Multi_Dir_ListBox.Items.Count then
-        Ini.WriteString('VERZEICHNISSE', 'dir' + IntToStr(i), Multi_Dir_ListBox.Items[i])
+		for i:= 0  to 9 do
+		begin
+			if i < Multi_Dir_ListBox.Items.Count then
+				Ini.WriteString('VERZEICHNISSE', 'dir' + IntToStr(i), Multi_Dir_ListBox.Items[i])
 			else
-        Ini.WriteString('VERZEICHNISSE', 'dir' + IntToStr(i), '')
-    end;
-  finally
-    Ini.Free;
-  end;
+				Ini.WriteString('VERZEICHNISSE', 'dir' + IntToStr(i), '')
+		end;
+	finally
+		Ini.Free;
+	end;
 end;
 
 {--- MP3List : Select all pathentries in listbox ------------------------------}
@@ -703,12 +704,12 @@ var
 begin
 	if Multi_Dir_ListBox.Items.Count > 0 then
 		for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
-    	Multi_Dir_ListBox.Selected[i]	:=	True;
+			Multi_Dir_ListBox.Selected[i]	:=	True;
 
 	{set Go-Button}
-  if Multi_Dir_ListBox.SelCount > 0 then
+	if Multi_Dir_ListBox.SelCount > 0 then
 		FolderScanGoBtn.Enabled	:=	True
-  else
+	else
 		FolderScanGoBtn.Enabled	:=	False;
 end;
 
@@ -719,7 +720,7 @@ var
 begin
 	if Multi_Dir_ListBox.Items.Count > 0 then
 		for i	:= 0 to	(Multi_Dir_ListBox.Items.Count - 1) do
-    	Multi_Dir_ListBox.Selected[i]	:=	False;
+			Multi_Dir_ListBox.Selected[i]	:=	False;
 
 	FolderScanGoBtn.Enabled  :=  False;
 end;
@@ -730,7 +731,7 @@ var
 	i	:	Integer;
 begin
 	for i	:=	(Multi_Dir_ListBox.Items.Count - 1) downto 0 do
-  	if Multi_Dir_ListBox.Selected[i] then
+		if Multi_Dir_ListBox.Selected[i] then
 			Multi_Dir_ListBox.Items.Delete(i);
 end;
 
@@ -745,19 +746,19 @@ end;
 procedure TF_Main.Own_Filter_CheckBoxClick(Sender: TObject);
 begin
 	if Own_Filter_CheckBox.Checked	=	True then
-  begin
-    Own_Filter_CheckBox.Checked	:=	True;
-    filter_ComboBox.Visible			:=	False;
-    Filter_Edit.Visible					:=	True;
-	end
-  else
 	begin
-  	Own_Filter_CheckBox.Checked	:=	False;
-    filter_ComboBox.Visible			:=	True;
-    Filter_Edit.Visible					:=	False;
+		Own_Filter_CheckBox.Checked	:=	True;
+		filter_ComboBox.Visible			:=	False;
+		Filter_Edit.Visible					:=	True;
+	end
+	else
+	begin
+		Own_Filter_CheckBox.Checked	:=	False;
+		filter_ComboBox.Visible			:=	True;
+		Filter_Edit.Visible					:=	False;
 		{filter erneut zuweisen.}
-    search_filter_expression		:=	filter_ComboBox.Items[filter_ComboBox.ItemIndex];
-  end;
+		search_filter_expression		:=	filter_ComboBox.Items[filter_ComboBox.ItemIndex];
+	end;
 end;
 
 {--- MP3List : if filter was choosed ------------------------------------------}
@@ -768,12 +769,12 @@ end;
 
 {--- MP3List : on mouse up in pathentries listbox check selected --------------}
 procedure TF_Main.Multi_Dir_ListBoxMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+	Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
 	{set Go-Button}
-  if Multi_Dir_ListBox.SelCount > 0 then
+	if Multi_Dir_ListBox.SelCount > 0 then
 		FolderScanGoBtn.Enabled	:=	True
-  else
+	else
 		FolderScanGoBtn.Enabled	:=	False;
 end;
 
@@ -887,7 +888,7 @@ begin
 		StopWatchScanTimeStart := Time;
 
 		{Pacman aktivieren und starten}
-    FolderScanPacmanBtn.Visible        :=  True;
+		FolderScanPacmanBtn.Visible        :=  True;
 		FolderScanPacmanBtn.Repaint;
 		pacman_direction          :=  True;
 		Pacman_Move_Timer.Enabled :=  True;
@@ -987,8 +988,8 @@ begin
 		FolderScanTxtOutputBtn.Enabled		:=	MP3_ListBox.Items.Count > 0;
 		FolderScanHtmlOutputBtn.Enabled :=	MP3_ListBox.Items.Count > 0;
 
-    {Speicher freigeben}
-    Files.Free;
+		{Speicher freigeben}
+		Files.Free;
 
 		{Button zurücksetzen}
 		FolderScanGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
@@ -998,17 +999,17 @@ begin
 		search_status :=  False;
 
 		{clear progressbar}
-    FolderScanSearchProgressBar.Position :=	0;
-  end;
+		FolderScanSearchProgressBar.Position :=	0;
+	end;
 end;
 
 {--- MP3List : When Checkbox "search subdir" is clicked -----------------------}
 procedure TF_Main.Subdir_CheckBoxClick(Sender: TObject);
 begin
 	if Subdir_CheckBox.Checked = True then
-  	search_subdir		:=	True
-  else
-  	search_subdir		:=	False;
+		search_subdir		:=	True
+	else
+		search_subdir		:=	False;
 end;
 
 {--- MP3List : When Checkbox "Output with pathes" is clicked. -----------------}
@@ -1016,17 +1017,17 @@ procedure TF_Main.Output_with_path_CBClick(Sender: TObject);
 begin
 	if Output_with_path_CB.Checked then
 		output_with_pathes  :=  True
-  else
+	else
 		output_with_pathes  :=  False;
 end;
 
 {--- MP3List : When Checkbox "Output with filesize" is clicked. ---------------}
 procedure TF_Main.Output_with_filesize_CBClick(Sender: TObject);
 begin
-  if Output_with_filesize_CB.Checked then
-    output_with_filesize  :=  True
+	if Output_with_filesize_CB.Checked then
+		output_with_filesize  :=  True
 	else
-    output_with_filesize  :=  False;
+		output_with_filesize  :=  False;
 end;
 
 {--- MP3List : write mp3list as an textfile -----------------------------------}
@@ -1134,15 +1135,15 @@ begin
 	begin
 		create_html_output(mp3list_single_template_file,
 											 SlashSep(html_files_output_path, mp3list_html_output_file),
-                       '',
-                       0);
+											 '',
+											 0);
 
-    {zip files}
+		{zip files}
 (*
-    if mp3list_html_files_zip then
-    begin
-      {zip files}
-      { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
+		if mp3list_html_files_zip then
+		begin
+			{zip files}
+			{ syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
 
 			Libc.system(PChar('zip -j' +
 												' ' +
@@ -1152,50 +1153,50 @@ begin
 												SlashSep(html_files_output_path, mp3list_html_output_file)));
 			if mp3list_html_files_delete_after_zip then
 			begin
-        if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
-          ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
-      end;
-    end;
+				if not DeleteFile(SlashSep(html_files_output_path, mp3list_html_output_file)) then
+					ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
+			end;
+		end;
 *)
-  end;
+	end;
 
- 	{Wenn eine Seite fuer jeden Buchstaben erzeugt werden soll.}
+	{Wenn eine Seite fuer jeden Buchstaben erzeugt werden soll.}
 	if mp3list_html_multi_output = 1 then
-  begin
+	begin
 
-    dir :=	'ABCDEFGHIJKLMNOPQRSTUVWXYZ0';
+		dir :=	'ABCDEFGHIJKLMNOPQRSTUVWXYZ0';
 
-    {clear stringlists first}
-    for i := 0 to Length(mp3list_Character_stringlists) - 1 do
+		{clear stringlists first}
+		for i := 0 to Length(mp3list_Character_stringlists) - 1 do
 			mp3list_Character_stringlists[i].Clear;
 
 		{sort every single line to it's assignes character stringlist}
-    for i := 0 to MP3_ListBox.Items.Count - 1 do
-    begin
-      letter_found  :=  False;
-      first_letter  :=  MP3_ListBox.Items[i][1];
+		for i := 0 to MP3_ListBox.Items.Count - 1 do
+		begin
+			letter_found  :=  False;
+			first_letter  :=  MP3_ListBox.Items[i][1];
 
-      {compare for all letter except numbers}
-      for i2 := 0 to Length(dir) - 2 do
+			{compare for all letter except numbers}
+			for i2 := 0 to Length(dir) - 2 do
 			begin
 				{	1 means the string start with searched letter}
-        if AnsiPos(Lowercase(first_letter), lowercase(dir[i2])) = 1 then
-        begin
-          letter_found  :=  True;
-          break;
-        end;
-      end;
+				if AnsiPos(Lowercase(first_letter), lowercase(dir[i2])) = 1 then
+				begin
+					letter_found  :=  True;
+					break;
+				end;
+			end;
 
 			{add to letter stringlist or number stringlist}
-      if letter_found then
-        mp3list_Character_stringlists[i2].Add(MP3_ListBox.Items[i])
-      else
-        mp3list_Character_stringlists[26].Add(MP3_ListBox.Items[i])
-    end;
+			if letter_found then
+				mp3list_Character_stringlists[i2].Add(MP3_ListBox.Items[i])
+			else
+				mp3list_Character_stringlists[26].Add(MP3_ListBox.Items[i])
+		end;
 
 		FolderScanSearchProgressBar.Min     	:=	0;
 		FolderScanSearchProgressBar.Position :=	0;
-    FolderScanSearchProgressBar.Max      :=  Length(dir) - 1;
+		FolderScanSearchProgressBar.Max      :=  Length(dir) - 1;
 
 		FtpUploadList.Clear;	//	Fresh list
 
@@ -1211,23 +1212,23 @@ begin
 			FtpUploadList.Add(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)));
 
 			FolderScanSearchProgressBar.Position :=	i;
-	  end;
+		end;
 
 		FolderScanSearchProgressBar.Position     	:=	0;
 
-    {zip files}
+		{zip files}
 (*
-    if mp3list_html_files_zip then
-    begin
-      files_to_zip  :=  '';
-      for i := 0 to Length(dir) - 1 do
-      begin
-        if FileExists(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
-          files_to_zip  :=  files_to_zip + SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)) + ' ';
-        FolderScanSearchProgressBar.Position :=	i;
-      end;
+		if mp3list_html_files_zip then
+		begin
+			files_to_zip  :=  '';
+			for i := 0 to Length(dir) - 1 do
+			begin
+				if FileExists(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
+					files_to_zip  :=  files_to_zip + SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending)) + ' ';
+				FolderScanSearchProgressBar.Position :=	i;
+			end;
 			{zip files}
-      { syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
+			{ syntax : zip name_of_zip_file file1_to_zip file1_to_zip file1_to_zip}
 
 			Libc.system(PChar('zip -j' +
 												' ' +
@@ -1237,16 +1238,16 @@ begin
 												files_to_zip));
 			for i := 0 to Length(dir) - 1 do
 			begin
-        if mp3list_html_files_delete_after_zip then
-        begin
-          if not DeleteFile(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
-            ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
-        end;
+				if mp3list_html_files_delete_after_zip then
+				begin
+					if not DeleteFile(SlashSep(html_files_output_path, (mp3list_html_file_name + dir[i] + mp3list_html_file_ending))) then
+						ShowMessage(GetTxt(1, 17, 'Kann Datei nicht löschen') + SlashSep(html_files_output_path, mp3list_html_output_file));
+				end;
 			end;
-    end;
+		end;
 *)
 
-    FolderScanSearchProgressBar.Position     	:=	0;
+		FolderScanSearchProgressBar.Position     	:=	0;
 
 	end;
 
@@ -1290,15 +1291,15 @@ end;
 procedure TF_Main.FolderScanPopupMenuPopup(Sender: TObject);
 begin
 	if MP3_ListBox.Items.Count > 0 then
-  begin
-	  checkfilenames1.Enabled									:=	True;
-    checkfilenamesforallowedlength1.Enabled	:=	True;
-  end
-  else
-  begin
-	  checkfilenames1.Enabled									:=	False;
-	  checkfilenamesforallowedlength1.Enabled	:=	False;
-  end;
+	begin
+		checkfilenames1.Enabled									:=	True;
+		checkfilenamesforallowedlength1.Enabled	:=	True;
+	end
+	else
+	begin
+		checkfilenames1.Enabled									:=	False;
+		checkfilenamesforallowedlength1.Enabled	:=	False;
+	end;
 end;
 
 {--- MP3List : PopUp - Check filenames for length JOLIET ----------------------}
@@ -1309,11 +1310,11 @@ begin
 	NameCheckTS.TabVisible	:=	False;
 
 	if MP3_ListBox.Items.Count > 0 then
-  	for i := 0 to MP3_ListBox.Items.Count - 1 do
-      if check_filename_for_length(MP3_ListBox.Items[i], 64) then
+		for i := 0 to MP3_ListBox.Items.Count - 1 do
+			if check_filename_for_length(MP3_ListBox.Items[i], 64) then
 				NameCheck_ListBox.Items.Add(MP3_ListBox.Items[i]);
 
-  if NameCheck_ListBox.Items.Count > 0 then
+	if NameCheck_ListBox.Items.Count > 0 then
 		NameCheckTS.TabVisible	:=	True;
 
 end;
@@ -1372,16 +1373,16 @@ end;
 {--- MP3List : Bring MP3List to front if clicked ------------------------------}
 procedure TF_Main.MP3_ListBoxClick(Sender: TObject);
 begin
-  MP3_ListBox.BringToFront;
+	MP3_ListBox.BringToFront;
 end;
 
 {--- MP3List : start moving the PACMAN ----------------------------------------}
 procedure TF_Main.FolderScanPacmanStartBtnClick(Sender: TObject);
 begin
-  {Pacman aktivieren und starten}
+	{Pacman aktivieren und starten}
 	FolderScanPacmanStartBtn.Visible        :=  True;
-  Pacman_Move_Timer.Enabled :=  True;
-  pacman_direction          :=  True;
+	Pacman_Move_Timer.Enabled :=  True;
+	pacman_direction          :=  True;
 	FolderScanPacmanSpeedEdit.Text    :=  IntToStr(Pacman_Move_Timer.Interval);
 end;
 
@@ -1397,15 +1398,15 @@ end;
 {--- MP3List : Close PACMAN setuppanel ----------------------------------------}
 procedure TF_Main.FolderScanPacmanCloseBtnClick(Sender: TObject);
 begin
-  {Pacman deaktivieren und ausblenden}
+	{Pacman deaktivieren und ausblenden}
 	FolderScanPacmanBtn.Visible        :=  False;
-  Pacman_Move_Timer.Enabled :=  False;
+	Pacman_Move_Timer.Enabled :=  False;
 	FolderScanPacmanPanel.Visible			:=	False;
 
-  {Pfade speichern}
+	{Pfade speichern}
 	Ini := TIniFile.Create(ini_file_name);
-  Ini.WriteInteger ('GENERAL',  'pacmanspeed' , Pacman_Move_Timer.Interval);
-  Ini.Free;
+	Ini.WriteInteger ('GENERAL',  'pacmanspeed' , Pacman_Move_Timer.Interval);
+	Ini.Free;
 end;
 
 {--- MP3List : Set EDIT value to timerinterval --------------------------------}
@@ -1423,16 +1424,16 @@ end;
 {--- MP3List : timner to start moving the PACMAN ------------------------------}
 procedure TF_Main.Pacman_Move_TimerTimer(Sender: TObject);
 begin
-  if pacman_direction = True then
-  begin
+	if pacman_direction = True then
+	begin
 		FolderScanPacmanBtn.Glyph.LoadFromResourceName(HInstance,'eater-r');
 		if FolderScanPacmanBtn.Left > FolderScanTS.ClientWidth - 45 then
-      pacman_direction  :=  False;
+			pacman_direction  :=  False;
 		FolderScanPacmanBtn.Left :=  FolderScanPacmanBtn.Left + 8 ;
 		FolderScanPacmanBtn.Repaint;
-  end
-  else
-  begin
+	end
+	else
+	begin
 		FolderScanPacmanBtn.Glyph.LoadFromResourceName(HInstance,'eater-l');
 		if FolderScanPacmanBtn.Left < FolderScanSearchProgressBar.Left then
 			pacman_direction  :=  True;
@@ -1475,7 +1476,8 @@ var
 begin
 	ITunesImportFoundCntLab2.Caption	:=	'...';
 	ITunesImportScanTime2.Caption	:=	'...';
-	ListBox_Error.Clear;
+
+	ListBox_Error.Clear;
 
 	StopWatchStart := Time;
 
@@ -1510,6 +1512,12 @@ begin
 		AddLogMessage('Preloading XML file');
 		Application.ProcessMessages;
 
+		if SearchForDuplicatesByArtistAndTrackname then
+		begin
+			DupCompareList  :=  TStringList.Create;
+			DupCompareListPath  :=  TStringList.Create;
+		end;
+
 		AssignFile(F, ITunesImportXmlFileCB.Text);
 		Reset(F);
 		cnt	:=	0;
@@ -1526,10 +1534,6 @@ begin
 
 		AddLogMessage('Processing XML content');
 		Application.ProcessMessages;
-
-		DupCompareList  :=  TStringList.Create;
-		DupCompareListPath  :=  TStringList.Create;
-		DupListAll  :=  TStringList.Create;
 
 		for i := 0 to XMLDocumentiTunesImport.DocumentElement.ChildNodes.Count - 1 do
 		begin
@@ -1688,13 +1692,17 @@ begin
 					else if podcast then
 						ListBox_Error.Items.Add(ResultString + ' (Is Podcast)')
 					else
-          begin
+					begin
 
 						MP3_ListBox.Items.Add(ResultString);
 
 						//  Dump Artist and title.
-						DupCompareList.Add(Lowercase(Artist + ' - ' + Title));  //  Add name
-						DupCompareListPath.Add(Location); //  Add path
+						//  Search results for already search files
+						if SearchForDuplicatesByArtistAndTrackname then
+						begin
+							DupCompareList.Add(Lowercase(Artist + ' - ' + Title));  //  Add name
+							DupCompareListPath.Add(Location); //  Add path
+						end;
 
 					end;
 				end;
@@ -1724,49 +1732,48 @@ begin
 
 		end;
 
-    //  Search results for already search files
-    for iFileList := 0 to DupCompareList.Count - 1 do
-    begin
-      DupFound  := False;
+		//  Search results for already search files
+		if SearchForDuplicatesByArtistAndTrackname then
+		begin
 
-      for iDupList := 0 to DupCompareList.Count - 1 do
-      begin
-        if iFileList <> iDupList then
-        begin
-          if DupCompareList[iFileList] <> '' then
-          begin
+			DupListAll  :=  TStringList.Create;
 
-            if DupCompareList[iFileList] = DupCompareList[iDupList] then
-            begin
+			for iFileList := 0 to DupCompareList.Count - 1 do
+			begin
+				DupFound  := False;
 
-              if not DupFound then
-              begin
-                DupListAll.Add (DupCompareList[iFileList] + ' (' + DupCompareListPath[iFileList] + ')');
-                DupFound  := True;
-              end;
+				for iDupList := 0 to DupCompareList.Count - 1 do
+				begin
+					if iFileList <> iDupList then
+					begin
+						if DupCompareList[iFileList] <> '' then
+						begin
+							if DupCompareList[iFileList] = DupCompareList[iDupList] then
+							begin
+								if not DupFound then
+								begin
+									DupListAll.Add (DupCompareList[iFileList] + ' (' + DupCompareListPath[iFileList] + ')');
+									DupFound  := True;
+								end;
 
-              DupListAll.Add (DupCompareList[iDupList] + ' (' + DupCompareListPath[iDupList] + ')');
+								DupListAll.Add (DupCompareList[iDupList] + ' (' + DupCompareListPath[iDupList] + ')');
 
-              DupCompareList[iDupList] := '';
+								DupCompareList[iDupList] := '';
+							end;
+						end;
+					end;
+				end;
+			end;
 
-            end;
+			ListBox2.Items.Text :=  (DupListAll.Text);
+			ListBox2.Sorted :=	True;
 
-          end;
+			DupCompareList.Free;
+			DupCompareListPath.Free;
+			DupListAll.Free;
 
-        end;
+		end;
 
-      end;
-
-    end;
-
-		ListBox1.Items.Text :=  (DupCompareList.Text );
-		ListBox1.Sorted :=	True;
-		ListBox2.Items.Text :=  (DupListAll.Text);
-		ListBox2.Sorted :=	True;
-
-		DupCompareList.Free;
-		DupCompareListPath.Free;
-		DupListAll.Free;
 
 		{Button zurücksetzen}
 		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
@@ -1858,7 +1865,7 @@ end;
 procedure TF_Main.NameCheck_ListBoxMouseUp(Sender: TObject;
 	Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if  NameCheck_ListBox.ItemIndex >= 0 then
+	if  NameCheck_ListBox.ItemIndex >= 0 then
 		Char_Count_Lab.Caption  :=  IntToStr(Length(NameCheck_ListBox.Items[NameCheck_ListBox.ItemIndex]));
 end;
 
@@ -1973,7 +1980,7 @@ end;
 
 procedure TF_Main.DeleteFilesAfterFtpUpload;
 var
-  i: Integer;
+	i: Integer;
 begin
 	for i := 0 to FtpUploadList.Count - 1 do
 		DeleteFile(FtpUploadList[i]);

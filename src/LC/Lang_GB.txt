@@ -101,6 +101,7 @@ Msg=GB
 96 = Open Windows Explorer after creating websites
 97 = DupFinder
 98 = Show duplicate finder
+99 = Search for duplicates by Artist and Track name
 
 [Setup]
  1 = General

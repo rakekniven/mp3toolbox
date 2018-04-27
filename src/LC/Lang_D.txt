@@ -101,6 +101,7 @@ Msg=D
 96 = Nach dem Erstellen der Internetseiten ein Windows Explorer-Fenster öffnen
 97 = DupFinder
 98 = Duplikate anzeigen
+99 = Suche nach Duplikaten anhand von Artist und Titel
 
 [Setup]
  1 = Allgemein
