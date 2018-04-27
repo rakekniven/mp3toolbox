@@ -1333,6 +1333,9 @@ object F_Main: TF_Main
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
+      DesignSize = (
+        782
+        292)
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1343,8 +1346,9 @@ object F_Main: TF_Main
       object Genre_CheckListBox: TCheckListBox
         Left = 16
         Top = 25
-        Width = 465
-        Height = 315
+        Width = 425
+        Height = 254
+        Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 0
       end
     end

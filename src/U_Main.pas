@@ -1475,6 +1475,7 @@ var
 	DupListAll: TStringList;
 	DupCompareList: TStringList;
 	DupCompareListPath: TStringList;
+	MP3ResultList: TStringList;
 begin
 	ITunesImportFoundCntLab2.Caption	:=	'...';
 	ITunesImportScanTime2.Caption	:=	'...';
@@ -1482,6 +1483,9 @@ begin
 	ListBox_Error.Clear;
 
 	StopWatchStart := Time;
+
+	DupCompareList  :=  TStringList.Create;
+	DupCompareListPath  :=  TStringList.Create;
 
 	{When Search is canceled.}
 	if search_status  = True then
@@ -1514,11 +1518,7 @@ begin
 		AddLogMessage('Preloading XML file');
 		Application.ProcessMessages;
 
-		if SearchForDuplicatesByArtistAndTrackname then
-		begin
-			DupCompareList  :=  TStringList.Create;
-			DupCompareListPath  :=  TStringList.Create;
-		end;
+		MP3ResultList	:=	TStringList.Create;
 
 		AssignFile(F, ITunesImportXmlFileCB.Text);
 		Reset(F);
@@ -1696,7 +1696,7 @@ begin
 					else
 					begin
 
-						MP3_ListBox.Items.Add(ResultString);
+						MP3ResultList.Add(ResultString);
 
 						//  Dump Artist and title.
 						//  Search results for already search files
@@ -1770,12 +1770,12 @@ begin
 			DuplicatesLB.Items.Text :=  (DupListAll.Text);
 			DuplicatesLB.Sorted :=	True;
 
-			DupCompareList.Free;
-			DupCompareListPath.Free;
 			DupListAll.Free;
 
 		end;
 
+		MP3_ListBox.Items.Text	:=	MP3ResultList.Text;
+		MP3ResultList.Free;
 
 		{Button zurücksetzen}
 		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
@@ -1790,6 +1790,9 @@ begin
 		AddLogMessage('XML processing done.');
 
 	end;
+
+	DupCompareList.Free;
+	DupCompareListPath.Free;
 
 	StopWatchEnd           :=  Time;
 
