@@ -133,9 +133,9 @@ type
 		MainSelectionBtn1: TSpeedButton;
 		MainSelectionBtn2: TSpeedButton;
 		DupFinderTS: TTabSheet;
-		ListBox2: TListBox;
-		PopupMenu1: TPopupMenu;
-		Speichernunter2: TMenuItem;
+		DuplicatesLB: TListBox;
+		DuplicatesPopupMenu: TPopupMenu;
+		DuplicatesSaveAs: TMenuItem;
 		Showduplicatefinder1: TMenuItem;
 		procedure Sel_Dir_BtnClick(Sender: TObject);
 		procedure Close_Btn1Click(Sender: TObject);
@@ -210,7 +210,7 @@ type
 		procedure FtpUploadBitBtnClick(Sender: TObject);
 		procedure MainSelectionBtn1Click(Sender: TObject);
 		procedure MainSelectionBtn2Click(Sender: TObject);
-		procedure Speichernunter2Click(Sender: TObject);
+		procedure DuplicatesSaveAsClick(Sender: TObject);
 		procedure Showduplicatefinder1Click(Sender: TObject);
 
 	private
@@ -514,7 +514,7 @@ begin
 	end;
 end;
 
-procedure TF_Main.Speichernunter2Click(Sender: TObject);
+procedure TF_Main.DuplicatesSaveAsClick(Sender: TObject);
 var
 	ToF	:TextFile;
 	i: Integer;
@@ -523,8 +523,8 @@ begin
 	begin
 		AssignFile(ToF, SaveDialog_File.FileName);
 		Rewrite(ToF);
-		for i := 0 to ListBox2.Count - 1 do
-			writeln(ToF, ListBox2.Items[i]);
+		for i := 0 to DuplicatesLB.Count - 1 do
+			writeln(ToF, DuplicatesLB.Items[i]);
 		CloseFile(ToF);
 	end;
 end;
@@ -609,6 +609,8 @@ begin
 	FtpUploadBitBtn.Caption                 :=  GetTxt( 1, 62, 'Upload via FTP');
 	DupFinderTS.Caption			                :=  GetTxt( 1, 97, 'DupFinder');
 	Showduplicatefinder1.Caption            :=  GetTxt( 1, 98, 'Show duplicate finder');
+	Speichernunter1.Caption	                :=  GetTxt( 1,100, 'Speichern unter ...');
+	DuplicatesSaveAs.Caption                :=  GetTxt( 1,100, 'Speichern unter ...');
 end;
 
 procedure TF_Main.Close_Btn1Click(Sender: TObject);
@@ -1765,8 +1767,8 @@ begin
 				end;
 			end;
 
-			ListBox2.Items.Text :=  (DupListAll.Text);
-			ListBox2.Sorted :=	True;
+			DuplicatesLB.Items.Text :=  (DupListAll.Text);
+			DuplicatesLB.Sorted :=	True;
 
 			DupCompareList.Free;
 			DupCompareListPath.Free;

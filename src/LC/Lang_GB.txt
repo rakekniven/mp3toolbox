@@ -102,6 +102,7 @@ Msg=GB
 97 = DupFinder
 98 = Show duplicate finder
 99 = Search for duplicates by Artist and Track name
+100 = Save as...
 
 [Setup]
  1 = General

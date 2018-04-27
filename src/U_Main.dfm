@@ -40,10 +40,6 @@ object F_Main: TF_Main
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = '??mp3list'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         782
         362)
@@ -1259,17 +1255,13 @@ object F_Main: TF_Main
     Top = 398
     Width = 790
     Height = 323
-    ActivePage = DupFinderTS
+    ActivePage = SearchResultTS
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 3
     OnChange = PageControl2Change
     object SearchResultTS: TTabSheet
       Caption = '?!SearchResult'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object MP3_ListBox: TListBox
         Left = 0
         Top = 0
@@ -1298,10 +1290,6 @@ object F_Main: TF_Main
     end
     object LogTS: TTabSheet
       Caption = '?!Log'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object LogListBox: TListBox
         Left = 0
         Top = 0
@@ -1328,10 +1316,6 @@ object F_Main: TF_Main
     object NameCheckTS: TTabSheet
       Caption = '?!NameCheckTS'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object NameCheck_ListBox: TListBox
         Left = 0
         Top = 0
@@ -1349,10 +1333,6 @@ object F_Main: TF_Main
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GenreLab: TLabel
         Left = 16
         Top = 3
@@ -1371,10 +1351,6 @@ object F_Main: TF_Main
     object ErrorTS: TTabSheet
       Caption = '?!Error'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1387,13 +1363,13 @@ object F_Main: TF_Main
     object DupFinderTS: TTabSheet
       Caption = 'DupFinder'
       ImageIndex = 5
-      object ListBox2: TListBox
+      object DuplicatesLB: TListBox
         Left = 0
         Top = 0
         Width = 782
         Height = 292
         Align = alClient
-        PopupMenu = PopupMenu1
+        PopupMenu = DuplicatesPopupMenu
         TabOrder = 0
       end
     end
@@ -2325,12 +2301,12 @@ object F_Main: TF_Main
     Top = 16
     DOMVendorDesc = 'MSXML'
   end
-  object PopupMenu1: TPopupMenu
+  object DuplicatesPopupMenu: TPopupMenu
     Left = 464
     Top = 624
-    object Speichernunter2: TMenuItem
+    object DuplicatesSaveAs: TMenuItem
       Caption = 'Speichern unter ...'
-      OnClick = Speichernunter2Click
+      OnClick = DuplicatesSaveAsClick
     end
   end
 end
