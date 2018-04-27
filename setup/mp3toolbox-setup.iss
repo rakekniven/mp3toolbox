@@ -29,7 +29,6 @@ AppUpdatesURL=http://www.rakekniven.de
 UninstallDisplayName=MP3Toolbox
 MinVersion=0,6.1.7600
 DisableStartupPrompt=true
-ShowUndisplayableLanguages=true
 UninstallDisplayIcon={app}\mp3toolbox.exe
 CreateAppDir=true
 OutputBaseFilename=MP3ToolboxSetup-1.1.27
