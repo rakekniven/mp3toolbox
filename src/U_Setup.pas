@@ -83,6 +83,7 @@ type
 		DeleteAfterFtpUploadCB: TCheckBox;
 		GroupBox2: TGroupBox;
 		OpenWinExplorerAfterCreateSitesCB: TCheckBox;
+    SearchForDuplicatesByArtistAndTracknameCB: TCheckBox;
 		procedure FormShow(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure TXT_File_Output_EditChange(Sender: TObject);
@@ -117,6 +118,7 @@ type
 		procedure InsertSortingZeroCBClick(Sender: TObject);
 		procedure DeleteAfterFtpUploadCBClick(Sender: TObject);
 		procedure OpenWinExplorerAfterCreateSitesCBClick(Sender: TObject);
+    procedure SearchForDuplicatesByArtistAndTracknameCBClick(Sender: TObject);
 	private
 		{ Private-Deklarationen }
 	public
@@ -181,6 +183,7 @@ begin
 	InsertSortingZeroCB.Checked			:=	InsertSortingZero;
 	DeleteAfterFtpUploadCB.Checked	:=	DeleteAfterFtpUpload;
 	OpenWinExplorerAfterCreateSitesCB.Checked	:=	OpenWinExplorerAfterCreateSites;
+  SearchForDuplicatesByArtistAndTracknameCB.Checked :=  SearchForDuplicatesByArtistAndTrackname;
 
 	{set values of editfields}
 	TXT_File_Output_Edit.Text	 						:=	text_files_output_path;
@@ -385,6 +388,8 @@ begin
 		Ini.WriteBool		('GENERAL', 'InsertSortingZero', 		      InsertSortingZero);
 		Ini.WriteBool		('GENERAL', 'DeleteAfterFtpUpload', 			DeleteAfterFtpUpload);
 		Ini.WriteBool		('GENERAL', 'OpenWinExplorerAfterCreateSites', 			OpenWinExplorerAfterCreateSites);
+		Ini.WriteBool		('GENERAL', 'SearchForDuplicatesByArtistAndTrackname', 			SearchForDuplicatesByArtistAndTrackname);
+
 
 		for i := 0 to mp3list_SearchAndReplace.Count - 1 do
 		begin
@@ -518,6 +523,7 @@ begin
 	FtpTestConnectionBtn.Caption										:=  GetTxt( 1, 72, 'Test connection');
 	InsertSortingZeroCB.Caption											:=  GetTxt( 1, 87, 'InsertSortingZero');
 	OpenWinExplorerAfterCreateSitesCB.Caption				:=  GetTxt( 1, 96, 'InsertSortingZero');
+	SearchForDuplicatesByArtistAndTracknameCB.Caption				:=  GetTxt( 1, 99, 'Search for duplicates by Artist and Track name');
 	MiscTS.Caption																	:=	GetTXT( 1, 88, 'Misc');
 	DeleteAfterFtpUploadCB.Caption									:=	GetTXT( 1, 89, 'DeleteAfterFtpUpload');
 (*
@@ -591,6 +597,11 @@ begin
     mp3list_html_files_delete_after_zip    :=  True
 	else
     mp3list_html_files_delete_after_zip    :=  False;
+end;
+
+procedure TF_Setup.SearchForDuplicatesByArtistAndTracknameCBClick(Sender: TObject);
+begin
+  SearchForDuplicatesByArtistAndTrackname :=  SearchForDuplicatesByArtistAndTracknameCB.Checked;
 end;
 
 procedure TF_Setup.DeleteAfterFtpUploadCBClick(Sender: TObject);

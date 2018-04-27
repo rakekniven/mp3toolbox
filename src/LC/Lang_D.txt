@@ -99,6 +99,10 @@ Msg=D
 94 = Durchsuche Deine Ordner nach MP3-Dateien und erstelle die Webseiten
 95 = Importiere Deine iTunes-Bibliothek und erstelle die Webseiten
 96 = Nach dem Erstellen der Internetseiten ein Windows Explorer-Fenster öffnen
+97 = DupFinder
+98 = Duplikate anzeigen
+99 = Suche nach Duplikaten anhand von Artist und Titel
+100 = Speichern unter ...
 
 [Setup]
  1 = Allgemein

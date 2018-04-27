@@ -99,6 +99,10 @@ Msg=GB
 94 = Scan your folders for MP3 files and create your websites
 95 = Import your iTunes library and create your websites
 96 = Open Windows Explorer after creating websites
+97 = DupFinder
+98 = Show duplicate finder
+99 = Search for duplicates by Artist and Track name
+100 = Save as...
 
 [Setup]
  1 = General

@@ -1360,6 +1360,19 @@ object F_Main: TF_Main
         TabOrder = 0
       end
     end
+    object DupFinderTS: TTabSheet
+      Caption = 'DupFinder'
+      ImageIndex = 5
+      object DuplicatesLB: TListBox
+        Left = 0
+        Top = 0
+        Width = 782
+        Height = 292
+        Align = alClient
+        PopupMenu = DuplicatesPopupMenu
+        TabOrder = 0
+      end
+    end
   end
   object MainSelectionPanel1: TPanel
     Left = 771
@@ -2176,6 +2189,10 @@ object F_Main: TF_Main
         Caption = '??Show found genres'
         OnClick = Showfoundgenres1Click
       end
+      object Showduplicatefinder1: TMenuItem
+        Caption = '??Show duplicate finder'
+        OnClick = Showduplicatefinder1Click
+      end
     end
     object Help1: TMenuItem
       Caption = '??Help'
@@ -2283,5 +2300,13 @@ object F_Main: TF_Main
     Left = 712
     Top = 16
     DOMVendorDesc = 'MSXML'
+  end
+  object DuplicatesPopupMenu: TPopupMenu
+    Left = 464
+    Top = 624
+    object DuplicatesSaveAs: TMenuItem
+      Caption = 'Speichern unter ...'
+      OnClick = DuplicatesSaveAsClick
+    end
   end
 end
