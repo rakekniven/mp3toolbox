@@ -1262,6 +1262,7 @@ object F_Main: TF_Main
     object SearchResultTS: TTabSheet
       Caption = '?!SearchResult'
       ImageIndex = 1
+      OnShow = SearchResultTSShow
       object MP3_ListBox: TListBox
         Left = 0
         Top = 0
@@ -1333,6 +1334,7 @@ object F_Main: TF_Main
     object GenreTS: TTabSheet
       Caption = '??GenreTS'
       ImageIndex = 4
+      OnShow = GenreTSShow
       DesignSize = (
         782
         292)
@@ -1355,6 +1357,7 @@ object F_Main: TF_Main
     object ErrorTS: TTabSheet
       Caption = '?!Error'
       ImageIndex = 3
+      OnShow = ErrorTSShow
       object ListBox_Error: TListBox
         Left = 0
         Top = 0
@@ -1367,6 +1370,7 @@ object F_Main: TF_Main
     object DupFinderTS: TTabSheet
       Caption = 'DupFinder'
       ImageIndex = 5
+      OnShow = DupFinderTSShow
       object DuplicatesLB: TListBox
         Left = 0
         Top = 0

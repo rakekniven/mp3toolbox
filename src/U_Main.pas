@@ -212,6 +212,10 @@ type
 		procedure MainSelectionBtn2Click(Sender: TObject);
 		procedure DuplicatesSaveAsClick(Sender: TObject);
 		procedure Showduplicatefinder1Click(Sender: TObject);
+		procedure GenreTSShow(Sender: TObject);
+		procedure ErrorTSShow(Sender: TObject);
+		procedure DupFinderTSShow(Sender: TObject);
+		procedure SearchResultTSShow(Sender: TObject);
 
 	private
 		cnt: Integer;
@@ -514,6 +518,11 @@ begin
 	end;
 end;
 
+procedure TF_Main.DupFinderTSShow(Sender: TObject);
+begin
+	AddLogMessage('Duplicates found: ' + IntToStr(DuplicatesLB.Items.Count));
+end;
+
 procedure TF_Main.DuplicatesSaveAsClick(Sender: TObject);
 var
 	ToF	:TextFile;
@@ -616,6 +625,11 @@ end;
 procedure TF_Main.Close_Btn1Click(Sender: TObject);
 begin
 	Close;
+end;
+
+procedure TF_Main.ErrorTSShow(Sender: TObject);
+begin
+	AddLogMessage('Error and ignored files found: ' + IntToStr(ListBox_Error.Items.Count));
 end;
 
 procedure TF_Main.Exit1Click(Sender: TObject);
@@ -1087,6 +1101,11 @@ begin
 															'',
 															SW_SHOW);
 
+end;
+
+procedure TF_Main.GenreTSShow(Sender: TObject);
+begin
+		AddLogMessage('Genres found: ' + IntToStr(Genre_CheckListBox.Items.Count));
 end;
 
 procedure TF_Main.GitHubMenuEntryClick(Sender: TObject);
@@ -1719,13 +1738,6 @@ begin
 			total_work_duration	:=  (StopWatchScanTimeEnd - StopWatchScanTimeStart) +
 															(StopWatchSearchTimeEnd - StopWatchSearchTimeStart);
 
-			{total counter (wird für ausgabenschleife benötigt TXT und HTML}
-			mp3list_result_count		  :=	MP3_ListBox.Items.Count;
-
-			MP3_ListBox.Sorted	:=	True;
-			ITunesImportFoundCntLab2.Caption	:=	IntToStr(mp3list_result_count);
-
-
 			if not ErrorTS.TabVisible then
 			begin
 				if ListBox_Error.Count > 0 then
@@ -1776,6 +1788,9 @@ begin
 
 		MP3_ListBox.Items.Text	:=	MP3ResultList.Text;
 		MP3ResultList.Free;
+
+		MP3_ListBox.Sorted	:=	True;
+		ITunesImportFoundCntLab2.Caption	:=	IntToStr(MP3_ListBox.Items.Count);
 
 		{Button zurücksetzen}
 		ITunesImportGoBtn.Glyph.LoadFromResourceName(HInstance,'vcrplay');
@@ -1887,6 +1902,11 @@ begin
 																	[rfReplaceAll, rfIgnoreCase]);
 	end;
 	Result	:=	s;
+end;
+
+procedure TF_Main.SearchResultTSShow(Sender: TObject);
+begin
+	AddLogMessage('Results: ' + IntToStr(MP3_ListBox.Items.Count));
 end;
 
 function TF_Main.ReplaceVariablesInResult(AString,
