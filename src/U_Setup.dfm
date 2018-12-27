@@ -28,7 +28,7 @@ object F_Setup: TF_Setup
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = MiscTS
+    ActivePage = Allgemein
     TabOrder = 0
     object Allgemein: TTabSheet
       Margins.Left = 4
@@ -49,7 +49,9 @@ object F_Setup: TF_Setup
         Width = 37
         Height = 16
         Cursor = crHandPoint
-        Hint = 'https://code.google.com/p/mp3toolbox/wiki/ListOfVariables'
+        Hint = 
+          'https://github.com/rakekniven/mp3toolbox/wiki/List-of-variables-' +
+          '(template)'
         Alignment = taRightJustify
         Caption = '??Help'
         Font.Charset = DEFAULT_CHARSET
