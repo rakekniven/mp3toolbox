@@ -109,7 +109,7 @@ object About_F: TAbout_F
           ''
           'Mark Ziegler '
           ''
-          '2002-2018'
+          '2002-2021'
           ''
           'iTunes is registered trademark of Apple Inc.'
           'Same for iTunes logo.'
