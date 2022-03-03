@@ -1,6 +1,6 @@
 (*
 one line to give the program's name and an idea of what it does.
-Copyright (C) yyyy  name of author
+Copyright (C) 2021 rakekniven
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -136,7 +136,7 @@ VAR IniFile     : TextFile;
       Result := '';
   end;
 
-  {Section ID des übergebenen Sectionsname ermitteln}
+  {Section ID des ï¿½bergebenen Sectionsname ermitteln}
   function GetSectionID (Section : STRING) : INTEGER;
   var
     SectionIndex : INTEGER;
@@ -162,7 +162,7 @@ VAR IniFile     : TextFile;
         INC(SectionIndex);
       end;
 
-      {Passende Section ID zurückgeben oder 0}
+      {Passende Section ID zurï¿½ckgeben oder 0}
       if Found then
         Result := SectionIndex-1
       else
@@ -191,14 +191,14 @@ VAR IniFile     : TextFile;
       TempName := Trim(Copy(TempStr,PosSep+1,Length(TempStr)-PosSep));
 
 
-      {evtl. vorhandene Anführungszeichen ausfiltern !}
+      {evtl. vorhandene Anfï¿½hrungszeichen ausfiltern !}
       if Length(TempName) > 2 then begin
         if (TempName[1]='''') and (TempName[Length(TempName)]='''') then begin
           TempName := Copy(TempName,2,Length(TempName)-2);
         end;
       end;
 
-      {Rückgabevariablen belegen}
+      {Rï¿½ckgabevariablen belegen}
       ActNummer := StrToInt(TempNr);
       ActText   := TempName;
     end
@@ -230,14 +230,14 @@ VAR IniFile     : TextFile;
       TempValue := Trim(Copy(TempStr,PosSep+1,Length(TempStr)-PosSep));
 
 
-      {evtl. vorhandene Anführungszeichen ausfiltern !}
+      {evtl. vorhandene Anfï¿½hrungszeichen ausfiltern !}
       if Length(TempValue) > 2 then begin
         if (TempValue[1]='''') and (TempValue[Length(TempValue)]='''') then begin
           TempValue := Copy(TempValue,2,Length(TempValue)-2);
         end;
       end;
 
-      {Rückgabevariablen belegen}
+      {Rï¿½ckgabevariablen belegen}
       ActEntry := TempEntry;
       ActValue := TempValue;
     end
@@ -263,12 +263,12 @@ BEGIN  { of Set_Language_New }
 			AssignFile(IniFile,Lng_LibName);
 			Reset(IniFile);
 
-			{Zeile für Zeile auslesen}
+			{Zeile fï¿½r Zeile auslesen}
 			while not EOF(IniFile) do begin
 				Readln(IniFile, TempLine);
 
 
-				{Prüfung ob String ein Kommentar ist}
+				{Prï¿½fung ob String ein Kommentar ist}
 				if Length(TempLine) > 0 then
 					DoLine := Trim(TempLine)[1] <> ';'       // Kommentarzeilen beginnen mit einem ';'
 				else
@@ -291,7 +291,7 @@ BEGIN  { of Set_Language_New }
 							if (TempNummer <> 0) and (TempText <> '~~~') then begin
 								ActTextNr := FormIndex[ActSectID]+TempNummer-1;
 
-								{Prüfen ob erstes Zeichen ein "\" ist um mehrzeilige Ausgaben zu ermöglichen}
+								{Prï¿½fen ob erstes Zeichen ein "\" ist um mehrzeilige Ausgaben zu ermï¿½glichen}
 								if Length(TempText)>0 then
 									NewLine := TempText[1]='\'
 								else
@@ -364,7 +364,7 @@ BEGIN  { of Set_Language_New }
 			end;
 			CloseFile(IniFile);
 		except
-			Application.MessageBox (PWideChar('Languagefile is missing. This program won´t work without a valid languagefile. Look for : "' + Lng_LibName),
+			Application.MessageBox (PWideChar('Languagefile is missing. This program wonï¿½t work without a valid languagefile. Look for : "' + Lng_LibName),
 																		'Warning',
 																		2);
 			Application.Terminate;
